@@ -1,3 +1,7 @@
+
+import java.util.List;
+
+import Towers.*;
 interface PlayerInterface{
 
     // Getters and setters for player attributes
@@ -15,9 +19,9 @@ interface PlayerInterface{
 
 
     // Manage towers owned py player
-    List<Tower> getTowers();
-    void addTower(Tower tower);
-    void removeTower(Tower tower);
+    List<tower> getTowers();
+    void addTower(tower tower);
+    void removeTower(tower tower);
 
     // Check or update the players satus ingame, won? lost? round
     GameStatus getStatus();

@@ -1,4 +1,4 @@
-package Model.Towers;
+package Towers;
 
 public abstract class towerFactory {
 
