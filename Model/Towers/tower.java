@@ -49,7 +49,7 @@ public abstract class Tower implements TowerInterface  {
     }
 
 
-    private void setTowerType Tower towerType) {
+    private void setTowerType(Tower towerType) {
         this.towerType = towerType;
     }
 

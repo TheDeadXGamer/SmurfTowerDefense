@@ -19,9 +19,9 @@ interface PlayerInterface{
 
 
     // Manage towers owned py player
-    List<tower> getTowers();
-    void addTower(tower tower);
-    void removeTower(tower tower);
+    List<Tower> getTowers();
+    void addTower(Tower tower);
+    void removeTower(Tower tower);
 
     // Check or update the players satus ingame, won? lost? round
     GameStatus getStatus();

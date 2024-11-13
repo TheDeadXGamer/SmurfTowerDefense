@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
-import Towers.tower;
+import Towers.Tower;
 
 public class Player implements PlayerInterface {
     private int health;
     private int money;
     private int roundNumber;
-    private List<tower> towers;
+    private List<Tower> towers;
     private GameStatus gameStatus;
     private Difficulty difficulty;
 
@@ -53,13 +53,13 @@ public class Player implements PlayerInterface {
     }
 
     @Override
-    public List<tower> getTowers() {
+    public List<Tower> getTowers() {
         
         return towers;
     }
 
     @Override
-    public void addTower(tower tower) {
+    public void addTower(Tower tower) {
         if (money >= tower.getCost()) {
             towers.add(tower);
             money -= tower.getCost();
@@ -69,7 +69,7 @@ public class Player implements PlayerInterface {
     }
 
     @Override
-    public void removeTower(tower tower) {
+    public void removeTower(Tower tower) {
         towers.remove(tower);
         money += tower.getCost() / 2; // If we should use this logic for selling? (Erik: might be better to use seperate method, might break Single responsibility principle)
     }
