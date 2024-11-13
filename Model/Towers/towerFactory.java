@@ -1,9 +1,9 @@
 package Towers;
 
-public abstract class towerFactory {
+public abstract class TowerFactory {
 
     //Will always delegate to subclass
-    public abstract tower createTower();
+    public abstract Tower createTower();
     
     
 }

@@ -2,7 +2,7 @@ package Towers;
 
 
 
-public abstract class tower implements towerInterface  {
+public abstract class Tower implements TowerInterface  {
 
 
         
@@ -12,7 +12,7 @@ public abstract class tower implements towerInterface  {
         
     protected int attackSpeed;
     protected int damage;
-    protected tower towerType;
+    protected Tower towerType;
     protected int cost;
     protected int range;
         //maybe also a nr of projectiles variable?
@@ -35,7 +35,7 @@ public abstract class tower implements towerInterface  {
     }
 
     @Override
-    public tower getTowerType() {
+    public Tower getTowerType() {
         return towerType;
     }
 
@@ -49,8 +49,8 @@ public abstract class tower implements towerInterface  {
     }
 
 
-    private void setTowerType(tower tower) {
-        this.towerType = tower;
+    private void setTowerType Tower towerType) {
+        this.towerType = towerType;
     }
 
     @Override

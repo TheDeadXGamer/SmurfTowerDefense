@@ -1,6 +1,6 @@
 package Towers;
 
-interface towerInterface {
+interface TowerInterface {
 
 
 
@@ -11,7 +11,7 @@ interface towerInterface {
     //do i even need this? might be enough to just have a parentclass that has abstract methods instead
     int getAttackSpeed();
     int getDamage();
-    tower getTowerType();
+    Tower getTowerType();
     int getCost();
     
 
