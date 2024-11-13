@@ -3,7 +3,7 @@ import javafx.geometry.Point2D;
 public class Enemy implements EnemyInterface {
     // Enum for enemy types with their properties
     public enum EnemyType {
-        GARGAMEL("Gargamel", 200, 10, 50, 100),
+        GARGAMEL("Gargamel", 200, 10, 50, 100);
        
         final String name;
         final int health;
@@ -45,7 +45,22 @@ public class Enemy implements EnemyInterface {
     public String getName() {
         return type.getName();
     }
-   
+
+    @Override
+    public void setName(String name) {
+        // TODO
+    }
+
+    @Override
+    public double getX() {
+        return 0; // TODO
+    }
+
+    @Override
+    public double getY() {
+        return 0; // TODO
+    }
+
     // Getter for type
     public EnemyType getType() {
         return type;
