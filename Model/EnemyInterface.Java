@@ -1,15 +1,19 @@
-interface EnemiesInterface {
+import javafx.geometry.Point2D;
+
+interface EnemyInterface {
 
     // Basic properties
     int getHealth();
     void setHealth(int health);
     int getSpeed();
-    void setSpeed();
+    void setSpeed(int speed);
+    String getName();
+    void setName(String name);      // Might have to change these later to some other method of obtaining predetermined names
 
     // Postition tracking
     double getX();
     double getY();
-    void setPosition(double X, double Y);
+    void setPosition(Point2D position);
 
     // Reward/Scoring
     int getReward();        // Gain rewards for killing enemies such as money
