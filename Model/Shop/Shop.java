@@ -1,3 +1,5 @@
+package Shop;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +22,7 @@ public class Shop implements ShopInterface {
         if (towerPrices.containsKey(towerType)){
             int cost = getTowerCost(towerType);
             if (playerMoney >= cost) {
-                // TODO: subtract player's money by cost (call to Player class) and update UI
+                // TODO: subtract player's money by cost (call to Player.Player class) and update UI
                 return true;
             } else {
                 // TODO: give message that player doesn't have enough money

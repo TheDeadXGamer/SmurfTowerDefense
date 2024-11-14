@@ -1,4 +1,4 @@
-package Towers;
+package Tower;
 
 public abstract class TowerFactory {
 

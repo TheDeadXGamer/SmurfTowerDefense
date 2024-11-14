@@ -1,7 +1,11 @@
+package Shop;
+
+import Shop.Shop;
+
 public class ShopUI {
     private Shop shop;
-    // private Player player;
-    public ShopUI(Shop shop /*, Player player */ ) {
+    // private Player.Player player;
+    public ShopUI(Shop shop /*, Player.Player player */ ) {
         this.shop = shop;
         // this.player = player;
     }

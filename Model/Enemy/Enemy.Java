@@ -1,3 +1,5 @@
+package Enemy;
+
 import javafx.geometry.Point2D;
 
 public class Enemy implements EnemyInterface {
@@ -31,7 +33,7 @@ public class Enemy implements EnemyInterface {
     private int reward;
     private int scoreValue;
    
-    // Constructor for Enemy using EnemyType
+    // Constructor for Enemies.Enemy using EnemyType
     public Enemy(EnemyType type, Point2D startPosition) {
         this.type = type;
         this.health = type.health;
@@ -95,7 +97,7 @@ public class Enemy implements EnemyInterface {
     }
 
     // Returns position
-    @Override
+
     public Point2D getPosition() {
         return position;  // Return the Point2D object directly
     }

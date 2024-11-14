@@ -1,4 +1,4 @@
-package Towers;
+package Tower;
 
 interface TowerInterface {
 

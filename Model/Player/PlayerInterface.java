@@ -1,7 +1,9 @@
+package Player;
 
 import java.util.List;
+import Game.*;
 
-import Towers.*;
+import Tower.*;
 interface PlayerInterface{
 
     // Getters and setters for player attributes

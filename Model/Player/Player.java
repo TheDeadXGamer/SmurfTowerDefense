@@ -1,6 +1,9 @@
+package Player;
+
 import java.util.ArrayList;
 import java.util.List;
-import Towers.Tower;
+import Tower.Tower;
+import Game.*;
 
 public class Player implements PlayerInterface {
     private int health;

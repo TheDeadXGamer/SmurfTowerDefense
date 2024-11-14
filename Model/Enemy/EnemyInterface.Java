@@ -1,3 +1,5 @@
+package Enemy;
+
 import javafx.geometry.Point2D;
 
 interface EnemyInterface {
