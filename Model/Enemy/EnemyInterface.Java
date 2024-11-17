@@ -3,6 +3,7 @@ package Enemy;
 import javafx.geometry.Point2D;
 
 interface EnemyInterface {
+    // Arvid: should be split into smaller interfaces (interface segregation principle), see similar methods in PlayerInterface
 
     // Basic properties
     int getHealth();

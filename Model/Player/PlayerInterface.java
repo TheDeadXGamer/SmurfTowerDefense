@@ -5,6 +5,7 @@ import Game.*;
 
 import Tower.*;
 interface PlayerInterface{
+    // Arvid: should be split into smaller interfaces (interface segregation principle), see similar methods in EnemyInterface
 
     // Getters and setters for player attributes
     int getMoney();
