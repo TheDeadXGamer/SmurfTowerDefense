@@ -32,5 +32,5 @@ public abstract class BaseEnemy implements EnemyInterface {
     @Override public int getScoreValue() { return scoreValue; }
     @Override public void takeDamage(int damage) { this.health -= damage; }
     @Override public boolean isAlive() { return this.health > 0; }
-    @Override public abstract void move();
+    @Override public void move() { /* TODO */ }
 }

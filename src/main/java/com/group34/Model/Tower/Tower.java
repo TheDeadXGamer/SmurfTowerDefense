@@ -1,6 +1,6 @@
-package Tower;
-import Enemy.*;
+package com.group34.Model.Tower;
 import java.awt.geom.Point2D;
+import com.group34.Model.Enemy.BaseEnemy;
 import java.lang.Math;
 public abstract class Tower  {
     protected int attackSpeed;
