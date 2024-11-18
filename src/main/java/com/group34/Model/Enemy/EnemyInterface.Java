@@ -11,7 +11,7 @@ interface EnemyInterface {
     int getSpeed();
     void setSpeed(int speed);
     String getName();
-    void setName(String name);      // Might have to change these later to some other method of obtaining predetermined names
+    void setName(String name);     // Might have to change these later to some other method of obtaining predetermined names
 
     // Postition tracking
     double getX();
