@@ -36,7 +36,7 @@ public class Player implements PlayerInterface {
     @Override
     public void setMoney(int money) {
         this.money = money;
-        System.out.println("Player health set to " + health);
+        System.out.println("Player money set to " + money);
     }
 
 
