@@ -1,6 +1,6 @@
 package Tower;
 
-import javafx.geometry.Point2D;
+import java.awt.geom.Point2D;
 
 public class LightningSmurf extends Tower{
 

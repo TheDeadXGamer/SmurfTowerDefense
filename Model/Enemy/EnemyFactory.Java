@@ -1,10 +1,11 @@
 package Enemy;
-import java.awt.Point;
+
+import java.awt.geom.Point2D;
 
 // Factory class that creates enemies based on class type
 class EnemyFactory {
     // Create enemy of type T at a given position
-    public static <T extends EnemyInterface> T createEnemy(Class<T> enemyClass, Point startPosition) {
+    public static <T extends EnemyInterface> T createEnemy(Class<T> enemyClass, Point2D startPosition) {
         try {
             // Create a new instance of the enemy class
             T enemy = enemyClass.getDeclaredConstructor().newInstance();

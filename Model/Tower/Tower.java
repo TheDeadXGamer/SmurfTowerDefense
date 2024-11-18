@@ -1,15 +1,8 @@
 package Tower;
 import Enemy.*;
-import javafx.geometry.Point2D;
+import java.awt.geom.Point2D;
 import java.lang.Math;
 public abstract class Tower  {
-
-
-        
-
-
-
-        
     protected int attackSpeed;
     protected int damage;
     protected String towerType;
@@ -28,18 +21,11 @@ public abstract class Tower  {
     }
 
     //maybe also a nr of projectiles variable?
-    
-
-        //Dont know how to nicely store upgrades for towers yet
-
-
-
-
+    //Dont know how to nicely store upgrades for towers yet
 
     public int getAttackSpeed() {return this.attackSpeed;}
 
     public int getDamage() {return this.damage;}
-
 
     public String getTowerType() {return this.towerType;}
     public int getCost() {return this.cost;}
@@ -52,33 +38,25 @@ public abstract class Tower  {
         this.damage = damage;
     }
 
-
     private void setTowerType(String towerType) {
         this.towerType = towerType;
     }
-
-
 
     private void setCost(int price) {
         this.cost = price;
         
     }
     //should shooting be instant or will the projectiles be able to miss?
-    public void attack(Enemy target) {
+    public void attack(BaseEnemy target) {
         shootProjectile(target);
         int currHealth = target.getHealth();
         target.setHealth(currHealth - this.damage);
 
     }
 
-    public void shootProjectile(Enemy target) {
-        Point2D EnemyPosition =  target.getPosition();
+    public void shootProjectile(BaseEnemy target) {
+        Point2D EnemyPosition = new Point2D.Double(target.getX(), target.getY());
         double Coefficient = (EnemyPosition.getY() - position.getY()) / (EnemyPosition.getX() - position.getX());
-
         //venne riktigt hur jag ska göra detta, tänker att det kan vänta tills annat implementeras
-
-
     }
-
-    
 }
