@@ -1,12 +1,12 @@
 package Enemy;
 
-import javafx.geometry.Point2D;
+import java.awt.Point;
 
 public abstract class BaseEnemy implements EnemyInterface {
     private String name;
     private int health;
     private int speed;
-    private Point2D position;
+    private Point position;
     private final int reward;
     private final int scoreValue;
 
@@ -14,7 +14,7 @@ public abstract class BaseEnemy implements EnemyInterface {
         this.name = name;
         this.health = health;
         this.speed = speed;
-        this.position = new Point2D(0, 0);
+        this.position = new Point(0, 0);
         this.reward = reward;
         this.scoreValue = scoreValue;
     }
@@ -27,7 +27,7 @@ public abstract class BaseEnemy implements EnemyInterface {
     @Override public void setHealth(int health) { if(health > 0) this.health = health; }
     @Override public int getSpeed() { return speed; }
     @Override public void setSpeed(int speed) { if(speed > 0) this.speed = speed; }
-    @Override public void setPosition(Point2D position) { this.position = position; }
+    @Override public void setPosition(Point position) { this.position = position; }
     @Override public int getReward() { return reward; }
     @Override public int getScoreValue() { return scoreValue; }
     @Override public void takeDamage(int damage) { this.health -= damage; }

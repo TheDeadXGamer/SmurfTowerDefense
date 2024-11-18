@@ -1,6 +1,6 @@
 package Enemy;
 
-import javafx.geometry.Point2D;
+import java.awt.Point;
 
 interface EnemyInterface {
     // Arvid: should be split into smaller interfaces (interface segregation principle), see similar methods in PlayerInterface
@@ -16,7 +16,7 @@ interface EnemyInterface {
     // Postition tracking
     double getX();
     double getY();
-    void setPosition(Point2D position);
+    void setPosition(Point position);
 
     // Reward/Scoring
     int getReward();        // Gain rewards for killing enemies such as money
