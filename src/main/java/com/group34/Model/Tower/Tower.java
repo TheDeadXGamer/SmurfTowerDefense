@@ -3,12 +3,6 @@ import com.group34.Model.Enemy.*;
 import javafx.geometry.Point2D;
 import java.lang.Math;
 public abstract class Tower  {
-
-
-        
-
-
-
         
     protected int attackSpeed;
     protected int damage;
