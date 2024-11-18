@@ -1,8 +1,8 @@
-package Shop;
+package com.group34.Model.Shop;
 
 import java.util.ArrayList;
 
-import Player.Player;
+import com.group34.Model.Player.Player;
 
 public class ShopModel {
     private Player player;

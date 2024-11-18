@@ -1,4 +1,4 @@
-package Shop;
+package com.group34.Model.Shop;
 
 public class TowerShopItem implements IShopItem {
     private String name;

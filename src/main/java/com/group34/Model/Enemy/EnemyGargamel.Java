@@ -1,4 +1,4 @@
-package Enemy;
+package com.group34.Model.Enemy;
 
 public class EnemyGargamel extends BaseEnemy {
     public EnemyGargamel() {

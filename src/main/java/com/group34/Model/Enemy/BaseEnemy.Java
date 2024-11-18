@@ -1,4 +1,4 @@
-package Enemy;
+package com.group34.Model.Enemy;
 
 import java.awt.geom.Point2D;
 

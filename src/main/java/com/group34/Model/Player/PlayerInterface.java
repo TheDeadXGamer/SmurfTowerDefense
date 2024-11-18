@@ -1,6 +1,6 @@
-package Player;
+package com.group34.Model.Player;
 import java.util.List;
-import Tower.*;
+import com.group34.Model.Tower.*;
 
 interface PlayerInterface{
     // Arvid: should be split into smaller interfaces (interface segregation principle), see similar methods in EnemyInterface

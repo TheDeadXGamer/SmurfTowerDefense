@@ -1,6 +1,6 @@
-package Game;
+package com.group34.Model.Game;
 
-import Player.Player;
+import com.group34.Model.Player.Player;
 
 public class GameModel {
     private Difficulty difficulty;

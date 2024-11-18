@@ -1,4 +1,4 @@
-package Tower;
+package com.group34.Model.Tower;
 
 import java.awt.geom.Point2D;
 

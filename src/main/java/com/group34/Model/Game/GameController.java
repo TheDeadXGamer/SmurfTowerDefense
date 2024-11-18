@@ -1,4 +1,4 @@
-package Game;
+package com.group34.Model.Game;
 
 public class GameController{
     private GameModel gameModel;

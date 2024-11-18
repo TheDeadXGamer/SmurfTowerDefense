@@ -1,4 +1,4 @@
-package Game;
+package com.group34.Model.Game;
 import javax.swing.JFrame;
 
 public class Game extends JFrame {
