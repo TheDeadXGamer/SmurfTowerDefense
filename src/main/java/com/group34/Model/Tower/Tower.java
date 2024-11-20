@@ -1,6 +1,11 @@
 package com.group34.Model.Tower;
 import java.awt.geom.Point2D;
 import com.group34.Model.Enemy.BaseEnemy;
+import com.group34.Model.Projectile.LightningBolt;
+import com.group34.Model.Projectile.LightningBoltFactory;
+import com.group34.Model.Projectile.ProjectileFactory;
+import com.group34.Model.Projectile.ProjectileInterface;
+
 import java.lang.Math;
 public abstract class Tower  {
     protected int attackSpeed;
@@ -9,6 +14,7 @@ public abstract class Tower  {
     protected int cost;
     protected Point2D position;
     protected int range;
+    protected String projectileType;
 
     protected int size; //Im thinking that towers should have hitboxes of different sizes.
 
@@ -46,6 +52,10 @@ public abstract class Tower  {
         this.cost = price;
         
     }
+
+    public Point2D getPosition() {
+        return this.position;
+    }
     //should shooting be instant or will the projectiles be able to miss?
     public void attack(BaseEnemy target) {
         shootProjectile(target);
@@ -55,8 +65,21 @@ public abstract class Tower  {
     }
 
     public void shootProjectile(BaseEnemy target) {
+
+        ProjectileInterface projectile;
+
+        switch (projectileType) {
+            case ("LightningBolt"):
+                ProjectileFactory factory = new LightningBoltFactory(this);
+                projectile = factory.createProjectile();
+                break;
+
+
+        }
+
         Point2D EnemyPosition = new Point2D.Double(target.getX(), target.getY());
         double Coefficient = (EnemyPosition.getY() - position.getY()) / (EnemyPosition.getX() - position.getX());
         //venne riktigt hur jag ska göra detta, tänker att det kan vänta tills annat implementeras
+
     }
 }
