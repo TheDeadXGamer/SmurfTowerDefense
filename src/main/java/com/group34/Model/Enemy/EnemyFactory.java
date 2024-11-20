@@ -6,6 +6,6 @@ import java.awt.geom.Point2D;
 public class EnemyFactory implements EnemyFactoryInterface {
     @Override
     public BaseEnemy createGargamel(Point2D position) {
-        return new Gargamel(position);
+        return new EnemyGargamel();
     }
 }
