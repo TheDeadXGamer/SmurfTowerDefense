@@ -36,23 +36,6 @@ public abstract class Tower  {
     public String getTowerType() {return this.towerType;}
     public int getCost() {return this.cost;}
 
-    private void setAttackSpeed(int attackSpeed) {
-        this.attackSpeed = attackSpeed; 
-    }
-
-    private void setDamage(int damage) {
-        this.damage = damage;
-    }
-
-    private void setTowerType(String towerType) {
-        this.towerType = towerType;
-    }
-
-    private void setCost(int price) {
-        this.cost = price;
-        
-    }
-
     public Point2D getPosition() {
         return this.position;
     }
