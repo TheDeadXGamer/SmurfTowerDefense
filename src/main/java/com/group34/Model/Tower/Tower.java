@@ -7,6 +7,7 @@ import com.group34.Model.Projectile.ProjectileFactory;
 import com.group34.Model.Projectile.ProjectileInterface;
 
 import java.lang.Math;
+
 public abstract class Tower  {
     protected int attackSpeed;
     protected int damage;
