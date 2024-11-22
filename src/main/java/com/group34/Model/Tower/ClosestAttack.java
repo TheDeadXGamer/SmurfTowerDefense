@@ -11,7 +11,7 @@ public interface ClosestAttack extends Attack {
     default public void attack(Stream<BaseEnemy> enemies) {
 
         BaseEnemy closest = enemies
-            .filter(enemy -> this.getPosition().distance(enemy.getPosition()).norm() < this.range())
+            .filter(enemy -> this.getPosition().distance(enemy.getPosition()).abs() < this.range())
             .min(Integer::compare)
             .map(enemy -> enemy.damage(this.damage));
 
