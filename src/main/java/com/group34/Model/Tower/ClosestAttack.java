@@ -10,11 +10,10 @@ import com.group34.Model.Enemy.BaseEnemy;
 public interface ClosestAttack extends Attack {
     default public void attack(Stream<BaseEnemy> enemies) {
 
-        /*BaseEnemy closest = enemies
-            .min(Comparator.comparing(target -> this.getPosition().distance(target.getPosition()))).get();
-        int currHealth = closest.getHealth();
-        closest.setHealth(currHealth - this.damage());
-        */
+        BaseEnemy closest = enemies
+            .filter(enemy -> this.getPosition().distance(enemy.getPosition()).abs() < this.range)
+            .min(Integer::compare)
+            .map(enemy -> enemy.damage(this.damage));
     };
     
 }
