@@ -14,7 +14,6 @@ public interface ClosestAttack extends Attack {
             .filter(enemy -> this.getPosition().distance(enemy.getPosition()).abs() < this.range)
             .min(Integer::compare)
             .map(enemy -> enemy.damage(this.damage));
-
     };
     
 }
