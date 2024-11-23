@@ -1,8 +1,9 @@
 package com.group34.Model.Player;
 
+import com.group34.Model.Tower.Tower;
+
 import java.util.ArrayList;
 import java.util.List;
-import com.group34.Model.Tower.Tower;
 
 
 public class Player implements PlayerInterface {
