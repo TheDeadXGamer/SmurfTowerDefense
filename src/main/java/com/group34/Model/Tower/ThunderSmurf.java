@@ -1,12 +1,49 @@
 package com.group34.Model.Tower;
 
-import java.awt.geom.Point2D;
+import com.group34.Model.Enemy.BaseEnemy;
 
-public class ThunderSmurf extends Tower{
-    
-    public ThunderSmurf(Point2D position) {
-        super(1,3,1000,position,300);
-        towerType = this.getClass().getName();
-        projectileType = "ThunderBolt";
+import java.awt.geom.Point2D;
+import java.util.stream.Stream;
+
+public class ThunderSmurf implements Attack{
+    protected int attackSpeed;
+    protected int damage;
+
+    protected Point2D position;
+    protected int range;
+
+
+    public ThunderSmurf(Point2D position, int attackSpeed, int damage, int range) {
+
+        this.attackSpeed = attackSpeed;
+        this.damage = damage;
+        this.range = range;
+        this.position = position;
+    }
+
+
+    @Override
+    public int getAttackSpeed() {
+        return attackSpeed;
+    }
+
+    @Override
+    public int getDamage() {
+        return damage;
+    }
+
+    @Override
+    public void attack(Stream<BaseEnemy> enemy) {
+
+    }
+
+    @Override
+    public Point2D getPosition() {
+        return (Point2D) position.clone();
+    }
+
+    @Override
+    public int getRange() {
+        return range;
     }
 }

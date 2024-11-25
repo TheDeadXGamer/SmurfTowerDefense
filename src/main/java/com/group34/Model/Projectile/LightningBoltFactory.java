@@ -1,15 +1,16 @@
 package com.group34.Model.Projectile;
 
+import com.group34.Model.Tower.Attack;
 import com.group34.Model.Tower.Tower;
 
 import java.awt.*;
 
 public class LightningBoltFactory extends  ProjectileFactory{
 
-    Tower tower;
+    Attack tower;
 
     Image art;
-    public LightningBoltFactory(Tower tower) {
+    public LightningBoltFactory(Attack tower) {
         this.tower = tower;
     }
     @Override
