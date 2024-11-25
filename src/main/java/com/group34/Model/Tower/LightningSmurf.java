@@ -39,8 +39,7 @@ public class LightningSmurf implements Upgrade, Attack {
 
     @Override
     public int getRange() {
-        int copy = range;
-        return copy;
+        return range;
     }
 
     @Override
