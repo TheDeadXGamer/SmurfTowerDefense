@@ -33,7 +33,7 @@ public class LightningSmurf implements Upgrade, Attack {
 
     @Override
     public Point2D getPosition() {
-        return new Point2D.Double(position.getX(),position.getY());
+        return (Point2D) position.clone();
     }
 
 
