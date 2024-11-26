@@ -51,4 +51,11 @@ public class LightningSmurfTest {
         assertEquals(3, tower.getDamage());
         assertEquals(1000, tower.getCost());
     }
+
+    @Test
+    public void testEnemyDies() {
+        enemy.setHealth(2);;
+        tower.attack(enemy);
+        assertFalse(enemy.isAlive());
+    }
 }
