@@ -1,13 +1,13 @@
 package com.group34.Model.Tower;
 
-import java.util.Base64;
-import java.util.Iterator;
+
 import java.util.stream.Stream;
 
-import com.group34.Model.Enemy.BaseEnemy;
+import com.group34.Model.Enemy.Enemy;
 
 public interface AreaAttack extends Attack {
-    default public void attack(Stream<BaseEnemy> enemies) {
+    @Override
+    default public void attack(Stream<Enemy> enemies) {
         /*
         enemies.forEach(target -> {
             int currHealth = target.getHealth();

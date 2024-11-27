@@ -1,20 +1,19 @@
 package com.group34.Model.Tower;
 
-import java.util.Base64;
+
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.stream.Stream;
 
-import com.group34.Model.Enemy.BaseEnemy;
+import com.group34.Model.Enemy.Enemy;
 
 public interface ClosestAttack extends Attack {
-    default public void attack(Stream<BaseEnemy> enemies) {
-
-        /*BaseEnemy closest = enemies
+    @Override
+    default public void attack(Stream<Enemy> enemies) {
+        
+        Enemy closest = enemies
             .min(Comparator.comparing(target -> this.getPosition().distance(target.getPosition()))).get();
-        int currHealth = closest.getHealth();
-        closest.setHealth(currHealth - this.damage());
-        */
+        closest.damage(this.getDamage());
+    
     };
     
 }
