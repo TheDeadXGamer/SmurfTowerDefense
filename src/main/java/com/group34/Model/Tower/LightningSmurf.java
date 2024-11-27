@@ -1,16 +1,21 @@
 package com.group34.Model.Tower;
 
-import java.awt.geom.Point2D;
+import com.group34.Model.Enemy.Enemy;
+import com.group34.Model.Tower.Targeting.ClosestAttack;
+import com.group34.Model.Tower.Targeting.Targetings;
 
-public class LightningSmurf implements Upgrade, ClosestAttack {
+import java.awt.geom.Point2D;
+import java.util.List;
+
+public class LightningSmurf implements Upgrade,Attack {
 
     protected int attackSpeed;
     protected int damage;
 
     protected Point2D position;
     protected int range;
-
-
+    List<Enemy> targets;
+    Targetings targeting = new ClosestAttack();
     public LightningSmurf(Point2D position, int attackSpeed, int damage, int range) {
         this.attackSpeed = attackSpeed;
         this.damage = damage;
@@ -35,6 +40,11 @@ public class LightningSmurf implements Upgrade, ClosestAttack {
     }
 
     @Override
+    public void action() {
+        targeting.attack(targets);
+    }
+
+    @Override
     public int getAttackSpeed() {
         return attackSpeed;
     }
@@ -43,6 +53,8 @@ public class LightningSmurf implements Upgrade, ClosestAttack {
     public int getDamage() {
         return damage;
     }
+
+
 
 
 }
