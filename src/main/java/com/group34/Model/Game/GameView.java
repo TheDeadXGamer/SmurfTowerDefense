@@ -11,35 +11,33 @@ import java.io.InputStream;
 
 public class GameView extends JPanel {
     private Image backgroundImage;
+    private Image shopImage;
+    private Image gargamelImage;
+    private Image lightningTowerImage;
     private GameController controller;
 
     public GameView(GameController controller){
         this.controller = controller;
 
-        JButton easyButton = new JButton("Easy");
-        JButton mediumButton = new JButton("Medium");
-        JButton hardButton = new JButton("Hard");
-
-        easyButton.addActionListener(e -> controller.setDifficulty(Difficulty.EASY));
-        mediumButton.addActionListener(e -> controller.setDifficulty(Difficulty.MEDIUM));
-        hardButton.addActionListener(e -> controller.setDifficulty(Difficulty.HARD));
-
-        add(easyButton);
-        add(mediumButton);
-        add(hardButton);
-
-        try {
-            InputStream imageStream = getClass().getResourceAsStream("/assets/Maps/BaseMap.png"); //Different solution bcs new File() didnt work with relative path?
-            if (imageStream == null) {
-                throw new IOException("Background image not found.");
-            }
-            backgroundImage = ImageIO.read(imageStream);
-        } catch (IOException e) {
-            System.out.println("Error loading background image");
-        }
+        backgroundImage = loadImage("/assets/Maps/BaseMap.png");
+        shopImage = loadImage("/assets/Shop/Shop.png");
         
          
         
+    }
+
+    private Image loadImage(String path){
+        try {
+            InputStream imageStream = getClass().getResourceAsStream(path);
+            if (imageStream == null) {
+                throw new IOException("Image not found at path: " + path);
+        }
+        return ImageIO.read(imageStream);        
+    }catch (Exception e) {
+        e.printStackTrace();
+        System.out.println("Error loading image: " + path);
+        return null;
+        }
     }
 
     @Override
@@ -49,6 +47,14 @@ public class GameView extends JPanel {
         if (backgroundImage != null) {
             g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
 
-        }   
+        } 
+        
+        if (shopImage != null){
+            int shopWidth = getWidth() / 3; 
+            int shopHeight = getHeight();  
+            int shopX = getWidth() - shopWidth; 
+            int shopY = 0; 
+            g.drawImage(shopImage, shopX, shopY, shopWidth, shopHeight, this);
+        }
     }
 }
