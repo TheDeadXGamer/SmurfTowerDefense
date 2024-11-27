@@ -2,6 +2,7 @@ package com.group34.Model.Tower;
 
 
 import com.group34.Model.Enemy.Enemy;
+import com.group34.Model.Projectile.LightningBoltFactory;
 import com.group34.Model.Tower.Targeting.ClosestAttack;
 import com.group34.Model.Tower.Targeting.Targetings;
 
@@ -15,7 +16,7 @@ public class ThunderSmurf implements Attack {
     protected Point2D position;
     protected int range;
     List<Enemy> targets;
-    Targetings targeting = new ClosestAttack();
+    Targetings targeting = new ClosestAttack(new LightningBoltFactory(this),position); //TODO Den ska ha annan projectile men lägger såhär undertiden
 
     public ThunderSmurf(Point2D position, int attackSpeed, int damage, int range) {
 
