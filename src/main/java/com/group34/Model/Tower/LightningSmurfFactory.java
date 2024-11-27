@@ -1,7 +1,5 @@
 package com.group34.Model.Tower;
 
-import com.group34.Model.Projectile.LightningBolt;
-import com.group34.Model.Projectile.LightningBoltFactory;
 
 import java.awt.geom.Point2D;
 

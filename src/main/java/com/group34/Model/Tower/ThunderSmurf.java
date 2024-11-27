@@ -1,11 +1,8 @@
 package com.group34.Model.Tower;
 
-import com.group34.Model.Enemy.BaseEnemy;
 
 import java.awt.geom.Point2D;
-import java.util.stream.Stream;
-
-public class ThunderSmurf implements Attack{
+public class ThunderSmurf implements ClosestAttack {
     protected int attackSpeed;
     protected int damage;
 
@@ -32,10 +29,6 @@ public class ThunderSmurf implements Attack{
         return damage;
     }
 
-    @Override
-    public void attack(Stream<BaseEnemy> enemy) {
-
-    }
 
     @Override
     public Point2D getPosition() {

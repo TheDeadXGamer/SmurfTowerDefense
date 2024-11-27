@@ -1,13 +1,8 @@
 package com.group34.Model.Tower;
 
-import com.group34.Model.Enemy.BaseEnemy;
-import com.group34.Model.Projectile.LightningBolt;
-import com.group34.Model.Projectile.ProjectileInterface;
-
 import java.awt.geom.Point2D;
-import java.util.stream.Stream;
 
-public class LightningSmurf implements Upgrade, Attack {
+public class LightningSmurf implements Upgrade, ClosestAttack {
 
     protected int attackSpeed;
     protected int damage;
@@ -17,13 +12,10 @@ public class LightningSmurf implements Upgrade, Attack {
 
 
     public LightningSmurf(Point2D position, int attackSpeed, int damage, int range) {
-
         this.attackSpeed = attackSpeed;
         this.damage = damage;
         this.range = range;
         this.position = position;
-
-
     }
 
     @Override
@@ -50,11 +42,6 @@ public class LightningSmurf implements Upgrade, Attack {
     @Override
     public int getDamage() {
         return damage;
-    }
-
-    @Override
-    public void attack(Stream<BaseEnemy> enemy) {
-
     }
 
 

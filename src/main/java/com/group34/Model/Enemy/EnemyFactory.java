@@ -11,7 +11,4 @@ public class EnemyFactory {
         this.spawn = spawn;
     }
 
-    public Enemy createGargamel() {
-        return new Gargamel();
-    }
 }
