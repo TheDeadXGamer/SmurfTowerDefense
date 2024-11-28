@@ -25,6 +25,9 @@ public class ClosestAttack implements Targetings {
     public void attack(List<Enemy> enemy) {
 
         Enemy closestEnemy = closestEnemy(enemy);
+        if (closestEnemy == null) {
+            return;
+        }
         ProjectileInterface projectile = factory.createProjectile(); //TODO Projectile should actually do something when created
         closestEnemy.damage(projectile.getDamage());
 
@@ -34,14 +37,20 @@ public class ClosestAttack implements Targetings {
     }
 
     public Enemy closestEnemy(List<Enemy> enemies) {
+        if (enemies.isEmpty()) {
+            return null;
+        }
+
         Enemy closestEnemy = null;
-        double minDistance = 0;
+
         for (Enemy enemy2: enemies) {
-            double deltaY = enemy2.getPosition().getY() - towerPosition.getY();
-            double deltaX = enemy2.getPosition().getX() - towerPosition.getX();
-            double distance = Math.sqrt(Math.pow(deltaY,2)+Math.pow(deltaX,2));
-            if (distance < minDistance) {
-                minDistance = distance;
+
+            double distance = enemy2.getPosition().distance(towerPosition);
+            if (closestEnemy == null) {
+                closestEnemy = enemy2;
+            }
+
+            else if (closestEnemy.getPosition().distance(towerPosition) > distance) {
                 closestEnemy = enemy2;
             }
         }
