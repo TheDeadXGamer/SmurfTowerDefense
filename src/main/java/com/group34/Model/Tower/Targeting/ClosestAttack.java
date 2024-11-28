@@ -36,7 +36,7 @@ public class ClosestAttack implements Targetings {
 
     }
 
-    public Enemy closestEnemy(List<Enemy> enemies) {
+    Enemy closestEnemy(List<Enemy> enemies) {
         if (enemies.isEmpty()) {
             return null;
         }
