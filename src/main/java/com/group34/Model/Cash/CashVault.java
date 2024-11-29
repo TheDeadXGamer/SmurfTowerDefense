@@ -1,4 +1,4 @@
-package com.group34.Model.Tower;
+package com.group34.Model.Cash;
 
 public class CashVault {
 
