@@ -18,7 +18,7 @@ public interface Enemy {
 
     void damage(int damage);
 
-    // How does movement relate to speed? Advance speed units per iteration? It will be coupled to freme rate? Add timeObject instead perhaps?
+    // How does movement relate to speed? Advance speed units per iteration? It will be coupled to frame rate? Add timeObject instead perhaps?
     //void move();
 
 }
