@@ -4,3 +4,4 @@ public interface Attack extends Tower {
    public int getAttackSpeed();
    public int getDamage();
 }
+

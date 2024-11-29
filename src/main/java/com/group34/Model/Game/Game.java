@@ -4,14 +4,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-
 public class Game extends JFrame {
     public Game(){
         setTitle("Smurf Tower Defence");
         setSize(1000, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-
 
         // CardLayout to handle different views, welcomescreen, game, (shop/upgrades))
         CardLayout cardLayout = new CardLayout();
