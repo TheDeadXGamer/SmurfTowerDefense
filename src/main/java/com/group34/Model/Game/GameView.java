@@ -71,19 +71,6 @@ public class GameView extends JPanel {
             }
         };
 
-        // difficulty buttons
-        JButton easyButton = new JButton("Easy");
-        JButton mediumButton = new JButton("Medium");
-        JButton hardButton = new JButton("Hard");
-
-        easyButton.addActionListener(e -> controller.setDifficulty(Difficulty.EASY));
-        mediumButton.addActionListener(e -> controller.setDifficulty(Difficulty.MEDIUM));
-        hardButton.addActionListener(e -> controller.setDifficulty(Difficulty.HARD));
-
-        gamePanel.add(easyButton);
-        gamePanel.add(mediumButton);
-        gamePanel.add(hardButton);
-
         // game panel size
         Dimension gamePanelSize = new Dimension(gameWidth, gameHeight);
         gamePanel.setPreferredSize(gamePanelSize);
