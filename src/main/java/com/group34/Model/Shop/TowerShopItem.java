@@ -1,21 +1,17 @@
 package com.group34.Model.Shop;
 
+import com.group34.Model.Tower.Tower;
+import com.group34.Model.Tower.TowerFactory;
+
 public class TowerShopItem implements IShopItem {
-    private String name;
-    private int cost;
+    private TowerFactory towerTypeFactory;
 
-    public TowerShopItem(String name, int cost) {
-        this.name = name;
-        this.cost = cost;
+    public TowerShopItem(TowerFactory towerTypeFactory) {
+        this.towerTypeFactory = towerTypeFactory;
     }
 
     @Override
-    public String getName() {
-        return this.name;
-    }
-
-    @Override
-    public int getCost() {
-        return this.cost;
+    public TowerFactory getTowerTypeFactory() {
+        return towerTypeFactory;
     }
 }

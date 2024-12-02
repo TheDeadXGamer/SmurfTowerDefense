@@ -1,9 +1,16 @@
 package com.group34.Model.Tower;
 
-public abstract class TowerFactory {
+import java.awt.geom.Point2D;
 
+public abstract class TowerFactory {
+    protected Tower towerReference;
+    protected TowerFactory(Tower towerReference) {
+        this.towerReference = towerReference;
+    }
+
+    abstract public Tower createTower(Point2D position);
     
-    abstract public Tower createTower();
-    
-    
+    public Tower getTowerReference() {
+        return towerReference;
+    }
 }
