@@ -1,4 +1,6 @@
 package com.group34.Model.Tower;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.geom.Point2D;
 
 /**
@@ -8,15 +10,35 @@ public interface Tower {
     /**
      * @return the position is needed to calculate in range targets. Also required for UI placement.
      **/
-    public Point2D getPosition();
+    Point2D getPosition();
+
+    /**
+     * @return Sets the position of the tower.
+     **/
+    void setPosition(Point2D position);
 
     /**
      * @return Determines in range targets.
      **/
-    public int getRange();
+    int getRange();
 
     /**
      * @return Generalized action of Tower which is called by downstream client user. The towers themselves handle the required input in their implementation.
      **/
-    public void action();
+    void action();
+
+    /**
+     * @return The type of the tower as a String.
+     **/
+    String getTowerType();
+
+    /**
+     * @return The path to the image equivalent of the tower.
+     **/
+    String getTowerImagePath();
+
+    /**
+     * @return The cost of the tower.
+     **/
+    int getCost();
 }

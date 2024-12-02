@@ -6,16 +6,19 @@ import com.group34.Model.Projectile.LightningBoltFactory;
 import com.group34.Model.Tower.Targeting.ClosestAttack;
 import com.group34.Model.Tower.Targeting.Targetings;
 
+import javax.swing.*;
 import java.awt.geom.Point2D;
 import java.util.List;
 
 public class ThunderSmurf implements Attack {
     protected int attackSpeed;
     protected int damage;
-
     protected Point2D position;
     protected int range;
+    protected int cost;
     List<Enemy> targets;
+
+
     Targetings targeting = new ClosestAttack(new LightningBoltFactory(this),position); //TODO Den ska ha annan projectile men lägger såhär undertiden
 
     public ThunderSmurf(Point2D position, int attackSpeed, int damage, int range) {
@@ -46,6 +49,11 @@ public class ThunderSmurf implements Attack {
     }
 
     @Override
+    public void setPosition(Point2D position) {
+        this.position = position;
+    }
+
+    @Override
     public int getRange() {
         return range;
     }
@@ -53,5 +61,20 @@ public class ThunderSmurf implements Attack {
     @Override
     public void action() {
         targeting.attack(targets);
+    }
+
+    @Override
+    public String getTowerType() {
+        return "ThunderSmurf";
+    }
+
+    @Override
+    public String getTowerImagePath() {
+        return ""; // no image yet
+    }
+
+    @Override
+    public int getCost() {
+        return 1000;
     }
 }

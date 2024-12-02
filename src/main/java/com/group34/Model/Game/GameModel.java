@@ -13,7 +13,6 @@ public class GameModel {
         this.gameStatus = GameStatus.ACTIVE; 
         this.currentRound = 1;
         this.player = new Player(200, 1000); // EASY values as default
-
     }
 
     public Difficulty getDifficulty() {
@@ -61,5 +60,9 @@ public class GameModel {
 
     public void setGameStatus(GameStatus status) {
         this.gameStatus = status;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }

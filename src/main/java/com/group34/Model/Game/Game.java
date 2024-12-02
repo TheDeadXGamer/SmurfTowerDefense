@@ -1,13 +1,19 @@
 package com.group34.Model.Game;
+import com.group34.Model.Shop.ShopController;
+import com.group34.Model.Shop.ShopModel;
+
 import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 public class Game extends JFrame {
+    /**
+     * @return Initiates the game.
+    **/
     public Game(){
         setTitle("Smurf Tower Defence");
-        setSize(1000, 600);
+        setSize(815, 635);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -18,11 +24,17 @@ public class Game extends JFrame {
         // Initializing MVC components
         GameModel model = new GameModel();
         GameController controller = new GameController(model);
-        GameView gameView = new GameView(controller);
+
+        ShopModel shopModel = new ShopModel(model.getPlayer());
+        ShopController shopController = new ShopController(shopModel);
+
+        GameView gameView = new GameView(controller, shopController);
+
         WelcomeScreen welcomeScreen = new WelcomeScreen(controller, cardLayout, container);
 
         container.add(welcomeScreen, "WELCOME_SCREEN");
         container.add(gameView,"GAME_VIEW");
+
         cardLayout.show(container, getName());
         setContentPane(container); // Set container as content
         setVisible(true);

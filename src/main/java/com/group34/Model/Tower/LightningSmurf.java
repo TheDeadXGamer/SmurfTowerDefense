@@ -34,6 +34,11 @@ public class LightningSmurf implements Upgrade,Attack {
         return (Point2D) position.clone();
     }
 
+    @Override
+    public void setPosition(Point2D position) {
+        this.position = position;
+    }
+
 
     @Override
     public int getRange() {
@@ -46,6 +51,21 @@ public class LightningSmurf implements Upgrade,Attack {
     }
 
     @Override
+    public String getTowerType() {
+        return "LightningSmurf";
+    }
+
+    @Override
+    public String getTowerImagePath() {
+        return "/assets/Towers/LightningSmurf.png";
+    }
+
+    @Override
+    public int getCost() {
+        return 500;
+    }
+
+    @Override
     public int getAttackSpeed() {
         return attackSpeed;
     }
@@ -54,8 +74,5 @@ public class LightningSmurf implements Upgrade,Attack {
     public int getDamage() {
         return damage;
     }
-
-
-
 
 }
