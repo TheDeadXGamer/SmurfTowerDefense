@@ -13,9 +13,9 @@ public class EnemyPath {
     private static final int DEFAULT_WIDTH = 800;   // Default window size
     private static final int DEFAULT_HEIGHT = 600;  // Used for initial calculations
 
-    public EnemyPath() {
+    public EnemyPath(String filePath) {
         waypoints = new LinkedList<>();
-        initializeWaypoints();
+        initializeWaypoints(filePath);
     }
 
     /**
