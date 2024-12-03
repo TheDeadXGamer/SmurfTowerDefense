@@ -1,11 +1,13 @@
-package com.group34.Model.Game;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.imageio.ImageIO;
+package com.group34.View.Game;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.io.IOException;
-import java.awt.Graphics;
 import java.io.InputStream;
+
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
+
+import com.group34.Controller.Game.GameController;
 
 
 

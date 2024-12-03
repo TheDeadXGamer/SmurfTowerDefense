@@ -1,15 +1,16 @@
 // WaypointPanel.java
-package com.group34.Model.Enemy;
+package com.group34.Model.Pathway;
 
-import javax.swing.JPanel;
-import javax.imageio.ImageIO;
-import java.awt.Image;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 
 public class WaypointPanel extends JPanel {
     private Image backgroundImage;

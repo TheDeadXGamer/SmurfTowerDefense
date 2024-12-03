@@ -1,5 +1,5 @@
 // WaypointTool.java
-package com.group34.Model.Enemy;
+package com.group34.Model.Pathway;
 
 import javax.swing.JFrame;
 

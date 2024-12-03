@@ -1,8 +1,12 @@
-package com.group34.Model.Game;
+package com.group34.View.Game;
 import java.awt.CardLayout;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+
+import com.group34.Controller.Game.GameController;
+import com.group34.Model.Game.GameModel;
 
 public class Game extends JFrame {
     public Game(){

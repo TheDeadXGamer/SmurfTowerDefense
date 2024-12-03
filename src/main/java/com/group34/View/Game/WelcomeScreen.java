@@ -1,6 +1,17 @@
-package com.group34.Model.Game;
-import javax.swing.*;
-import java.awt.*;
+package com.group34.View.Game;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Font;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import com.group34.Controller.Game.GameController;
+import com.group34.Model.Game.Difficulty;
 
 
 public class WelcomeScreen extends JPanel{
