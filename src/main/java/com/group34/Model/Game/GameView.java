@@ -186,7 +186,7 @@ public class GameView extends JPanel {
                         Point dropPoint = dtde.getLocation();
                         IShopItem item = findItemByName(itemName);
                         if (item != null && shopController.purchaseItem(item)) {
-                            Tower tower = item.getTowerTypeFactory().createTower(dropPoint);
+                            Tower tower = item.getTowerTypeFactory().createTower(itemName,dropPoint);
                             System.out.println("Dropped " + tower.getTowerType() + " at " + dropPoint);
                             shopController.getShopModel().getPlayer().addTower(tower);
                             updateView();
