@@ -29,7 +29,6 @@ public class ThunderSmurf implements Attack {
         this.position = position;
     }
 
-
     @Override
     public int getAttackSpeed() {
         return attackSpeed;
@@ -39,9 +38,6 @@ public class ThunderSmurf implements Attack {
     public int getDamage() {
         return damage;
     }
-
-
-
 
     @Override
     public Point2D getPosition() {

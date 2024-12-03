@@ -8,7 +8,7 @@ public abstract class TowerFactory {
         this.towerReference = towerReference;
     }
 
-    abstract public Tower createTower(Point2D position);
+    abstract public Tower createTower(String type, Point2D position);
     
     public Tower getTowerReference() {
         return towerReference;
