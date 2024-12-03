@@ -2,6 +2,9 @@
 package com.group34.Model.Enemy;
 
 import java.awt.geom.Point2D;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -18,15 +21,20 @@ public class EnemyPath {
     /**
      * Initialize waypoints for the enemy to follow.
      * Waypoints are stored as percentages of the window size.
+     * @param filePath The filepath to the txt file containing the waypoints.
      */
-    private void initializeWaypoints() {
-        // Store waypoints using percentages but convert to actual coordinates
-        addWaypoint(0.0, 0.4);    // Start at left, 40% down
-        addWaypoint(0.2, 0.4);    // 20% from left, 40% down
-        addWaypoint(0.3, 0.6);
-        addWaypoint(0.5, 0.3);
-        addWaypoint(0.7, 0.5);
-        addWaypoint(1.0, 0.4);    // End at right edge
+    private void initializeWaypoints(String filePath) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(";");
+                double xPercent = Double.parseDouble(parts[0].trim());
+                double yPercent = Double.parseDouble(parts[1].trim());
+                addWaypoint(xPercent, yPercent);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

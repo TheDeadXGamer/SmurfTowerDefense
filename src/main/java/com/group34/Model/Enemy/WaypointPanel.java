@@ -1,4 +1,3 @@
-// WaypointPanel.java
 package com.group34.Model.Enemy;
 
 import javax.swing.JPanel;
@@ -39,7 +38,7 @@ public class WaypointPanel extends JPanel {
                 int y = e.getY();
                 double xPercent = (double) x / getWidth();
                 double yPercent = (double) y / getHeight();
-                String coordinates = String.format("x=%.2f; y=%.2f%n", xPercent, yPercent);
+                String coordinates = String.format("%.2f;%.2f%n", xPercent, yPercent);
                 System.out.print(coordinates);
 
                 try {
