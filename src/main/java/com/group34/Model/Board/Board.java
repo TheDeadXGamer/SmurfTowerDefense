@@ -27,7 +27,12 @@ public class Board {
     public void addTower(Tower tower) throws PlacementError { 
    
         Point2D position = tower.getPosition();
-        if (position.getX() < 0 || position.getX() > width || position.getY() < 0 || position.getY() > height) {
+        if (
+            position.getX() < 0 || 
+            position.getX() > width ||
+            position.getY() < 0 ||
+            position.getY() > height
+        ) {
             throw new PlacementError("Tower placed outside of board");
         }
 
