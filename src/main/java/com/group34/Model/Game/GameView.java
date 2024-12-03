@@ -203,19 +203,18 @@ public class GameView extends JPanel {
                 }
             }
         });
-    }
 
-    /**
-     * @return Image from path.
-     **/
+
         coinsIcon = loadImage("/assets/Other/Smurfcoins.png");
         healthIcon = loadImage("/assets/Other/Smurfhealth.png");
         settingsIcon = loadImage("/assets/Other/Smurfsettings.png");
         backgroundImage = loadImage("/assets/Maps/BaseMap.png");
         shopImage = loadImage("/assets/Shop/Shop.png");
 
-        
     }
+
+        
+    
 
 
     private Image loadImage(String path){
