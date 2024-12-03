@@ -9,16 +9,11 @@ public interface Enemy {
     int getSpeed();
 
     int getReward();    
-    
-    default String getName() {
-        return this.getClass().getName();
-    };
 
     Point2D getPosition();
 
     void damage(int damage);
 
-    // How does movement relate to speed? Advance speed units per iteration? It will be coupled to frame rate? Add timeObject instead perhaps?
-    //void move();
+    void move();
 
 }

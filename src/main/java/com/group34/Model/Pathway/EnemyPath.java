@@ -1,5 +1,5 @@
 // EnemyPath.java
-package com.group34.Model.Enemy;
+package com.group34.Model.Pathway;
 
 import java.awt.geom.Point2D;
 import java.util.LinkedList;

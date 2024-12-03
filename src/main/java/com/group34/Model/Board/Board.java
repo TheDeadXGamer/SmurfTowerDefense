@@ -40,5 +40,11 @@ public class Board {
         towers.add(tower);
     }
 
+    public void update() {
+        for (Tower tower : towers) {
+            tower.action();
+        }
+    }
+
     
 }
