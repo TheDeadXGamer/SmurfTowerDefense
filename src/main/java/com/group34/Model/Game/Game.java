@@ -7,15 +7,21 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class Game extends JFrame {
-    /**
-     * @return Initiates the game.
-    **/
+public class Game extends JFrame implements Runnable {
+
+    private Thread gameThread;
+
+    private final double FPS_SET = 120.0;
+    private final double UPS_SET = 60.0;
+    
+
+
     public Game(){
         setTitle("Smurf Tower Defence");
         setSize(815, 635);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+
 
         // CardLayout to handle different views, welcomescreen, game, (shop/upgrades))
         CardLayout cardLayout = new CardLayout();
@@ -38,9 +44,69 @@ public class Game extends JFrame {
         cardLayout.show(container, getName());
         setContentPane(container); // Set container as content
         setVisible(true);
+
+        
+    }
+
+    private void start(){
+        gameThread = new Thread(this){};
+        gameThread.start();
+    }
+    
+
+    private void updateGame(){
+        // Game update logic
+        // System.out.println("Game updated!");
+    }
+
+    @Override
+    public void run(){
+
+        double timePerFrame = 1000000000.0 / FPS_SET;
+        double timePerUpdate = 1000000000.0 / UPS_SET;
+
+        long lastFrame = System.nanoTime();
+        long lastUpdate = System.nanoTime();
+        long lastTimeCheck = System.currentTimeMillis();
+
+        int frames = 0;
+        int updates = 0;
+
+        long now;
+        
+
+        while (true){   
+
+            now = System.nanoTime();
+            //Render
+            if (now - lastFrame >= timePerFrame) {
+                repaint();
+                lastFrame = now;
+                frames ++;
+            }
+
+            //Update
+            if (now - lastUpdate >= timePerUpdate){
+                updateGame();
+                lastUpdate = now;
+                updates ++;
+            }
+
+            if (System.currentTimeMillis() - lastTimeCheck >= 1000) {
+                System.out.println("FPS: " + frames + " | UPS: " + updates);
+                frames = 0;
+                updates = 0;
+                lastTimeCheck = System.currentTimeMillis();
+            }
+
+        }
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Game());
+        SwingUtilities.invokeLater(() -> {
+            Game game = new Game();
+            game.start();
+        });
+        
     }
 }
