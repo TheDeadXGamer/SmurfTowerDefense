@@ -6,7 +6,6 @@ import com.group34.Model.Projectile.LightningBoltFactory;
 import com.group34.Model.Tower.Targeting.ClosestAttack;
 import com.group34.Model.Tower.Targeting.Targetings;
 
-import javax.swing.*;
 import java.awt.geom.Point2D;
 import java.util.List;
 
