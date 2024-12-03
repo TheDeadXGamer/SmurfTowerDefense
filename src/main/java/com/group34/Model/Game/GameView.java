@@ -22,8 +22,10 @@ import java.util.Objects;
 public class GameView extends JPanel {
     private Image backgroundImage;
     private Image shopImage;
-    private Image gargamelImage;
-    private Image lightningTowerImage;
+    private Image coinsIcon;
+    private Image healthIcon;
+    private Image settingsIcon;
+    
     private GameController controller;
     private ShopController shopController;
 
@@ -201,11 +203,20 @@ public class GameView extends JPanel {
                 }
             }
         });
+
+
+        coinsIcon = loadImage("/assets/Other/Smurfcoins.png");
+        healthIcon = loadImage("/assets/Other/Smurfhealth.png");
+        settingsIcon = loadImage("/assets/Other/Smurfsettings.png");
+        backgroundImage = loadImage("/assets/Maps/BaseMap.png");
+        shopImage = loadImage("/assets/Shop/Shop.png");
+
     }
 
-    /**
-     * @return Image from path.
-     **/
+        
+    
+
+
     private Image loadImage(String path){
         try {
             InputStream imageStream = getClass().getResourceAsStream(path);
@@ -220,6 +231,53 @@ public class GameView extends JPanel {
         }
     }
 
+
+    private void drawIcon(Graphics g, Image icon, int x, int y, int width, int height) {
+        if (icon != null) {
+            g.drawImage(icon, x, y, width, height, this);
+        } else {
+            System.out.println("Warning: Attempted to draw a null icon.");
+        }
+    }
+    
+    
+
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+    
+        int iconWidth = getWidth() / 16;
+        int iconHeight = getHeight() / 10;
+    
+        // Paint background
+        if (backgroundImage != null) {
+            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        }
+
+        // Display shop
+        if (shopImage != null) {
+            int shopWidth = getWidth() / 3;
+            int shopHeight = getHeight();
+            int shopX = getWidth() - shopWidth;
+            int shopY = 0;
+            g.drawImage(shopImage, shopX, shopY, shopWidth, shopHeight, this);
+        }
+    
+        // Place icons
+        int coinsIconX = getWidth() / 50;
+        int coinsIconY = getHeight() / 50;
+        drawIcon(g, coinsIcon, coinsIconX, coinsIconY, iconWidth, iconHeight);
+    
+        int healthIconX = coinsIconX + getWidth() / 6;
+        int healthIconY = coinsIconY; 
+        drawIcon(g, healthIcon, healthIconX, healthIconY, iconWidth, iconHeight);
+    
+        int settingsIconX = getWidth() - iconWidth - getWidth() / 50;
+        int settingsIconY = getHeight() / 50; 
+        drawIcon(g, settingsIcon, settingsIconX, settingsIconY, iconWidth, iconHeight);
+    }
+    
+    
     private IShopItem findItemByName(String name) {
         for (IShopItem item : shopController.getShopModel().getItems()) {
             if (item.getTowerTypeFactory().getTowerReference().getTowerType().equals(name)) {
