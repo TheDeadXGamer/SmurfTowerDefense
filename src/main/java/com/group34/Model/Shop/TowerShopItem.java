@@ -10,6 +10,9 @@ public class TowerShopItem implements IShopItem {
         this.towerTypeFactory = towerTypeFactory;
     }
 
+    /**
+     * @return the factory for the tower type.
+     */
     @Override
     public TowerFactory getTowerTypeFactory() {
         return towerTypeFactory;

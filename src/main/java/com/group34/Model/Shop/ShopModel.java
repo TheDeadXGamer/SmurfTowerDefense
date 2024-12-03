@@ -18,12 +18,17 @@ public class ShopModel {
 
     }
 
+    /**
+     * @return list of items in shop.
+     **/
     public ArrayList<IShopItem> getItems() {
         return items;
     }
 
     /**
-     * @return true if player has enough money to purchase item while subtracting cost from player's money.
+     * Purchases an item from the shop.
+     * @param shopItem the item to be purchased.
+     * @return true if player has enough money to purchase item while subtracting cost from player's money, false otherwise.
      **/
     public boolean purchaseItem(IShopItem shopItem) {
         int playerMoney = player.getMoney();
@@ -40,6 +45,9 @@ public class ShopModel {
         }
     }
 
+    /**
+     * @return the player.
+     **/
     public Player getPlayer() {
         return player;
     }
