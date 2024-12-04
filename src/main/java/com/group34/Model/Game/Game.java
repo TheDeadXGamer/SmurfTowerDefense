@@ -1,6 +1,8 @@
 package com.group34.Model.Game;
 import com.group34.Model.Shop.ShopController;
 import com.group34.Model.Shop.ShopModel;
+import com.group34.View.GameView;
+import com.group34.View.WelcomeScreen;
 
 import java.awt.CardLayout;
 import javax.swing.JFrame;
@@ -13,7 +15,7 @@ public class Game extends JFrame implements Runnable {
 
     private final double FPS_SET = 120.0;
     private final double UPS_SET = 60.0;
-    
+
 
 
     public Game(){
@@ -45,14 +47,14 @@ public class Game extends JFrame implements Runnable {
         setContentPane(container); // Set container as content
         setVisible(true);
 
-        
+
     }
 
     private void start(){
         gameThread = new Thread(this){};
         gameThread.start();
     }
-    
+
 
     private void updateGame(){
         // Game update logic
@@ -73,9 +75,9 @@ public class Game extends JFrame implements Runnable {
         int updates = 0;
 
         long now;
-        
 
-        while (true){   
+
+        while (true){
 
             now = System.nanoTime();
             //Render
@@ -107,6 +109,6 @@ public class Game extends JFrame implements Runnable {
             Game game = new Game();
             game.start();
         });
-        
+
     }
 }

@@ -6,7 +6,7 @@ import java.awt.geom.Point2D;
 public class LightningSmurfFactory extends TowerFactory {
 
     public LightningSmurfFactory() {
-        super(new LightningSmurf(null,0,0,0));
+        super(new LightningSmurf(null,1,2,200));
     }
     @Override
     public Tower createTower(Point2D position) {
