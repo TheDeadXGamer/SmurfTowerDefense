@@ -1,6 +1,8 @@
 package com.group34.Model.Game;
 import com.group34.Model.Shop.ShopController;
 import com.group34.Model.Shop.ShopModel;
+import com.group34.View.GameView;
+import com.group34.View.WelcomeScreen;
 
 import java.awt.CardLayout;
 import javax.swing.JFrame;
@@ -9,7 +11,7 @@ import javax.swing.SwingUtilities;
 
 public class Game extends JFrame {
     /**
-     * @return Initiates the game.
+     * Initiates the game.
     **/
     public Game(){
         setTitle("Smurf Tower Defence");
