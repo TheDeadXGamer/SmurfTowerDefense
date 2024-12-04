@@ -24,6 +24,8 @@ public class GameModel {
         difficultyModifiers();
     }
 
+
+    // FACTORY PATTERN
     public void difficultyModifiers(){
         switch (difficulty) {
             case EASY:
@@ -64,5 +66,13 @@ public class GameModel {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public int getPlayerMoney() {
+        return player.getMoney();
+    }
+
+    public int getPlayerHealth() {
+        return player.getHealth();
     }
 }
