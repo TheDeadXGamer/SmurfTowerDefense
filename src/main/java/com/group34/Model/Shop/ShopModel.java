@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.group34.Model.Player.Player;
 import com.group34.Model.Tower.*;
+import com.group34.Model.Tower.Factory.LightningSmurfFactory;
 
 public class ShopModel {
     private Player player;

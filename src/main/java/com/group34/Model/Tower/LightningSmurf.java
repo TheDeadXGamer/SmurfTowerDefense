@@ -10,18 +10,20 @@ import java.util.List;
 
 public class LightningSmurf implements Upgrade,Attack {
 
-    protected int attackSpeed;
-    protected int damage;
-    protected Point2D position;
-    protected int range;
-    List<Enemy> targets;
-    Targetings targeting = new ClosestAttack(new LightningBoltFactory(this), position);
+    private int attackSpeed;
+    private int damage;
+    private Point2D position;
+    private int range;
+    private List<Enemy> targets;
+    private int cost;
+    private Targetings targeting = new ClosestAttack(new LightningBoltFactory(this), position);
 
-    public LightningSmurf(Point2D position, int attackSpeed, int damage, int range) {
-        this.attackSpeed = attackSpeed;
-        this.damage = damage;
-        this.range = range;
+    public LightningSmurf(Point2D position) {
+        this.attackSpeed = 1;
+        this.damage = 3;
+        this.range = 300;
         this.position = position;
+        this.cost = 500;
     }
 
     /**
@@ -30,7 +32,7 @@ public class LightningSmurf implements Upgrade,Attack {
      */
     @Override
     public Attack upgrade() {
-        return new ThunderSmurf(this.position,1,5,400);
+        return new ThunderSmurf(this.position);
     }
 
     /**
@@ -92,7 +94,7 @@ public class LightningSmurf implements Upgrade,Attack {
      */
     @Override
     public int getCost() {
-        return 500;
+        return cost;
     }
 
     /**

@@ -10,21 +10,22 @@ import java.awt.geom.Point2D;
 import java.util.List;
 
 public class ThunderSmurf implements Attack {
-    protected int attackSpeed;
-    protected int damage;
-    protected Point2D position;
-    protected int range;
-    protected int cost;
-    List<Enemy> targets;
+    private int attackSpeed;
+    private int damage;
+    private Point2D position;
+    private int range;
+    private int cost;
+    private List<Enemy> targets;
 
 
     Targetings targeting = new ClosestAttack(new LightningBoltFactory(this),position); //TODO Den ska ha annan projectile men lägger såhär undertiden
 
-    public ThunderSmurf(Point2D position, int attackSpeed, int damage, int range) {
-        this.attackSpeed = attackSpeed;
-        this.damage = damage;
-        this.range = range;
+    public ThunderSmurf(Point2D position) {
+        this.attackSpeed = 1;
+        this.damage = 5;
+        this.range = 400;
         this.position = position;
+        this.cost = 1000;
     }
 
     /**
@@ -104,6 +105,6 @@ public class ThunderSmurf implements Attack {
      */
     @Override
     public int getCost() {
-        return 1000;
+        return cost;
     }
 }

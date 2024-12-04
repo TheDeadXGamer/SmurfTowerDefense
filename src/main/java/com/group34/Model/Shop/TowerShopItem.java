@@ -1,7 +1,7 @@
 package com.group34.Model.Shop;
 
 import com.group34.Model.Tower.Tower;
-import com.group34.Model.Tower.TowerFactory;
+import com.group34.Model.Tower.Factory.TowerFactory;
 
 public class TowerShopItem implements IShopItem {
     private TowerFactory towerTypeFactory;
