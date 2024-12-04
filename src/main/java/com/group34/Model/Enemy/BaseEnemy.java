@@ -10,8 +10,8 @@ public abstract class BaseEnemy implements Enemy {
     private int health;
     private CashVault cashVault;
     private Game game;
-    private int speed;
     private int reward;
+    private int speed;
     private RoadToken point;
 
     public BaseEnemy(

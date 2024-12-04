@@ -4,11 +4,6 @@ import com.group34.Model.Board.Board;
 import com.group34.Model.Game.Game;
 import com.group34.Model.Game.Player;
 
-
-
-
-
-
 class TowerDefenceBuilder {
 }
 class TowerDefence implements Runnable {
@@ -16,6 +11,7 @@ class TowerDefence implements Runnable {
     Board board;
     Player player;
 
+    @Override
     public void run() {
         while (player.isAlive()) {
             board.update();

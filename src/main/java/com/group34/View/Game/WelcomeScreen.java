@@ -5,13 +5,11 @@ import java.awt.Font;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import com.group34.Controller.Game.GameController;
-import com.group34.Model.Difficulty.Difficulty;
 
 
 public class WelcomeScreen extends JPanel{
@@ -37,36 +35,36 @@ public class WelcomeScreen extends JPanel{
         centerPanel.add(Box.createVerticalStrut(20));
 
 
-        // Difficulty buttons
-        JButton easyButton = new JButton("Easy");
-        easyButton.addActionListener(e -> {
-            controller.setDifficulty(Difficulty.EASY);
-            cardLayout.show(container, "GAME_VIEW");
-        });
+        // // Difficulty buttons
+        // JButton easyButton = new JButton("Easy");
+        // easyButton.addActionListener(e -> {
+        //     controller.setDifficulty(Difficulty.EASY);
+        //     cardLayout.show(container, "GAME_VIEW");
+        // });
 
 
-        JButton mediumButton = new JButton("Medium");
-        mediumButton.addActionListener(e -> {
-            controller.setDifficulty(Difficulty.MEDIUM);
-            cardLayout.show(container, "GAME_VIEW");
-        });
+        // JButton mediumButton = new JButton("Medium");
+        // mediumButton.addActionListener(e -> {
+        //     controller.setDifficulty(Difficulty.MEDIUM);
+        //     cardLayout.show(container, "GAME_VIEW");
+        // });
 
 
-        JButton hardButton = new JButton("Hard");
-        hardButton.addActionListener(e -> {
-            controller.setDifficulty(Difficulty.HARD);
-            cardLayout.show(container, "GAME_VIEW");
-        });
+        // JButton hardButton = new JButton("Hard");
+        // hardButton.addActionListener(e -> {
+        //     controller.setDifficulty(Difficulty.HARD);
+        //     cardLayout.show(container, "GAME_VIEW");
+        // });
 
 
         //Panel for buttons
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.add(easyButton);
-        buttonPanel.add(mediumButton);
-        buttonPanel.add(hardButton);
+        // JPanel buttonPanel = new JPanel();
+        // buttonPanel.add(easyButton);
+        // buttonPanel.add(mediumButton);
+        // buttonPanel.add(hardButton);
 
-        centerPanel.add(buttonPanel);
-        add(centerPanel, BorderLayout.CENTER);
+        // centerPanel.add(buttonPanel);
+        // add(centerPanel, BorderLayout.CENTER);
 
 
     }

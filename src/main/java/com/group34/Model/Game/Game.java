@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.group34.Model.Enemy.Enemy;
 
-public class Game{
+public class Game {
     private int currentRound;
     private List<Enemy> enemies;
 
@@ -31,8 +31,8 @@ public class Game{
 
     public void update() {
         for (Enemy enemy : enemies) {
-            enemy.move();
+            enemy.move(); 
         }
     }
-    
+
 }

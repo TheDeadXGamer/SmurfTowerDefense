@@ -11,12 +11,17 @@ public class RoadToken {
         this.distance = 0;
     }
 
+    public RoadToken(RoadSection section, int distance) {
+        this.section = section;
+        this.distance = distance;
+    }
+
     public RoadToken advance(int distance) {
         return section.advance(this, distance);
     }
 
     public Point2D getPosition() {
-        return section.getPosition();
+        return section.getPosition(distance);
     }
 
 }
