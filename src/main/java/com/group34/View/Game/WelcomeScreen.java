@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import com.group34.Controller.Game.GameController;
-import com.group34.Model.Game.Difficulty;
+import com.group34.Model.Difficulty.Difficulty;
 
 
 public class WelcomeScreen extends JPanel{

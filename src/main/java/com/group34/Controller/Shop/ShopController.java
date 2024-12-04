@@ -1,7 +1,9 @@
-package com.group34.Model.Shop;
+package com.group34.Controller.Shop;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+import com.group34.View.Shop.ShopModel;
 
 public class ShopController implements MouseListener {
     ShopModel shopModel;

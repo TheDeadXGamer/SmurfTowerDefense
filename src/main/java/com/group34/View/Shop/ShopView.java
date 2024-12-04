@@ -1,4 +1,4 @@
-package com.group34.Model.Shop;
+package com.group34.View.Shop;
 
 public class ShopView {
     private ShopModel shopModel;

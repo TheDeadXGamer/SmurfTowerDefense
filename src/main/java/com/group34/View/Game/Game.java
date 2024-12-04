@@ -5,9 +5,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import com.group34.Controller.Game.GameController;
-import com.group34.Model.Game.GameModel;
-
 public class Game extends JFrame {
     public Game(){
         setTitle("Smurf Tower Defence");
@@ -20,16 +17,16 @@ public class Game extends JFrame {
         JPanel container = new JPanel(cardLayout);
 
         // Initializing MVC components
-        GameModel model = new GameModel();
-        GameController controller = new GameController(model);
-        GameView gameView = new GameView(controller);
-        WelcomeScreen welcomeScreen = new WelcomeScreen(controller, cardLayout, container);
+        //GameModel model = new GameModel();
+        //GameController controller = new GameController(model);
+        //GameView gameView = new GameView(controller);
+        //WelcomeScreen welcomeScreen = new WelcomeScreen(controller, cardLayout, container);
 
-        container.add(welcomeScreen, "WELCOME_SCREEN");
-        container.add(gameView,"GAME_VIEW");
-        cardLayout.show(container, getName());
-        setContentPane(container); // Set container as content
-        setVisible(true);
+        //container.add(welcomeScreen, "WELCOME_SCREEN");
+        //container.add(gameView,"GAME_VIEW");
+        //cardLayout.show(container, getName());
+        //setContentPane(container); // Set container as content
+        //setVisible(true);
     }
 
     public static void main(String[] args) {
