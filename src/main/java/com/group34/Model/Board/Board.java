@@ -16,14 +16,27 @@ public class Board {
         this.height = height;
     }
 
+    /**
+     * Returns the width of the board
+     * @return the width of the board
+     */
     public int getWidth() {
         return width;
     }
 
+    /**
+     * Returns the height of the board
+     * @return the height of the board
+     */
     public int getHeight() {
         return height;
     }
 
+    /**
+     * Adds a tower to the board
+     * @param tower The 'Tower' to be added
+     * @throws PlacementError if the tower is placed outside of the board or on top of another tower
+     */
     public void addTower(Tower tower) throws PlacementError { 
    
         Point2D position = tower.getPosition();

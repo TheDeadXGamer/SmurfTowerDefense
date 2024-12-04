@@ -7,10 +7,19 @@ public class ShopController {
         this.shopModel = shopModel;
     }
 
+    /**
+     * Returns the shop model.
+     * @return the shop model.
+     */
     public ShopModel getShopModel() {
         return shopModel;
     }
 
+    /**
+     * Purchases an item from the shop.
+     * @param item the item to be purchased.
+     * @return true if the item was purchased successfully, false otherwise.
+     */
     public boolean purchaseItem(IShopItem item) {
         return shopModel.purchaseItem(item);
     }

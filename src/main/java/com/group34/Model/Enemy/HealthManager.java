@@ -8,8 +8,11 @@ public class HealthManager {
         this.health = health;
     }
 
-    // What happens when the enemy dies? A decorator added? Register to some DeathManager? Force the owner to delete the object? Change a flag? 
-    public void damage(int damage) {
+    /**
+     * Damages the enemy by the given amount.
+     * @param damage the amount to damage the enemy by
+     */
+    public void damage(int damage) { // What happens when the enemy dies? A decorator added? Register to some DeathManager? Force the owner to delete the object? Change a flag? 
         this.health -= damage;
     }
 }
