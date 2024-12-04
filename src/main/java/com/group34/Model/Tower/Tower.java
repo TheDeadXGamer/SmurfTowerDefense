@@ -1,6 +1,5 @@
 package com.group34.Model.Tower;
-import javax.swing.*;
-import java.awt.*;
+
 import java.awt.geom.Point2D;
 
 /**

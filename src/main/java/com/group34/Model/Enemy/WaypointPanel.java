@@ -52,6 +52,7 @@ public class WaypointPanel extends JPanel {
         });
     }
 
+    // Paint the background image
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -60,6 +61,7 @@ public class WaypointPanel extends JPanel {
         }
     }
 
+    // Close the file writer when the panel is removed
     @Override
     public void removeNotify() {
         super.removeNotify();
