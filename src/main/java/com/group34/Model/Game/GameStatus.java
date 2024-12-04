@@ -7,8 +7,8 @@ public class GameStatus {
 
     public GameStatus() {
         menuState = new MenuState();
-        preparationState = new PreparationState();
-        roundState = new RoundState();
+        prepRound = new PreparationState();
+        midRoundState = new MidRoundState();
         endRoundState = new EndRoundState();
         gameOverState = new GameOverState();
         victoryState = new VictoryState();
