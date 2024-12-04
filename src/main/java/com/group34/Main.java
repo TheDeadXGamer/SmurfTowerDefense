@@ -2,7 +2,7 @@ package com.group34;
 
 import com.group34.Model.Board.Board;
 import com.group34.Model.Game.Player;
-import com.group34.View.Game.Game;
+import com.group34.Model.Game.Game;
 
 
 
@@ -17,7 +17,7 @@ class TowerDefence implements Runnable {
     public void run() {
         while (player.isAlive()) {
             board.update();
-            game.repaint();
+            game.update();
         }
     }
 
