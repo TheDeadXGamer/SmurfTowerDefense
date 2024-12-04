@@ -1,8 +1,10 @@
 package com.group34;
 
 import com.group34.Model.Board.Board;
-import com.group34.Model.Game.Player;
 import com.group34.Model.Game.Game;
+import com.group34.Model.Game.Player;
+
+
 
 
 
@@ -25,7 +27,7 @@ class TowerDefence implements Runnable {
 
 public class Main {
     public static void main (String[] args){
-        Game game = new Game();
-        game.setVisible(true);
+       // GameView game = new GameView();
+       // game.setVisible(true);
     }
 }
