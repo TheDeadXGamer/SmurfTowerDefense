@@ -1,16 +1,17 @@
 package com.group34.Model.Game;
 
+import com.group34.Model.Game.GameState.GameState;
 import com.group34.Model.Player.Player;
 
 public class GameModel {
     private Difficulty difficulty;
-    private GameStatus gameStatus;
+    private GameState gameState;
     private int currentRound;
     private Player player;
 
     public GameModel() {
         this.difficulty = Difficulty.EASY; // Setting EASY as default 
-        this.gameStatus = GameStatus.ACTIVE; 
+        this.gameState = GameState.ACTIVE; 
         this.currentRound = 1;
         this.player = new Player(200, 1000); // EASY values as default
     }
@@ -54,12 +55,12 @@ public class GameModel {
         currentRound ++;
     }
 
-    public GameStatus getGameStatus(){
-        return gameStatus;
+    public GameState getGameState(){
+        return gameState;
     }
 
-    public void setGameStatus(GameStatus status) {
-        this.gameStatus = status;
+    public void setGameState(GameState state) {
+        this.gameState = state;
     }
 
     public Player getPlayer() {
