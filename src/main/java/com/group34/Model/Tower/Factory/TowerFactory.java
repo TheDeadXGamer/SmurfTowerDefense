@@ -1,4 +1,7 @@
-package com.group34.Model.Tower;
+package com.group34.Model.Tower.Factory;
+
+import com.group34.Model.Tower.Attack;
+import com.group34.Model.Tower.Tower;
 
 import java.awt.geom.Point2D;
 
