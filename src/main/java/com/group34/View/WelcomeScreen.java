@@ -1,4 +1,7 @@
-package com.group34.Model.Game;
+package com.group34.View;
+import com.group34.Model.Game.Difficulty;
+import com.group34.Model.Game.GameController;
+
 import javax.swing.*;
 import java.awt.*;
 
