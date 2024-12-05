@@ -1,17 +1,23 @@
 package com.group34;
 
 import java.awt.Dimension;
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
 
 import com.group34.Model.Board.Board;
+import com.group34.Model.Board.PlacementError;
 import com.group34.Model.Cash.CashVault;
 import com.group34.Model.Game.Game;
 import com.group34.Model.Game.Player;
 import com.group34.Model.Round.Round;
+import com.group34.Model.Round.RoundBuilder;
+import com.group34.Model.Tower.LightningSmurfFactory;
+import com.group34.Model.Tower.Tower;
 import com.group34.View.BoardView;
-import com.group34.View.LightningSmurfView;
+
 
 
 
@@ -76,12 +82,10 @@ class TowerDefence extends JFrame implements Runnable {
     void init() {
         setTitle("Tower Defence");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(false);
+        setResizable(true);
         setLocationRelativeTo(null);
         
-        // Board board = new Board(new Dimension(815, 635));
         BoardView boardView = new BoardView(this.board);
-        boardView.add(new LightningSmurfView(this.board));
         add(boardView);
         
         pack();
@@ -90,23 +94,46 @@ class TowerDefence extends JFrame implements Runnable {
 
     @Override
     public void run() {
-        while (player.isAlive()) {
-            game.update();
-            repaint();
+        for (Round round : rounds) {
+            while (round.eventsLeft() > 0 && game.enemiesLeft() > 0) {
+                if (player.isAlive()) {
+                    // game.update();
+                    //repaint();
+                    //break;
+
+                    
+                }
+            }
         }
+        //game.update();
+        repaint();
+        System.out.println("Game Over");
     }
-
-    
-
 
 }
 
 public class Main {
     public static void main (String[] args){
     
+        List<Round> rounds = new ArrayList<>();
+    
+        
+        RoundBuilder roundBuilder = new RoundBuilder();
+        Round round = roundBuilder.build();
+
+
+        Point2D position = new Point2D.Double(100, 100);
+        Tower tower = new LightningSmurfFactory(position).createTower();
+        Board board = new Board(new Dimension(815, 635));
+        try {
+            board.addTower(tower);
+        } catch (PlacementError e) {
+            System.out.println(e.getMessage());
+        }
+
         TowerDefence towerDefence = new TowerDefenceBuilder()
-            .setBoard(new Board(new Dimension(815, 635)))
-            .setRounds(null)
+            .setBoard(board)
+            .setRounds(new ArrayList<>())
             .setPlayer(new Player(30))
             .setCashVault(new CashVault(300))
             .setGame(new Game())

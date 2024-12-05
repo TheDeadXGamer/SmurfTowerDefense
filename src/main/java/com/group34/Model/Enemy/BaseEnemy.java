@@ -28,7 +28,6 @@ public abstract class BaseEnemy implements Enemy {
         this.speed = speed;
         this.reward = reward;
         this.point = point;
-
     }
 
     public void init() {
@@ -46,7 +45,7 @@ public abstract class BaseEnemy implements Enemy {
 
     @Override
     public void move() {
-        this.point = point.advance(speed);
+        point.advance(speed);
     }
 
     public boolean isAlive() {

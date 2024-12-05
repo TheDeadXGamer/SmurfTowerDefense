@@ -3,36 +3,34 @@ package com.group34.Model.Road;
 
 import java.awt.geom.Point2D;
 
-public class RoadSection implements Road {
-    private Point2D start;
-    private RoadSection child;
-    // Angles and cruve could be delagated to views. 
-    private float angle;
-    private int distance;
+public class RoadSection{
+    private final Point2D start;
+    private final  RoadSection child;
+    private final float angle;
+    private final int length;
 
 
-    public RoadSection(Point2D point, RoadSection child) {
+    public RoadSection(Point2D point, RoadSection child, float angle) {
         this.start = point;
+        this.angle = angle;
         this.child = child;
-        this.distance = (int) Math.abs(child.getStart().distance(point));
+        this.length = (int) Math.abs(child.getStart().distance(point));
     }
 
     public Point2D getStart() {
         return new Point2D.Double(this.start.getX(), this.start.getY());
     }
 
-    public RoadToken advance(RoadToken token, int distance) {
-        if (distance > this.distance) {
-            return new RoadToken(child,
-                distance + token.distance - this.distance
-            );
+    void advance(RoadToken token, int amount) {
+        if (token.distance + amount >= this.length) {
+            token.setRoadSection(child);
+            token.distance = token.distance + amount - this.length;
         } else {
-            token.distance += distance;
-            return token;
+            token.distance += amount;
         }
     }
 
-    public Point2D getPosition(int distance) {
+    Point2D getPosition(int distance) {
         Point2D point = new Point2D.Double(distance, 0);
         Point2D rotatedPoint = rotate(point, angle);
         return new Point2D.Double(
@@ -42,7 +40,7 @@ public class RoadSection implements Road {
 
     }
 
-    public static Point2D rotate(Point2D point, double angle) {
+    private static Point2D rotate(Point2D point, double angle) {
         double x = point.getX();
         double y = point.getY();
 

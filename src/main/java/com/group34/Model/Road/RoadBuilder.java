@@ -1,11 +1,8 @@
 package com.group34.Model.Road;
 
 import java.awt.geom.Point2D;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.group34.Model.Game.Player;
 
 public class RoadBuilder {
     private int hight;
@@ -22,11 +19,9 @@ public class RoadBuilder {
         distances.add(distance);
     }
 
-    public Road build() {
+    public void build() {
 
-        return new RoadSection(points.get(0), null);
-
-       
+  
 
     }
 }

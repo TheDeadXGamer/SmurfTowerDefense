@@ -5,14 +5,16 @@ import java.util.PriorityQueue;
 
 import com.group34.Model.Enemy.Enemy;
 
+
+
 public class Round {
     
     PriorityQueue<RoundEvent> events;
     int counter = 0;
 
 
-    public Round(PriorityQueue<RoundEvent> events) {
-        this.events = events;
+    public Round(RoundBuilder builder) {
+        this.events = builder.events;
     }
 
     public Optional<Enemy> spawn() {

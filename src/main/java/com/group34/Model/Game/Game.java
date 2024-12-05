@@ -1,5 +1,6 @@
 package com.group34.Model.Game;
 
+import java.util.Iterator;
 import java.util.List;
 
 import com.group34.Model.Enemy.Enemy;
@@ -15,6 +16,13 @@ public class Game {
         enemies.remove(enemy);
     }
 
+    public Iterator<Enemy> getEnemies() {
+        return enemies.iterator();
+    }
+
+    public int enemiesLeft() {
+        return enemies.size();
+    }
 
     public void update() {
         for (Enemy enemy : enemies) {
