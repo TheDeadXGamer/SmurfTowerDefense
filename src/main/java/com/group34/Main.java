@@ -75,11 +75,7 @@ class TowerDefence extends JFrame implements Runnable {
         this.player = builder.player;
 
 
-        init();
-
-    }
-
-    void init() {
+    
         setTitle("Tower Defence");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
@@ -90,7 +86,9 @@ class TowerDefence extends JFrame implements Runnable {
         
         pack();
         setVisible(true);
+
     }
+
 
     @Override
     public void run() {
@@ -98,10 +96,14 @@ class TowerDefence extends JFrame implements Runnable {
             while (round.eventsLeft() > 0 && game.enemiesLeft() > 0) {
                 if (player.isAlive()) {
                     // game.update();
-                    //repaint();
-                    //break;
+                    repaint();
 
-                    
+                    try {
+                        Thread.sleep(10000 / FPS);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("Round Over");
                 }
             }
         }
