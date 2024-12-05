@@ -49,7 +49,7 @@ public class Board {
 
     public void update(Iterator<Enemy> enemies) {
         for (Tower tower : towers) {
-            tower.attack(enemies);
+            //tower.attack(enemies);
         }
     }
 

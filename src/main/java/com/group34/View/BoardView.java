@@ -1,5 +1,6 @@
 package com.group34.View;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.IOException;
@@ -17,6 +18,11 @@ public class BoardView extends JPanel {
     public BoardView(Board board) {
         this.board = board;
         backgroundImage = loadImage("/assets/Maps/BaseMap.png");
+        Dimension dimension = new Dimension(
+            board.getWidth(),
+            board.getHeight()
+        );
+        setPreferredSize(dimension);
     }
 
     private Image loadImage(String path) {
