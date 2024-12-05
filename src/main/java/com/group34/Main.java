@@ -4,8 +4,8 @@ import com.group34.Model.Board.Board;
 import com.group34.Model.Game.Game;
 import com.group34.Model.Game.Player;
 
-class TowerDefenceBuilder {
-}
+
+
 class TowerDefence implements Runnable {
     Game game;
     Board board;

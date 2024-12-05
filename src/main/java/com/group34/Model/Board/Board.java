@@ -1,8 +1,10 @@
 package com.group34.Model.Board;
 
 import java.awt.geom.Point2D;
+import java.util.Iterator;
 import java.util.List;
 
+import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Tower.Tower;
 
 public class Board {
@@ -45,9 +47,9 @@ public class Board {
         towers.add(tower);
     }
 
-    public void update() {
+    public void update(Iterator<Enemy> enemies) {
         for (Tower tower : towers) {
-            tower.action();
+            tower.attack(enemies);
         }
     }
 

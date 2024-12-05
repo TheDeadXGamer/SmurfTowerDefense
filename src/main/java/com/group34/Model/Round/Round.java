@@ -33,23 +33,5 @@ public class Round {
 
 }
 
-class RoundBuilder {
-    private final PriorityQueue<RoundEvent> events;
-
-    public RoundBuilder() {
-        events = new PriorityQueue<>();
-    }
-
-    public RoundBuilder addEvent(RoundEvent event) {
-        events.add(event);
-        return this;
-    }
-
-    public Round build() {
-        return new Round(events);
-    }
-
-}
-
 
 
