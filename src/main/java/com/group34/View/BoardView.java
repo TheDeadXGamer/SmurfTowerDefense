@@ -1,42 +1,22 @@
 package com.group34.View;
 
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.io.IOException;
-import java.io.InputStream;
 
-import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import com.group34.Model.Board.Board;
 
 public class BoardView extends JPanel {
-    private Board board;
-    private Image backgroundImage;
+    public Board board;
+    final Image backgroundImage = new ImageIcon(
+        getClass().getResource(ViewConstants.BASE_MAP_IMAGE_PATH))
+        .getImage();
 
     public BoardView(Board board) {
         this.board = board;
-        backgroundImage = loadImage("/assets/Maps/BaseMap.png");
-        Dimension dimension = new Dimension(
-            board.getWidth(),
-            board.getHeight()
-        );
-        setPreferredSize(dimension);
-    }
-
-    private Image loadImage(String path) {
-        try {
-            InputStream imageStream = getClass().getResourceAsStream(path);
-            if (imageStream == null) {
-                throw new IOException("Image not found at path: " + path);
-            }
-            return ImageIO.read(imageStream);        
-        } catch (Exception e) {
-        e.printStackTrace();
-        System.out.println("Error loading image: " + path);
-        return null;
-        }
+        setPreferredSize(board.getDimension());
     }
 
     @Override
@@ -47,9 +27,10 @@ public class BoardView extends JPanel {
             backgroundImage, 
             0, 
             0, 
-            board.getWidth(),
-            board.getHeight(), 
-        this);
+            (int) board.getDimension().getWidth(),
+            (int) board.getDimension().getHeight(), 
+            this
+        );
 
     }
 
