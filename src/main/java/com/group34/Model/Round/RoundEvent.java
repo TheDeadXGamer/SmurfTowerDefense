@@ -1,12 +1,12 @@
 package com.group34.Model.Round;
 
-import com.group34.Model.Enemy.Enemy;
+import com.group34.Model.Enemy.EnemyFactory;
 
 public class RoundEvent implements Comparable<RoundEvent> {
-    final Enemy enemy;
+    final EnemyFactory enemy;
     final int counter;
 
-    public RoundEvent(Enemy enemy, int counter) {
+    public RoundEvent(EnemyFactory enemy, int counter) {
         this.enemy = enemy;
         this.counter = counter;
     }

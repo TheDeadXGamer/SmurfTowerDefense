@@ -10,9 +10,8 @@ public class RoadEnd implements Road {
     }
 
     @Override
-    public RoadToken advance(RoadToken token, int distance) {
+    public void advance(RoadToken token, int distance) {
         player.reduceHealth(1);
-        return token;
     }
 
 

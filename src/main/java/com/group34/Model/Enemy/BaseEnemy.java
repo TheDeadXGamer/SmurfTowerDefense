@@ -30,10 +30,6 @@ public abstract class BaseEnemy implements Enemy {
         this.point = point;
     }
 
-    public void init() {
-        game.subscribe(this);
-    }
-
     @Override
     public void damage(int damage) {
         this.health -= damage;

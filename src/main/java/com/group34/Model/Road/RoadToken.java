@@ -3,20 +3,20 @@ package com.group34.Model.Road;
 import java.awt.geom.Point2D;
 
 public class RoadToken {
-    RoadSection section;
+    Road section;
     int distance;
 
-    public RoadToken(RoadSection section) {
+    public RoadToken(Road section) {
         this.section = section;
         this.distance = 0;
     }
 
-    public RoadToken(RoadSection section, int distance) {
+    public RoadToken(Road section, int distance) {
         this.section = section;
         this.distance = distance;
     }
 
-    void setRoadSection(RoadSection section) {
+    void setRoadSection(Road section) {
         this.section = section;
     }
 

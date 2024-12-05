@@ -3,7 +3,7 @@ package com.group34.Model.Road;
 
 import java.awt.geom.Point2D;
 
-public class RoadSection{
+public class RoadSection implements Road {
     private final Point2D start;
     private final  RoadSection child;
     private final float angle;
@@ -21,7 +21,8 @@ public class RoadSection{
         return new Point2D.Double(this.start.getX(), this.start.getY());
     }
 
-    void advance(RoadToken token, int amount) {
+    @Override
+    public void advance(RoadToken token, int amount) {
         if (token.distance + amount >= this.length) {
             token.setRoadSection(child);
             token.distance = token.distance + amount - this.length;
@@ -30,7 +31,7 @@ public class RoadSection{
         }
     }
 
-    Point2D getPosition(int distance) {
+    public Point2D getPosition(int distance) {
         Point2D point = new Point2D.Double(distance, 0);
         Point2D rotatedPoint = rotate(point, angle);
         return new Point2D.Double(
