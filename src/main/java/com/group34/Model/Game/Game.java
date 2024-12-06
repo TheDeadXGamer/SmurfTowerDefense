@@ -13,6 +13,7 @@ public class Game {
 
     public void subscribe(Enemy enemy){
         enemies.add(enemy);
+
     }
 
     public void unsubscribe(Enemy enemy){
