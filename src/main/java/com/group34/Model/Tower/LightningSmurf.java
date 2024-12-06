@@ -141,4 +141,8 @@ public class LightningSmurf implements Upgrade, Attack {
     private boolean checkIfInRange(Enemy enemy) {
         return position.distance(enemy.getPosition()) <= this.range;
     }
+
+    public void changeTargeting(Targetings targetingtype) {
+        targeting = targetingtype;
+    }
 }

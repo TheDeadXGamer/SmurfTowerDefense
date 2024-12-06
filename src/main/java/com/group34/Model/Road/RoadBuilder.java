@@ -14,7 +14,9 @@ public class RoadBuilder {
 
     public RoadBuilder(Board board, Player player) {
         this.board = board;
+
         this.player = player;
+
     }
 
     public RoadBuilder add(Point2D point) {

@@ -34,7 +34,8 @@ public class Board {
 
     }
 
-    public void addTower(Tower tower) throws PlacementError { 
+    public void addTower(Tower tower) throws PlacementError {
+        
    
         if (!withinDimension(tower.getPosition())) {
             throw new PlacementError("Tower placed outside of board");
