@@ -86,8 +86,6 @@ class TowerDefence extends JFrame implements Runnable {
         this.rounds = builder.rounds;
         this.player = builder.player;
         this.roadSpawn = builder.roadSpawn;
-
-
     
         setTitle("Tower Defence");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

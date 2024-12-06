@@ -8,7 +8,7 @@ import com.group34.Model.Projectile.LightningBoltFactory;
 import com.group34.Model.Tower.Targeting.ClosestAttack;
 import com.group34.Model.Tower.Targeting.Targetings;
 
-public class LightningSmurf implements Upgrade,Attack {
+public class LightningSmurf implements Upgrade, Attack {
 
     protected int attackSpeed;
     protected int damage;
@@ -55,8 +55,6 @@ public class LightningSmurf implements Upgrade,Attack {
     public int getDamage() {
         return damage;
     }
-
-
 
 
 }
