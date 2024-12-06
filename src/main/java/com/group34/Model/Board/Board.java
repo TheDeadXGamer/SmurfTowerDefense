@@ -29,6 +29,7 @@ public class Board {
 
     public Iterator<Tower> getTowers() {
         return towers.iterator();
+
     }
 
     public void addTower(Tower tower) throws PlacementError { 

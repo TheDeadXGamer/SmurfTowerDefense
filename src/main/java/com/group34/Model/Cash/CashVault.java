@@ -9,15 +9,28 @@ public class CashVault {
         this.balance = balance;
     }
 
+    /**
+     * Returns the balance of the cash vault.
+     * @return the balance of the cash vault
+     */
     public int getBalance() {
         return balance;
     }
 
+    /**
+     * Deposits the given amount into the balance.
+     * @param amount the amount to deposit
+     */
     public void deposit(int amount) {
         assert amount >= 0;
         balance += amount;
     }
 
+    /**
+     * Reduces the balance by the given amount.
+     * @param amount the amount to reduce the balance by
+     * @throws OverDraftError if the balance would go below 0
+     */
     public void reduce(int amount) throws OverDraftError {
         throw new OverDraftError();
     }

@@ -1,5 +1,7 @@
 
-package com.group34.View.Game;
+package com.group34.View;
+
+
 public class UpgradeScreen {
 
 }
