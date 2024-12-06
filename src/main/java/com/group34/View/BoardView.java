@@ -8,10 +8,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import com.group34.Model.Board.Board;
+import com.group34.Model.Enemy.Enemy;
+import com.group34.Model.Game.Game;
 import com.group34.Model.Tower.Tower;
 
 public class BoardView extends JPanel {
     public Board board;
+    public Game game;
+
     final Image backgroundImage = new ImageIcon(
         getClass().getResource(ViewConstants.BASE_MAP_IMAGE_PATH)
     ).getImage();
@@ -26,8 +30,19 @@ public class BoardView extends JPanel {
             Image.SCALE_SMOOTH
     );
 
-    public BoardView(Board board) {
+    final Image gargamelImage = new ImageIcon(
+        getClass().getResource(ViewConstants.GARGAMEL_IMAGE)
+    )
+        .getImage()
+        .getScaledInstance(
+            ViewConstants.TOWER_SIZE,
+            ViewConstants.TOWER_SIZE, 
+            Image.SCALE_SMOOTH
+    );
+
+    public BoardView(Board board, Game game) {
         this.board = board;
+        this.game = game;
         setPreferredSize(board.getDimension());
     }
 
@@ -57,6 +72,21 @@ public class BoardView extends JPanel {
                 ViewConstants.TOWER_SIZE,
                 this);
         }
+
+        Iterator<Enemy> iterEnemy = game.getEnemies();
+
+        for (;iterEnemy.hasNext();) {
+            Enemy e = iterEnemy.next();
+            g.drawImage(
+                gargamelImage, 
+                (int) e.getPosition().getX(), 
+                (int) e.getPosition().getY(), 
+                ViewConstants.TOWER_SIZE,
+                ViewConstants.TOWER_SIZE,
+                this);
+        }
+
+        
 
     }
 

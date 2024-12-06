@@ -1,14 +1,16 @@
 package com.group34.Model.Game;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import com.group34.Model.Enemy.Enemy;
 
 public class Game {
-    private List<Enemy> enemies;
+    private final List<Enemy> enemies = new ArrayList<>();
 
     public void subscribe(Enemy enemy){
+        System.out.println("Subscribing enemy");
         enemies.add(enemy);
     }
 

@@ -19,7 +19,7 @@ public class Round {
 
     public Optional<EnemyFactory> spawn() {
         Optional<EnemyFactory> res;
-        if (events.peek().counter == counter) {
+        if (!events.isEmpty() && events.peek().counter == counter) {
             res = Optional.of(events.poll().enemy);
         } else {
             res = Optional.empty();

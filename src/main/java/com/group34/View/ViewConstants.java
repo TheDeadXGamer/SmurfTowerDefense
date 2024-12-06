@@ -23,4 +23,6 @@ public class ViewConstants {
     public static final String BASE_MAP_IMAGE_PATH = "/assets/Maps/BaseMap.png";
 
     public static final String LIGHTNINGSMURF_IMAGE = "/assets/Towers/SmurfLightningTower.png";
+
+    public static final String GARGAMEL_IMAGE = "/assets/Enemies/BaseEnemy.png";
 }
