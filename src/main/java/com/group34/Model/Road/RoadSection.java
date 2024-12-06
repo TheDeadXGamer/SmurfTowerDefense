@@ -5,20 +5,22 @@ import java.awt.geom.Point2D;
 
 public class RoadSection implements Road {
     private final Point2D start;
-    private final  RoadSection child;
+    private final  Road child;
     private final float angle;
     private final int length;
 
 
-    public RoadSection(Point2D point, RoadSection child) {
+    public RoadSection(Point2D point, Road child) {
         this.start = point;
         
         this.child = child;
         this.angle = (float) Math.atan2(
-            child.getStart().getY() - point.getY(),
-            child.getStart().getX() - point.getX()
+            child.getPosition(0).getY() - point.getY(),
+            child.getPosition(0).getX() - point.getX()
         );
-        this.length = (int) Math.abs(child.getStart().distance(point));
+        
+        this.length = (int) Math.
+            abs(child.getPosition(0).distance(point));
     }
 
     public Point2D getStart() {

@@ -63,10 +63,11 @@ public class RoadBuilder {
 
         Road child = end;
 
-        for (int i = points.size() - 2; i < 0; i--) {
-            child = new RoadSpawn(points.get(i), child);
+        for (int i = points.size() - 1; i >= 0; i--) {
+            child = new RoadSection(points.get(i), child);
          
         }
+
         RoadSpawn spawn = new RoadSpawn(points.get(0), child); 
 
         return spawn;

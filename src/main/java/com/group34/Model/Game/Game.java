@@ -10,7 +10,6 @@ public class Game {
     private final List<Enemy> enemies = new ArrayList<>();
 
     public void subscribe(Enemy enemy){
-        System.out.println("Subscribing enemy");
         enemies.add(enemy);
     }
 

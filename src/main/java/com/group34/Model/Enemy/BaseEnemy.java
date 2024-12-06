@@ -65,6 +65,7 @@ public abstract class BaseEnemy implements Enemy {
 
     @Override
     public Point2D getPosition() {
+        //System.out.println("Returning point" + point.getPosition());
         return point.getPosition();
     }
 

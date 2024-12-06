@@ -106,8 +106,6 @@ class TowerDefence extends JFrame implements Runnable {
     @Override
     public void run() {
         for (Round round : rounds) {
-            System.out.println(round.eventsLeft());
-            System.out.println(game.enemiesLeft());
             while (round.eventsLeft() > 0 || game.enemiesLeft() > 0) {
                 if (player.isAlive()) {
                     Optional<EnemyFactory> spawn = round.spawn();
@@ -118,7 +116,7 @@ class TowerDefence extends JFrame implements Runnable {
                     game.update();
                     repaint();
                     try {
-                        Thread.sleep(10000 / FPS);
+                        Thread.sleep(1000 / FPS);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -135,12 +133,6 @@ public class Main {
     
         List<Round> rounds = new ArrayList<>();
     
-        
-     
-        //Round round = roundBuilder.build();
-
-
-       
         Point2D position = new Point2D.Double(100, 100);
         Tower tower = new LightningSmurfFactory(position).createTower();
         Board board = new Board(new Dimension(815, 635));
@@ -158,8 +150,12 @@ public class Main {
 
 
         RoadSpawn spawn = new RoadBuilder(board, player)
-            .add(new Point2D.Double(200., 635.))
             .add(new Point2D.Double(200., 0.))
+            .add(new Point2D.Double(300., 100.))
+            .add(new Point2D.Double(100., 200.))
+            .add(new Point2D.Double(400., 300.))
+            .add(new Point2D.Double(100., 400.))
+            .add(new Point2D.Double(200., 635.))
             .build();
 
         board.addTower(tower);
