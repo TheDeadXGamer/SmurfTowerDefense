@@ -8,12 +8,12 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import com.group34.Model.Board.Board;
-import com.group34.Model.Board.PlacementError;
 import com.group34.Model.Cash.CashVault;
 import com.group34.Model.Game.Game;
 import com.group34.Model.Game.Player;
+import com.group34.Model.Road.RoadBuilder;
+import com.group34.Model.Road.RoadSpawn;
 import com.group34.Model.Round.Round;
-import com.group34.Model.Round.RoundBuilder;
 import com.group34.Model.Tower.LightningSmurfFactory;
 import com.group34.Model.Tower.Tower;
 import com.group34.View.BoardView;
@@ -115,28 +115,35 @@ class TowerDefence extends JFrame implements Runnable {
 }
 
 public class Main {
-    public static void main (String[] args){
+    public static void main (String[] args) throws Exception {
     
         List<Round> rounds = new ArrayList<>();
     
         
-        RoundBuilder roundBuilder = new RoundBuilder();
-        Round round = roundBuilder.build();
+        //RoundBuilder roundBuilder = new RoundBuilder();
+        //Round round = roundBuilder.build();
 
 
+       
         Point2D position = new Point2D.Double(100, 100);
         Tower tower = new LightningSmurfFactory(position).createTower();
         Board board = new Board(new Dimension(815, 635));
-        try {
-            board.addTower(tower);
-        } catch (PlacementError e) {
-            System.out.println(e.getMessage());
-        }
+        Player player = new Player(30);
+
+
+
+        RoadSpawn spawn = new RoadBuilder(board, player)
+            .add(new Point2D.Double(200., 635.))
+            .add(new Point2D.Double(200., 0.))
+            .build();
+
+        board.addTower(tower);
+      
 
         TowerDefence towerDefence = new TowerDefenceBuilder()
             .setBoard(board)
             .setRounds(new ArrayList<>())
-            .setPlayer(new Player(30))
+            .setPlayer(player)
             .setCashVault(new CashVault(300))
             .setGame(new Game())
             .build();

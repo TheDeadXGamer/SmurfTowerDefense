@@ -10,10 +10,14 @@ public class RoadSection implements Road {
     private final int length;
 
 
-    public RoadSection(Point2D point, RoadSection child, float angle) {
+    public RoadSection(Point2D point, RoadSection child) {
         this.start = point;
-        this.angle = angle;
+        
         this.child = child;
+        this.angle = (float) Math.atan2(
+            child.getStart().getY() - point.getY(),
+            child.getStart().getX() - point.getX()
+        );
         this.length = (int) Math.abs(child.getStart().distance(point));
     }
 
@@ -31,6 +35,7 @@ public class RoadSection implements Road {
         }
     }
 
+    @Override
     public Point2D getPosition(int distance) {
         Point2D point = new Point2D.Double(distance, 0);
         Point2D rotatedPoint = rotate(point, angle);

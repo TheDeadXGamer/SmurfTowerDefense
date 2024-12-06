@@ -2,12 +2,11 @@ package com.group34.Model.Road;
 
 import java.awt.geom.Point2D;
 
-import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Enemy.EnemyFactory;
 
 public class RoadSpawn implements Road {
-    private Point2D position;
-    private Road child;
+    private final  Point2D position;
+    private final Road child;
 
     public RoadSpawn(Point2D position, Road child) {
         this.position = position;
@@ -16,7 +15,7 @@ public class RoadSpawn implements Road {
 
     public void spawn(EnemyFactory enemyFactory) {
         RoadToken token = new RoadToken(child);
-        Enemy enemy = enemyFactory.createEnemy(token);
+        enemyFactory.createEnemy(token);
     }
 
     @Override
