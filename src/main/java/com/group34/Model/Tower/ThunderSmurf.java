@@ -7,6 +7,7 @@ import com.group34.Model.Tower.Targeting.ClosestAttack;
 import com.group34.Model.Tower.Targeting.Targetings;
 
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ThunderSmurf implements Attack {
@@ -15,7 +16,9 @@ public class ThunderSmurf implements Attack {
     private Point2D position;
     private int range;
     private int cost;
-    private List<Enemy> targets;
+    private List<Enemy> targets = new ArrayList<>();
+    private boolean canAttack = true;
+    private float lastAttack = System.nanoTime();
 
 
     Targetings targeting = new ClosestAttack(new LightningBoltFactory(this),position); //TODO Den ska ha annan projectile men lägger såhär undertiden
@@ -78,7 +81,16 @@ public class ThunderSmurf implements Attack {
      */
     @Override
     public void action() {
-        targeting.attack(targets);
+        if (System.nanoTime() - lastAttack >= (Math.pow(10,9) / attackSpeed )) {
+            canAttack = true;
+        }
+
+        if (canAttack) {
+            targeting.attack(targets);
+            canAttack = false;
+            lastAttack = System.nanoTime();
+        }
+
     }
 
     /**
@@ -106,5 +118,18 @@ public class ThunderSmurf implements Attack {
     @Override
     public int getCost() {
         return cost;
+    }
+
+    @Override
+    public void notifyTower(Enemy enemy) {
+        if (checkIfInRange(enemy) && !targets.contains(enemy)) {
+            targets.add(enemy);
+        }
+        else if (!checkIfInRange(enemy) && targets.contains(enemy)) {
+            targets.remove(enemy);
+        }
+    }
+    private boolean checkIfInRange(Enemy enemy) {
+        return position.distance(enemy.getPosition()) <= this.range;
     }
 }

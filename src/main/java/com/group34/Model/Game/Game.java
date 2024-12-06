@@ -7,6 +7,8 @@ import java.util.List;
 import com.group34.Model.Enemy.Enemy;
 
 public class Game {
+
+    private TowerNotifier notifier = new TowerNotifier();
     private final List<Enemy> enemies = new ArrayList<>();
 
     public void subscribe(Enemy enemy){
@@ -27,7 +29,8 @@ public class Game {
 
     public void update() {
         for (Enemy enemy : enemies) {
-            enemy.move(); 
+            enemy.move();
+            notifier.getInstance().notifyThatEnemyMoved(enemy);
         }
     }
 

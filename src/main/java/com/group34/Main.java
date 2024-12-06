@@ -112,6 +112,7 @@ class TowerDefence extends JFrame implements Runnable {
                     }
 
                     game.update();
+                    board.update();
                     repaint();
                     try {
                         Thread.sleep(1000 / FPS);
@@ -133,6 +134,7 @@ public class Main {
     
         Point2D position = new Point2D.Double(100, 100);
         Tower tower = new LightningSmurfFactory(position).createTower();
+        Tower tower2 = new LightningSmurfFactory(new Point2D.Double(400,300)).createTower();
         Board board = new Board(new Dimension(815, 635));
         Player player = new Player(30);
         CashVault cashVault = new CashVault(100);
@@ -142,7 +144,10 @@ public class Main {
             .addEvent(new RoundEvent(
                 new GargamelFactory(game, cashVault),
                  0)
-            ).build();
+            ).addEvent(new RoundEvent(
+                        new GargamelFactory(game, cashVault),
+                        1)).build();
+
 
         rounds.add(round);
 
@@ -157,7 +162,7 @@ public class Main {
             .build();
 
         board.addTower(tower);
-      
+        board.addTower(tower2);
 
         TowerDefence towerDefence = new TowerDefenceBuilder()
             .setBoard(board)

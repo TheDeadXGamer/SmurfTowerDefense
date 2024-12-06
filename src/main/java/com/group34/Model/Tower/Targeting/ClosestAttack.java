@@ -27,7 +27,7 @@ public class ClosestAttack implements Targetings {
         }
         ProjectileInterface projectile = factory.createProjectile(); //TODO Projectile should actually do something when created
         closestEnemy.damage(projectile.getDamage());
-
+        System.out.println("damaged!");
 
 
 
