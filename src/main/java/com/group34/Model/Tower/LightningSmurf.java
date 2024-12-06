@@ -1,7 +1,9 @@
 package com.group34.Model.Tower;
 
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
 import java.util.List;
+
 
 import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Projectile.LightningBoltFactory;
@@ -10,19 +12,24 @@ import com.group34.Model.Tower.Targeting.Targetings;
 
 public class LightningSmurf implements Upgrade,Attack {
 
+    private Boolean canAttack = true;
+
+    private float lastAttackTime = 0;
+
     protected int attackSpeed;
     protected int damage;
 
     protected Point2D position;
     protected int range;
-    List<Enemy> targets;
-    Targetings targeting = new ClosestAttack(new LightningBoltFactory(this), position);
+    List<Enemy> targets = new ArrayList<>();
+    Targetings targeting;
     
     public LightningSmurf(Point2D position, int attackSpeed, int damage, int range) {
         this.attackSpeed = attackSpeed;
         this.damage = damage;
         this.range = range;
         this.position = position;
+        this.targeting = new ClosestAttack(new LightningBoltFactory(this), this.position);
     }
 
     @Override
@@ -43,7 +50,28 @@ public class LightningSmurf implements Upgrade,Attack {
 
     @Override
     public void action() {
-        targeting.attack(targets);
+        if (System.nanoTime() - lastAttackTime >=  (Math.pow(10,9)) / attackSpeed) {
+            canAttack = true;
+        }
+        if (canAttack) {
+
+            targeting.attack(targets);
+            canAttack = false;
+            lastAttackTime = System.nanoTime();
+
+        }
+    }
+
+    @Override
+    public void checkInRange(Enemy enemy) {
+
+        if (position.distance(enemy.getPosition()) <= range && !targets.contains(enemy)) {
+            targets.add(enemy);
+
+        }
+        else if (position.distance(enemy.getPosition()) > range && targets.contains(enemy)) {
+            targets.remove(enemy);
+        }
     }
 
     @Override
@@ -57,6 +85,8 @@ public class LightningSmurf implements Upgrade,Attack {
     }
 
 
-
-
+    @Override
+    public void notifyAllTowers(Enemy enemy) {
+        checkInRange(enemy);
+    }
 }

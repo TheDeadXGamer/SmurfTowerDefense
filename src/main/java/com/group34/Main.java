@@ -114,6 +114,7 @@ class TowerDefence extends JFrame implements Runnable {
                     }
 
                     game.update();
+                    board.update();
                     repaint();
                     try {
                         Thread.sleep(1000 / FPS);
@@ -150,7 +151,7 @@ public class Main {
 
 
         RoadSpawn spawn = new RoadBuilder(board, player)
-            .add(new Point2D.Double(200., 0.))
+            .add(new Point2D.Double(600., 0.))
             .add(new Point2D.Double(300., 100.))
             .add(new Point2D.Double(100., 200.))
             .add(new Point2D.Double(400., 300.))

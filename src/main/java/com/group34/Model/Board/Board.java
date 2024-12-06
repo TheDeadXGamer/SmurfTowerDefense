@@ -7,10 +7,12 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.group34.Model.Enemy.Enemy;
+import com.group34.Model.Game.TowerNotifier;
 import com.group34.Model.Tower.Tower;
 
 public class Board {
 
+    private TowerNotifier notifier = new TowerNotifier();
     private List<Tower> towers = new ArrayList<>();
     private float towerWidth = (float) 1.0;
     private Dimension dimension;
@@ -46,11 +48,13 @@ public class Board {
         }
 
         towers.add(tower);
+        notifier.getInstance().subscribe(tower);
+
     }
 
-    public void update(Iterator<Enemy> enemies) {
+    public void update() {
         for (Tower tower : towers) {
-            //tower.attack(enemies);
+            tower.action();
         }
     }
 

@@ -21,6 +21,7 @@ public class LightningSmurfView extends JLabel {
         this.board = board;
     }
 
+
     
     @Override
     public void paintComponent(Graphics g){

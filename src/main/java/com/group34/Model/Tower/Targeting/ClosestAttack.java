@@ -18,6 +18,7 @@ public class ClosestAttack implements Targetings {
     public ClosestAttack(ProjectileFactory projectileType, Point2D position) {
         this.factory = projectileType;
         this.towerPosition = position;
+
     }
 
     //MIGHT WANT TO BE SINGLETON?
@@ -25,12 +26,13 @@ public class ClosestAttack implements Targetings {
     public void attack(List<Enemy> enemy) {
 
         Enemy closestEnemy = closestEnemy(enemy);
+
         if (closestEnemy == null) {
             return;
         }
         ProjectileInterface projectile = factory.createProjectile(); //TODO Projectile should actually do something when created
         closestEnemy.damage(projectile.getDamage());
-
+        System.out.println("Enemy took "+projectile.getDamage() +" damage");
 
 
 
