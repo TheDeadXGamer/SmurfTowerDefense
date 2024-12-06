@@ -1,14 +1,18 @@
 package com.group34.Model.Enemy;
 
-import java.awt.geom.Point2D;
+import com.group34.Model.Cash.CashVault;
+import com.group34.Model.Game.Game;
+import com.group34.Model.Road.RoadToken;
 
-// Concrete Factory 
-public class EnemyFactory {
+public abstract class EnemyFactory {
+    final CashVault cashVault;
+    final Game game;
 
-    private Point2D spawn;
-
-    public EnemyFactory(Point2D spawn) {
-        this.spawn = spawn;
+    public EnemyFactory(Game game, CashVault cashVault) {
+        this.game = game;
+        this.cashVault = cashVault;
     }
+
+    public abstract Enemy createEnemy(RoadToken token);
 
 }

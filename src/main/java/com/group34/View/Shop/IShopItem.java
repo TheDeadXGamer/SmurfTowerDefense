@@ -1,6 +1,6 @@
-package com.group34.Model.Shop;
+package com.group34.View.Shop;
 
-import com.group34.Model.Tower.Factory.TowerFactory;
+import com.group34.Model.Tower.TowerFactory;
 
 public interface IShopItem {
     TowerFactory getTowerTypeFactory();
