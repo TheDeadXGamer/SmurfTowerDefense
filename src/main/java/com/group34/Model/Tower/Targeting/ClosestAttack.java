@@ -2,10 +2,7 @@ package com.group34.Model.Tower.Targeting;
 
 
 import java.awt.geom.Point2D;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Stream;
-import java.math.*;
 import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Projectile.ProjectileFactory;
 import com.group34.Model.Projectile.ProjectileInterface;
