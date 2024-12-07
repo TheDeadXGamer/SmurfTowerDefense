@@ -17,6 +17,9 @@ public class BoardView extends JPanel {
     public Board board;
     public Game game;
 
+    final Image projectileImage = new ImageIcon(
+            getClass().getResource(ViewConstants.BASE_MAP_IMAGE_PATH)
+    ).getImage();
     final Image backgroundImage = new ImageIcon(
         getClass().getResource(ViewConstants.BASE_MAP_IMAGE_PATH)
     ).getImage();
@@ -93,10 +96,14 @@ public class BoardView extends JPanel {
         Iterator<Projectile> iterProjectile = board.getProjectileManager().getProjectiles().iterator();
         Projectile p;
         for (;iterProjectile.hasNext();) {
-
             p = iterProjectile.next();
-            g.drawImage(
-                    smurfImage,
+
+            Image projectileImage = new ImageIcon(
+                    getClass().getResource(ViewConstants.getProjectileImage(p.getProjectileType()))
+            ).getImage();
+
+            g.drawImage(projectileImage
+                    ,
                     (int) p.getCurrentPosition().getX(),
                     (int) p.getCurrentPosition().getY(),
                     ViewConstants.TOWER_SIZE,

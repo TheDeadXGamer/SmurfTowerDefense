@@ -10,15 +10,15 @@ public class LightningBolt implements Projectile {
     private Point2D targetDestination;
     private Point2D currentPosition;
     private int damage;
-    private Image art;
+    private String projectileType;
 
 
-    public LightningBolt(double speed, Point2D startPosition, int damage, Image art, Point2D targetDestination) {
+    public LightningBolt(double speed, Point2D startPosition, int damage, String projectileType, Point2D targetDestination) {
         this.speed = speed;
         this.startPosition = startPosition;
         this.currentPosition = startPosition;
         this.damage = damage;
-        this.art = art;
+        this.projectileType = projectileType;
         this.targetDestination = targetDestination;
 
     }
@@ -55,8 +55,8 @@ public class LightningBolt implements Projectile {
      * @return the art of the projectile
      */
     @Override
-    public Image getArt() {
-        return this.art;
+    public String getProjectileType() {
+        return this.projectileType;
     }
 
     @Override
