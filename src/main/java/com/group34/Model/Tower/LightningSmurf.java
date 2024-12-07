@@ -1,6 +1,7 @@
 package com.group34.Model.Tower;
 
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.group34.Model.Enemy.Enemy;
@@ -13,16 +14,20 @@ public class LightningSmurf implements Upgrade, Attack {
     protected int attackSpeed;
     protected int damage;
 
+    private boolean canAttack = true;
+    private float lastAttack = System.nanoTime();
     protected Point2D position;
     protected int range;
-    List<Enemy> targets;
-    Targetings targeting = new ClosestAttack(new LightningBoltFactory(this), position);
+    List<Enemy> targets = new ArrayList<>();
+    Targetings targeting;
+
     
     public LightningSmurf(Point2D position, int attackSpeed, int damage, int range) {
         this.attackSpeed = attackSpeed;
         this.damage = damage;
         this.range = range;
         this.position = position;
+        this.targeting = new ClosestAttack(new LightningBoltFactory(this), position);
     }
 
     /**
@@ -66,7 +71,16 @@ public class LightningSmurf implements Upgrade, Attack {
      */
     @Override
     public void action() {
-        targeting.attack(targets);
+        if (System.nanoTime() - lastAttack >= (Math.pow(10,9) / attackSpeed )) {
+            canAttack = true;
+        }
+
+        if (canAttack) {
+            targeting.attack(targets);
+            canAttack = false;
+            lastAttack = System.nanoTime();
+        }
+
     }
 
     /**
@@ -115,6 +129,21 @@ public class LightningSmurf implements Upgrade, Attack {
     }
 
 
+    @Override
+    public void notifyTower(Enemy enemy) {
+        if (checkIfInRange(enemy) && !targets.contains(enemy)) {
+            targets.add(enemy);
+        }
+        else if (!checkIfInRange(enemy) && targets.contains(enemy)) {
+            targets.remove(enemy);
+        }
+    }
 
+    private boolean checkIfInRange(Enemy enemy) {
+        return position.distance(enemy.getPosition()) <= this.range;
+    }
 
+    public void changeTargeting(Targetings targetingtype) {
+        targeting = targetingtype;
+    }
 }

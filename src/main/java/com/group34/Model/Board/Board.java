@@ -6,10 +6,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.group34.Model.Enemy.Enemy;
+import com.group34.Model.Game.TowerNotifier;
+import com.group34.Model.Projectile.Projectile;
+import com.group34.Model.Projectile.ProjectileManager;
 import com.group34.Model.Tower.Tower;
 
 public class Board {
+    private ProjectileManager projectileManager = new ProjectileManager();
+
+    private TowerNotifier notifier = new TowerNotifier();
 
     private List<Tower> towers = new ArrayList<>();
     private float towerWidth = (float) 1.0;
@@ -27,12 +32,17 @@ public class Board {
         return (int) towerWidth;
     }
 
+    public ProjectileManager getProjectileManager() {
+        return projectileManager.getInstance();
+    }
+
     public Iterator<Tower> getTowers() {
         return towers.iterator();
 
     }
 
-    public void addTower(Tower tower) throws PlacementError { 
+    public void addTower(Tower tower) throws PlacementError {
+
    
         if (!withinDimension(tower.getPosition())) {
             throw new PlacementError("Tower placed outside of board");
@@ -47,12 +57,14 @@ public class Board {
         }
 
         towers.add(tower);
+        notifier.getInstance().subscribe(tower);
     }
 
-    public void update(Iterator<Enemy> enemies) {
+    public void update() {
         for (Tower tower : towers) {
-            //tower.attack(enemies);
+            tower.action();
         }
+        projectileManager.getInstance().updateProjectiles();
     }
 
     private boolean withinDimension(Point2D point) {

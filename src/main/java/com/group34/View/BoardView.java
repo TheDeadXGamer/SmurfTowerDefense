@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import com.group34.Model.Board.Board;
 import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Game.Game;
+import com.group34.Model.Projectile.Projectile;
 import com.group34.Model.Tower.Tower;
 
 public class BoardView extends JPanel {
@@ -59,6 +60,9 @@ public class BoardView extends JPanel {
             this
         );
 
+
+
+
         Iterator<Tower> iter = board.getTowers();
         Tower t;
     
@@ -86,7 +90,19 @@ public class BoardView extends JPanel {
                 this);
         }
 
-        
+        Iterator<Projectile> iterProjectile = board.getProjectileManager().getProjectiles().iterator();
+        Projectile p;
+        for (;iterProjectile.hasNext();) {
+
+            p = iterProjectile.next();
+            g.drawImage(
+                    smurfImage,
+                    (int) p.getCurrentPosition().getX(),
+                    (int) p.getCurrentPosition().getY(),
+                    ViewConstants.TOWER_SIZE,
+                    ViewConstants.TOWER_SIZE,
+                    this);
+        }
 
     }
 

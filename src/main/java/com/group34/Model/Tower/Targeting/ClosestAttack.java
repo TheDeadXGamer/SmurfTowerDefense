@@ -5,19 +5,20 @@ import java.awt.geom.Point2D;
 import java.util.List;
 import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Projectile.ProjectileFactory;
-import com.group34.Model.Projectile.ProjectileInterface;
-import com.group34.Model.Tower.Attack;
+import com.group34.Model.Projectile.Projectile;
+import com.group34.Model.Projectile.ProjectileManager;
 
 public class ClosestAttack implements Targetings {
 
-    ProjectileFactory factory;
-    Point2D towerPosition;
+    private ProjectileManager projectileManager = new ProjectileManager();
+    private ProjectileFactory factory;
+    private Point2D towerPosition;
     public ClosestAttack(ProjectileFactory projectileType, Point2D position) {
         this.factory = projectileType;
         this.towerPosition = position;
     }
 
-    //MIGHT WANT TO BE SINGLETON?
+
     @Override
     public void attack(List<Enemy> enemy) {
 
@@ -25,7 +26,8 @@ public class ClosestAttack implements Targetings {
         if (closestEnemy == null) {
             return;
         }
-        ProjectileInterface projectile = factory.createProjectile(); //TODO Projectile should actually do something when created
+        Projectile projectile = factory.createProjectile(closestEnemy); //TODO Projectile should actually do something when created
+        projectileManager.getInstance().addProjectile(projectile);
         closestEnemy.damage(projectile.getDamage());
 
 
