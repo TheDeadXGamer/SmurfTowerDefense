@@ -1,25 +1,29 @@
 package com.group34.Model.Projectile;
 
+import com.group34.Model.Enemy.Enemy;
+import com.group34.Model.Enemy.Positionable;
+
 import java.awt.*;
 import java.awt.geom.Point2D;
 
 public class LightningBolt implements Projectile {
 
     private double speed;
-    private Point2D startPosition;
-    private Point2D targetDestination;
+    private Positionable enemy;
     private Point2D currentPosition;
     private int damage;
     private String projectileType;
+    private double lastAngle = 0;
 
 
-    public LightningBolt(double speed, Point2D startPosition, int damage, String projectileType, Point2D targetDestination) {
+
+    public LightningBolt(double speed, Point2D startPosition, int damage, String projectileType, Positionable enemy) {
         this.speed = speed;
-        this.startPosition = startPosition;
+
         this.currentPosition = startPosition;
         this.damage = damage;
         this.projectileType = projectileType;
-        this.targetDestination = targetDestination;
+        this.enemy = enemy;
 
     }
 
@@ -62,8 +66,8 @@ public class LightningBolt implements Projectile {
     @Override
     public double getAngle() {
         // Calculate the differences in x and y
-        double deltaX = targetDestination.getX() - startPosition.getX();
-        double deltaY = targetDestination.getY() - startPosition.getY();
+        double deltaX = getTargetPosition().getX() - getCurrentPosition().getX();
+        double deltaY = getTargetPosition().getY() - getCurrentPosition().getY();
 
         // Get the angle using atan2, which returns a value from -π to π
         double angle = Math.atan2(deltaY, deltaX);
@@ -76,6 +80,8 @@ public class LightningBolt implements Projectile {
     @Override
     public void update() {
 
+        lastAngle += 0.000000000000000000000000000001*(lastAngle - getAngle());
+
         //Calculate how far to move projectile in each axis
         double deltaX = Math.cos(getAngle()) * speed;
         double deltaY = Math.sin(getAngle()) * speed;
@@ -85,6 +91,6 @@ public class LightningBolt implements Projectile {
 
     @Override
     public Point2D getTargetPosition() {
-        return targetDestination;
+        return enemy.getPosition();
     }
 }
