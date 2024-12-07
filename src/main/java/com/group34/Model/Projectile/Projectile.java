@@ -5,7 +5,7 @@ import java.awt.geom.Point2D;
 
 public interface Projectile {
 
-    int getSpeed();
+    double getSpeed();
     Point2D getCurrentPosition();
     int getDamage();
 

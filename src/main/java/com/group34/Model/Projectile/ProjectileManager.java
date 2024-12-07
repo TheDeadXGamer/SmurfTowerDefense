@@ -20,19 +20,25 @@ public class ProjectileManager {
     }
 
     public void updateProjectiles() {
+        List<Projectile> reachedTarget = new ArrayList<>();
 
         for (Projectile projectile: projectiles) {
             projectile.update();
             if (checkIfProjectileReached(projectile)) {
-                projectiles.remove(projectile);
+                System.out.println("Projectile position: " + projectile.getCurrentPosition() + " | Target position " + projectile.getTargetPosition() + " | Distance: " + projectile.getCurrentPosition().distance(projectile.getTargetPosition()));
+                reachedTarget.add(projectile);
             }
-
+        }
+        for (Projectile projectile: reachedTarget) {
+            projectiles.remove(projectile);
         }
 
+
     }
+    public List<Projectile> getProjectiles() {return projectiles;}
 
     private boolean checkIfProjectileReached(Projectile projectile) {
-        if (projectile.getTargetPosition().distance(projectile.getCurrentPosition()) <= 20) {
+        if (projectile.getTargetPosition().distance(projectile.getCurrentPosition()) <= 3) {
             return true;
 
         }

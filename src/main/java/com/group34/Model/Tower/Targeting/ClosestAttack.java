@@ -10,7 +10,7 @@ import com.group34.Model.Projectile.ProjectileManager;
 
 public class ClosestAttack implements Targetings {
 
-    private ProjectileManager projectileManager;
+    private ProjectileManager projectileManager = new ProjectileManager();
     private ProjectileFactory factory;
     private Point2D towerPosition;
     public ClosestAttack(ProjectileFactory projectileType, Point2D position) {
@@ -18,7 +18,7 @@ public class ClosestAttack implements Targetings {
         this.towerPosition = position;
     }
 
-    //MIGHT WANT TO BE SINGLETON?
+
     @Override
     public void attack(List<Enemy> enemy) {
 
@@ -29,7 +29,7 @@ public class ClosestAttack implements Targetings {
         Projectile projectile = factory.createProjectile(closestEnemy); //TODO Projectile should actually do something when created
         projectileManager.getInstance().addProjectile(projectile);
         closestEnemy.damage(projectile.getDamage());
-        System.out.println("damaged!");
+
 
 
 

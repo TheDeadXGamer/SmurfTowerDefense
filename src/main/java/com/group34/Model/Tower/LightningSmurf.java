@@ -20,6 +20,7 @@ public class LightningSmurf implements Upgrade, Attack {
     protected int range;
     List<Enemy> targets = new ArrayList<>();
     Targetings targeting;
+
     
     public LightningSmurf(Point2D position, int attackSpeed, int damage, int range) {
         this.attackSpeed = attackSpeed;

@@ -15,6 +15,6 @@ public class LightningBoltFactory extends  ProjectileFactory{
     }
     @Override
     public Projectile createProjectile(Enemy enemy) {
-        return new LightningBolt(1, tower.getPosition(), tower.getDamage(), art,enemy.getPosition());
+        return new LightningBolt(8, tower.getPosition(), tower.getDamage(), art,enemy.getPosition());
     }
 }

@@ -5,17 +5,18 @@ import java.awt.geom.Point2D;
 
 public class LightningBolt implements Projectile {
 
-    private int speed;
+    private double speed;
     private Point2D startPosition;
     private Point2D targetDestination;
-    private Point2D currentPosition = startPosition;
+    private Point2D currentPosition;
     private int damage;
     private Image art;
 
 
-    public LightningBolt(int speed, Point2D startPosition, int damage, Image art, Point2D targetDestination) {
+    public LightningBolt(double speed, Point2D startPosition, int damage, Image art, Point2D targetDestination) {
         this.speed = speed;
         this.startPosition = startPosition;
+        this.currentPosition = startPosition;
         this.damage = damage;
         this.art = art;
         this.targetDestination = targetDestination;
@@ -27,7 +28,7 @@ public class LightningBolt implements Projectile {
      * @return the speed of the projectile
      */
     @Override
-    public int getSpeed() {
+    public double getSpeed() {
         return this.speed;
     }
 
@@ -60,11 +61,21 @@ public class LightningBolt implements Projectile {
 
     @Override
     public double getAngle() {
-        return Math.tan((startPosition.getY() - targetDestination.getY()) / (startPosition.getX() - targetDestination.getX()));
+        // Calculate the differences in x and y
+        double deltaX = targetDestination.getX() - startPosition.getX();
+        double deltaY = targetDestination.getY() - startPosition.getY();
+
+        // Get the angle using atan2, which returns a value from -π to π
+        double angle = Math.atan2(deltaY, deltaX);
+
+
+
+        return angle;
     }
 
     @Override
     public void update() {
+
         //Calculate how far to move projectile in each axis
         double deltaX = Math.cos(getAngle()) * speed;
         double deltaY = Math.sin(getAngle()) * speed;

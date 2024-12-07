@@ -12,6 +12,6 @@ public class LightningSmurfFactory extends TowerFactory{
     @Override
     public Tower createTower() {
 
-        return new LightningSmurf(position,5,2,200);
+        return new LightningSmurf(position,1,2,200);
     }
 }
