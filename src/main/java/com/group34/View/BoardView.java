@@ -17,9 +17,7 @@ public class BoardView extends JPanel {
     public Board board;
     public Game game;
 
-    final Image projectileImage = new ImageIcon(
-            getClass().getResource(ViewConstants.BASE_MAP_IMAGE_PATH)
-    ).getImage();
+
     final Image backgroundImage = new ImageIcon(
         getClass().getResource(ViewConstants.BASE_MAP_IMAGE_PATH)
     ).getImage();
