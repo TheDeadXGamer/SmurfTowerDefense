@@ -38,7 +38,7 @@ public class ProjectileManager {
     public List<Projectile> getProjectiles() {return projectiles;}
 
     private boolean checkIfProjectileReached(Projectile projectile) {
-        if (projectile.getTargetPosition().distance(projectile.getCurrentPosition()) <= 3) {
+        if (projectile.getTargetPosition().distance(projectile.getCurrentPosition()) <= 15) {
             return true;
 
         }
