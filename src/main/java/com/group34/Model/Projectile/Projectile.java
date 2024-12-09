@@ -9,7 +9,7 @@ public interface Projectile {
     Point2D getCurrentPosition();
     int getDamage();
 
-    public String getProjectileType();
+    String getProjectileType();
 
     public double getAngle();
     public void update();

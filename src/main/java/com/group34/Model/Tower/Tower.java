@@ -1,15 +1,18 @@
 package com.group34.Model.Tower;
 
+import com.group34.Model.Enemy.Attackable;
+import com.group34.Model.Positionable;
+
 import java.awt.geom.Point2D;
 
 /**
  * Provide Client API for Tower Collections.
  **/
-public interface Tower extends TowerListener {
+public interface Tower<enemies extends Positionable & Attackable> extends TowerListener<enemies>, Positionable {
     /**
      * @return the position is needed to calculate in range targets. Also required for UI placement.
      **/
-    Point2D getPosition();
+
 
     /**
      * @return Sets the position of the tower.
