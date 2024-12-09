@@ -1,9 +1,7 @@
 package com.group34.Model.Projectile;
 
-import com.group34.Model.Enemy.Enemy;
-import com.group34.Model.Enemy.Positionable;
+import com.group34.Model.Positionable;
 
-import java.awt.*;
 import java.awt.geom.Point2D;
 
 public class LightningBolt implements Projectile {
@@ -13,7 +11,7 @@ public class LightningBolt implements Projectile {
     private Point2D currentPosition;
     private int damage;
     private String projectileType;
-    private double lastAngle = 0;
+
 
 
 
@@ -80,7 +78,7 @@ public class LightningBolt implements Projectile {
     @Override
     public void update() {
 
-        lastAngle += 0.000000000000000000000000000001*(lastAngle - getAngle());
+
 
         //Calculate how far to move projectile in each axis
         double deltaX = Math.cos(getAngle()) * speed;
