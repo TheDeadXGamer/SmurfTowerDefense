@@ -1,6 +1,7 @@
 package com.group34.Model.Projectile;
 
 import com.group34.Model.Enemy.Enemy;
+import com.group34.Model.Positionable;
 import com.group34.Model.Tower.Attack;
 
 import java.awt.*;
@@ -14,7 +15,7 @@ public class LightningBoltFactory extends  ProjectileFactory{
         this.tower = tower;
     }
     @Override
-    public Projectile createProjectile(Enemy enemy) {
+    public Projectile createProjectile(Positionable enemy) {
         return new LightningBolt(8, tower.getPosition(), tower.getDamage(), art,enemy.getPosition());
     }
 }
