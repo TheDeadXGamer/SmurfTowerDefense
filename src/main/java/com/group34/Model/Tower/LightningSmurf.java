@@ -4,12 +4,14 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.group34.Model.Enemy.Attackable;
 import com.group34.Model.Enemy.Enemy;
+import com.group34.Model.Positionable;
 import com.group34.Model.Projectile.LightningBoltFactory;
 import com.group34.Model.Tower.Targeting.ClosestAttack;
 import com.group34.Model.Tower.Targeting.Targetings;
 
-public class LightningSmurf implements Upgrade, Attack {
+public class LightningSmurf<enemies extends Positionable & Attackable> implements Upgrade, Attack<enemies> {
 
     protected int attackSpeed;
     protected int damage;
@@ -18,7 +20,7 @@ public class LightningSmurf implements Upgrade, Attack {
     private float lastAttack = System.nanoTime();
     protected Point2D position;
     protected int range;
-    List<Enemy> targets = new ArrayList<>();
+    List<enemies> targets = new ArrayList<>();
     Targetings targeting;
 
     
@@ -130,7 +132,7 @@ public class LightningSmurf implements Upgrade, Attack {
 
 
     @Override
-    public void notifyTower(Enemy enemy) {
+    public void notifyTower(enemies enemy) {
         if (checkIfInRange(enemy) && !targets.contains(enemy)) {
             targets.add(enemy);
         }
@@ -139,11 +141,13 @@ public class LightningSmurf implements Upgrade, Attack {
         }
     }
 
-    private boolean checkIfInRange(Enemy enemy) {
+    private boolean checkIfInRange(enemies enemy) {
         return position.distance(enemy.getPosition()) <= this.range;
     }
 
     public void changeTargeting(Targetings targetingtype) {
         targeting = targetingtype;
     }
+
+
 }

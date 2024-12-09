@@ -1,8 +1,10 @@
 package com.group34.Model.Enemy;
 
+import com.group34.Model.Positionable;
+
 import java.awt.geom.Point2D;
 
-public interface Enemy {
+public interface Enemy extends Positionable,Attackable {
 
     int getHealth();
 
@@ -10,9 +12,9 @@ public interface Enemy {
 
     int getReward();    
 
-    Point2D getPosition();
 
-    void damage(int damage);
+
+
 
     void move();
 
