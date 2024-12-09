@@ -25,4 +25,19 @@ public class ViewConstants {
     public static final String LIGHTNINGSMURF_IMAGE = "/assets/Towers/LightningSmurf.png";
 
     public static final String GARGAMEL_IMAGE = "/assets/Enemies/BaseEnemy.png";
+
+    public static String getProjectileImage(String projectileType) {
+        try {
+            switch (projectileType) {
+                case "LightningBolt":
+                    return "/assets/Projectiles/LightningBolt.png";
+                default:
+                    throw new IllegalArgumentException("Invalid projectile type: " + projectileType);
+            }
+        } catch (IllegalArgumentException e) {
+            // Log or handle the error here (e.g., return a default image)
+            System.err.println("Error: " + e.getMessage());
+            return "";
+        }
+    }
 }

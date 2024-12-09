@@ -92,11 +92,16 @@ public class BoardView extends JPanel {
 
         Iterator<Projectile> iterProjectile = board.getProjectileManager().getProjectiles().iterator();
         Projectile p;
-        for (;iterProjectile.hasNext();) {
 
+
+        for (;iterProjectile.hasNext();) {
             p = iterProjectile.next();
+            Image projectileImage = new ImageIcon(
+                    getClass().getResource(ViewConstants.getProjectileImage(p.getProjectileType()))).getImage();
+
+
             g.drawImage(
-                    smurfImage,
+                    projectileImage,
                     (int) p.getCurrentPosition().getX(),
                     (int) p.getCurrentPosition().getY(),
                     ViewConstants.TOWER_SIZE,
