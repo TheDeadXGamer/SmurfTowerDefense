@@ -11,14 +11,10 @@ public class Game {
     private TowerNotifier notifier = new TowerNotifier();
     private final List<Enemy> enemies = new ArrayList<>();
 
-    public void subscribe(Enemy enemy){
+    public void addEnemy(Enemy enemy) {
         enemies.add(enemy);
-
     }
 
-    public void unsubscribe(Enemy enemy){
-        enemies.remove(enemy);
-    }
 
     public Iterator<Enemy> getEnemies() {
         return enemies.iterator();
@@ -30,6 +26,9 @@ public class Game {
 
     public void update() {
         for (Enemy enemy : enemies) {
+            if (!enemy.isAlive()) {
+                enemies.remove(enemy);
+            }
             enemy.move();
             notifier.getInstance().notifyThatEnemyMoved(enemy);
         }
