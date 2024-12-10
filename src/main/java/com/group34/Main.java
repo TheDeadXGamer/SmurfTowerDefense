@@ -16,6 +16,7 @@ import com.group34.Model.Game.Game;
 import com.group34.Model.Game.Player;
 import com.group34.Model.Road.RoadBuilder;
 import com.group34.Model.Road.RoadSpawn;
+import com.group34.Model.Road.RoadToken;
 import com.group34.Model.Round.Round;
 import com.group34.Model.Round.RoundBuilder;
 import com.group34.Model.Round.RoundEvent;
@@ -107,8 +108,10 @@ class TowerDefence extends JFrame implements Runnable {
             while (round.eventsLeft() > 0 || game.enemiesLeft() > 0) {
                 if (player.isAlive()) {
                     Optional<EnemyFactory> spawn = round.spawn();
+
                     if (spawn.isPresent()) {
-                        roadSpawn.spawn(spawn.get());
+                        RoadToken token = new RoadToken(roadSpawn);;
+                        game.addEnemy(spawn.get().createEnemy(token));
                     }
 
                     game.update();
@@ -142,11 +145,10 @@ public class Main {
 
         Round round = new RoundBuilder()
             .addEvent(new RoundEvent(
-                new GargamelFactory(game, cashVault),
-                 0)
-            ).addEvent(new RoundEvent(
-                        new GargamelFactory(game, cashVault),
-                        1)).build();
+                new GargamelFactory(cashVault), 0))
+            .addEvent(new RoundEvent(
+                new GargamelFactory(cashVault),1))
+            .build();
 
 
         rounds.add(round);

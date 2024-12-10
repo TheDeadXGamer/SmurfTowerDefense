@@ -3,27 +3,23 @@ package com.group34.Model.Enemy;
 import java.awt.geom.Point2D;
 
 import com.group34.Model.Cash.CashVault;
-import com.group34.Model.Game.Game;
 import com.group34.Model.Road.RoadToken;
 
 public abstract class BaseEnemy implements Enemy {
     private int health;
     private CashVault cashVault;
-    private Game game;
     private int reward;
     private int speed;
     private RoadToken point;
 
     public BaseEnemy(
         int health,
-        Game game, 
         CashVault cashVault, 
         int speed, 
         int reward,
         RoadToken point
     ) {
         this.health = health;
-        this.game = game;
         this.cashVault = cashVault;
         this.speed = speed;
         this.reward = reward;
@@ -34,7 +30,6 @@ public abstract class BaseEnemy implements Enemy {
     public void damage(int damage) {
         this.health -= damage;
         if (!isAlive()) {
-            game.unsubscribe(this);
             this.cashVault.deposit(getReward());
         }
     }
@@ -44,6 +39,7 @@ public abstract class BaseEnemy implements Enemy {
         point.advance(speed);
     }
 
+    @Override
     public boolean isAlive() {
         return health > 0;
     }
