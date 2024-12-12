@@ -10,9 +10,10 @@ public interface Projectile {
     int getDamage();
 
     String getProjectileType();
+    void damage();
 
-    public double getAngle();
-    public void update();
+    double getAngle();
+    void update();
 
-    public Point2D getTargetPosition();
+    Point2D getTargetPosition();
 }

@@ -31,7 +31,7 @@ public class ClosestAttack<enemies extends Positionable & Attackable> implements
         }
         Projectile projectile = factory.createProjectile(closestEnemy); //TODO Projectile should actually do something when created
         projectileManager.getInstance().addProjectile(projectile);
-        closestEnemy.damage(projectile.getDamage());
+
 
 
 

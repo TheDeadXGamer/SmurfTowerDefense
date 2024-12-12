@@ -1,13 +1,14 @@
 package com.group34.Model.Projectile;
 
+import com.group34.Model.Enemy.Attackable;
 import com.group34.Model.Positionable;
 
 import java.awt.geom.Point2D;
 
-public class LightningBolt implements Projectile {
+public class LightningBolt<Target extends Positionable & Attackable> implements Projectile {
 
     private double speed;
-    private Positionable enemy;
+    private Target enemy;
     private Point2D currentPosition;
     private int damage;
     private String projectileType;
@@ -15,7 +16,7 @@ public class LightningBolt implements Projectile {
 
 
 
-    public LightningBolt(double speed, Point2D startPosition, int damage, String projectileType, Positionable enemy) {
+    public LightningBolt(double speed, Point2D startPosition, int damage, String projectileType, Target enemy) {
         this.speed = speed;
 
         this.currentPosition = startPosition;
@@ -59,6 +60,11 @@ public class LightningBolt implements Projectile {
     @Override
     public String getProjectileType() {
         return this.projectileType;
+    }
+
+    @Override
+    public void damage() {
+        enemy.damage(damage);
     }
 
     @Override
