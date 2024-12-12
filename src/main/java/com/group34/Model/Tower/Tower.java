@@ -34,13 +34,4 @@ public interface Tower<enemies extends Positionable & Attackable> extends TowerL
      **/
     String getTowerType();
 
-    /**
-     * @return The path to the image equivalent of the tower.
-     **/
-    String getTowerImagePath();
-
-    /**
-     * @return The cost of the tower.
-     **/
-    int getCost();
 }

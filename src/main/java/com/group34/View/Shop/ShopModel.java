@@ -1,34 +1,49 @@
 package com.group34.View.Shop;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
+import com.group34.Model.Cash.CashVault;
+import com.group34.Model.Cash.OverDraftError;
 import com.group34.Model.Game.Player;
+import com.group34.Model.Tower.LightningSmurfFactory;
+import com.group34.Model.Tower.Tower;
 
 public class ShopModel {
-    private Player player;
     private ArrayList<IShopItem> items;
+    private Player player;
+    private CashVault cashVault;
 
-    public ShopModel(Player player, ArrayList<IShopItem> items) {
+    public ShopModel(Player player, CashVault cashVault) {
         this.player = player;
-        this.items = items;
+        this.cashVault = cashVault;
+
+        // adds items to the shop as a factory and a cost
+        items = new ArrayList<>();
+        items.add(new TowerShopItem(new LightningSmurfFactory(), 50));
     }
 
     public ArrayList<IShopItem> getItems() {
         return items;
     }
 
-    // public boolean purchaseItem(IShopItem shopItem) {
-    //     int playerMoney = player.getMoney();
-    //     int cost = shopItem.getCost();
+    public CashVault getCashVault() {
+        return cashVault;
+    }
 
-    //     // if player has enough money, purchase item and return true
-    //     if (playerMoney >= cost) {
-    //         player.setMoney(playerMoney - cost);  // subtract cost from players money
-    //         return true;
-    //     } else {
-    //         System.out.println("You don't have enough money for a " + shopItem.getName());  // temporary
-    //         // TODO: replace println with equivalent in UI
-    //         return false;
-    //     }
-    // }
+    public Player getPlayer() {
+        return player;
+    }
+
+    public Tower purchaseItem(IShopItem item, Point2D position) {
+        try {
+            cashVault.reduce(item.getCost());
+            return item.getFactory().createTower(position);
+        } catch (OverDraftError e) {
+            // TODO: Handle the overdraft error better
+            System.err.println(e.getMessage());
+            return null;
+        }
+    }
+
 }

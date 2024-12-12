@@ -23,8 +23,8 @@ import com.group34.Model.Round.RoundEvent;
 import com.group34.Model.Tower.LightningSmurfFactory;
 import com.group34.Model.Tower.Tower;
 import com.group34.View.BoardView;
-
-
+import com.group34.View.Shop.ShopController;
+import com.group34.View.Shop.ShopModel;
 
 
 class TowerDefenceBuilder {
@@ -34,6 +34,7 @@ class TowerDefenceBuilder {
     Game game;
     Player player;
     RoadSpawn roadSpawn;
+    ShopModel shopModel;
 
     public TowerDefenceBuilder setBoard(Board board) {
         this.board = board;
@@ -92,8 +93,12 @@ class TowerDefence extends JFrame implements Runnable {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
         setLocationRelativeTo(null);
+
+        // TODO: maybe not the best usage of shop stuff like this, change later
+        ShopModel shopModel = new ShopModel(player, cashVault);
+        ShopController shopController = new ShopController(shopModel);
         
-        BoardView boardView = new BoardView(this.board, this.game);
+        BoardView boardView = new BoardView(this.board, this.game, shopController);
         add(boardView);
         
         pack();
@@ -136,8 +141,8 @@ public class Main {
         List<Round> rounds = new ArrayList<>();
     
         Point2D position = new Point2D.Double(100, 100);
-        Tower tower = new LightningSmurfFactory(position).createTower();
-        Tower tower2 = new LightningSmurfFactory(new Point2D.Double(400,300)).createTower();
+        Tower tower = new LightningSmurfFactory().createTower(position);
+        Tower tower2 = new LightningSmurfFactory().createTower(new Point2D.Double(400,300));
         Board board = new Board(new Dimension(815, 635));
         Player player = new Player(30);
         CashVault cashVault = new CashVault(100);

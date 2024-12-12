@@ -101,25 +101,7 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
      */
     @Override
     public String getTowerType() {
-        return "ThunderSmurf";
-    }
-
-    /**
-     * Returns the path to the image equivalent of the tower
-     * @return the path to the image equivalent of the tower
-     */
-    @Override
-    public String getTowerImagePath() {
-        return ""; // no image yet
-    }
-
-    /**
-     * Returns the cost of the tower
-     * @return the cost of the tower
-     */
-    @Override
-    public int getCost() {
-        return cost;
+        return this.getClass().getSimpleName();
     }
 
     @Override
