@@ -17,6 +17,7 @@ public class MapRoadCreatorTool extends JFrame {
     private MapPanel mapPanel;
     private List<Point2D> points = new ArrayList<Point2D>();
     private Map<Double, Double> scalablePoints = new LinkedHashMap<>();
+    private JButton finishButton;
 
     public MapRoadCreatorTool() {
         super("Map Road Creator Tool");
@@ -26,8 +27,38 @@ public class MapRoadCreatorTool extends JFrame {
         mapPanel = new MapPanel();
         add(mapPanel);
 
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        finishButton = new JButton("Finish Path");
+        finishButton.addActionListener(e -> validateAndFinishPath());
+        buttonPanel.add(finishButton);
+
+        setLayout(new BorderLayout());
+        add(mapPanel, BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.SOUTH);
+
         loadImage();
         setVisible(true);
+    }
+
+    private void validateAndFinishPath() {
+        if (points.size() < 2) {
+            JOptionPane.showMessageDialog(this,
+                    "Path must have at least 2 points.");
+            return;
+        }
+
+        Map.Entry<Double, Double> lastPoint = null;
+        for (Map.Entry<Double, Double> entry : scalablePoints.entrySet()) {
+            lastPoint = entry;
+        }
+
+        if (lastPoint != null && RoadValidator.isValidBorderPoint(lastPoint.getKey(), lastPoint.getValue())) {
+            // Path is valid - TODO: add code to save/export the path
+            JOptionPane.showMessageDialog(this, "Path is valid and complete!");
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "Last point must be on a border.");
+        }
     }
 
     private class MapPanel extends JPanel {
@@ -80,26 +111,50 @@ public class MapRoadCreatorTool extends JFrame {
     }
 
     void mouseClicker(MouseEvent e) {
-        addPoint(e.getX(), e.getY());
-        addScalablePoint(e.getX(), e.getY());
+        double xPercentage = (e.getX() / (double)mapPanel.getWidth());
+        double yPercentage = (e.getY() / (double)mapPanel.getHeight());
 
-        // Check if path is valid after each point addition
-        if (!RoadValidator.isValidPercentageRoad(scalablePoints)) {
-            JOptionPane.showMessageDialog(this,
-                    "Warning: Current path configuration is invalid. Make sure start and end points are on borders.");
+        System.out.println("Click at: (" + e.getX() + ", " + e.getY() + ")");
+        System.out.println("Percentage: (" + xPercentage + ", " + yPercentage + ")");
+
+        if (points.isEmpty()) {
+            // First point - must be on a border
+            if (RoadValidator.isValidBorderPoint(xPercentage, yPercentage)) {
+                addPoint(e.getX(), e.getY());
+                addScalablePoint(e.getX(), e.getY());
+                mapPanel.repaint();
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "First point must be on a border.");
+            }
+        } else {
+            // Check if this is meant to be the last point (near a border)
+            boolean isLastPoint = RoadValidator.isValidBorderPoint(xPercentage, yPercentage);
+
+            Map<Double, Double> tempPoints = new LinkedHashMap<>(scalablePoints);
+            tempPoints.put(xPercentage, yPercentage);
+
+            if (RoadValidator.isValidPercentageRoad(tempPoints, isLastPoint)) {
+                addPoint(e.getX(), e.getY());
+                addScalablePoint(e.getX(), e.getY());
+                mapPanel.repaint();
+            } else {
+                if (isLastPoint) {
+                    JOptionPane.showMessageDialog(this,
+                            "Invalid path configuration.");
+                }
+            }
         }
-
-        mapPanel.repaint();
     }
 
     private void addPoint(double x, double y){
-        Point2D point = new Point2D.Double(x,y);
+        Point2D point = new Point2D.Double(x, y); // Raw coordinates
         points.add(point);
     }
 
     private void addScalablePoint(double x, double y){
-        double xPercentage = (x / mapPanel.getWidth()) * 100;
-        double yPercentage = (y / mapPanel.getHeight()) * 100;
+        double xPercentage = x / mapPanel.getWidth();
+        double yPercentage = y / mapPanel.getHeight();
         scalablePoints.put(xPercentage, yPercentage);
     }
 

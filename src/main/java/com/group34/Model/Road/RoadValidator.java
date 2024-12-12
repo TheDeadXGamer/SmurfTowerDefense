@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 public class RoadValidator {
+    public static final double BORDER_TOLERANCE = 0.10; // 10% tolerance for percentages
+    public static final double COORDINATE_TOLERANCE = 50.0; // pixel tolerance for actual coordinates
+
     public static boolean isValidRoad(List<Point2D> points, double width, double height) {
         if (points.size() < 2) {
             return false;
@@ -18,48 +21,66 @@ public class RoadValidator {
             }
         }
 
-        // Check start and end points are on borders
-        Point2D start = points.get(0);
-        Point2D end = points.get(points.size() - 1);
+        Point2D start = points.getFirst();
+        Point2D end = points.getLast();
 
-        boolean startOnBorder = start.getX() == 0 || start.getY() == 0 ||
-                start.getX() == width || start.getY() == height;
-
-        boolean endOnBorder = end.getX() == 0 || end.getY() == 0 ||
-                end.getX() == width || end.getY() == height;
+        boolean startOnBorder = isOnBorderX(start.getX(), width) || isOnBorderY(start.getY(), height);
+        boolean endOnBorder = isOnBorderX(end.getX(), width) || isOnBorderY(end.getY(), height);
 
         return startOnBorder && endOnBorder;
     }
 
-    public static boolean isValidPercentageRoad(Map<Double, Double> points) {
+    public static boolean isValidPercentageRoad(Map<Double, Double> points, boolean isLastPoint) {
         if (points.size() < 2) {
             return false;
         }
 
-        // Check all percentages are within 0-100
+        // Check all percentages are within 0-1
         for (Map.Entry<Double, Double> point : points.entrySet()) {
-            if (point.getKey() < 0 || point.getKey() > 100 ||
-                    point.getValue() < 0 || point.getValue() > 100) {
+            if (point.getKey() < 0 || point.getKey() > 1 ||
+                    point.getValue() < 0 || point.getValue() > 1) {
                 return false;
             }
         }
 
-        // Get first and last points
+        // Get first point
         Map.Entry<Double, Double> start = points.entrySet().iterator().next();
-        Double lastKey = null;
-        Double lastValue = null;
-        for (Map.Entry<Double, Double> entry : points.entrySet()) {
-            lastKey = entry.getKey();
-            lastValue = entry.getValue();
+        boolean startOnBorder = isValidBorderPoint(start.getKey(), start.getValue());
+
+        // If this is intended to be the last point, check if it's on a border
+        if (isLastPoint) {
+            Double lastKey = null;
+            Double lastValue = null;
+            for (Map.Entry<Double, Double> entry : points.entrySet()) {
+                lastKey = entry.getKey();
+                lastValue = entry.getValue();
+            }
+            boolean endOnBorder = isValidBorderPoint(lastKey, lastValue);
+            return startOnBorder && endOnBorder;
         }
 
-        // Check start and end points are on borders (0 or 100)
-        boolean startOnBorder = start.getKey() == 0 || start.getValue() == 0 ||
-                start.getKey() == 100 || start.getValue() == 100;
+        // For intermediate points, just make sure start is valid and point is in bounds
+        return startOnBorder;
+    }
 
-        boolean endOnBorder = lastKey == 0 || lastValue == 0 ||
-                lastKey == 100 || lastValue == 100;
+    // For percentage-based validation (used by MapRoadCreatorTool)
+    public static boolean isValidBorderPoint(double x, double y) {
+        boolean xNearZero = x <= BORDER_TOLERANCE;
+        boolean xNearMax = x >= (1 - BORDER_TOLERANCE);
+        boolean yNearZero = y <= BORDER_TOLERANCE;
+        boolean yNearMax = y >= (1 - BORDER_TOLERANCE);
 
-        return startOnBorder && endOnBorder;
+        return xNearZero || xNearMax || yNearZero || yNearMax;
+    }
+
+    // For coordinate-based validation (used by RoadBuilder)
+    private static boolean isOnBorderX(double coordinate, double maxValue) {
+        return coordinate <= COORDINATE_TOLERANCE ||
+                coordinate >= (maxValue - COORDINATE_TOLERANCE);
+    }
+
+    private static boolean isOnBorderY(double coordinate, double maxValue) {
+        return coordinate <= COORDINATE_TOLERANCE ||
+                coordinate >= (maxValue - COORDINATE_TOLERANCE);
     }
 }
