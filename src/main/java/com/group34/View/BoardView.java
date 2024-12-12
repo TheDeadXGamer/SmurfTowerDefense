@@ -1,7 +1,10 @@
 package com.group34.View;
 
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.*;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDropEvent;
 import java.util.Iterator;
 
 import javax.swing.ImageIcon;
@@ -12,6 +15,7 @@ import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Game.Game;
 import com.group34.Model.Projectile.Projectile;
 import com.group34.Model.Tower.Tower;
+import com.group34.View.Shop.ShopController;
 
 public class BoardView extends JPanel {
     public Board board;
@@ -41,10 +45,38 @@ public class BoardView extends JPanel {
             Image.SCALE_SMOOTH
     );
 
-    public BoardView(Board board, Game game) {
+    public BoardView(Board board, Game game, ShopController shopController) {
         this.board = board;
         this.game = game;
         setPreferredSize(board.getDimension());
+
+        setLayout(new BorderLayout());
+
+        RightPanel rightPanel = new RightPanel(shopController);
+        add(rightPanel, BorderLayout.EAST);
+
+        // Enable drop target
+        setDropTarget(new DropTarget() {
+            @Override
+            public synchronized void drop(DropTargetDropEvent dtde) {
+                try {
+                    dtde.acceptDrop(dtde.getDropAction());
+                    Transferable transferable = dtde.getTransferable();
+                    String towerType = (String) transferable.getTransferData(DataFlavor.stringFlavor);
+
+                    // Create and place the tower on the board
+                    Point dropPoint = dtde.getLocation();
+                    Tower tower = shopController.purchaseTower(towerType, dropPoint);
+
+                    board.addTower(tower);
+                    rightPanel.updateStatusPanel(); // update the labels for health and cash
+
+                    repaint(); // Repaint to show the new tower
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     @Override

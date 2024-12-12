@@ -10,6 +10,7 @@ import com.group34.Model.Positionable;
 import com.group34.Model.Projectile.LightningBoltFactory;
 import com.group34.Model.Tower.Targeting.ClosestAttack;
 import com.group34.Model.Tower.Targeting.Targetings;
+import com.group34.View.ViewConstants;
 
 public class LightningSmurf<enemies extends Positionable & Attackable> implements Upgrade, Attack<enemies> {
 
@@ -91,26 +92,9 @@ public class LightningSmurf<enemies extends Positionable & Attackable> implement
      */
     @Override
     public String getTowerType() {
-        return "LightningSmurf";
+        return this.getClass().getSimpleName();
     }
 
-    /**
-     * Returns the path to the image of the tower
-     * @return the path to the image of the tower
-     */
-    @Override
-    public String getTowerImagePath() {
-        return "/assets/Towers/LightningSmurf.png";
-    }
-
-    /**
-     * Returns the cost of the tower
-     * @return the cost of the tower
-     */
-    @Override
-    public int getCost() {
-        return 10;
-    }
 
     /**
      * Returns the attack speed of the tower
