@@ -123,6 +123,18 @@ public class BoardView extends JPanel {
                 ViewConstants.TOWER_SIZE,
                 ViewConstants.TOWER_SIZE,
                 this);
+
+
+            // Set font to green
+            g.setColor(ViewConstants.HEALTH_BAR_COLOR);
+            
+            g.setFont(g.getFont().deriveFont(20f));
+            g.drawString(
+                Integer.toString(e.getHealth()), 
+                (int) e.getPosition().getX() - ViewConstants.TOWER_SIZE / 2, 
+                (int) e.getPosition().getY() + ViewConstants.TOWER_SIZE / 2
+            );
+            g.setFont(g.getFont().deriveFont(12f));
         }
 
         Iterator<Projectile> iterProjectile = board.getProjectileManager().getProjectiles().iterator();
