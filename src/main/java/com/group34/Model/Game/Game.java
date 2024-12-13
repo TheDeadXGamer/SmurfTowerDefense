@@ -25,12 +25,19 @@ public class Game {
     }
 
     public void update() {
+
+        List<Enemy> killedEnemies = new ArrayList<>();
         for (Enemy enemy : enemies) {
             if (!enemy.isAlive()) {
-                enemies.remove(enemy);
+                killedEnemies.add(enemy);
+                continue;
             }
             enemy.move();
             notifier.getInstance().notifyThatEnemyMoved(enemy);
+        }
+        for (Enemy enemy: killedEnemies) {
+            enemies.remove(enemy);
+
         }
     }
 

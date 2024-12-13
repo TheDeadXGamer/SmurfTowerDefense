@@ -23,6 +23,8 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
     private float lastAttack = System.nanoTime();
 
 
+
+
     Targetings targeting = new ClosestAttack(new LightningBoltFactory(this),position); //TODO Den ska ha annan projectile men lägger såhär undertiden
 
     public ThunderSmurf(Point2D position) {
