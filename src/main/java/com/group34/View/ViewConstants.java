@@ -1,8 +1,12 @@
 package com.group34.View;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 public class ViewConstants {
     // colors
@@ -69,5 +73,7 @@ public class ViewConstants {
         return new ImageIcon(image);
     }
 
+
+    public static final Color HEALTH_BAR_COLOR = new Color(0, 255, 0); 
 
 }

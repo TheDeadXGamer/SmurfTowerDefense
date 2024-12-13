@@ -1,6 +1,9 @@
 package com.group34.View;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Point;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.dnd.DropTarget;
@@ -102,8 +105,8 @@ public class BoardView extends JPanel {
             t = iter.next();
             g.drawImage(
                 smurfImage, 
-                (int) t.getPosition().getX(), 
-                (int) t.getPosition().getY(), 
+                (int) t.getPosition().getX() - ViewConstants.TOWER_SIZE / 2, 
+                (int) t.getPosition().getY() - ViewConstants.TOWER_SIZE / 2, 
                 ViewConstants.TOWER_SIZE,
                 ViewConstants.TOWER_SIZE,
                 this);
@@ -115,11 +118,23 @@ public class BoardView extends JPanel {
             Enemy e = iterEnemy.next();
             g.drawImage(
                 gargamelImage, 
-                (int) e.getPosition().getX(), 
-                (int) e.getPosition().getY(), 
+                (int) e.getPosition().getX() - ViewConstants.TOWER_SIZE / 2, 
+                (int) e.getPosition().getY() - ViewConstants.TOWER_SIZE / 2, 
                 ViewConstants.TOWER_SIZE,
                 ViewConstants.TOWER_SIZE,
                 this);
+
+
+            // Set font to green
+            g.setColor(ViewConstants.HEALTH_BAR_COLOR);
+            
+            g.setFont(g.getFont().deriveFont(20f));
+            g.drawString(
+                Integer.toString(e.getHealth()), 
+                (int) e.getPosition().getX() - ViewConstants.TOWER_SIZE / 2, 
+                (int) e.getPosition().getY() + ViewConstants.TOWER_SIZE / 2
+            );
+            g.setFont(g.getFont().deriveFont(12f));
         }
 
         Iterator<Projectile> iterProjectile = board.getProjectileManager().getProjectiles().iterator();
@@ -134,8 +149,8 @@ public class BoardView extends JPanel {
 
             g.drawImage(
                     projectileImage,
-                    (int) p.getCurrentPosition().getX(),
-                    (int) p.getCurrentPosition().getY(),
+                    (int) p.getCurrentPosition().getX() - ViewConstants.TOWER_SIZE / 2,
+                    (int) p.getCurrentPosition().getY() - ViewConstants.TOWER_SIZE / 2,
                     ViewConstants.TOWER_SIZE,
                     ViewConstants.TOWER_SIZE,
                     this);
