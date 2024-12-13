@@ -4,19 +4,18 @@ import java.awt.Dimension;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.swing.JFrame;
 
 import com.group34.Model.Board.Board;
 import com.group34.Model.Cash.CashVault;
-import com.group34.Model.Enemy.EnemyFactory;
 import com.group34.Model.Enemy.GargamelFactory;
 import com.group34.Model.Game.Game;
+import com.group34.Model.Game.GameBuilder;
 import com.group34.Model.Game.Player;
+import com.group34.Model.Game.Repaintable;
 import com.group34.Model.Road.RoadBuilder;
 import com.group34.Model.Road.RoadSpawn;
-import com.group34.Model.Road.RoadToken;
 import com.group34.Model.Round.Round;
 import com.group34.Model.Round.RoundBuilder;
 import com.group34.Model.Round.RoundEvent;
@@ -29,7 +28,6 @@ import com.group34.View.Shop.ShopModel;
 
 class TowerDefenceBuilder {
     Board board;
-    List<Round> rounds;
     CashVault cashVault;
     Game game;
     Player player;
@@ -43,11 +41,6 @@ class TowerDefenceBuilder {
 
     public TowerDefenceBuilder setPlayer(Player player) {
         this.player = player;
-        return this;
-    }
-
-    public TowerDefenceBuilder setRounds(List<Round> rounds) {
-        this.rounds = rounds;
         return this;
     }
 
@@ -71,28 +64,25 @@ class TowerDefenceBuilder {
     }
 }
 
-class TowerDefence extends JFrame implements Runnable {
+class TowerDefence extends JFrame implements Runnable, Repaintable {
     static final int FPS = 60;
     private CashVault cashVault;
     private Game game;
     private Board board;
-    private List<Round> rounds;
     private Player player;
-    private RoadSpawn roadSpawn;
 
     public TowerDefence(TowerDefenceBuilder builder) {
 
-        this.board = builder.board;
         this.cashVault = builder.cashVault;
         this.game = builder.game;
-        this.rounds = builder.rounds;
+        this.board = builder.board;
         this.player = builder.player;
-        this.roadSpawn = builder.roadSpawn;
     
         setTitle("Tower Defence");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
         setLocationRelativeTo(null);
+        game.setRepaintable(this);
 
         // TODO: maybe not the best usage of shop stuff like this, change later
         ShopModel shopModel = new ShopModel(player, cashVault);
@@ -109,44 +99,29 @@ class TowerDefence extends JFrame implements Runnable {
 
     @Override
     public void run() {
-        for (Round round : rounds) {
-            while (round.eventsLeft() > 0 || game.enemiesLeft() > 0) {
-                if (player.isAlive()) {
-                    Optional<EnemyFactory> spawn = round.spawn();
-
-                    if (spawn.isPresent()) {
-                        RoadToken token = new RoadToken(roadSpawn);;
-                        game.addEnemy(spawn.get().createEnemy(token));
-                    }
-
-                    game.update();
-                    board.update();
-                    repaint();
-                    try {
-                        Thread.sleep(1000 / FPS);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-        System.out.println("Game Over");
+        game.update();
     }
 
+    @Override
+    public void repaint() {
+        super.repaint();
+        try {
+            Thread.sleep(1000 / Repaintable.FPS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 public class Main {
     public static void main (String[] args) throws Exception {
     
-        List<Round> rounds = new ArrayList<>();
-    
         Point2D position = new Point2D.Double(100, 100);
         Tower tower = new LightningSmurfFactory().createTower(position);
         Tower tower2 = new LightningSmurfFactory().createTower(new Point2D.Double(400,300));
-        Board board = new Board(new Dimension(815, 635));
         Player player = new Player(30);
         CashVault cashVault = new CashVault(100);
-        Game game = new Game();
+        Board board = new Board(new Dimension(815, 635));
 
         Round round = new RoundBuilder()
             .addEvent(new RoundEvent(
@@ -156,8 +131,10 @@ public class Main {
             .build();
 
 
+        List<Round> rounds = new ArrayList<>();
         rounds.add(round);
-
+        
+        
 
         RoadSpawn spawn = new RoadBuilder(board, player)
             .add(new Point2D.Double(200., 0.))
@@ -168,16 +145,22 @@ public class Main {
             .add(new Point2D.Double(200., 635.))
             .build();
 
+        Game game = new GameBuilder()
+        .setBoard(board)
+        .setPlayer(player)
+        .setCashVault(cashVault)
+        .setRoadSpawn(spawn)
+        .setRounds(rounds)
+        .build();
+
         board.addTower(tower);
         board.addTower(tower2);
 
         TowerDefence towerDefence = new TowerDefenceBuilder()
-            .setBoard(board)
-            .setRounds(rounds)
-            .setPlayer(player)
             .setCashVault(cashVault)
             .setGame(game)
-            .setRoadSpawn(spawn)
+            .setBoard(board)
+            .setPlayer(player)
             .build();
 
         Thread thread = new Thread(towerDefence);
