@@ -1,29 +1,36 @@
 package com.group34.Model.Tower;
 
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.group34.Model.Enemy.Attackable;
 import com.group34.Model.Enemy.Enemy;
+import com.group34.Model.Positionable;
 import com.group34.Model.Projectile.LightningBoltFactory;
 import com.group34.Model.Tower.Targeting.ClosestAttack;
 import com.group34.Model.Tower.Targeting.Targetings;
+import com.group34.View.ViewConstants;
 
-import java.awt.geom.Point2D;
-import java.util.List;
+public class LightningSmurf<enemies extends Positionable & Attackable> implements Upgrade, Attack<enemies> {
 
-public class LightningSmurf implements Upgrade,Attack {
+    protected int attackSpeed;
+    protected int damage;
 
-    private int attackSpeed;
-    private int damage;
-    private Point2D position;
-    private int range;
-    private List<Enemy> targets;
-    private int cost;
-    private Targetings targeting = new ClosestAttack(new LightningBoltFactory(this), position);
+    private boolean canAttack = true;
+    private float lastAttack = System.nanoTime();
+    protected Point2D position;
+    protected int range;
+    List<enemies> targets = new ArrayList<>();
+    Targetings targeting;
 
-    public LightningSmurf(Point2D position) {
-        this.attackSpeed = 1;
-        this.damage = 3;
-        this.range = 300;
+    
+    public LightningSmurf(Point2D position, int attackSpeed, int damage, int range) {
+        this.attackSpeed = attackSpeed;
+        this.damage = damage;
+        this.range = range;
         this.position = position;
-        this.cost = 500;
+        this.targeting = new ClosestAttack(new LightningBoltFactory(this), position);
     }
 
     /**
@@ -67,7 +74,16 @@ public class LightningSmurf implements Upgrade,Attack {
      */
     @Override
     public void action() {
-        targeting.attack(targets);
+        if (System.nanoTime() - lastAttack >= (Math.pow(10,9) / attackSpeed )) {
+            canAttack = true;
+        }
+
+        if (canAttack) {
+            targeting.attack(targets);
+            canAttack = false;
+            lastAttack = System.nanoTime();
+        }
+
     }
 
     /**
@@ -76,26 +92,9 @@ public class LightningSmurf implements Upgrade,Attack {
      */
     @Override
     public String getTowerType() {
-        return "LightningSmurf";
+        return this.getClass().getSimpleName();
     }
 
-    /**
-     * Returns the path to the image of the tower
-     * @return the path to the image of the tower
-     */
-    @Override
-    public String getTowerImagePath() {
-        return "/assets/Towers/LightningSmurf.png";
-    }
-
-    /**
-     * Returns the cost of the tower
-     * @return the cost of the tower
-     */
-    @Override
-    public int getCost() {
-        return cost;
-    }
 
     /**
      * Returns the attack speed of the tower
@@ -114,5 +113,25 @@ public class LightningSmurf implements Upgrade,Attack {
     public int getDamage() {
         return damage;
     }
+
+
+    @Override
+    public void notifyTower(enemies enemy) {
+        if (checkIfInRange(enemy) && !targets.contains(enemy)) {
+            targets.add(enemy);
+        }
+        else if (!checkIfInRange(enemy) && targets.contains(enemy)) {
+            targets.remove(enemy);
+        }
+    }
+
+    private boolean checkIfInRange(enemies enemy) {
+        return position.distance(enemy.getPosition()) <= this.range;
+    }
+
+    public void changeTargeting(Targetings targetingtype) {
+        targeting = targetingtype;
+    }
+
 
 }

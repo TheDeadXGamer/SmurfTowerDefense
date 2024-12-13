@@ -1,56 +1,78 @@
 package com.group34.Model.Board;
 
+import java.awt.Dimension;
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import com.group34.Model.Game.TowerNotifier;
+import com.group34.Model.Projectile.Projectile;
+import com.group34.Model.Projectile.ProjectileManager;
 import com.group34.Model.Tower.Tower;
 
 public class Board {
-    private int width;
-    private int height;
-    private List<Tower> towers;
+    private ProjectileManager projectileManager = new ProjectileManager();
+
+    private TowerNotifier notifier = new TowerNotifier();
+
+    private List<Tower> towers = new ArrayList<>();
     private float towerWidth = (float) 1.0;
+    private Dimension dimension;
 
-    public Board(int width, int height) {
-        this.width = width;
-        this.height = height;
+    public Board(Dimension dimension) {
+        this.dimension = dimension;
     }
 
-    /**
-     * Returns the width of the board
-     * @return the width of the board
-     */
-    public int getWidth() {
-        return width;
+    public Dimension getDimension( ) {
+        return dimension;
     }
 
-    /**
-     * Returns the height of the board
-     * @return the height of the board
-     */
-    public int getHeight() {
-        return height;
+    public int getTowerWidth() {
+        return (int) towerWidth;
     }
 
-    /**
-     * Adds a tower to the board
-     * @param tower The 'Tower' to be added
-     * @throws PlacementError if the tower is placed outside of the board or on top of another tower
-     */
-    public void addTower(Tower tower) throws PlacementError { 
+    public ProjectileManager getProjectileManager() {
+        return projectileManager.getInstance();
+    }
+
+    public Iterator<Tower> getTowers() {
+        return towers.iterator();
+
+    }
+
+    public void addTower(Tower tower) throws PlacementError {
+
    
-        Point2D position = tower.getPosition();
-        if (position.getX() < 0 || position.getX() > width || position.getY() < 0 || position.getY() > height) {
+        if (!withinDimension(tower.getPosition())) {
             throw new PlacementError("Tower placed outside of board");
         }
 
-        for (Tower t : towers) {
-            if (t.getPosition().distance(tower.getPosition()) < towerWidth) {
+        Iterator<Tower> iterator = getTowers();
+        for (Tower t; iterator.hasNext();) {
+            t = iterator.next();
+            if (t.getPosition().distance(tower.getPosition()) < getTowerWidth()) {
                 throw new PlacementError("Tower placed on top of another tower");
             }
         }
 
         towers.add(tower);
+        notifier.getInstance().subscribe(tower);
+    }
+
+    public void update() {
+        for (Tower tower : towers) {
+            tower.action();
+        }
+        projectileManager.getInstance().updateProjectiles();
+    }
+
+    private boolean withinDimension(Point2D point) {
+        double x = point.getX();
+        double y = point.getY();
+        boolean widthIsOk = x >= 0 && x <= getDimension().getWidth();
+        boolean heightIsOk = y >= 0 && y <= getDimension().getHeight();
+        return widthIsOk && heightIsOk;
     }
 
     

@@ -1,21 +1,28 @@
 package com.group34.Model.Projectile;
 
-import java.awt.*;
+import com.group34.Model.Enemy.Attackable;
+import com.group34.Model.Positionable;
+
 import java.awt.geom.Point2D;
 
-public class LightningBolt implements ProjectileInterface{
+public class LightningBolt<Target extends Positionable & Attackable> implements Projectile {
 
-    private int speed;
-    private Point2D position;
+    private double speed;
+    private Target enemy;
+    private Point2D currentPosition;
     private int damage;
-    private Image art;
+    private String projectileType;
 
 
-    public LightningBolt(int speed, Point2D position, int damage, Image art) {
+
+
+    public LightningBolt(double speed, Point2D startPosition, int damage, String projectileType, Target enemy) {
         this.speed = speed;
-        this.position = position;
+
+        this.currentPosition = startPosition;
         this.damage = damage;
-        this.art = art;
+        this.projectileType = projectileType;
+        this.enemy = enemy;
 
     }
 
@@ -24,7 +31,7 @@ public class LightningBolt implements ProjectileInterface{
      * @return the speed of the projectile
      */
     @Override
-    public int getSpeed() {
+    public double getSpeed() {
         return this.speed;
     }
 
@@ -33,8 +40,8 @@ public class LightningBolt implements ProjectileInterface{
      * @return the position of the projectile
      */
     @Override
-    public Point2D getPosition() {
-        return this.position;
+    public Point2D getCurrentPosition() {
+        return this.currentPosition;
     }
 
     /**
@@ -51,7 +58,43 @@ public class LightningBolt implements ProjectileInterface{
      * @return the art of the projectile
      */
     @Override
-    public Image getArt() {
-        return this.art;
+    public String getProjectileType() {
+        return this.projectileType;
+    }
+
+    @Override
+    public void damage() {
+        enemy.damage(damage);
+    }
+
+    @Override
+    public double getAngle() {
+        // Calculate the differences in x and y
+        double deltaX = getTargetPosition().getX() - getCurrentPosition().getX();
+        double deltaY = getTargetPosition().getY() - getCurrentPosition().getY();
+
+        // Get the angle using atan2, which returns a value from -π to π
+        double angle = Math.atan2(deltaY, deltaX);
+
+
+
+        return angle;
+    }
+
+    @Override
+    public void update() {
+
+
+
+        //Calculate how far to move projectile in each axis
+        double deltaX = Math.cos(getAngle()) * speed;
+        double deltaY = Math.sin(getAngle()) * speed;
+
+        currentPosition = new Point2D.Double(currentPosition.getX() + deltaX,currentPosition.getY() + deltaY);
+    }
+
+    @Override
+    public Point2D getTargetPosition() {
+        return enemy.getPosition();
     }
 }

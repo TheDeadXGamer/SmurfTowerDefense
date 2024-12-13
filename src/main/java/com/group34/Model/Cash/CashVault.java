@@ -32,6 +32,9 @@ public class CashVault {
      * @throws OverDraftError if the balance would go below 0
      */
     public void reduce(int amount) throws OverDraftError {
-        throw new OverDraftError();
+        if (balance < amount) {
+            throw new OverDraftError("Not enough Money");
+        }
+        balance -= amount;
     }
 }
