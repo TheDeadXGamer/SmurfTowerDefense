@@ -12,8 +12,6 @@ import java.util.*;
 import java.util.List;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import com.group34.Model.Road.RoadValidator;
-
 public class MapRoadCreatorTool extends JFrame {
     private BufferedImage mapImage;
     private MapPanel mapPanel;

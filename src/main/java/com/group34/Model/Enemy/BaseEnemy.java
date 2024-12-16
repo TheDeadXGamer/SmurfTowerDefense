@@ -2,25 +2,21 @@ package com.group34.Model.Enemy;
 
 import java.awt.geom.Point2D;
 
-import com.group34.Model.Cash.CashVault;
 import com.group34.Model.Road.RoadToken;
 
 public abstract class BaseEnemy implements Enemy {
-    private int health;
-    private CashVault cashVault;
-    private int reward;
-    private int speed;
-    private RoadToken point;
+    private static int health;
+    private static int reward;
+    private static int speed;
+    private final RoadToken point;
 
     public BaseEnemy(
         int health,
-        CashVault cashVault, 
         int speed, 
         int reward,
         RoadToken point
     ) {
         this.health = health;
-        this.cashVault = cashVault;
         this.speed = speed;
         this.reward = reward;
         this.point = point;
@@ -29,9 +25,6 @@ public abstract class BaseEnemy implements Enemy {
     @Override
     public void damage(int damage) {
         this.health -= damage;
-        if (!isAlive()) {
-            this.cashVault.deposit(getReward());
-        }
     }
 
     @Override

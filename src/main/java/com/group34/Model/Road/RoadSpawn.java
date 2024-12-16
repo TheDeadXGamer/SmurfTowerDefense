@@ -20,7 +20,6 @@ public class RoadSpawn implements Road {
     @Override
     public void advance(RoadToken token, int distance) {
         assert distance > 0;
-        //System.out.println("RoadSpawn.advance");
         token.setRoadSection(child);
         token.distance = distance;
     }

@@ -2,7 +2,7 @@ package com.group34.Model.Enemy;
 
 import com.group34.Model.Positionable;
 
-public interface Enemy extends Positionable,Attackable {
+public interface Enemy extends Positionable, Attackable {
 
     int getHealth();
 

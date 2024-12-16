@@ -1,4 +1,4 @@
-package com.group34.Model.Road;
+package com.group34;
 
 import java.awt.geom.Point2D;
 import java.util.List;
