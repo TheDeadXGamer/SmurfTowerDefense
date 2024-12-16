@@ -97,7 +97,7 @@ class TowerDefence extends JFrame implements Runnable {
         setLocationRelativeTo(null);
 
         // TODO: maybe not the best usage of shop stuff like this, change later
-        ShopModel shopModel = new ShopModel(player, cashVault);
+        ShopModel shopModel = new ShopModel(player, cashVault,board);
         ShopController shopController = new ShopController(shopModel);
         
         BoardView boardView = new BoardView(this.board, this.game, shopController);

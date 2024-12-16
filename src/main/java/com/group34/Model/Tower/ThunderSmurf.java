@@ -21,7 +21,7 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
     private List<enemies> targets = new ArrayList<>();
     private boolean canAttack = true;
     private float lastAttack = System.nanoTime();
-
+    private float towerWidth;
 
 
 
@@ -104,6 +104,11 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
     @Override
     public String getTowerType() {
         return this.getClass().getSimpleName();
+    }
+
+    @Override
+    public float getTowerWidth() {
+        return towerWidth;
     }
 
     @Override
