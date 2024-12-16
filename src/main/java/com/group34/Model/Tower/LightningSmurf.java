@@ -125,6 +125,13 @@ public class LightningSmurf<enemies extends Positionable & Attackable> implement
         }
     }
 
+    @Override
+    public void notifyOfDeath(enemies enemy) {
+        if (targets.contains(enemy)) {
+            targets.remove(enemy);
+        }
+    }
+
     private boolean checkIfInRange(enemies enemy) {
         return position.distance(enemy.getPosition()) <= this.range;
     }
