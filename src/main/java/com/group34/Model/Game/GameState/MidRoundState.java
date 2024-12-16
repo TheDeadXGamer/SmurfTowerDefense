@@ -25,7 +25,7 @@ public class MidRoundState implements GameState {
 
     public void update(TowerDefence towerDefence) {
         for (Round round : towerDefence.getRounds()) {
-            while (round.eventsLeft() > 0 || towerDefence.getGame().enemiesLeft() > 0) {
+            while (!round.isRoundOver() || towerDefence.getGame().enemiesLeft() > 0) {
                 if (towerDefence.getPlayer().isAlive()) {
                     Optional<EnemyFactory> spawn = round.spawn();
 
