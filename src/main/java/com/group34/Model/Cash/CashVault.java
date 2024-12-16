@@ -1,12 +1,18 @@
 package com.group34.Model.Cash;
 
-public class CashVault {
+import com.group34.Model.IObservable;
+import com.group34.Model.IObserver;
 
+import java.util.ArrayList;
+
+public class CashVault implements IObservable {
+    private ArrayList<IObserver> observers;
     private int balance;
 
     public CashVault(int balance) {
         assert balance >= 0;
         this.balance = balance;
+        observers = new ArrayList<>();
     }
 
     /**
@@ -24,6 +30,7 @@ public class CashVault {
     public void deposit(int amount) {
         assert amount >= 0;
         balance += amount;
+        notifyObservers();
     }
 
     /**
@@ -36,5 +43,24 @@ public class CashVault {
             throw new OverDraftError("Not enough Money");
         }
         balance -= amount;
+        notifyObservers();
     }
+
+    @Override
+    public void addObserver(IObserver observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(IObserver observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (IObserver observer : observers) {
+            observer.update();
+        }
+    }
+
 }
