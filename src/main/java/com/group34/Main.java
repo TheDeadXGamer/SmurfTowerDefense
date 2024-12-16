@@ -20,6 +20,7 @@ import com.group34.Model.Road.RoadToken;
 import com.group34.Model.Round.Round;
 import com.group34.Model.Round.RoundBuilder;
 import com.group34.Model.Round.RoundEvent;
+import com.group34.Model.Round.RoundConfig;
 import com.group34.Model.Tower.LightningSmurfFactory;
 import com.group34.Model.Tower.Tower;
 import com.group34.View.BoardView;
@@ -79,6 +80,7 @@ class TowerDefence extends JFrame implements Runnable {
     private List<Round> rounds;
     private Player player;
     private RoadSpawn roadSpawn;
+    
 
     public TowerDefence(TowerDefenceBuilder builder) {
 
@@ -110,7 +112,7 @@ class TowerDefence extends JFrame implements Runnable {
     @Override
     public void run() {
         for (Round round : rounds) {
-            while (round.eventsLeft() > 0 || game.enemiesLeft() > 0) {
+            while (!round.isRoundOver() || game.enemiesLeft() > 0) {
                 if (player.isAlive()) {
                     Optional<EnemyFactory> spawn = round.spawn();
 
@@ -138,7 +140,6 @@ class TowerDefence extends JFrame implements Runnable {
 public class Main {
     public static void main (String[] args) throws Exception {
     
-        List<Round> rounds = new ArrayList<>();
     
         Point2D position = new Point2D.Double(100, 100);
         Tower tower = new LightningSmurfFactory().createTower(position);
@@ -147,16 +148,8 @@ public class Main {
         Player player = new Player(30);
         CashVault cashVault = new CashVault(100);
         Game game = new Game();
-
-        Round round = new RoundBuilder()
-            .addEvent(new RoundEvent(
-                new GargamelFactory(cashVault), 0))
-            .addEvent(new RoundEvent(
-                new GargamelFactory(cashVault),1))
-            .build();
-
-
-        rounds.add(round);
+        
+        List<Round> rounds = RoundConfig.createRounds(cashVault);
 
 
         RoadSpawn spawn = new RoadBuilder(board, player)
