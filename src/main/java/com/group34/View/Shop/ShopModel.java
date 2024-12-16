@@ -7,6 +7,7 @@ import com.group34.Model.Board.Board;
 import com.group34.Model.Board.PlacementError;
 import com.group34.Model.Cash.CashVault;
 import com.group34.Model.Cash.OverDraftError;
+import com.group34.Model.Game.Game;
 import com.group34.Model.Game.Player;
 import com.group34.Model.Tower.LightningSmurfFactory;
 import com.group34.Model.Tower.Tower;
@@ -16,10 +17,14 @@ public class ShopModel {
     private Player player;
     private CashVault cashVault;
     private Board board;
-    public ShopModel(Player player, CashVault cashVault,Board board) {
+    private Game game;
+
+    public ShopModel(Player player, CashVault cashVault, Board board, Game game) {
         this.player = player;
         this.cashVault = cashVault;
         this.board = board;
+        this.game = game;
+
         // adds items to the shop as a factory and a cost
         items = new ArrayList<>();
         items.add(new TowerShopItem(new LightningSmurfFactory(), 50));
@@ -35,6 +40,10 @@ public class ShopModel {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public Game getGame() {
+        return game;
     }
 
     public String purchaseItem(IShopItem item, Point2D position) {

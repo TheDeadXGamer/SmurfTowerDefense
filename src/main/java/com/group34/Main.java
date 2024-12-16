@@ -105,8 +105,7 @@ class TowerDefence extends JFrame implements Runnable {
         setResizable(true);
         setLocationRelativeTo(null);
 
-        // TODO: maybe not the best usage of shop stuff like this, change later
-        ShopModel shopModel = new ShopModel(player, cashVault,board);
+        ShopModel shopModel = new ShopModel(player, cashVault, board, game);
         ShopController shopController = new ShopController(shopModel);
         
         BoardView boardView = new BoardView(this.board, this.game, shopController);
@@ -120,7 +119,9 @@ class TowerDefence extends JFrame implements Runnable {
 
     @Override
     public void run() {
-        for (Round round : rounds) {
+        for (int i = 0; i < rounds.size(); i++) {
+            Round round = rounds.get(i);
+            game.setRoundNumber(i + 1); // setting round number
             while (!round.isRoundOver() || game.enemiesLeft() > 0) {
                 if (player.isAlive()) {
                     Optional<EnemyFactory> spawn = round.spawn();
