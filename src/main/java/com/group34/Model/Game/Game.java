@@ -29,15 +29,13 @@ public class Game {
         for (Enemy enemy : enemies) {
             if (!enemy.isAlive()) {
                 killedEnemies.add(enemy);
-        
             }
             enemy.move();
             notifier.getInstance().notifyThatEnemyMoved(enemy);
         }
-     
-        for (Enemy enemy : killedEnemies) {
-            enemies.remove(enemy);
-            notifier.getInstance().notifyThatEnemyMoved(enemy);
+
+        for (Enemy enemy: killedEnemies) {
+            notifier.getInstance().notifyThatEnemyDied(enemy);
             enemies.remove(enemy);
         }
 

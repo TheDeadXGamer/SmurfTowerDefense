@@ -33,4 +33,10 @@ public class TowerNotifier {
             tower.notifyTower(enemy);
         }
     }
+    public void notifyThatEnemyDied(Enemy enemy) {
+        for (TowerListener tower: listeners) {
+            tower.notifyOfDeath(enemy);
+
+        }
+    }
 }

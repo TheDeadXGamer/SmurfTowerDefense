@@ -13,7 +13,7 @@ public class ShopController {
     public ArrayList<IShopItem> getItems() {
         return shopModel.getItems();
     }
-    public Tower purchaseTower(String towerType, Point2D position) {
+    public String purchaseTower(String towerType, Point2D position) {
         // find the item in the shop model, purchase it, and return it
         for (IShopItem item : shopModel.getItems()) {
             if (item.getTypeName().equals(towerType)) {

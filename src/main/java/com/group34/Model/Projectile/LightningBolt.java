@@ -1,11 +1,12 @@
 package com.group34.Model.Projectile;
 
 import com.group34.Model.Enemy.Attackable;
+import com.group34.Model.Enemy.Killable;
 import com.group34.Model.Positionable;
 
 import java.awt.geom.Point2D;
 
-public class LightningBolt<Target extends Positionable & Attackable> implements Projectile {
+public class LightningBolt<Target extends Positionable & Attackable & Killable> implements Projectile {
 
     private double speed;
     private Target enemy;
@@ -97,4 +98,11 @@ public class LightningBolt<Target extends Positionable & Attackable> implements 
     public Point2D getTargetPosition() {
         return enemy.getPosition();
     }
+
+    @Override
+    public boolean IfTargetDead() {
+        return !enemy.isAlive();
+    }
+
+
 }

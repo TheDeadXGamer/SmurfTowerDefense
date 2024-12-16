@@ -16,4 +16,6 @@ public interface Projectile {
     void update();
 
     Point2D getTargetPosition();
+
+    boolean IfTargetDead();
 }

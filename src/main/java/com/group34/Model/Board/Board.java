@@ -17,7 +17,7 @@ public class Board {
     private TowerNotifier notifier = new TowerNotifier();
 
     private List<Tower> towers = new ArrayList<>();
-    private float towerWidth = (float) 1.0;
+
     private Dimension dimension;
 
     public Board(Dimension dimension) {
@@ -28,9 +28,7 @@ public class Board {
         return dimension;
     }
 
-    public int getTowerWidth() {
-        return (int) towerWidth;
-    }
+
 
     public ProjectileManager getProjectileManager() {
         return projectileManager.getInstance();
@@ -41,23 +39,25 @@ public class Board {
 
     }
 
-    public void addTower(Tower tower) throws PlacementError {
+    public boolean addTower(Tower tower) throws PlacementError {
 
    
         if (!withinDimension(tower.getPosition())) {
-            throw new PlacementError("Tower placed outside of board");
+            return false;
+
         }
 
         Iterator<Tower> iterator = getTowers();
         for (Tower t; iterator.hasNext();) {
             t = iterator.next();
-            if (t.getPosition().distance(tower.getPosition()) < getTowerWidth()) {
-                throw new PlacementError("Tower placed on top of another tower");
+            if (t.getPosition().distance(tower.getPosition()) < t.getTowerWidth()) {
+                return false;
             }
         }
 
         towers.add(tower);
         notifier.getInstance().subscribe(tower);
+        return true;
     }
 
     public void update() {

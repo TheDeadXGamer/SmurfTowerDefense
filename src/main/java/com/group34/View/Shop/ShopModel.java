@@ -3,6 +3,8 @@ package com.group34.View.Shop;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
+import com.group34.Model.Board.Board;
+import com.group34.Model.Board.PlacementError;
 import com.group34.Model.Cash.CashVault;
 import com.group34.Model.Cash.OverDraftError;
 import com.group34.Model.Game.Player;
@@ -13,11 +15,11 @@ public class ShopModel {
     private ArrayList<IShopItem> items;
     private Player player;
     private CashVault cashVault;
-
-    public ShopModel(Player player, CashVault cashVault) {
+    private Board board;
+    public ShopModel(Player player, CashVault cashVault,Board board) {
         this.player = player;
         this.cashVault = cashVault;
-
+        this.board = board;
         // adds items to the shop as a factory and a cost
         items = new ArrayList<>();
         items.add(new TowerShopItem(new LightningSmurfFactory(), 50));
@@ -35,14 +37,25 @@ public class ShopModel {
         return player;
     }
 
-    public Tower purchaseItem(IShopItem item, Point2D position) {
+    public String purchaseItem(IShopItem item, Point2D position) {
         try {
-            cashVault.reduce(item.getCost());
-            return item.getFactory().createTower(position);
+            Tower newTower = item.getFactory().createTower(position);
+
+            if (item.getCost() <= cashVault.getBalance()) {
+                if ( board.addTower(newTower)) {
+                     cashVault.reduce(item.getCost());
+                     return "Purchased";
+                }
+                return "PlacedOnAnotherTower";
+            }
+            return "NotEnoughMoney";
+
         } catch (OverDraftError e) {
             // TODO: Handle the overdraft error better
             System.err.println(e.getMessage());
             return null;
+        } catch (PlacementError e) {
+            throw new RuntimeException(e);
         }
     }
 
