@@ -39,4 +39,5 @@ public class RightPanel extends JPanel {
     public void updateStatusPanel() {
         statusPanel.updateLabels();
     }
+    
 }
