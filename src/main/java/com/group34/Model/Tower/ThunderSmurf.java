@@ -21,7 +21,7 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
     private List<enemies> targets = new ArrayList<>();
     private boolean canAttack = true;
     private float lastAttack = System.nanoTime();
-
+    private float towerWidth;
 
 
 
@@ -107,6 +107,11 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
     }
 
     @Override
+    public float getTowerWidth() {
+        return towerWidth;
+    }
+
+    @Override
     public void notifyTower(enemies enemy) {
         if (checkIfInRange(enemy) && !targets.contains(enemy)) {
             targets.add(enemy);
@@ -115,6 +120,13 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
             targets.remove(enemy);
         }
     }
+
+    public void notifyOfDeath(enemies enemy) {
+        if (targets.contains(enemy)) {
+            targets.remove(enemy);
+        }
+    }
+
     private boolean checkIfInRange(enemies enemy) {
         return position.distance(enemy.getPosition()) <= this.range;
     }
