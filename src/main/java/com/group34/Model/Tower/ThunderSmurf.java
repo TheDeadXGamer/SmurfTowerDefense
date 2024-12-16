@@ -115,6 +115,13 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
             targets.remove(enemy);
         }
     }
+
+    public void notifyOfDeath(enemies enemy) {
+        if (targets.contains(enemy)) {
+            targets.remove(enemy);
+        }
+    }
+
     private boolean checkIfInRange(enemies enemy) {
         return position.distance(enemy.getPosition()) <= this.range;
     }
