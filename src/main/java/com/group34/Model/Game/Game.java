@@ -36,6 +36,7 @@ public class Game {
             notifier.getInstance().notifyThatEnemyMoved(enemy);
         }
         for (Enemy enemy: killedEnemies) {
+            notifier.getInstance().notifyThatEnemyDied(enemy);
             enemies.remove(enemy);
 
         }

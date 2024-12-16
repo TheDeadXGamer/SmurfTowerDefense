@@ -6,4 +6,5 @@ import com.group34.Model.Positionable;
 
 public interface TowerListener<enemies extends Positionable & Attackable> {
     public void notifyTower(enemies enemy);
+    void notifyOfDeath(enemies enemy);
 }
