@@ -1,5 +1,7 @@
 package com.group34.View.Shop;
 
+import com.group34.Model.Cash.CashVault;
+import com.group34.Model.Game.Player;
 import com.group34.Model.Tower.Tower;
 
 import java.awt.geom.Point2D;
@@ -22,10 +24,10 @@ public class ShopController {
         }
         return null; // maybe throw some exception instead
     }
-    public int getCashVaultBalance() {
-        return shopModel.getCashVault().getBalance();
+    public CashVault getCashVault() {
+        return shopModel.getCashVault();
     }
-    public int getPlayerHealth() {
-        return shopModel.getPlayer().getHealth();
+    public Player getPlayer() {
+        return shopModel.getPlayer();
     }
 }

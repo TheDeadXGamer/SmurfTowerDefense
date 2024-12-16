@@ -58,7 +58,7 @@ public class BoardView extends JPanel {
         RightPanel rightPanel = new RightPanel(shopController);
         add(rightPanel, BorderLayout.EAST);
 
-        // Enable drop target
+        // Enable drop target, TODO: show image of tower being dragged
         setDropTarget(new DropTarget() {
             @Override
             public synchronized void drop(DropTargetDropEvent dtde) {
@@ -72,7 +72,6 @@ public class BoardView extends JPanel {
                     Tower tower = shopController.purchaseTower(towerType, dropPoint);
 
                     board.addTower(tower);
-                    rightPanel.updateStatusPanel(); // update the labels for health and cash
 
                     repaint(); // Repaint to show the new tower
                 } catch (Exception e) {

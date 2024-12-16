@@ -36,7 +36,4 @@ public class RightPanel extends JPanel {
         shopPanel = new ShopPanel(shopController);
         add(shopPanel, BorderLayout.CENTER);
     }
-    public void updateStatusPanel() {
-        statusPanel.updateLabels();
-    }
 }
