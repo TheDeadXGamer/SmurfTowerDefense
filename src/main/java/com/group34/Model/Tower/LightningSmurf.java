@@ -24,13 +24,15 @@ public class LightningSmurf<enemies extends Positionable & Attackable> implement
     List<enemies> targets = new ArrayList<>();
     Targetings targeting;
 
+    private float towerWidth;
     
-    public LightningSmurf(Point2D position, int attackSpeed, int damage, int range) {
+    public LightningSmurf(Point2D position, int attackSpeed, int damage, int range,float towerWidth) {
         this.attackSpeed = attackSpeed;
         this.damage = damage;
         this.range = range;
         this.position = position;
         this.targeting = new ClosestAttack(new LightningBoltFactory(this), position);
+        this.towerWidth = towerWidth;
     }
 
     /**
@@ -95,6 +97,11 @@ public class LightningSmurf<enemies extends Positionable & Attackable> implement
         return this.getClass().getSimpleName();
     }
 
+    @Override
+    public float getTowerWidth() {
+        return towerWidth;
+    }
+
 
     /**
      * Returns the attack speed of the tower
@@ -121,6 +128,13 @@ public class LightningSmurf<enemies extends Positionable & Attackable> implement
             targets.add(enemy);
         }
         else if (!checkIfInRange(enemy) && targets.contains(enemy)) {
+            targets.remove(enemy);
+        }
+    }
+
+    @Override
+    public void notifyOfDeath(enemies enemy) {
+        if (targets.contains(enemy)) {
             targets.remove(enemy);
         }
     }

@@ -27,7 +27,7 @@ public class Game {
     public TowerNotifier getNotifier() {
         return notifier;
     }
-
+  
     public int enemiesLeft() {
         return enemies.size();
     }

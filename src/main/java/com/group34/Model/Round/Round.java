@@ -18,19 +18,15 @@ public class Round {
     }
 
     public Optional<EnemyFactory> spawn() {
-        Optional<EnemyFactory> res;
         if (!events.isEmpty() && events.peek().counter == counter) {
-            res = Optional.of(events.poll().enemy);
-        } else {
-            res = Optional.empty();
+            return Optional.of(events.poll().enemy); 
         }
-        counter++;
-        return res;
-        
+        counter++; 
+        return Optional.empty();
     }
 
-    public int eventsLeft() {
-        return events.size();
+    public boolean isRoundOver() {
+        return events.isEmpty();
     }
 
 }

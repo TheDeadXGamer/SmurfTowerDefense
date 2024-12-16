@@ -7,8 +7,7 @@ import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDropEvent;
 import java.util.Iterator;
 
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import com.group34.Model.Board.Board;
 import com.group34.Model.Enemy.Enemy;
@@ -18,6 +17,9 @@ import com.group34.Model.Tower.Tower;
 import com.group34.View.Shop.ShopController;
 
 public class BoardView extends JPanel {
+    private String temporaryMessage = null;
+    private boolean showTemporaryMessage = false;
+    private Timer errorTimer;
     public Board board;
     public Game game;
 
@@ -31,7 +33,7 @@ public class BoardView extends JPanel {
         .getImage()
         .getScaledInstance(
             ViewConstants.TOWER_SIZE,
-            ViewConstants.TOWER_SIZE, 
+            ViewConstants.TOWER_SIZE,
             Image.SCALE_SMOOTH
     );
 
@@ -41,7 +43,7 @@ public class BoardView extends JPanel {
         .getImage()
         .getScaledInstance(
             ViewConstants.TOWER_SIZE,
-            ViewConstants.TOWER_SIZE, 
+            ViewConstants.TOWER_SIZE,
             Image.SCALE_SMOOTH
     );
 
@@ -49,7 +51,6 @@ public class BoardView extends JPanel {
         this.board = board;
         this.game = game;
         setPreferredSize(board.getDimension());
-
         setLayout(new BorderLayout());
 
         RightPanel rightPanel = new RightPanel(shopController);
@@ -66,11 +67,18 @@ public class BoardView extends JPanel {
 
                     // Create and place the tower on the board
                     Point dropPoint = dtde.getLocation();
-                    Tower tower = shopController.purchaseTower(towerType, dropPoint);
+                    String checkPurchase = shopController.purchaseTower(towerType, dropPoint);
 
-                    board.addTower(tower);
+                    switch(checkPurchase) {
+
+                        case "PlacedOnAnotherTower":
+                            showTemporaryMessage("Cannot place on another tower!");
+                            break;
+                        case "NotEnoughMoney"  :
+                            showTemporaryMessage("Not enough money!");
+                    }
+
                     rightPanel.updateStatusPanel(); // update the labels for health and cash
-
                     repaint(); // Repaint to show the new tower
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -79,68 +87,100 @@ public class BoardView extends JPanel {
         });
     }
 
-    @Override
-    public void paintComponent(Graphics g){
-        super.paintComponent(g);
+    private void showTemporaryMessage(String message) {
+        temporaryMessage = message;
+        showTemporaryMessage = true;
+        repaint(); // Trigger repaint to show the message
 
-        g.drawImage(
-            backgroundImage, 
-            0, 
-            0, 
-            (int) board.getDimension().getWidth(),
-            (int) board.getDimension().getHeight(), 
-            this
-        );
-
-
-
-
-        Iterator<Tower> iter = board.getTowers();
-        Tower t;
-    
-        for (;iter.hasNext();) {
-            t = iter.next();
-            g.drawImage(
-                smurfImage, 
-                (int) t.getPosition().getX(), 
-                (int) t.getPosition().getY(), 
-                ViewConstants.TOWER_SIZE,
-                ViewConstants.TOWER_SIZE,
-                this);
+        if (errorTimer == null || !errorTimer.isRunning()) {
+            // Hide the message after 2 seconds
+            errorTimer = new Timer(2000, e -> {
+                showTemporaryMessage = false;
+                repaint(); // Trigger repaint to remove the message
+            });
+            errorTimer.setRepeats(false);
+            errorTimer.start();
         }
 
-        Iterator<Enemy> iterEnemy = game.getEnemies();
-
-        for (;iterEnemy.hasNext();) {
-            Enemy e = iterEnemy.next();
-            g.drawImage(
-                gargamelImage, 
-                (int) e.getPosition().getX(), 
-                (int) e.getPosition().getY(), 
-                ViewConstants.TOWER_SIZE,
-                ViewConstants.TOWER_SIZE,
-                this);
-        }
-
-        Iterator<Projectile> iterProjectile = board.getProjectileManager().getProjectiles().iterator();
-        Projectile p;
-
-
-        for (;iterProjectile.hasNext();) {
-            p = iterProjectile.next();
-            Image projectileImage = new ImageIcon(
-                    getClass().getResource(ViewConstants.getProjectileImage(p.getProjectileType()))).getImage();
-
-
-            g.drawImage(
-                    projectileImage,
-                    (int) p.getCurrentPosition().getX(),
-                    (int) p.getCurrentPosition().getY(),
-                    ViewConstants.TOWER_SIZE,
-                    ViewConstants.TOWER_SIZE,
-                    this);
-        }
 
     }
 
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        g.drawImage(
+                backgroundImage,
+                0,
+                0,
+                (int) board.getDimension().getWidth(),
+                (int) board.getDimension().getHeight(),
+                this
+        );
+
+        // Draw towers
+        Iterator<Tower> iter = board.getTowers();
+        while (iter.hasNext()) {
+            Tower t = iter.next();
+            g.drawImage(
+                    smurfImage,
+                    (int) t.getPosition().getX() - ViewConstants.TOWER_SIZE / 2,
+                    (int) t.getPosition().getY() - ViewConstants.TOWER_SIZE / 2,
+                    ViewConstants.TOWER_SIZE,
+                    ViewConstants.TOWER_SIZE,
+                    this
+            );
+        }
+
+        // Draw enemies
+        Iterator<Enemy> iterEnemy = game.getEnemies();
+        while (iterEnemy.hasNext()) {
+            Enemy e = iterEnemy.next();
+            g.drawImage(
+                    gargamelImage,
+                    (int) e.getPosition().getX() - ViewConstants.TOWER_SIZE / 2,
+                    (int) e.getPosition().getY() - ViewConstants.TOWER_SIZE / 2,
+                    ViewConstants.TOWER_SIZE,
+                    ViewConstants.TOWER_SIZE,
+                    this
+            );
+
+            g.setColor(ViewConstants.HEALTH_BAR_COLOR);
+            g.setFont(g.getFont().deriveFont(20f));
+            g.drawString(
+                    Integer.toString(e.getHealth()),
+                    (int) e.getPosition().getX() - ViewConstants.TOWER_SIZE / 2,
+                    (int) e.getPosition().getY() + ViewConstants.TOWER_SIZE / 2
+            );
+        }
+
+        // Draw projectiles
+        Iterator<Projectile> iterProjectile = board.getProjectileManager().getProjectiles().iterator();
+        while (iterProjectile.hasNext()) {
+            Projectile p = iterProjectile.next();
+            Image projectileImage = new ImageIcon(
+                    getClass().getResource(ViewConstants.getProjectileImage(p.getProjectileType()))
+            ).getImage();
+            g.drawImage(
+                    projectileImage,
+                    (int) p.getCurrentPosition().getX() - ViewConstants.TOWER_SIZE / 2,
+                    (int) p.getCurrentPosition().getY() - ViewConstants.TOWER_SIZE / 2,
+                    ViewConstants.TOWER_SIZE,
+                    ViewConstants.TOWER_SIZE,
+                    this
+            );
+        }
+
+        // Draw temporary message if visible
+        if (showTemporaryMessage) {
+            g.setColor(Color.RED);
+            g.setFont(new Font("Arial", Font.BOLD, 25));
+            int messageWidth = g.getFontMetrics().stringWidth(temporaryMessage);
+            g.drawString(
+                    temporaryMessage,
+                    ViewConstants.GAME_WIDTH/4 + 35,
+                    ViewConstants.GAME_HEIGHT/2 -100
+            );
+        }
+    }
 }

@@ -20,18 +20,23 @@ public class ProjectileManager {
     }
 
     public void updateProjectiles() {
-        List<Projectile> reachedTarget = new ArrayList<>();
+        List<Projectile> removeProjectiles = new ArrayList<>();
 
         for (Projectile projectile: projectiles) {
             projectile.update();
             if (checkIfProjectileReached(projectile)) {
                 System.out.println("Projectile position: " + projectile.getCurrentPosition() + " | Target position " + projectile.getTargetPosition() + " | Distance: " + projectile.getCurrentPosition().distance(projectile.getTargetPosition()));
                 projectile.damage();
-                reachedTarget.add(projectile);
+                removeProjectiles.add(projectile);
+
+            }
+            if (projectile.IfTargetDead()) {
+                removeProjectiles.add(projectile);
             }
         }
-        for (Projectile projectile: reachedTarget) {
+        for (Projectile projectile: removeProjectiles) {
             projectiles.remove(projectile);
+
         }
 
 
