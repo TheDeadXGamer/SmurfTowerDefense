@@ -1,9 +1,9 @@
 package com.group34.Model.Game.GameState;
 
-import com.group34.Model.Game.Game;
+import com.group34.TowerDefence;
 
 public interface GameState {
-    void enterState(Game game);
-    void exitState(Game game);
-    void update(Game game);
+    void enterState(TowerDefence towerDefence);
+    void exitState(TowerDefence towerDefence);
+    void update(TowerDefence towerDefence);
 }

@@ -1,18 +1,18 @@
 package com.group34.Model.Game.GameState;
 
-import com.group34.Model.Game.Game;
+import com.group34.TowerDefence;
 
 public class GameOverState implements GameState {
     
-    public void enterState(Game game) {
+    public void enterState(TowerDefence towerDefence) {
         // Display game over screen
     }
 
-    public void exitState(Game game) {
+    public void exitState(TowerDefence towerDefence) {
         //Go to main menu
     }
 
-    public void update(Game game) {
+    public void update(TowerDefence towerDefence) {
         // Check if player wants to restart or go to main menu
     }
     

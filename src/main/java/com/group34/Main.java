@@ -5,15 +5,13 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JFrame;
-
 import com.group34.Model.Board.Board;
 import com.group34.Model.Cash.CashVault;
 import com.group34.Model.Enemy.GargamelFactory;
 import com.group34.Model.Game.Game;
-import com.group34.Model.Game.GameBuilder;
 import com.group34.Model.Game.Player;
-import com.group34.Model.Game.Repaintable;
+import com.group34.Model.Game.GameState.GameState;
+import com.group34.Model.Game.GameState.MidRoundState;
 import com.group34.Model.Road.RoadBuilder;
 import com.group34.Model.Road.RoadSpawn;
 import com.group34.Model.Round.Round;
@@ -21,8 +19,6 @@ import com.group34.Model.Round.RoundBuilder;
 import com.group34.Model.Round.RoundEvent;
 import com.group34.Model.Tower.LightningSmurfFactory;
 import com.group34.Model.Tower.Tower;
-import com.group34.View.BoardView;
-import com.group34.View.Shop.ShopController;
 import com.group34.View.Shop.ShopModel;
 
 
@@ -33,6 +29,8 @@ class TowerDefenceBuilder {
     Player player;
     RoadSpawn roadSpawn;
     ShopModel shopModel;
+    List<Round> rounds;
+    GameState startState;
 
     public TowerDefenceBuilder setBoard(Board board) {
         this.board = board;
@@ -59,59 +57,22 @@ class TowerDefenceBuilder {
         return this;
     }
 
+    public TowerDefenceBuilder setRounds (List<Round> rounds) {
+        this.rounds = rounds;
+        return this;
+    }
+
+    public TowerDefenceBuilder setStartState (GameState startState) {
+        this.startState = startState;
+        return this;
+    }
+
     public TowerDefence build() {
         return new TowerDefence(this);
     }
 }
 
-class TowerDefence extends JFrame implements Runnable, Repaintable {
-    static final int FPS = 60;
-    private CashVault cashVault;
-    private Game game;
-    private Board board;
-    private Player player;
 
-    public TowerDefence(TowerDefenceBuilder builder) {
-
-        this.cashVault = builder.cashVault;
-        this.game = builder.game;
-        this.board = builder.board;
-        this.player = builder.player;
-    
-        setTitle("Tower Defence");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(true);
-        setLocationRelativeTo(null);
-        game.setRepaintable(this);
-
-        // TODO: maybe not the best usage of shop stuff like this, change later
-        ShopModel shopModel = new ShopModel(player, cashVault);
-        ShopController shopController = new ShopController(shopModel);
-        
-        BoardView boardView = new BoardView(this.board, this.game, shopController);
-        add(boardView);
-        
-        pack();
-        setVisible(true);
-
-    }
-
-
-    @Override
-    public void run() {
-        game.update();
-    }
-
-    @Override
-    public void repaint() {
-        super.repaint();
-        try {
-            Thread.sleep(1000 / Repaintable.FPS);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-}
 
 public class Main {
     public static void main (String[] args) throws Exception {
@@ -122,6 +83,7 @@ public class Main {
         Player player = new Player(30);
         CashVault cashVault = new CashVault(100);
         Board board = new Board(new Dimension(815, 635));
+        Game game = new Game();
 
         Round round = new RoundBuilder()
             .addEvent(new RoundEvent(
@@ -145,13 +107,6 @@ public class Main {
             .add(new Point2D.Double(200., 635.))
             .build();
 
-        Game game = new GameBuilder()
-        .setBoard(board)
-        .setPlayer(player)
-        .setCashVault(cashVault)
-        .setRoadSpawn(spawn)
-        .setRounds(rounds)
-        .build();
 
         board.addTower(tower);
         board.addTower(tower2);
@@ -161,6 +116,9 @@ public class Main {
             .setGame(game)
             .setBoard(board)
             .setPlayer(player)
+            .setRoadSpawn(spawn)
+            .setRounds(rounds)
+            .setStartState(new MidRoundState())
             .build();
 
         Thread thread = new Thread(towerDefence);

@@ -1,7 +1,6 @@
 package com.group34.Model.Game.GameState;
 
 import com.group34.Model.Game.Game;
-import com.group34.Model.Game.Repaintable;
 import com.group34.Model.Road.RoadToken;
 import com.group34.Model.Round.Round;
 
@@ -10,33 +9,34 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
+import com.group34.TowerDefence;
 import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Enemy.EnemyFactory;
 
 public class MidRoundState implements GameState {
     
-    public void enterState(Game game) {
+    public void enterState(TowerDefence towerDefence) {
         System.out.println("Starting new round...");
     }
 
-    public void exitState(Game game) {
+    public void exitState(TowerDefence towerDefence) {
         System.out.println("Round completed!");
     }
 
-    public void update(Game game) {
-        for (Round round : game.getRounds()) {
-            while (round.eventsLeft() > 0 || game.enemiesLeft() > 0) {
-                if (game.getPlayer().isAlive()) {
+    public void update(TowerDefence towerDefence) {
+        for (Round round : towerDefence.getRounds()) {
+            while (round.eventsLeft() > 0 || towerDefence.getGame().enemiesLeft() > 0) {
+                if (towerDefence.getPlayer().isAlive()) {
                     Optional<EnemyFactory> spawn = round.spawn();
 
                     if (spawn.isPresent()) {
-                        RoadToken token = new RoadToken(game.getRoadSpawn());
-                        game.addEnemy(spawn.get().createEnemy(token));
+                        RoadToken token = new RoadToken(towerDefence.getRoadSpawn());
+                        towerDefence.getGame().addEnemy(spawn.get().createEnemy(token));
                     }
 
-                    updateKilledEnemies(game);
-                    game.getBoard().update();
-                    game.getRepaintable().repaint();
+                    updateKilledEnemies(towerDefence);
+                    towerDefence.getBoard().update();
+                    towerDefence.repaint();
                 }
             }
         }
@@ -44,8 +44,9 @@ public class MidRoundState implements GameState {
         
     }
 
-    private void updateKilledEnemies(Game game) {
+    private void updateKilledEnemies(TowerDefence towerDefence) {
         List<Enemy> killedEnemies = new ArrayList<>();
+        Game game = towerDefence.getGame();
         Iterator<Enemy> iterEnemy = game.getEnemies();
         for (; iterEnemy.hasNext();) {
             Enemy enemy = iterEnemy.next();

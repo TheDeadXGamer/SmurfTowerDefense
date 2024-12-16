@@ -1,18 +1,18 @@
 package com.group34.Model.Game.GameState;
 
-import com.group34.Model.Game.Game;
+import com.group34.TowerDefence;
 
 public class BetweenRoundState implements GameState {
     
-    public void enterState(Game game) {
+    public void enterState(TowerDefence towerDefence) {
         // Display round number
     }
 
-    public void exitState(Game game) {
+    public void exitState(TowerDefence towerDefence) {
         // Go to next round
     }
 
-    public void update(Game game) {
+    public void update(TowerDefence towerDefence) {
         // Check if player wants to start next round
     }
 }
