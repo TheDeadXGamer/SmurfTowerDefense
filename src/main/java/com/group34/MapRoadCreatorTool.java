@@ -1,4 +1,4 @@
-package com.group34.Model.Road;
+package com.group34;
 
 import javax.swing.*;
 import javax.imageio.ImageIO;
@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.*;
 import java.util.List;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import com.group34.Model.Road.RoadValidator;
 
 public class MapRoadCreatorTool extends JFrame {
     private BufferedImage mapImage;
