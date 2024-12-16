@@ -35,9 +35,15 @@ class TowerDefenceBuilder {
     Player player;
     RoadSpawn roadSpawn;
     ShopModel shopModel;
+    GameSpeed gameSpeed;
 
     public TowerDefenceBuilder setBoard(Board board) {
         this.board = board;
+        return this;
+    }
+
+    public TowerDefenceBuilder setGameSpeed(GameSpeed gameSpeed) {
+        this.gameSpeed = gameSpeed;
         return this;
     }
 
@@ -79,6 +85,7 @@ class TowerDefence extends JFrame implements Runnable {
     private List<Round> rounds;
     private Player player;
     private RoadSpawn roadSpawn;
+    private GameSpeed gameSpeed;
 
     public TowerDefence(TowerDefenceBuilder builder) {
 
@@ -88,6 +95,7 @@ class TowerDefence extends JFrame implements Runnable {
         this.rounds = builder.rounds;
         this.player = builder.player;
         this.roadSpawn = builder.roadSpawn;
+        this.gameSpeed = builder.gameSpeed;
     
         setTitle("Tower Defence");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -123,7 +131,7 @@ class TowerDefence extends JFrame implements Runnable {
                     board.update();
                     repaint();
                     try {
-                        Thread.sleep(1000 / FPS);
+                        Thread.sleep(1000 / gameSpeed.getSpeed());
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -230,6 +238,7 @@ public class Main {
             .setCashVault(cashVault)
             .setGame(game)
             .setRoadSpawn(spawn)
+            .setGameSpeed(GameSpeed.SLOW)
             .build();
 
         Thread thread = new Thread(towerDefence);
