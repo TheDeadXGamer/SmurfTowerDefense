@@ -44,7 +44,7 @@ public class TowerDefence extends JFrame implements Runnable {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
 
-        Shop shop = new Shop(cashVault);
+        Shop shop = new Shop(cashVault, board);
         ShopPanel shopPanel = new ShopPanel(shop);
         StatusPanel statusPanel = new StatusPanel(cashVault, player);
         RightPanel rightPanel = new RightPanel(shopPanel, statusPanel);

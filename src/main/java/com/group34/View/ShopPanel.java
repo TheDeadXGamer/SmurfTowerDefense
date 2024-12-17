@@ -13,6 +13,7 @@ import java.awt.datatransfer.Transferable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Iterator;
+import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -29,14 +30,16 @@ import com.group34.Model.Shop.ShopItem;
 
 public class ShopPanel extends JPanel {
 
-    final Image smurfImage = new ImageIcon(
-        getClass().getResource(ViewConstants.LIGHTNINGSMURF_IMAGE))
-        .getImage()
-        .getScaledInstance(
-            ViewConstants.TOWER_SIZE,
-            ViewConstants.TOWER_SIZE,
-            Image.SCALE_SMOOTH
+    private Map<String, Image> towerImages = Map.of(
+        "LightningSmurf", new ImageIcon(
+            getClass().getResource(ViewConstants.LIGHTNINGSMURF_IMAGE))
+            .getImage()
+            .getScaledInstance(
+                ViewConstants.TOWER_SIZE,
+                ViewConstants.TOWER_SIZE,
+                Image.SCALE_SMOOTH)
     );
+    
 
     /**
      * Constructor for ShopPanel.
@@ -98,7 +101,8 @@ public class ShopPanel extends JPanel {
         itemComponent.setLayout(new FlowLayout());
 
         JLabel itemImageLabel = new JLabel();
-        Image towerImage = smurfImage; // TODO: make this work for different tower images
+        Image towerImage = towerImages.get(item.getName()); 
+
         if (towerImage != null) {
             Image image = towerImage.getScaledInstance(ViewConstants.TOWER_SIZE, ViewConstants.TOWER_SIZE, Image.SCALE_SMOOTH);
             itemImageLabel.setIcon(new ImageIcon(image));
