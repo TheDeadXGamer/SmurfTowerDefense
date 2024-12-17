@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.group34.Model.Game.TowerNotifier;
+import com.group34.Model.Projectile.Projectile;
 import com.group34.Model.Projectile.ProjectileManager;
 import com.group34.Model.Tower.Tower;
 
@@ -47,8 +48,6 @@ public class Board {
         }
 
         Iterator<Tower> iterator = getTowers();
-
-        // Check if the tower is being placed on top of another tower
         for (Tower t; iterator.hasNext();) {
             t = iterator.next();
             if (t.getPosition().distance(tower.getPosition()) < t.getTowerWidth()) {
