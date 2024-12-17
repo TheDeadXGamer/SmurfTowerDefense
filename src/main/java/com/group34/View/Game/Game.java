@@ -28,8 +28,4 @@ public class Game extends JFrame {
         //setContentPane(container); // Set container as content
         //setVisible(true);
     }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Game());
-    }
 }

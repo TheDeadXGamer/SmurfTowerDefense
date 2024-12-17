@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.group34.GameState.GameState;
 import com.group34.Model.Enemy.Enemy;
 
 public class Game {
 
-    private TowerNotifier notifier = new TowerNotifier();
+    private TowerNotifier notifier = new TowerNotifier().getInstance();
     private final List<Enemy> enemies = new ArrayList<>();
 
     public void addEnemy(Enemy enemy) {
@@ -19,6 +20,14 @@ public class Game {
         return enemies.iterator();
     }
 
+    public void removeEnemy(Enemy enemy) {
+        enemies.remove(enemy);
+    }
+
+    public TowerNotifier getNotifier() {
+        return notifier;
+    }
+  
     public int enemiesLeft() {
         return enemies.size();
     }

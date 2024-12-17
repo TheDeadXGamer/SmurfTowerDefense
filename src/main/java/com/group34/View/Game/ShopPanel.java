@@ -9,13 +9,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
-import java.awt.event.InputEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class ShopPanel extends JPanel {
     private ShopController shopController;
+
+    final Image smurfImage = new ImageIcon(
+        getClass().getResource(ViewConstants.LIGHTNINGSMURF_IMAGE))
+        .getImage()
+        .getScaledInstance(
+            ViewConstants.TOWER_SIZE,
+            ViewConstants.TOWER_SIZE,
+            Image.SCALE_SMOOTH
+    );
 
     /**
      * Constructor for ShopPanel.
@@ -39,10 +47,10 @@ public class ShopPanel extends JPanel {
         itemsPanel.setBackground(ViewConstants.RIGHT_PANEL_COLOR);
         itemsPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0)); // Add 10px top padding
 
-        // Grid stuff
+        // Grid stuff, not sure that it works
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 0, 10, 0); // Add vertical padding between items
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.fill = GridBagConstraints.HORIZONTAL; // Make items fill the cell horizontally
         gbc.weightx = 1.0;
         gbc.gridx = 0; // Single column
         gbc.anchor = GridBagConstraints.NORTH; // Anchor items to the top
@@ -78,23 +86,14 @@ public class ShopPanel extends JPanel {
         ShopItemComponent itemComponent = new ShopItemComponent(item);
         itemComponent.setLayout(new FlowLayout());
 
-        // Hämta rätt bild från item.getImagePath()
-        Image towerImage = new ImageIcon(
-            getClass().getResource(item.getImagePath()) // Hämta bild via getImagePath
-        ).getImage().getScaledInstance(
-            ViewConstants.TOWER_SIZE,
-            ViewConstants.TOWER_SIZE,
-            Image.SCALE_SMOOTH
-        );
-
-        // Skapa en JLabel för bilden
         JLabel itemImageLabel = new JLabel();
+        Image towerImage = smurfImage; // TODO: make this work for different tower images
         if (towerImage != null) {
-            itemImageLabel.setIcon(new ImageIcon(towerImage));
+            Image image = towerImage.getScaledInstance(ViewConstants.TOWER_SIZE, ViewConstants.TOWER_SIZE, Image.SCALE_SMOOTH);
+            itemImageLabel.setIcon(new ImageIcon(image));
         } else {
             itemImageLabel.setIcon(ViewConstants.createPlaceholderIcon());
         }
-
         itemImageLabel.setBorder(BorderFactory.createLineBorder(ViewConstants.BORDER_COLOR));
         itemComponent.add(itemImageLabel);
 
@@ -107,20 +106,6 @@ public class ShopPanel extends JPanel {
             @Override
             public int getSourceActions(JComponent c) {
                 return COPY;
-            }
-
-            @Override
-            public void exportAsDrag(JComponent comp, InputEvent e, int action) {
-                JLabel label = (JLabel) comp.getComponent(0);
-                Image image = ((ImageIcon) label.getIcon()).getImage();
-
-                int offsetX = -ViewConstants.TOWER_SIZE / 2;
-                int offsetY = -ViewConstants.TOWER_SIZE / 2;
-
-                setDragImage(image);
-                setDragImageOffset(new Point(offsetX, offsetY));
-
-                super.exportAsDrag(comp, e, action);
             }
         });
 
