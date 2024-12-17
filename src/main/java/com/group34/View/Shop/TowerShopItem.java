@@ -6,11 +6,13 @@ public class TowerShopItem implements IShopItem {
     private TowerFactory towerTypeFactory;
     private int cost;
     private String towerTypeName;
+    private String imagePath;
 
-    public TowerShopItem(TowerFactory towerTypeFactory, int cost) {
+    public TowerShopItem(TowerFactory towerTypeFactory, int cost, String imagePath) {
         this.towerTypeFactory = towerTypeFactory;
         this.cost = cost;
         this.towerTypeName = towerTypeFactory.createTower(null).getTowerType(); // maybe bad to create a tower just to get its type
+        this.imagePath = imagePath;
     }
 
     /**
@@ -34,5 +36,10 @@ public class TowerShopItem implements IShopItem {
     @Override
     public String getToolTipText() {
         return "Cost: " + cost; // TODO: more info needed
+    }
+
+    @Override
+    public String getImagePath() {
+        return imagePath; // Returnera den sparade bildsökvägen
     }
 }

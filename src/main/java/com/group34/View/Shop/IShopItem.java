@@ -7,4 +7,5 @@ public interface IShopItem {
     int getCost();
     String getTypeName();
     String getToolTipText();
+    String getImagePath();
 }
