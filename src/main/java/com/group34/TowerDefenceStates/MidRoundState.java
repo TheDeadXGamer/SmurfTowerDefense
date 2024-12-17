@@ -1,13 +1,10 @@
 package com.group34.TowerDefenceStates;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Enemy.EnemyFactory;
-import com.group34.Model.Game.Game;
 import com.group34.Model.Road.RoadToken;
 import com.group34.Model.Round.Round;
 import com.group34.TowerDefence;
@@ -28,45 +25,28 @@ public class MidRoundState implements GameState {
                 if (towerDefence.getPlayer().isAlive()) {
                     Optional<EnemyFactory> spawn = round.spawn();
 
-
-                    //If there is an enemy to spawn, create it and add it to the game
                     if (spawn.isPresent()) {
                         RoadToken token = new RoadToken(towerDefence.getRoadSpawn());
                         towerDefence.getGame().addEnemy(spawn.get().createEnemy(token));
                     }
-                    
-                    //Update enemies and repaint the view
-                    updateKilledEnemies(towerDefence);
+
+                    List<Enemy> killed = towerDefence.getGame().update();
+                    for (Enemy enemy : killed) {
+                        towerDefence.getCashVault().deposit(enemy.getReward());
+                    }
+
                     towerDefence.getBoard().update();
-                    towerDefence.repaint();
+                    towerDefence.getFrame().repaint();
+
+                    try {
+                        Thread.sleep(1000 / 60);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+  
                 }
             }
         }
-        System.out.println("Game Over");
-        
     }
 
-    private void updateKilledEnemies(TowerDefence towerDefence) {
-        List<Enemy> killedEnemies = new ArrayList<>();
-        Game game = towerDefence.getGame();
-        Iterator<Enemy> iterEnemy = game.getEnemies();
-
-        //Iterate over enemies and check if they are alive
-        //If not, add them to the killedEnemies list
-        for (; iterEnemy.hasNext();) {
-            Enemy enemy = iterEnemy.next();
-            if (!enemy.isAlive()) {
-                killedEnemies.add(enemy);
-                continue;
-            }
-
-            //Move enemy and notify observers
-            enemy.move();
-            game.getNotifier().getInstance().notifyThatEnemyMoved(enemy);
-        }
-        for (Enemy enemy: killedEnemies) {
-            game.removeEnemy(enemy);
-            game.getNotifier().getInstance().notifyThatEnemyDied(enemy);
-        }
-    }
 }

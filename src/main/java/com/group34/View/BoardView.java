@@ -16,7 +16,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import javax.swing.ImageIcon;
-import javax.swing.JPanel;
+import javax.swing.JFrame;
 import javax.swing.Timer;
 
 import com.group34.Controller.Shop.ShopController;
@@ -26,7 +26,7 @@ import com.group34.Model.Game.Game;
 import com.group34.Model.Projectile.Projectile;
 import com.group34.Model.Tower.Tower;
 
-public class BoardView extends JPanel {
+public class BoardView extends JFrame {
     private String temporaryMessage = null;
     private boolean showTemporaryMessage = false;
     private Timer errorTimer;
@@ -68,15 +68,28 @@ public class BoardView extends JPanel {
     ).getImage();
 
 
-    public BoardView(Board board, Game game, ShopController shopController) {
+    public BoardView(
+        Board board, 
+        Game game, 
+        ShopController shopController
+    ) {
         
+        setTitle("Tower Defence");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(true);
+        setLocationRelativeTo(null);
+
         this.board = board;
         this.game = game;
-        setLayout(new BorderLayout());
+        
         setPreferredSize(board.getDimension());
+        setLayout(new BorderLayout());
 
         RightPanel rightPanel = new RightPanel(shopController);
         add(rightPanel, BorderLayout.EAST);
+
+        pack();
+        setVisible(true);
 
         // Enable drop target, TODO: show image of tower being dragged
         setDropTarget(new DropTarget() {
@@ -127,8 +140,7 @@ public class BoardView extends JPanel {
     }
 
     @Override
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         
         // Enable anti-aliasing for smoother graphics

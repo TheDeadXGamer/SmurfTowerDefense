@@ -46,11 +46,11 @@ public class StatusPanel extends JPanel implements IObserver {
         this.shopController = shopController;
 
         // adding this as an observer to some observables
-        cashVault = shopController.getCashVault();
-        cashVault.addObserver(this);
+        // cashVault = shopController.getCashVault();
+        // cashVault.addObserver(this);
 
-        player = shopController.getPlayer();
-        player.addObserver(this);
+        // player = shopController.getPlayer();
+        // player.addObserver(this);
 
         // size, layout, background
         setPreferredSize(ViewConstants.STATUS_PANEL_SIZE);
@@ -64,7 +64,7 @@ public class StatusPanel extends JPanel implements IObserver {
         healthLabel = new JLabel();
         JLabel cashImageLabel = new JLabel(new ImageIcon(coinImage));
         cashLabel = new JLabel();
-        update();
+        // update();
 
         // font
         Font labelFont = new Font("Arial", Font.PLAIN, 16);

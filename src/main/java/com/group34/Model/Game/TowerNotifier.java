@@ -1,10 +1,10 @@
 package com.group34.Model.Game;
 
-import com.group34.Model.Enemy.Enemy;
-import com.group34.Model.Tower.TowerListener;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.group34.Model.Enemy.Enemy;
+import com.group34.Model.Tower.TowerListener;
 
 public class TowerNotifier {
 
@@ -27,6 +27,7 @@ public class TowerNotifier {
     public void unsubscribe(TowerListener tower) {
         listeners.remove(tower);
     }
+    
     public void notifyThatEnemyMoved(Enemy enemy) {
         for (TowerListener tower: listeners) {
 

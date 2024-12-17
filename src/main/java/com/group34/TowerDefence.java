@@ -15,7 +15,7 @@ import com.group34.Model.Shop.ShopModel;
 import com.group34.TowerDefenceStates.GameState;
 import com.group34.View.BoardView;
 
-public class TowerDefence extends JFrame implements Runnable{
+public class TowerDefence implements Runnable {
     static final int FPS = 60;
     private CashVault cashVault;
     private Game game;
@@ -24,6 +24,7 @@ public class TowerDefence extends JFrame implements Runnable{
     private GameState currentState;
     private RoadSpawn roadSpawn;
     private List<Round> rounds;
+    private BoardView frame;
 
 
     public TowerDefence(TowerDefenceBuilder builder) {
@@ -36,44 +37,20 @@ public class TowerDefence extends JFrame implements Runnable{
         this.roadSpawn = builder.roadSpawn;
         this.rounds = builder.rounds;
         
-        // Set up the JFrame
-        setTitle("Tower Defence");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setResizable(true);
-        setLocationRelativeTo(null);
-
-        // TODO: maybe not the best usage of shop stuff like this, change later
         ShopModel shopModel = new ShopModel(player, cashVault, board);
         ShopController shopController = new ShopController(shopModel);
         BoardView boardView = new BoardView(this.board, this.game, shopController);
 
-        add(boardView);
-        
-        pack();
-        setVisible(true);
-
+        frame = boardView;
     }
 
 
     @Override
     public void run() {
-        this.update();
-    }
-
-
-    /**
-     * Repaints the game
-     */
-    @Override
-    public void repaint() {
-        super.repaint();
-        try {
-            Thread.sleep(1000 / FPS);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        while (true) {
+            update();
         }
     }
-
     /**
      * Updates the game state
      * @return void
@@ -82,7 +59,11 @@ public class TowerDefence extends JFrame implements Runnable{
         currentState.update(this);
     }
 
-    /**
+    public BoardView getFrame() {
+        return frame;
+    }
+
+       /**
      * Sets the game state
      * @param state
      */
@@ -138,5 +119,4 @@ public class TowerDefence extends JFrame implements Runnable{
     public List<Round> getRounds() {
         return rounds;
     }
-   
 }

@@ -12,7 +12,6 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -70,16 +69,16 @@ public class ShopPanel extends JPanel {
         gbc.anchor = GridBagConstraints.NORTH; // Anchor items to the top
 
         // Adds items to the itemsPanel from the shopModel
-        ArrayList<IShopItem> items = shopController.getItems();
-        for (int i = 0; i < items.size(); i++) {
-            IShopItem item = items.get(i);
-            ShopItemComponent itemPanel = getTowerComponent(item);
-            itemPanel.setBackground(ViewConstants.RIGHT_PANEL_COLOR);
+        // ArrayList<IShopItem> items = shopController.getItems();
+        // for (int i = 0; i < items.size(); i++) {
+        //     IShopItem item = items.get(i);
+        //     ShopItemComponent itemPanel = getTowerComponent(item);
+        //     itemPanel.setBackground(ViewConstants.RIGHT_PANEL_COLOR);
 
-            gbc.gridy = i; // New row for each item
+        //     gbc.gridy = i; // New row for each item
 
-            itemsPanel.add(itemPanel, gbc);
-        }
+        //     itemsPanel.add(itemPanel, gbc);
+        // }
 
         // Create a JScrollPane and add the itemsPanel to it
         JScrollPane scrollPane = new JScrollPane(itemsPanel);
