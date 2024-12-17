@@ -10,6 +10,7 @@ import com.group34.Model.Cash.OverDraftError;
 import com.group34.Model.Game.Player;
 import com.group34.Model.Tower.LightningSmurfFactory;
 import com.group34.Model.Tower.Tower;
+import com.group34.View.ViewConstants;
 
 public class ShopModel {
     private ArrayList<IShopItem> items;
@@ -22,7 +23,9 @@ public class ShopModel {
         this.board = board;
         // adds items to the shop as a factory and a cost
         items = new ArrayList<>();
-        items.add(new TowerShopItem(new LightningSmurfFactory(), 50));
+        // Add towere
+        items.add(new TowerShopItem(new LightningSmurfFactory(), 50, ViewConstants.LIGHTNINGSMURF_IMAGE));
+        // Add new towers here
     }
 
     public ArrayList<IShopItem> getItems() {
