@@ -8,6 +8,9 @@ import com.group34.GameState.GameState;
 import com.group34.GameState.MidRoundState;
 import com.group34.Model.Board.Board;
 import com.group34.Model.Cash.CashVault;
+import com.group34.Model.Enemy.Enemy;
+import com.group34.Model.Enemy.EnemyFactory;
+import com.group34.Model.Enemy.GargamelFactory;
 import com.group34.Model.Game.Game;
 import com.group34.Model.Game.Player;
 import com.group34.Model.Road.RoadBuilder;
@@ -87,6 +90,7 @@ public class Main {
         CashVault cashVault = new CashVault(100);
         Board board = new Board(new Dimension(815, 635));
         Game game = new Game();       
+
         List<Round> rounds = RoundConfig.createRounds(cashVault);
 
         RoadSpawn spawn = new RoadBuilder(board, player)

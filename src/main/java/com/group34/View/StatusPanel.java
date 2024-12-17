@@ -1,14 +1,16 @@
 package com.group34.View;
 
 import com.group34.Model.Cash.CashVault;
+import com.group34.Model.Game.Player;
+import com.group34.Model.IObserver;
 import com.group34.View.Shop.ShopController;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
 
-public class StatusPanel extends JPanel {
-    final Image healthImage = new ImageIcon(
+public class StatusPanel extends JPanel implements IObserver {
+    private final Image healthImage = new ImageIcon(
             Objects.requireNonNull(getClass().getResource(ViewConstants.HEALTH_ICON_PATH))
     )
             .getImage()
@@ -18,7 +20,7 @@ public class StatusPanel extends JPanel {
                     Image.SCALE_SMOOTH
             );
 
-    final Image coinImage = new ImageIcon(
+    private final Image coinImage = new ImageIcon(
             getClass().getResource(ViewConstants.COIN_ICON_PATH)
     )
             .getImage()
@@ -28,41 +30,55 @@ public class StatusPanel extends JPanel {
                     Image.SCALE_SMOOTH
             );
 
-    JLabel healthLabel;
-    JLabel cashLabel;
-    ShopController shopController;
+    private JLabel healthLabel;
+    private JLabel cashLabel;
+    private ShopController shopController;
+    private CashVault cashVault;
+    private Player player;
 
     public StatusPanel(ShopController shopController) {
         this.shopController = shopController;
 
-        setPreferredSize(ViewConstants.STATUS_PANEL_SIZE); // fixed size
+        // adding this as an observer to some observables
+        cashVault = shopController.getCashVault();
+        cashVault.addObserver(this);
 
+        player = shopController.getPlayer();
+        player.addObserver(this);
+
+        // size, layout, background
+        setPreferredSize(ViewConstants.STATUS_PANEL_SIZE);
         setLayout(new GridLayout(2, 2));
-        setBackground(ViewConstants.RIGHT_PANEL_COLOR); // background color
-        int cashBalance = shopController.getCashVaultBalance();
-        int health = shopController.getPlayerHealth();
+        setBackground(ViewConstants.RIGHT_PANEL_COLOR);
 
+        // TODO: add label for rounds
+
+        // images and text
         JLabel healthImageLabel = new JLabel(new ImageIcon(healthImage));
-        healthLabel = new JLabel("" + health);
+        healthLabel = new JLabel();
         JLabel cashImageLabel = new JLabel(new ImageIcon(coinImage));
-        cashLabel = new JLabel("" + cashBalance);
+        cashLabel = new JLabel();
+        update();
 
+        // font
         Font labelFont = new Font("Arial", Font.PLAIN, 16);
         healthLabel.setFont(labelFont);
         cashLabel.setFont(labelFont);
 
+        // finalizing
         add(cashImageLabel);
         add(cashLabel);
         add(healthImageLabel);
         add(healthLabel);
         setBorder(BorderFactory.createLineBorder(ViewConstants.BORDER_COLOR));
     }
-    public void updateLabels() {
-        int health = shopController.getPlayerHealth();
-        int cashBalance = shopController.getCashVaultBalance();
+
+    @Override
+    public void update() {
+        int health = player.getHealth();
+        int cashBalance = cashVault.getBalance();
 
         healthLabel.setText("" + health);
         cashLabel.setText("" + cashBalance);
     }
-
 }
