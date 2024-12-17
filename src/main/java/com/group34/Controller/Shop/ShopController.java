@@ -1,11 +1,12 @@
-package com.group34.View.Shop;
-
-import com.group34.Model.Cash.CashVault;
-import com.group34.Model.Game.Player;
-import com.group34.Model.Tower.Tower;
+package com.group34.Controller.Shop;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+
+import com.group34.Model.Game.Player;
+import com.group34.Model.Shop.CashVault;
+import com.group34.Model.Shop.IShopItem;
+import com.group34.Model.Shop.ShopModel;
 
 public class ShopController {
     private ShopModel shopModel;

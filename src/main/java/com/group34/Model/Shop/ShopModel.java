@@ -1,12 +1,10 @@
-package com.group34.View.Shop;
+package com.group34.Model.Shop;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 import com.group34.Model.Board.Board;
 import com.group34.Model.Board.PlacementError;
-import com.group34.Model.Cash.CashVault;
-import com.group34.Model.Cash.OverDraftError;
 import com.group34.Model.Game.Player;
 import com.group34.Model.Tower.LightningSmurfFactory;
 import com.group34.Model.Tower.Tower;

@@ -1,17 +1,16 @@
-package com.group34.GameState;
-
-import com.group34.Model.Game.Game;
-import com.group34.Model.Road.RoadToken;
-import com.group34.Model.Round.Round;
+package com.group34.TowerDefenceStates;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
-import com.group34.TowerDefence;
 import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Enemy.EnemyFactory;
+import com.group34.Model.Game.Game;
+import com.group34.Model.Road.RoadToken;
+import com.group34.Model.Round.Round;
+import com.group34.TowerDefence;
 
 public class MidRoundState implements GameState {
     

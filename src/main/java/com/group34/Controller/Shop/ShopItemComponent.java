@@ -1,8 +1,13 @@
-package com.group34.View.Shop;
+package com.group34.Controller.Shop;
 
-import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.JComponent;
+import javax.swing.JToolTip;
+import javax.swing.ToolTipManager;
+
+import com.group34.Model.Shop.IShopItem;
 
 public class ShopItemComponent extends JComponent {
     private IShopItem shopItem;

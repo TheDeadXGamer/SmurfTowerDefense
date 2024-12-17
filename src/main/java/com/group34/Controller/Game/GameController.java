@@ -1,6 +1,5 @@
 package com.group34.Controller.Game;
 
-import com.group34.Model.Difficulty.Difficulty;
 //import com.group34.Model.Game.GameModel;
 
 public class GameController{

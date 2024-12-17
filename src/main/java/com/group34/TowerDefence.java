@@ -4,16 +4,16 @@ import java.util.List;
 
 import javax.swing.JFrame;
 
-import com.group34.GameState.GameState;
+import com.group34.Controller.Shop.ShopController;
 import com.group34.Model.Board.Board;
-import com.group34.Model.Cash.CashVault;
 import com.group34.Model.Game.Game;
 import com.group34.Model.Game.Player;
 import com.group34.Model.Road.RoadSpawn;
 import com.group34.Model.Round.Round;
+import com.group34.Model.Shop.CashVault;
+import com.group34.Model.Shop.ShopModel;
+import com.group34.TowerDefenceStates.GameState;
 import com.group34.View.BoardView;
-import com.group34.View.Shop.ShopController;
-import com.group34.View.Shop.ShopModel;
 
 public class TowerDefence extends JFrame implements Runnable{
     static final int FPS = 60;

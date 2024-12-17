@@ -1,17 +1,31 @@
-package com.group34.View.Game;
+package com.group34.View;
 
-import com.group34.View.Shop.IShopItem;
-import com.group34.View.Shop.ShopController;
-import com.group34.View.Shop.ShopItemComponent;
-import com.group34.View.ViewConstants;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Image;
+import java.awt.Insets;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
+import javax.swing.TransferHandler;
+
+import com.group34.Controller.Shop.ShopController;
+import com.group34.Controller.Shop.ShopItemComponent;
+import com.group34.Model.Shop.IShopItem;
 
 public class ShopPanel extends JPanel {
     private ShopController shopController;

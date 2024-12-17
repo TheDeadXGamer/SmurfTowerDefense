@@ -1,4 +1,4 @@
-package com.group34.GameState;
+package com.group34.TowerDefenceStates;
 
 import com.group34.TowerDefence;
 

@@ -1,14 +1,13 @@
 package com.group34.View;
 
-import com.group34.View.Game.ShopPanel;
-import com.group34.View.Shop.ShopController;
-import com.group34.View.ViewConstants;
-import jdk.jshell.Snippet;
+import java.awt.BorderLayout;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-public class RightPanel extends JPanel {
+import com.group34.Controller.Shop.ShopController;
+
+public class RightPanel extends JLabel {
     private ButtonPanel buttonPanel;
     private StatusPanel statusPanel;
     private ShopPanel shopPanel;

@@ -1,13 +1,19 @@
 package com.group34.View;
 
-import com.group34.Model.Cash.CashVault;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.util.Objects;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import com.group34.Controller.Shop.ShopController;
 import com.group34.Model.Game.Player;
 import com.group34.Model.IObserver;
-import com.group34.View.Shop.ShopController;
-
-import javax.swing.*;
-import java.awt.*;
-import java.util.Objects;
+import com.group34.Model.Shop.CashVault;
 
 public class StatusPanel extends JPanel implements IObserver {
     private final Image healthImage = new ImageIcon(

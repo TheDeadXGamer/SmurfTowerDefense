@@ -1,9 +1,9 @@
-package com.group34.Model.Cash;
+package com.group34.Model.Shop;
+
+import java.util.ArrayList;
 
 import com.group34.Model.IObservable;
 import com.group34.Model.IObserver;
-
-import java.util.ArrayList;
 
 public class CashVault implements IObservable {
     private ArrayList<IObserver> observers;

@@ -1,20 +1,30 @@
 package com.group34.View;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.RenderingHints;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDropEvent;
 import java.util.Iterator;
+import java.util.Map;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import javax.swing.Timer;
 
+import com.group34.Controller.Shop.ShopController;
 import com.group34.Model.Board.Board;
 import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Game.Game;
 import com.group34.Model.Projectile.Projectile;
 import com.group34.Model.Tower.Tower;
-import com.group34.View.Shop.ShopController;
 
 public class BoardView extends JPanel {
     private String temporaryMessage = null;
@@ -23,35 +33,47 @@ public class BoardView extends JPanel {
     public Board board;
     public Game game;
 
+    private Map<String, Image> enemyImages = Map.of(
+        "Gargamel", new ImageIcon(
+            getClass().getResource(ViewConstants.GARGAMEL_IMAGE))
+            .getImage()
+            .getScaledInstance(
+                ViewConstants.TOWER_SIZE,
+                ViewConstants.TOWER_SIZE,
+                Image.SCALE_SMOOTH)
+    );
+
+    private Map<String, Image> towerImages = Map.of(
+        "LightningSmurf", new ImageIcon(
+            getClass().getResource(ViewConstants.LIGHTNINGSMURF_IMAGE))
+            .getImage()
+            .getScaledInstance(
+                ViewConstants.TOWER_SIZE,
+                ViewConstants.TOWER_SIZE,
+                Image.SCALE_SMOOTH)
+    );
+
+    private Map<String, Image> projectileImages = Map.of(
+        "LightningBolt", new ImageIcon(
+            getClass().getResource(ViewConstants.LIGHTNINGBOLT_IMAGE))
+            .getImage()
+            .getScaledInstance(
+                ViewConstants.TOWER_SIZE,
+                ViewConstants.TOWER_SIZE,
+                Image.SCALE_SMOOTH)
+    );
+
     final Image backgroundImage = new ImageIcon(
         getClass().getResource(ViewConstants.BASE_MAP_IMAGE_PATH)
     ).getImage();
 
-    final Image smurfImage = new ImageIcon(
-        getClass().getResource(ViewConstants.LIGHTNINGSMURF_IMAGE)
-    )
-        .getImage()
-        .getScaledInstance(
-            ViewConstants.TOWER_SIZE,
-            ViewConstants.TOWER_SIZE,
-            Image.SCALE_SMOOTH
-    );
-
-    final Image gargamelImage = new ImageIcon(
-        getClass().getResource(ViewConstants.GARGAMEL_IMAGE)
-    )
-        .getImage()
-        .getScaledInstance(
-            ViewConstants.TOWER_SIZE,
-            ViewConstants.TOWER_SIZE,
-            Image.SCALE_SMOOTH
-    );
 
     public BoardView(Board board, Game game, ShopController shopController) {
+        
         this.board = board;
         this.game = game;
-        setPreferredSize(board.getDimension());
         setLayout(new BorderLayout());
+        setPreferredSize(board.getDimension());
 
         RightPanel rightPanel = new RightPanel(shopController);
         add(rightPanel, BorderLayout.EAST);
@@ -107,36 +129,54 @@ public class BoardView extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+        
+        // Enable anti-aliasing for smoother graphics
+        if (true) {
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        }
 
-        g.drawImage(
-                backgroundImage,
-                0,
-                0,
-                (int) board.getDimension().getWidth(),
-                (int) board.getDimension().getHeight(),
-                this
-        );
+        renderBackground(g);
+        renderTowers(g);
+        renderEnemies(g);
+        renderProjectiles(g);
 
-        // Draw towers
-        Iterator<Tower> iter = board.getTowers();
-        while (iter.hasNext()) {
-            Tower t = iter.next();
+        // Draw temporary message if visible
+        if (showTemporaryMessage) {
+            g.setColor(Color.RED);
+            g.setFont(new Font("Arial", Font.BOLD, 25));
+            int messageWidth = g.getFontMetrics().stringWidth(temporaryMessage);
+            g.drawString(
+                    temporaryMessage,
+                    ViewConstants.GAME_WIDTH/4 + 35,
+                    ViewConstants.GAME_HEIGHT/2 -100
+            );
+        }
+    }
+
+    private void renderProjectiles(Graphics g) {
+        Iterator<Projectile> iterProjectile = board.getProjectileManager().getProjectiles().iterator();
+        while (iterProjectile.hasNext()) {
+            Projectile p = iterProjectile.next();
+
             g.drawImage(
-                    smurfImage,
-                    (int) t.getPosition().getX() - ViewConstants.TOWER_SIZE / 2,
-                    (int) t.getPosition().getY() - ViewConstants.TOWER_SIZE / 2,
+                    projectileImages.get(p.getClass().getSimpleName()),
+                    (int) p.getCurrentPosition().getX() - ViewConstants.TOWER_SIZE / 2,
+                    (int) p.getCurrentPosition().getY() - ViewConstants.TOWER_SIZE / 2,
                     ViewConstants.TOWER_SIZE,
                     ViewConstants.TOWER_SIZE,
                     this
             );
         }
+    }
 
-        // Draw enemies
+    private void renderEnemies(Graphics g) {
         Iterator<Enemy> iterEnemy = game.getEnemies();
         while (iterEnemy.hasNext()) {
             Enemy e = iterEnemy.next();
             g.drawImage(
-                    gargamelImage,
+                    enemyImages.get(e.getClass().getSimpleName()),
                     (int) e.getPosition().getX() - ViewConstants.TOWER_SIZE / 2,
                     (int) e.getPosition().getY() - ViewConstants.TOWER_SIZE / 2,
                     ViewConstants.TOWER_SIZE,
@@ -152,34 +192,31 @@ public class BoardView extends JPanel {
                     (int) e.getPosition().getY() + ViewConstants.TOWER_SIZE / 2
             );
         }
+    }
 
-        // Draw projectiles
-        Iterator<Projectile> iterProjectile = board.getProjectileManager().getProjectiles().iterator();
-        while (iterProjectile.hasNext()) {
-            Projectile p = iterProjectile.next();
-            Image projectileImage = new ImageIcon(
-                    getClass().getResource(ViewConstants.getProjectileImage(p.getProjectileType()))
-            ).getImage();
+    private void renderTowers(Graphics g) {
+        Iterator<Tower> iter = board.getTowers();
+        while (iter.hasNext()) {
+            Tower t = iter.next();
             g.drawImage(
-                    projectileImage,
-                    (int) p.getCurrentPosition().getX() - ViewConstants.TOWER_SIZE / 2,
-                    (int) p.getCurrentPosition().getY() - ViewConstants.TOWER_SIZE / 2,
+                    towerImages.get(t.getTowerType()),
+                    (int) t.getPosition().getX() - ViewConstants.TOWER_SIZE / 2,
+                    (int) t.getPosition().getY() - ViewConstants.TOWER_SIZE / 2,
                     ViewConstants.TOWER_SIZE,
                     ViewConstants.TOWER_SIZE,
                     this
             );
         }
+    }
 
-        // Draw temporary message if visible
-        if (showTemporaryMessage) {
-            g.setColor(Color.RED);
-            g.setFont(new Font("Arial", Font.BOLD, 25));
-            int messageWidth = g.getFontMetrics().stringWidth(temporaryMessage);
-            g.drawString(
-                    temporaryMessage,
-                    ViewConstants.GAME_WIDTH/4 + 35,
-                    ViewConstants.GAME_HEIGHT/2 -100
-            );
-        }
+    private void renderBackground(Graphics g) {
+        g.drawImage(
+                backgroundImage,
+                0,
+                0,
+                (int) board.getDimension().getWidth(),
+                (int) board.getDimension().getHeight(),
+                this
+        );
     }
 }
