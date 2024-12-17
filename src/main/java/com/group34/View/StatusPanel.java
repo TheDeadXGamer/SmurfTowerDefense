@@ -10,7 +10,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.group34.Controller.Shop.ShopController;
 import com.group34.Model.Game.Player;
 import com.group34.Model.IObserver;
 import com.group34.Model.Shop.CashVault;
@@ -38,12 +37,10 @@ public class StatusPanel extends JPanel implements IObserver {
 
     private JLabel healthLabel;
     private JLabel cashLabel;
-    private ShopController shopController;
     private CashVault cashVault;
     private Player player;
 
-    public StatusPanel(ShopController shopController) {
-        this.shopController = shopController;
+    public StatusPanel( ) {
 
         // adding this as an observer to some observables
         // cashVault = shopController.getCashVault();

@@ -5,14 +5,13 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.group34.Controller.Shop.ShopController;
 
 public class RightPanel extends JLabel {
     private ButtonPanel buttonPanel;
     private StatusPanel statusPanel;
-    private ShopPanel shopPanel;
 
-    public RightPanel(ShopController shopController) {
+
+    public RightPanel(ShopPanel shopPanel) {
         setLayout(new BorderLayout());
         setPreferredSize(ViewConstants.SHOP_PANEL_SIZE);
         setBackground(ViewConstants.RIGHT_PANEL_COLOR);
@@ -26,13 +25,12 @@ public class RightPanel extends JLabel {
         topPanel.add(buttonPanel, BorderLayout.NORTH);
 
         // Add StatusPanel
-        statusPanel = new StatusPanel(shopController);
+        statusPanel = new StatusPanel();
         topPanel.add(statusPanel, BorderLayout.SOUTH);
 
         add(topPanel, BorderLayout.NORTH);
 
         // Add ShopPanel
-        shopPanel = new ShopPanel();
         add(shopPanel, BorderLayout.CENTER);
     }
 }

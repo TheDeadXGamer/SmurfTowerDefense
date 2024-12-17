@@ -2,10 +2,7 @@ package com.group34;
 
 import java.util.List;
 import java.util.Optional;
-
 import javax.swing.JFrame;
-
-import com.group34.Controller.Shop.ShopController;
 import com.group34.Model.Board.Board;
 import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Enemy.EnemyFactory;
@@ -17,6 +14,8 @@ import com.group34.Model.Round.Round;
 import com.group34.Model.Shop.CashVault;
 import com.group34.Model.Shop.Shop;
 import com.group34.View.BoardView;
+import com.group34.View.RightPanel;
+import com.group34.View.ShopPanel;
 
 
 public class TowerDefence extends JFrame implements Runnable {
@@ -44,10 +43,16 @@ public class TowerDefence extends JFrame implements Runnable {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
 
-        Shop shopModel = new Shop(cashVault);
-        ShopController shopController = new ShopController(shopModel);
-        BoardView boardView = new BoardView(this.board, this.game, shopController);
+        Shop shop = new Shop(cashVault);
+        ShopPanel shopPanel = new ShopPanel(shop);
+        RightPanel rightPanel = new RightPanel(shopPanel);
 
+        BoardView boardView = new BoardView(
+            this.board, 
+            this.game, 
+            rightPanel
+        );
+       
         add(boardView);
 
         pack();

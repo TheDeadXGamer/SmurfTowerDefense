@@ -6,12 +6,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Point;
 import java.awt.RenderingHints;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.Transferable;
-import java.awt.dnd.DropTarget;
-import java.awt.dnd.DropTargetDropEvent;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -19,7 +14,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import com.group34.Controller.Shop.ShopController;
 import com.group34.Model.Board.Board;
 import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Game.Game;
@@ -70,8 +64,8 @@ public class BoardView extends JPanel {
 
     public BoardView(
         Board board, 
-        Game game, 
-        ShopController shopController
+        Game game,
+        RightPanel rightPanel
     ) {
 
         this.board = board;
@@ -79,38 +73,36 @@ public class BoardView extends JPanel {
         
         setPreferredSize(board.getDimension());
         setLayout(new BorderLayout());
-
-        RightPanel rightPanel = new RightPanel(shopController);
         add(rightPanel, BorderLayout.EAST);
 
         // Enable drop target, TODO: show image of tower being dragged
-        setDropTarget(new DropTarget() {
-            @Override
-            public synchronized void drop(DropTargetDropEvent dtde) {
-                try {
-                    dtde.acceptDrop(dtde.getDropAction());
-                    Transferable transferable = dtde.getTransferable();
-                    String towerType = (String) transferable.getTransferData(DataFlavor.stringFlavor);
+        // setDropTarget(new DropTarget() {
+        //     @Override
+        //     public synchronized void drop(DropTargetDropEvent dtde) {
+        //         try {
+        //             dtde.acceptDrop(dtde.getDropAction());
+        //             Transferable transferable = dtde.getTransferable();
+        //             String towerType = (String) transferable.getTransferData(DataFlavor.stringFlavor);
 
-                    // Create and place the tower on the board
-                    Point dropPoint = dtde.getLocation();
-                    String checkPurchase = shopController.purchaseTower(towerType, dropPoint);
+        //             // Create and place the tower on the board
+        //             Point dropPoint = dtde.getLocation();
+        //             String checkPurchase = shopController.purchaseTower(towerType, dropPoint);
 
-                    switch(checkPurchase) {
+        //             switch(checkPurchase) {
 
-                        case "PlacedOnAnotherTower":
-                            showTemporaryMessage("Cannot place on another tower!");
-                            break;
-                        case "NotEnoughMoney"  :
-                            showTemporaryMessage("Not enough money!");
-                    }
+        //                 case "PlacedOnAnotherTower":
+        //                     showTemporaryMessage("Cannot place on another tower!");
+        //                     break;
+        //                 case "NotEnoughMoney"  :
+        //                     showTemporaryMessage("Not enough money!");
+        //             }
 
-                    repaint(); // Repaint to show the new tower
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        //             repaint(); // Repaint to show the new tower
+        //         } catch (Exception e) {
+        //             e.printStackTrace();
+        //         }
+        //     }
+        //});
     }
 
     private void showTemporaryMessage(String message) {
