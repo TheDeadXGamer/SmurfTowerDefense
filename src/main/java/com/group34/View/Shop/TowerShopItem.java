@@ -1,5 +1,7 @@
 package com.group34.View.Shop;
 
+import com.group34.Model.Tower.Attack;
+import com.group34.Model.Tower.Tower;
 import com.group34.Model.Tower.TowerFactory;
 
 public class TowerShopItem implements IShopItem {
@@ -10,7 +12,7 @@ public class TowerShopItem implements IShopItem {
     public TowerShopItem(TowerFactory towerTypeFactory, int cost) {
         this.towerTypeFactory = towerTypeFactory;
         this.cost = cost;
-        this.towerTypeName = towerTypeFactory.createTower(null).getTowerType(); // maybe bad to create a tower just to get its type
+        this.towerTypeName = towerTypeFactory.createTower(null).getTowerType();
     }
 
     /**
@@ -33,6 +35,11 @@ public class TowerShopItem implements IShopItem {
 
     @Override
     public String getToolTipText() {
-        return "Cost: " + cost; // TODO: more info needed
+        Attack tower = (Attack) towerTypeFactory.createTower(null); // temporary instance to get information
+        String toolTipText = "<html>" + tower.getTowerType() +
+                "<br>Damage: " + tower.getDamage() +
+                "<br>Attack Speed: " + tower.getAttackSpeed() +
+                "<br>Range: " + tower.getRange() + "</html>";
+        return toolTipText;
     }
 }

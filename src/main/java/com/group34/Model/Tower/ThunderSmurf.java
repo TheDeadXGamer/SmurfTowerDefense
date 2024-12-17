@@ -17,7 +17,6 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
     private int damage;
     private Point2D position;
     private int range;
-    private int cost;
     private List<enemies> targets = new ArrayList<>();
     private boolean canAttack = true;
     private float lastAttack = System.nanoTime();
@@ -32,7 +31,6 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
         this.damage = 5;
         this.range = 400;
         this.position = position;
-        this.cost = 1000;
     }
 
     /**

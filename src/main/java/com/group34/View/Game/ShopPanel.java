@@ -97,6 +97,12 @@ public class ShopPanel extends JPanel {
         itemImageLabel.setBorder(BorderFactory.createLineBorder(ViewConstants.BORDER_COLOR));
         itemComponent.add(itemImageLabel);
 
+        // price tag
+        JLabel priceLabel = new JLabel("$" + item.getCost());
+        priceLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+        priceLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        itemComponent.add(priceLabel, BorderLayout.SOUTH);
+
         itemComponent.setTransferHandler(new TransferHandler("text") {
             @Override
             protected Transferable createTransferable(JComponent c) {
