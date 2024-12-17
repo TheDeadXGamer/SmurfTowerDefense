@@ -82,9 +82,6 @@ public class ShopPanel extends JPanel {
         JScrollPane scrollPane = new JScrollPane(itemsPanel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        
-
-        
 
         // Add the scrollPane to the shopPanel
         add(createTitle(), BorderLayout.NORTH);

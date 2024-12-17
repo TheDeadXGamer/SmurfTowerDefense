@@ -12,6 +12,8 @@ import com.group34.Model.Road.RoadSpawn;
 import com.group34.Model.Round.Round;
 import com.group34.Model.Round.RoundConfig;
 import com.group34.Model.Shop.CashVault;
+import com.group34.Model.Shop.Shop;
+import com.group34.Model.Shop.ShopItem;
 import com.group34.Model.Tower.LightningSmurfFactory;
 import com.group34.Model.Tower.Tower;
 
@@ -25,7 +27,10 @@ public class Main {
         Player player = new Player(30);
         CashVault cashVault = new CashVault(100);
         Board board = new Board(new Dimension(815, 635));
-        Game game = new Game();       
+        Game game = new Game();  
+        
+        ShopItem item = new ShopItem(new LightningSmurfFactory(), 50);
+        Shop shop = new Shop(cashVault, board).addItem(item);
 
         List<Round> rounds = RoundConfig.createRounds(cashVault);
 
@@ -101,6 +106,7 @@ public class Main {
             .setPlayer(player)
             .setRoadSpawn(spawn)
             .setRounds(rounds)
+            .setShop(shop)
             .setGameSpeed(GameSpeed.NORMAL)
             .build();
 

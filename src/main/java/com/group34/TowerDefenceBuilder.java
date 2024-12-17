@@ -19,9 +19,15 @@ class TowerDefenceBuilder {
     Shop shopModel;
     List<Round> rounds;
     GameSpeed gameSpeed;
+    Shop shop;
 
     public TowerDefenceBuilder setBoard(Board board) {
         this.board = board;
+        return this;
+    }
+
+    public TowerDefenceBuilder setShop(Shop shop) {
+        this.shop = shop;
         return this;
     }
 

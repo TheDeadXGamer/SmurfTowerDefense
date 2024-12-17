@@ -61,9 +61,10 @@ public class StatusPanel extends JPanel implements PlayerSubscriber, CashVaultOb
 
         // images and text
         JLabel healthImageLabel = new JLabel(new ImageIcon(healthImage));
-        healthLabel = new JLabel();
+        healthLabel = new JLabel("" + player.getHealth());
+
         JLabel cashImageLabel = new JLabel(new ImageIcon(coinImage));
-        cashLabel = new JLabel();
+        cashLabel = new JLabel("" + cashVault.getBalance());
         // update();
 
         // font

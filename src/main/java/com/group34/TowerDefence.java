@@ -2,7 +2,10 @@ package com.group34;
 
 import java.util.List;
 import java.util.Optional;
+
 import javax.swing.JFrame;
+import javax.swing.plaf.SliderUI;
+
 import com.group34.Model.Board.Board;
 import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Enemy.EnemyFactory;
@@ -30,6 +33,8 @@ public class TowerDefence extends JFrame implements Runnable {
     private RoadSpawn roadSpawn;
     private List<Round> rounds;
     private GameSpeed gameSpeed;
+    private Shop shop;
+    private boolean isPaused = false;
 
 
     public TowerDefence(TowerDefenceBuilder builder) {
@@ -41,15 +46,13 @@ public class TowerDefence extends JFrame implements Runnable {
         this.roadSpawn = builder.roadSpawn;
         this.rounds = builder.rounds;
         this.gameSpeed = builder.gameSpeed;
+        this.shop = builder.shop;
         
         setTitle("Tower Defence");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
         setLocationRelativeTo(null);
 
-
-        ShopItem item = new ShopItem(new LightningSmurfFactory(), 50);
-        Shop shop = new Shop(cashVault, board).addItem(item);
         ShopPanel shopPanel = new ShopPanel(shop);
         StatusPanel statusPanel = new StatusPanel(cashVault, player);
         RightPanel rightPanel = new RightPanel(shopPanel, statusPanel);
@@ -65,9 +68,10 @@ public class TowerDefence extends JFrame implements Runnable {
         setVisible(true);
     }
 
-
     @Override
     public void run() {
+        renderWelcomeScreen();
+
         for (Round round : rounds) {
             while (!round.isRoundOver() || game.enemiesLeft() > 0) {
                 if (player.isAlive()) {
@@ -85,15 +89,36 @@ public class TowerDefence extends JFrame implements Runnable {
                     
                     board.update();
                     repaint();
+
                     try {
                         Thread.sleep(1000 / gameSpeed.getSpeed());
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
+                if (isPaused) { renderPausedScreen(); }
             }
         }
+        renderGameOverScreen();
         System.out.println("Game Over");
+    }
+
+    private void renderWelcomeScreen() {
+        while (true) {
+            break;
+        }
+    }
+
+    private void renderPausedScreen() {
+        while (true) {
+            break;
+        }
+    }
+
+    private void renderGameOverScreen() {
+        while (true) {
+            break;
+        }
     }
 
 }
