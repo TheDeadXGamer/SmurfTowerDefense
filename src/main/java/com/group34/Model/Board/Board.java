@@ -13,7 +13,7 @@ import com.group34.Model.Tower.Tower;
 public class Board {
     private ProjectileManager projectileManager = new ProjectileManager();
 
-    private TowerNotifier notifier = new TowerNotifier();
+    private TowerNotifier notifier = new TowerNotifier().getInstance();
 
     private List<Tower> towers = new ArrayList<>();
 
