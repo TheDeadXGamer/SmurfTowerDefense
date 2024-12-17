@@ -20,6 +20,10 @@ public class Game {
         return enemies.iterator();
     }
 
+    public void removeEnemy(Enemy enemy) {
+        enemies.remove(enemy);
+    }
+
     public TowerNotifier getNotifier() {
         return notifier;
     }
