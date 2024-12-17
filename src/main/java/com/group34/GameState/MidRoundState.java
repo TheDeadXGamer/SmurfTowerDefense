@@ -66,6 +66,7 @@ public class MidRoundState implements GameState {
             game.getNotifier().getInstance().notifyThatEnemyMoved(enemy);
         }
         for (Enemy enemy: killedEnemies) {
+            game.getNotifier().getInstance().notifyThatEnemyDied(enemy);
             game.removeEnemy(enemy);
         }
     }

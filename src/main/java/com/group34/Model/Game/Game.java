@@ -31,24 +31,4 @@ public class Game {
     public int enemiesLeft() {
         return enemies.size();
     }
-
-    public List<Enemy> update() {
-
-        List<Enemy> killedEnemies = new ArrayList<>();
-        for (Enemy enemy : enemies) {
-            if (!enemy.isAlive()) {
-                killedEnemies.add(enemy);
-            }
-            enemy.move();
-            notifier.getInstance().notifyThatEnemyMoved(enemy);
-        }
-
-        for (Enemy enemy: killedEnemies) {
-            notifier.getInstance().notifyThatEnemyDied(enemy);
-            enemies.remove(enemy);
-        }
-
-        return killedEnemies;
-    }
-
 }
