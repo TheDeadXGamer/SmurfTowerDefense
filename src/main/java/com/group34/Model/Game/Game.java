@@ -9,7 +9,7 @@ import com.group34.Model.Enemy.Enemy;
 
 public class Game {
 
-    private TowerNotifier notifier = new TowerNotifier();
+    private TowerNotifier notifier = new TowerNotifier().getInstance();
     private final List<Enemy> enemies = new ArrayList<>();
 
     public void addEnemy(Enemy enemy) {
