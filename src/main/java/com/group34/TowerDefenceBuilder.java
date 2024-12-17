@@ -8,7 +8,7 @@ import com.group34.Model.Game.Player;
 import com.group34.Model.Road.RoadSpawn;
 import com.group34.Model.Round.Round;
 import com.group34.Model.Shop.CashVault;
-import com.group34.Model.Shop.ShopModel;
+import com.group34.Model.Shop.Shop;
 
 class TowerDefenceBuilder {
     Board board;
@@ -16,7 +16,7 @@ class TowerDefenceBuilder {
     Game game;
     Player player;
     RoadSpawn roadSpawn;
-    ShopModel shopModel;
+    Shop shopModel;
     List<Round> rounds;
     GameSpeed gameSpeed;
 

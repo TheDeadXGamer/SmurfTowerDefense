@@ -83,8 +83,6 @@ public class BoardView extends JPanel {
         RightPanel rightPanel = new RightPanel(shopController);
         add(rightPanel, BorderLayout.EAST);
 
-
-
         // Enable drop target, TODO: show image of tower being dragged
         setDropTarget(new DropTarget() {
             @Override

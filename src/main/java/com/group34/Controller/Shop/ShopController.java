@@ -2,11 +2,11 @@ package com.group34.Controller.Shop;
 
 import java.awt.geom.Point2D;
 
-import com.group34.Model.Shop.ShopModel;
+import com.group34.Model.Shop.Shop;
 
 public class ShopController {
-    private ShopModel shopModel;
-    public ShopController(ShopModel shopModel) {
+    private Shop shopModel;
+    public ShopController(Shop shopModel) {
         this.shopModel = shopModel;
     }
 

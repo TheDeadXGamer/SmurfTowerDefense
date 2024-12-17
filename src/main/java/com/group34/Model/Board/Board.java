@@ -27,8 +27,6 @@ public class Board {
         return dimension;
     }
 
-
-
     public ProjectileManager getProjectileManager() {
         return projectileManager.getInstance();
     }

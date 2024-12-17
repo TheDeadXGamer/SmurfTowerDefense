@@ -10,6 +10,4 @@ public abstract class TowerFactory {
      * @return the created tower.
      */
     abstract public Tower createTower(Point2D position);
-    
-    
 }

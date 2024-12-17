@@ -15,7 +15,7 @@ import com.group34.Model.Road.RoadSpawn;
 import com.group34.Model.Road.RoadToken;
 import com.group34.Model.Round.Round;
 import com.group34.Model.Shop.CashVault;
-import com.group34.Model.Shop.ShopModel;
+import com.group34.Model.Shop.Shop;
 import com.group34.View.BoardView;
 
 
@@ -44,7 +44,7 @@ public class TowerDefence extends JFrame implements Runnable {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
 
-        ShopModel shopModel = new ShopModel(player, cashVault, board);
+        Shop shopModel = new Shop(player, cashVault, board);
         ShopController shopController = new ShopController(shopModel);
         BoardView boardView = new BoardView(this.board, this.game, shopController);
 
