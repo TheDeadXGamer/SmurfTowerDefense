@@ -9,7 +9,6 @@ import com.group34.Model.Road.RoadSpawn;
 import com.group34.Model.Round.Round;
 import com.group34.Model.Shop.CashVault;
 import com.group34.Model.Shop.ShopModel;
-import com.group34.TowerDefenceStates.GameState;
 
 class TowerDefenceBuilder {
     Board board;
@@ -19,7 +18,6 @@ class TowerDefenceBuilder {
     RoadSpawn roadSpawn;
     ShopModel shopModel;
     List<Round> rounds;
-    GameState startState;
     GameSpeed gameSpeed;
 
     public TowerDefenceBuilder setBoard(Board board) {
@@ -54,11 +52,6 @@ class TowerDefenceBuilder {
 
     public TowerDefenceBuilder setRounds (List<Round> rounds) {
         this.rounds = rounds;
-        return this;
-    }
-
-    public TowerDefenceBuilder setStartState (GameState startState) {
-        this.startState = startState;
         return this;
     }
 

@@ -14,7 +14,6 @@ import com.group34.Model.Round.RoundConfig;
 import com.group34.Model.Shop.CashVault;
 import com.group34.Model.Tower.LightningSmurfFactory;
 import com.group34.Model.Tower.Tower;
-import com.group34.TowerDefenceStates.MidRoundState;
 
 
 public class Main {
@@ -102,8 +101,7 @@ public class Main {
             .setPlayer(player)
             .setRoadSpawn(spawn)
             .setRounds(rounds)
-            .setStartState(new MidRoundState())
-            .setGameSpeed(GameSpeed.SLOW)
+            .setGameSpeed(GameSpeed.NORMAL)
             .build();
 
         Thread thread = new Thread(towerDefence);
