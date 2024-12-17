@@ -40,21 +40,23 @@ public class StatusPanel extends JPanel implements IObserver {
     private CashVault cashVault;
     private Player player;
 
-    public StatusPanel( ) {
+    public StatusPanel(
+        CashVault cashVault,
+        Player player
+    ) {
 
-        // adding this as an observer to some observables
-        // cashVault = shopController.getCashVault();
-        // cashVault.addObserver(this);
-
-        // player = shopController.getPlayer();
-        // player.addObserver(this);
+        this.cashVault = cashVault;
+        this.player = player;
+        cashVault.addObserver(this);
+        player.addObserver(this);
+ 
 
         // size, layout, background
         setPreferredSize(ViewConstants.STATUS_PANEL_SIZE);
         setLayout(new GridLayout(2, 2));
         setBackground(ViewConstants.RIGHT_PANEL_COLOR);
 
-        // TODO: add label for rounds
+  
 
         // images and text
         JLabel healthImageLabel = new JLabel(new ImageIcon(healthImage));

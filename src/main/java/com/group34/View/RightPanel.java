@@ -11,7 +11,7 @@ public class RightPanel extends JLabel {
     private StatusPanel statusPanel;
 
 
-    public RightPanel(ShopPanel shopPanel) {
+    public RightPanel(ShopPanel shopPanel, StatusPanel statusPanel) {
         setLayout(new BorderLayout());
         setPreferredSize(ViewConstants.SHOP_PANEL_SIZE);
         setBackground(ViewConstants.RIGHT_PANEL_COLOR);
@@ -25,7 +25,6 @@ public class RightPanel extends JLabel {
         topPanel.add(buttonPanel, BorderLayout.NORTH);
 
         // Add StatusPanel
-        statusPanel = new StatusPanel();
         topPanel.add(statusPanel, BorderLayout.SOUTH);
 
         add(topPanel, BorderLayout.NORTH);

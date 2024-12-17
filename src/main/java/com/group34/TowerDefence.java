@@ -16,6 +16,7 @@ import com.group34.Model.Shop.Shop;
 import com.group34.View.BoardView;
 import com.group34.View.RightPanel;
 import com.group34.View.ShopPanel;
+import com.group34.View.StatusPanel;
 
 
 public class TowerDefence extends JFrame implements Runnable {
@@ -45,7 +46,8 @@ public class TowerDefence extends JFrame implements Runnable {
 
         Shop shop = new Shop(cashVault);
         ShopPanel shopPanel = new ShopPanel(shop);
-        RightPanel rightPanel = new RightPanel(shopPanel);
+        StatusPanel statusPanel = new StatusPanel(cashVault, player);
+        RightPanel rightPanel = new RightPanel(shopPanel, statusPanel);
 
         BoardView boardView = new BoardView(
             this.board, 
