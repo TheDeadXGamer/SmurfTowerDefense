@@ -32,7 +32,7 @@ public class RightPanel extends JLabel {
         add(topPanel, BorderLayout.NORTH);
 
         // Add ShopPanel
-        shopPanel = new ShopPanel(shopController);
+        shopPanel = new ShopPanel();
         add(shopPanel, BorderLayout.CENTER);
     }
 }
