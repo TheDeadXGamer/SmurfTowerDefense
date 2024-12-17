@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 
 import com.group34.Model.Board.Board;
 import com.group34.Model.Cash.CashVault;
+import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Enemy.EnemyFactory;
 import com.group34.Model.Enemy.GargamelFactory;
 import com.group34.Model.Game.Game;
@@ -130,7 +131,11 @@ class TowerDefence extends JFrame implements Runnable {
                         game.addEnemy(spawn.get().createEnemy(token));
                     }
 
-                    game.update();
+                    List<Enemy> killed = game.update();
+                    for (Enemy enemy : killed) {
+                        cashVault.deposit(enemy.getReward());
+                    }
+                    
                     board.update();
                     repaint();
                     try {
@@ -157,6 +162,7 @@ public class Main {
         Player player = new Player(30);
         CashVault cashVault = new CashVault(100);
         Game game = new Game();
+
         
         List<Round> rounds = RoundConfig.createRounds(cashVault);
 
@@ -232,7 +238,7 @@ public class Main {
             .setCashVault(cashVault)
             .setGame(game)
             .setRoadSpawn(spawn)
-            .setGameSpeed(GameSpeed.SLOW)
+            .setGameSpeed(GameSpeed.NORMAL)
             .build();
 
         Thread thread = new Thread(towerDefence);

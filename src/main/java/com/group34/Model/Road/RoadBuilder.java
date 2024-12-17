@@ -3,6 +3,7 @@ package com.group34.Model.Road;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.group34.Model.Board.Board;
 import com.group34.Model.Game.Player;
 
