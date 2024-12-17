@@ -1,15 +1,21 @@
 package com.group34.View;
 
-import com.group34.Model.Cash.CashVault;
-import com.group34.Model.Game.Player;
-import com.group34.Model.IObserver;
-import com.group34.View.Shop.ShopController;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.util.Objects;
 
-public class StatusPanel extends JPanel implements IObserver {
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import com.group34.Model.Game.Player;
+import com.group34.Model.Game.PlayerSubscriber;
+import com.group34.Model.Shop.CashVault;
+import com.group34.Model.Shop.CashVaultObserver;
+
+public class StatusPanel extends JPanel implements PlayerSubscriber, CashVaultObserver {
     private final Image healthImage = new ImageIcon(
             Objects.requireNonNull(getClass().getResource(ViewConstants.HEALTH_ICON_PATH))
     )
@@ -32,33 +38,34 @@ public class StatusPanel extends JPanel implements IObserver {
 
     private JLabel healthLabel;
     private JLabel cashLabel;
-    private ShopController shopController;
     private CashVault cashVault;
     private Player player;
 
-    public StatusPanel(ShopController shopController) {
-        this.shopController = shopController;
+    public StatusPanel(
+        CashVault cashVault,
+        Player player
+    ) {
 
-        // adding this as an observer to some observables
-        cashVault = shopController.getCashVault();
-        cashVault.addObserver(this);
-
-        player = shopController.getPlayer();
-        player.addObserver(this);
+        this.cashVault = cashVault;
+        this.player = player;
+        cashVault.subscribe(this);
+        player.subscribe(this);
+ 
 
         // size, layout, background
         setPreferredSize(ViewConstants.STATUS_PANEL_SIZE);
         setLayout(new GridLayout(2, 2));
         setBackground(ViewConstants.RIGHT_PANEL_COLOR);
 
-        // TODO: add label for rounds
+  
 
         // images and text
         JLabel healthImageLabel = new JLabel(new ImageIcon(healthImage));
-        healthLabel = new JLabel();
+        healthLabel = new JLabel("" + player.getHealth());
+
         JLabel cashImageLabel = new JLabel(new ImageIcon(coinImage));
-        cashLabel = new JLabel();
-        update();
+        cashLabel = new JLabel("" + cashVault.getBalance());
+        // update();
 
         // font
         Font labelFont = new Font("Arial", Font.PLAIN, 16);
@@ -74,11 +81,14 @@ public class StatusPanel extends JPanel implements IObserver {
     }
 
     @Override
-    public void update() {
-        int health = player.getHealth();
-        int cashBalance = cashVault.getBalance();
-
+    public void updateHealth(int health) {
         healthLabel.setText("" + health);
-        cashLabel.setText("" + cashBalance);
     }
+
+
+    @Override
+    public void updateCash(int cash) {
+        cashLabel.setText("" + cash);
+    }
+
 }
