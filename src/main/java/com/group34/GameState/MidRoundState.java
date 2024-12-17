@@ -1,4 +1,4 @@
-package com.group34.Model.Game.GameState;
+package com.group34.GameState;
 
 import com.group34.Model.Game.Game;
 import com.group34.Model.Road.RoadToken;

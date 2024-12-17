@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.group34.GameState.GameState;
 import com.group34.Model.Enemy.Enemy;
-import com.group34.Model.Game.GameState.GameState;
 
 public class Game {
 
