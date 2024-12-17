@@ -6,9 +6,10 @@ public class ShopItem {
     int cost;
     TowerFactory factory;
 
-    public ShopItem(int cost) {
+    public ShopItem(TowerFactory factory, int cost) {
         assert cost >= 0;
         this.cost = cost;
+        this.factory = factory;
     }
 
     public int getCost() {

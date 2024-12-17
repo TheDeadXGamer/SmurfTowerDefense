@@ -7,9 +7,6 @@ import javax.swing.JPanel;
 
 
 public class RightPanel extends JLabel {
-    private ButtonPanel buttonPanel;
-    private StatusPanel statusPanel;
-
 
     public RightPanel(ShopPanel shopPanel, StatusPanel statusPanel) {
         setLayout(new BorderLayout());
@@ -21,7 +18,7 @@ public class RightPanel extends JLabel {
         topPanel.setLayout(new BorderLayout());
 
         // Add ButtonPanel
-        buttonPanel = new ButtonPanel();
+        ButtonPanel buttonPanel = new ButtonPanel();
         topPanel.add(buttonPanel, BorderLayout.NORTH);
 
         // Add StatusPanel

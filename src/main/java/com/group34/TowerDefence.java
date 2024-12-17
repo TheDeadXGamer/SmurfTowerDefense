@@ -13,6 +13,8 @@ import com.group34.Model.Road.RoadToken;
 import com.group34.Model.Round.Round;
 import com.group34.Model.Shop.CashVault;
 import com.group34.Model.Shop.Shop;
+import com.group34.Model.Shop.ShopItem;
+import com.group34.Model.Tower.LightningSmurfFactory;
 import com.group34.View.BoardView;
 import com.group34.View.RightPanel;
 import com.group34.View.ShopPanel;
@@ -43,8 +45,11 @@ public class TowerDefence extends JFrame implements Runnable {
         setTitle("Tower Defence");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
+        setLocationRelativeTo(null);
 
-        Shop shop = new Shop(cashVault, board);
+
+        ShopItem item = new ShopItem(new LightningSmurfFactory(), 50);
+        Shop shop = new Shop(cashVault, board).addItem(item);
         ShopPanel shopPanel = new ShopPanel(shop);
         StatusPanel statusPanel = new StatusPanel(cashVault, player);
         RightPanel rightPanel = new RightPanel(shopPanel, statusPanel);
@@ -54,7 +59,6 @@ public class TowerDefence extends JFrame implements Runnable {
             this.game, 
             rightPanel
         );
-       
         add(boardView);
 
         pack();

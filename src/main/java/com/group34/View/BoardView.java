@@ -70,12 +70,11 @@ public class BoardView extends JPanel {
 
         this.board = board;
         this.game = game;
-        
         setPreferredSize(board.getDimension());
         setLayout(new BorderLayout());
         add(rightPanel, BorderLayout.EAST);
 
-        // Enable drop target, TODO: show image of tower being dragged
+       // Enable drop target, TODO: show image of tower being dragged
         // setDropTarget(new DropTarget() {
         //     @Override
         //     public synchronized void drop(DropTargetDropEvent dtde) {
@@ -102,7 +101,7 @@ public class BoardView extends JPanel {
         //             e.printStackTrace();
         //         }
         //     }
-        //});
+        // });
     }
 
     private void showTemporaryMessage(String message) {
@@ -124,7 +123,8 @@ public class BoardView extends JPanel {
     }
 
     @Override
-    public void paint(Graphics g) {
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         
         // Enable anti-aliasing for smoother graphics

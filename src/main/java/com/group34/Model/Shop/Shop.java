@@ -13,11 +13,16 @@ public class Shop {
     private ArrayList<ShopItem> items = new ArrayList<>();
     private CashVault cashVault;
     private Board board;
-    private static final double refundFactor = 0.7;
+    private static final double REFUND_FACTOR = 0.7;
 
     public Shop(CashVault cashVault, Board board) {
         this.cashVault = cashVault;
         this.board = board;
+    }
+
+    public Shop addItem(ShopItem item) {
+        items.add(item);
+        return this;
     }
 
     public void purchaseItem(ShopItem item, Point2D position) 
@@ -29,7 +34,7 @@ public class Shop {
     }
 
     public void refundTower(Tower tower, ShopItem item) throws InvalidRemovalError {
-        cashVault.deposit((int) (item.getCost() * refundFactor));
+        cashVault.deposit((int) (item.getCost() * REFUND_FACTOR));
         board.removeTower(tower);
     }
 
