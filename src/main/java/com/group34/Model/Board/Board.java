@@ -33,7 +33,14 @@ public class Board {
 
     public Iterator<Tower> getTowers() {
         return towers.iterator();
+    }
 
+    public void removeTower(Tower tower) throws InvalidRemovalError {
+        if (!towers.contains(tower)) {
+            throw new InvalidRemovalError();
+        }
+        towers.remove(tower);
+        notifier.getInstance().unsubscribe(tower);
     }
 
     public boolean addTower(Tower tower) throws PlacementError {

@@ -11,10 +11,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.group34.Model.Game.Player;
-import com.group34.Model.IObserver;
+import com.group34.Model.Game.PlayerSubscriber;
 import com.group34.Model.Shop.CashVault;
+import com.group34.Model.Shop.CashVaultObserver;
 
-public class StatusPanel extends JPanel implements IObserver {
+public class StatusPanel extends JPanel implements PlayerSubscriber, CashVaultObserver {
     private final Image healthImage = new ImageIcon(
             Objects.requireNonNull(getClass().getResource(ViewConstants.HEALTH_ICON_PATH))
     )
@@ -47,8 +48,8 @@ public class StatusPanel extends JPanel implements IObserver {
 
         this.cashVault = cashVault;
         this.player = player;
-        cashVault.addObserver(this);
-        player.addObserver(this);
+        cashVault.subscribe(this);
+        player.subscribe(this);
  
 
         // size, layout, background
@@ -79,11 +80,14 @@ public class StatusPanel extends JPanel implements IObserver {
     }
 
     @Override
-    public void update() {
-        int health = player.getHealth();
-        int cashBalance = cashVault.getBalance();
-
+    public void updateHealth(int health) {
         healthLabel.setText("" + health);
-        cashLabel.setText("" + cashBalance);
     }
+
+
+    @Override
+    public void updateCash(int cash) {
+        cashLabel.setText("" + cash);
+    }
+
 }
