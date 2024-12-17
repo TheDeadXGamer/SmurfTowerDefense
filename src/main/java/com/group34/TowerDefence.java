@@ -35,7 +35,8 @@ public class TowerDefence extends JFrame implements Runnable{
         this.currentState = builder.startState;
         this.roadSpawn = builder.roadSpawn;
         this.rounds = builder.rounds;
-    
+        
+        // Set up the JFrame
         setTitle("Tower Defence");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
@@ -44,8 +45,8 @@ public class TowerDefence extends JFrame implements Runnable{
         // TODO: maybe not the best usage of shop stuff like this, change later
         ShopModel shopModel = new ShopModel(player, cashVault, board);
         ShopController shopController = new ShopController(shopModel);
-        
         BoardView boardView = new BoardView(this.board, this.game, shopController);
+
         add(boardView);
         
         pack();
@@ -59,6 +60,10 @@ public class TowerDefence extends JFrame implements Runnable{
         this.update();
     }
 
+
+    /**
+     * Repaints the game
+     */
     @Override
     public void repaint() {
         super.repaint();
@@ -69,30 +74,67 @@ public class TowerDefence extends JFrame implements Runnable{
         }
     }
 
+    /**
+     * Updates the game state
+     * @return void
+     */
     public void update() {
         currentState.update(this);
     }
 
+    /**
+     * Sets the game state
+     * @param state
+     */
+    public void setState(GameState state) {
+        this.currentState = state;
+        this.currentState.enterState(this);
+    }
+
+    /**
+     * Gets the player
+     * @return Player
+     */
     public Player getPlayer() {
         return player;
     }
 
+    /**
+     * Gets the cash vault
+     * @return CashVault
+     */
     public CashVault getCashVault() {
         return cashVault;
     }
 
+    /**
+     * Gets the game
+     * @return Game
+     */
     public Game getGame() {
         return game;
     }
 
+    /**
+     * Gets the board
+     * @return Board
+     */
     public Board getBoard() {
         return board;
     }
 
+    /**
+     * Gets the road spawn
+     * @return RoadSpawn
+     */
     public RoadSpawn getRoadSpawn() {
         return roadSpawn;
     }
 
+    /**
+     * Gets the rounds
+     * @return List<Round>
+     */
     public List<Round> getRounds() {
         return rounds;
     }

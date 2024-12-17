@@ -29,11 +29,14 @@ public class MidRoundState implements GameState {
                 if (towerDefence.getPlayer().isAlive()) {
                     Optional<EnemyFactory> spawn = round.spawn();
 
+
+                    //If there is an enemy to spawn, create it and add it to the game
                     if (spawn.isPresent()) {
                         RoadToken token = new RoadToken(towerDefence.getRoadSpawn());
                         towerDefence.getGame().addEnemy(spawn.get().createEnemy(token));
                     }
-
+                    
+                    //Update enemies and repaint the view
                     updateKilledEnemies(towerDefence);
                     towerDefence.getBoard().update();
                     towerDefence.repaint();
@@ -48,12 +51,17 @@ public class MidRoundState implements GameState {
         List<Enemy> killedEnemies = new ArrayList<>();
         Game game = towerDefence.getGame();
         Iterator<Enemy> iterEnemy = game.getEnemies();
+
+        //Iterate over enemies and check if they are alive
+        //If not, add them to the killedEnemies list
         for (; iterEnemy.hasNext();) {
             Enemy enemy = iterEnemy.next();
             if (!enemy.isAlive()) {
                 killedEnemies.add(enemy);
                 continue;
             }
+
+            //Move enemy and notify observers
             enemy.move();
             game.getNotifier().getInstance().notifyThatEnemyMoved(enemy);
         }
