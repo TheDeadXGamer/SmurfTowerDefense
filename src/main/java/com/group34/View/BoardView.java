@@ -76,6 +76,9 @@ public class BoardView extends JPanel {
                             break;
                         case "NotEnoughMoney"  :
                             showTemporaryMessage("Not enough money!");
+                            break;
+                        case "NotWithinBoard":
+                            showTemporaryMessage("Cannot place tower outside of board");
                     }
 
                     repaint(); // Repaint to show the new tower

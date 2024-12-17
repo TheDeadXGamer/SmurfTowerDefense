@@ -44,22 +44,27 @@ public class ShopModel {
         try {
             Tower newTower = item.getFactory().createTower(position);
 
-            if (item.getCost() <= cashVault.getBalance()) {
-                if ( board.addTower(newTower)) {
-                     cashVault.reduce(item.getCost());
-                     return "Purchased";
-                }
-                return "PlacedOnAnotherTower";
-            }
-            return "NotEnoughMoney";
+            switch(board.addTower(newTower)) {
+                case "PlacedOnAnotherTower":
+                    return "PlacedOnAnotherTower";
+                case "NotWithinBoard":
+                    return "NotWithinBoard";
+                case "Valid":
+                    if (item.getCost() <= cashVault.getBalance()) {
+                        return "Purchased";
+                    }
+                    else {return "NotEnoughMoney";}
 
-        } catch (OverDraftError e) {
-            // TODO: Handle the overdraft error better
-            System.err.println(e.getMessage());
-            return null;
+            }
+
+
+            return "";
+
         } catch (PlacementError e) {
             throw new RuntimeException(e);
         }
     }
+
+
 
 }

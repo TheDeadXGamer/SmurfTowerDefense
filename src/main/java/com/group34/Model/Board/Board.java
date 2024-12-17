@@ -21,6 +21,7 @@ public class Board {
 
     public Board(Dimension dimension) {
         this.dimension = dimension;
+
     }
 
     public Dimension getDimension( ) {
@@ -38,11 +39,11 @@ public class Board {
 
     }
 
-    public boolean addTower(Tower tower) throws PlacementError {
+    public String addTower(Tower tower) throws PlacementError {
 
    
         if (!withinDimension(tower.getPosition())) {
-            return false;
+            return "NotWithinBoard";
 
         }
 
@@ -52,13 +53,13 @@ public class Board {
         for (Tower t; iterator.hasNext();) {
             t = iterator.next();
             if (t.getPosition().distance(tower.getPosition()) < t.getTowerWidth()) {
-                return false;
+                return "PlacedOnAnotherTower";
             }
         }
 
         towers.add(tower);
         notifier.getInstance().subscribe(tower);
-        return true;
+        return "Valid";
     }
 
     public void update() {
