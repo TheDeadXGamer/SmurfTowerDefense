@@ -47,7 +47,7 @@ public class Board {
 
    
         if (!withinDimension(tower.getPosition())) {
-            return false;
+            throw new PlacementError("Tower not within the board");
 
         }
 
@@ -57,7 +57,7 @@ public class Board {
         for (Tower t; iterator.hasNext();) {
             t = iterator.next();
             if (t.getPosition().distance(tower.getPosition()) < t.getTowerWidth()) {
-                return false;
+                throw new PlacementError("Too close to another tower!");
             }
         }
 

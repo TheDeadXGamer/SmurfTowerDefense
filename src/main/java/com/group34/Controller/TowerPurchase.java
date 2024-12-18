@@ -1,5 +1,6 @@
 package com.group34.Controller;
 
+import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
@@ -12,13 +13,16 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.TransferHandler;
 
+import com.group34.Model.Board.PlacementError;
+import com.group34.Model.Shop.OverDraftError;
 import com.group34.Model.Shop.Shop;
+import com.group34.View.BoardView;
 import com.group34.View.ShopButton;
 
 public class TowerPurchase {
     public TowerPurchase(
         List<ShopButton> buttons,        
-        JPanel boardView, 
+        BoardView boardView,
         Shop shop
     ) {
         for (ShopButton button : buttons) {
@@ -43,46 +47,31 @@ public class TowerPurchase {
                 }
             });
 
-        // boardView.setDropTarget(new DropTarget() {
-        //     @Override
-        //     public synchronized void drop(DropTargetDropEvent dtde) {
-        //         try {
-        //             dtde.acceptDrop(dtde.getDropAction());
-        //             Transferable transferable = dtde.getTransferable();
-        //             String towerType = (String) transferable.getTransferData(DataFlavor.stringFlavor);
+         boardView.setDropTarget(new DropTarget() {
+             @Override
+             public synchronized void drop(DropTargetDropEvent dtde) {
+                 try {
+                     dtde.acceptDrop(dtde.getDropAction());
+                     Transferable transferable = dtde.getTransferable();
+                     String towerType = (String) transferable.getTransferData(DataFlavor.stringFlavor);
 
-        //             // Create and place the tower on the board
-        //             Point dropPoint = dtde.getLocation();
-        //             String checkPurchase = shop.purchaseTower(towerType, dropPoint);
-
-        //             switch(checkPurchase) {
-
-        //                 case "PlacedOnAnotherTower":
-        //                     showTemporaryMessage("Cannot place on another tower!");
-        //                     break;
-        //                 case "NotEnoughMoney"  :
-        //                     showTemporaryMessage("Not enough money!");
-        //             }
-        //         } catch (Exception e) {
-        //             e.printStackTrace();
-        //         }
-        //     }});
+                     // Create and place the tower on the board
+                     Point dropPoint = dtde.getLocation();
+                     try {
+                     shop.purchaseItem(towerType, dropPoint);}
+                     catch (PlacementError e) {
+                        boardView.showTemporaryMessage(e.getMessage());
+                     }
+                     catch (OverDraftError e) {
+                         boardView.showTemporaryMessage(e.getMessage());
+                     }
+                 } catch (Exception e) {
+                     e.printStackTrace();
+                 }
+             }});
         }
     }
 
-    // private void showTemporaryMessage(String message) {
-    //     temporaryMessage = message;
-    //     showTemporaryMessage = true;
 
-    //     if (errorTimer == null || !errorTimer.isRunning()) {
-    //         // Hide the message after 2 seconds
-    //         errorTimer = new Timer(2000, e -> {
-    //             showTemporaryMessage = false;
-    //             repaint(); // Trigger repaint to remove the message
-    //         });
-    //         errorTimer.setRepeats(false);
-    //         errorTimer.start();
-    //     }
-    // }
     
 }

@@ -172,4 +172,18 @@ public class BoardView extends JPanel {
                 this
         );
     }
+    public void showTemporaryMessage(String message) {
+        temporaryMessage = message;
+        showTemporaryMessage = true;
+
+        if (errorTimer == null || !errorTimer.isRunning()) {
+            // Hide the message after 2 seconds
+            errorTimer = new Timer(2000, e -> {
+                showTemporaryMessage = false;
+                repaint(); // Trigger repaint to remove the message
+            });
+            errorTimer.setRepeats(false);
+            errorTimer.start();
+        }
+    }
 }
