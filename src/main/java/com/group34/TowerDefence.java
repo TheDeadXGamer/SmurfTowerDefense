@@ -1,9 +1,11 @@
 package com.group34;
 
+import java.awt.CardLayout;
 import java.util.List;
 import java.util.Optional;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.plaf.SliderUI;
 
 import com.group34.Model.Board.Board;
@@ -22,6 +24,7 @@ import com.group34.View.BoardView;
 import com.group34.View.RightPanel;
 import com.group34.View.ShopPanel;
 import com.group34.View.StatusPanel;
+import com.group34.View.WelcomePanel;
 
 
 public class TowerDefence extends JFrame implements Runnable {
@@ -35,6 +38,11 @@ public class TowerDefence extends JFrame implements Runnable {
     private GameSpeed gameSpeed;
     private Shop shop;
     private boolean isPaused = false;
+    
+
+    private GameState currentState;
+    private CardLayout cardLayout;
+    private JPanel cardPanel;
 
 
     public TowerDefence(TowerDefenceBuilder builder) {
@@ -48,7 +56,7 @@ public class TowerDefence extends JFrame implements Runnable {
         this.gameSpeed = builder.gameSpeed;
         this.shop = builder.shop;
         
-        setTitle("Tower Defence");
+        setTitle("Smurf Tower Defence");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
         setLocationRelativeTo(null);
@@ -62,7 +70,15 @@ public class TowerDefence extends JFrame implements Runnable {
             this.game, 
             rightPanel
         );
-        add(boardView);
+
+        cardLayout = new CardLayout();
+        cardPanel = new JPanel(cardLayout);
+        cardPanel.add(new WelcomePanel(this), "Welcome");
+        cardPanel.add(boardView, "Game");
+
+        add(cardPanel);
+
+        currentState = GameState.WELCOME;
 
         pack();
         setVisible(true);
@@ -70,8 +86,49 @@ public class TowerDefence extends JFrame implements Runnable {
 
     @Override
     public void run() {
-        renderWelcomeScreen();
+        while (true) {
+            switch (currentState) {
+                case WELCOME:
+                    handleWelcome();
+                    break;
+            
+                case BETWEEN_ROUND:
+                    handleBetweenRound();
+                    break;
 
+                case ACTIVE_ROUND:
+                    handleActive();
+                    break;
+
+                case PAUSED:
+                    handlePaused();
+                    break;
+
+                case GAME_OVER:
+                    handleGameOver();
+                    break;
+            }
+        }
+    }
+
+    private void handleWelcome() {
+        cardLayout.show(cardPanel, "Welcome");
+    }
+
+    private void handlePaused() {
+        while (true) {
+            break;
+        }
+    }
+
+    private void handleGameOver() {
+        while (true) {
+            break;
+        }
+    }
+
+    private void handleActive(){
+        cardLayout.show(cardPanel, "Game");
         for (Round round : rounds) {
             while (!round.isRoundOver() || game.enemiesLeft() > 0) {
                 if (player.isAlive()) {
@@ -95,30 +152,20 @@ public class TowerDefence extends JFrame implements Runnable {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                } else {
+                    currentState = GameState.GAME_OVER;
+                    break;
                 }
-                if (isPaused) { renderPausedScreen(); }
             }
         }
-        renderGameOverScreen();
-        System.out.println("Game Over");
     }
 
-    private void renderWelcomeScreen() {
-        while (true) {
-            break;
-        }
+    private void handleBetweenRound() {
+        cardLayout.show(cardPanel, "Game");
     }
 
-    private void renderPausedScreen() {
-        while (true) {
-            break;
-        }
-    }
-
-    private void renderGameOverScreen() {
-        while (true) {
-            break;
-        }
+    public void setState(GameState state) {
+        currentState = state;
     }
 
 }
