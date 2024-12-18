@@ -23,6 +23,7 @@ import com.group34.Model.Shop.Shop;
 import com.group34.Model.Shop.ShopItem;
 import com.group34.Model.Tower.LightningSmurfFactory;
 import com.group34.View.BoardView;
+import com.group34.View.GameView;
 import com.group34.View.RightPanel;
 import com.group34.View.ShopButton;
 import com.group34.View.ShopPanel;
@@ -40,7 +41,7 @@ public class TowerDefence extends JFrame implements Runnable {
     private GameSpeed gameSpeed;
     private Shop shop;
     private boolean isPaused = false;
-
+    private GameView gameView = new GameView();
 
     public TowerDefence(TowerDefenceBuilder builder) {
 
@@ -52,23 +53,17 @@ public class TowerDefence extends JFrame implements Runnable {
         this.rounds = builder.rounds;
         this.gameSpeed = builder.gameSpeed;
         this.shop = builder.shop;
-        
+
         setTitle("Tower Defence");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
         setLocationRelativeTo(null);
-
-    
-
-
 
         List<ShopButton> buttons = new ArrayList<>();
         Iterator<ShopItem> shopItems = shop.getItems();
         while (shopItems.hasNext()) {
             buttons.add(new ShopButton(shopItems.next()));
         }
-
-
 
         ShopPanel shopPanel = new ShopPanel(buttons);
         StatusPanel statusPanel = new StatusPanel(cashVault, player);
@@ -79,16 +74,23 @@ public class TowerDefence extends JFrame implements Runnable {
             this.game, 
             rightPanel
         );
+
         TowerPurchase purchaseController = new TowerPurchase(
             buttons, 
             boardView, 
             shop
         );
 
-        add(boardView);
+        //GameView gameView = new GameView();
+        //gameView.add(boardView);
+        //gameView.pack();
+        //gameView.setVisible(true);
 
+        add(boardView);
         pack();
         setVisible(true);
+
+
     }
 
     @Override
@@ -111,6 +113,7 @@ public class TowerDefence extends JFrame implements Runnable {
                     }
                     
                     board.update();
+                    //gameView.repaint();
                     repaint();
 
                     try {
