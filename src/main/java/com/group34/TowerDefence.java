@@ -8,6 +8,7 @@ import java.util.Optional;
 import javax.swing.JFrame;
 
 import com.group34.Controller.TowerPurchase;
+import com.group34.Controller.TowerUpgrade;
 import com.group34.Model.Board.Board;
 import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Enemy.EnemyFactory;
@@ -19,12 +20,7 @@ import com.group34.Model.Round.Round;
 import com.group34.Model.Shop.CashVault;
 import com.group34.Model.Shop.Shop;
 import com.group34.Model.Shop.ShopItem;
-import com.group34.View.BoardView;
-import com.group34.View.GameView;
-import com.group34.View.RightPanel;
-import com.group34.View.ShopButton;
-import com.group34.View.ShopPanel;
-import com.group34.View.StatusPanel;
+import com.group34.View.*;
 
 
 public class TowerDefence extends JFrame implements Runnable {
@@ -61,25 +57,29 @@ public class TowerDefence extends JFrame implements Runnable {
         while (shopItems.hasNext()) {
             buttons.add(new ShopButton(shopItems.next()));
         }
-
+        UpgradePanel upgradeScreen = new UpgradePanel(new TowerUpgrade());
         ShopPanel shopPanel = new ShopPanel(buttons);
         StatusPanel statusPanel = new StatusPanel(cashVault, player);
-        RightPanel rightPanel = new RightPanel(shopPanel, statusPanel);
+        RightPanel rightPanel = new RightPanel(shopPanel, statusPanel,upgradeScreen);
 
         BoardView boardView = new BoardView(
-            this.board, 
-            this.game, 
+            this.board,
+            this.game,
             rightPanel
         );
 
         TowerPurchase purchaseController = new TowerPurchase(
-            buttons, 
-            boardView, 
+            buttons,
+            boardView,
             shop
         );
 
-        gameView.add(boardView);
-        add(gameView);
+        //GameView gameView = new GameView();
+        //gameView.add(boardView);
+        //gameView.pack();
+        //gameView.setVisible(true);
+
+        add(boardView);
         pack();
         setVisible(true);
 
@@ -89,6 +89,7 @@ public class TowerDefence extends JFrame implements Runnable {
     @Override
     public void run() {
         renderWelcomeScreen();
+
         for (Round round : rounds) {
             while (!round.isRoundOver() || game.enemiesLeft() > 0) {
                 if (player.isAlive()) {
@@ -113,8 +114,6 @@ public class TowerDefence extends JFrame implements Runnable {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                } else {
-                    break;
                 }
                 if (isPaused) { renderPausedScreen(); }
             }

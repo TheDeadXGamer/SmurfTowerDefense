@@ -8,7 +8,7 @@ import java.awt.geom.Point2D;
 /**
  * Provide Client API for Tower Collections.
  **/
-public interface Tower<enemies extends Positionable & Attackable> extends TowerListener<enemies>, Positionable {
+public interface Tower<enemies extends Positionable & Attackable> extends TowerListener<enemies>, Positionable,Upgrade {
     /**
      * @return the position is needed to calculate in range targets. Also required for UI placement.
      **/

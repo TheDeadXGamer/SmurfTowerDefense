@@ -66,6 +66,7 @@ public class LightningBolt<Target extends Positionable & Attackable & Killable> 
     @Override
     public void damage() {
         enemy.damage(damage);
+        System.out.println("did " + damage + " damage!");
     }
 
     @Override

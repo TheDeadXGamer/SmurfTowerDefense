@@ -16,14 +16,15 @@ import com.group34.Model.Shop.Shop;
 import com.group34.Model.Shop.ShopItem;
 import com.group34.Model.Tower.LightningSmurfFactory;
 import com.group34.Model.Tower.Tower;
+import com.group34.Model.Tower.TowerWrapper;
 
 
 public class Main {
     public static void main (String[] args) throws Exception {
     
         Point2D position = new Point2D.Double(100, 100);
-        Tower tower = new LightningSmurfFactory().createTower(position);
-        Tower tower2 = new LightningSmurfFactory().createTower(new Point2D.Double(400,300));
+        Tower tower = new TowerWrapper(new LightningSmurfFactory().createTower(position)) ;
+        Tower tower2 = new TowerWrapper(new LightningSmurfFactory().createTower(new Point2D.Double(100,400))).upgrade();
         Player player = new Player(30);
         CashVault cashVault = new CashVault(100);
         Board board = new Board(new Dimension(815, 635));

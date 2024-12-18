@@ -12,7 +12,7 @@ import com.group34.Model.Tower.Targeting.ClosestAttack;
 import com.group34.Model.Tower.Targeting.Targetings;
 import com.group34.View.ViewConstants;
 
-public class LightningSmurf<enemies extends Positionable & Attackable> implements Upgrade, Attack<enemies> {
+public class LightningSmurf<enemies extends Positionable & Attackable> implements  Attack<enemies> {
 
     protected int attackSpeed;
     protected int damage;

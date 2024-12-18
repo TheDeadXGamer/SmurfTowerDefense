@@ -25,14 +25,15 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
 
 
 
-    Targetings targeting = new ClosestAttack(new LightningBoltFactory(this),position); //TODO Den ska ha annan projectile men lägger såhär undertiden
+    Targetings targeting;
 
     public ThunderSmurf(Point2D position) {
-        this.attackSpeed = 1;
-        this.damage = 5;
-        this.range = 400;
+        this.attackSpeed = 2;
+        this.damage = 7;
+        this.range = 200;
         this.position = position;
-        this.cost = 1000;
+        this.cost = 50;
+        this.targeting = new ClosestAttack(new LightningBoltFactory(this),position);
     }
 
     /**
@@ -143,5 +144,10 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
      */
     private boolean checkIfInRange(enemies enemy) {
         return position.distance(enemy.getPosition()) <= this.range;
+    }
+
+    @Override
+    public Tower upgrade() {
+        return null;
     }
 }

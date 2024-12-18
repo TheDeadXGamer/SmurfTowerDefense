@@ -9,8 +9,7 @@ public class LightningSmurfFactory extends TowerFactory {
     }
     @Override
     public Tower createTower(Point2D position) {
-
-        return new LightningSmurf(position,2,5,200,50);
+       return new TowerWrapper(new LightningSmurf(position,2,5,200,50));
     }
 
 }

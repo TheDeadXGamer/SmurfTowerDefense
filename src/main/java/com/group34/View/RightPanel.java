@@ -1,6 +1,8 @@
 package com.group34.View;
 
-import java.awt.BorderLayout;
+import com.group34.Model.Tower.Tower;
+
+import java.awt.*;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -8,7 +10,12 @@ import javax.swing.JPanel;
 
 public class RightPanel extends JLabel {
 
-    public RightPanel(ShopPanel shopPanel, StatusPanel statusPanel) {
+    private CardLayout cardLayout; // For switching between panels
+    private JPanel cardPanel;      // Container for ShopPanel and UpgradePanel
+    private UpgradePanel upgradePanel;
+
+    public RightPanel(ShopPanel shopPanel, StatusPanel statusPanel, UpgradePanel upgradeScreen) {
+        this.upgradePanel = upgradeScreen;
         setLayout(new BorderLayout());
         setPreferredSize(ViewConstants.SHOP_PANEL_SIZE);
         setBackground(ViewConstants.RIGHT_PANEL_COLOR);
@@ -26,7 +33,29 @@ public class RightPanel extends JLabel {
 
         add(topPanel, BorderLayout.NORTH);
 
+        cardLayout = new CardLayout();
+        cardPanel = new JPanel(cardLayout);
+
         // Add ShopPanel
-        add(shopPanel, BorderLayout.CENTER);
+        cardPanel.add(shopPanel,"SHOP_PANEL");
+        //Add UpgradePanel
+        cardPanel.add(upgradeScreen,"UPGRADE_PANEL");
+
+
+        add(cardPanel);
+        cardLayout.show(cardPanel,"SHOP_PANEL");
+
+
+
+
     }
-}
+    public void displayShopPanel() {
+        cardLayout.show(cardPanel,"SHOP_PANEL");
+    }
+    public void displayUpgradePanel(Tower tower) {
+        cardLayout.show(cardPanel,"UPGRADE_PANEL");
+        upgradePanel.setCurrTower(tower);
+
+    }
+
+    }
