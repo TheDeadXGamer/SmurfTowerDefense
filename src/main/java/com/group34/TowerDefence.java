@@ -1,11 +1,15 @@
 package com.group34;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 import javax.swing.JFrame;
 import javax.swing.plaf.SliderUI;
+import javax.swing.plaf.basic.BasicOptionPaneUI;
 
+import com.group34.Controller.TowerPurchase;
 import com.group34.Model.Board.Board;
 import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Enemy.EnemyFactory;
@@ -20,6 +24,7 @@ import com.group34.Model.Shop.ShopItem;
 import com.group34.Model.Tower.LightningSmurfFactory;
 import com.group34.View.BoardView;
 import com.group34.View.RightPanel;
+import com.group34.View.ShopButton;
 import com.group34.View.ShopPanel;
 import com.group34.View.StatusPanel;
 
@@ -53,7 +58,19 @@ public class TowerDefence extends JFrame implements Runnable {
         setResizable(true);
         setLocationRelativeTo(null);
 
-        ShopPanel shopPanel = new ShopPanel(shop);
+    
+
+
+
+        List<ShopButton> buttons = new ArrayList<>();
+        Iterator<ShopItem> shopItems = shop.getItems();
+        while (shopItems.hasNext()) {
+            buttons.add(new ShopButton(shopItems.next()));
+        }
+
+
+
+        ShopPanel shopPanel = new ShopPanel(buttons);
         StatusPanel statusPanel = new StatusPanel(cashVault, player);
         RightPanel rightPanel = new RightPanel(shopPanel, statusPanel);
 
@@ -62,6 +79,12 @@ public class TowerDefence extends JFrame implements Runnable {
             this.game, 
             rightPanel
         );
+        TowerPurchase purchaseController = new TowerPurchase(
+            buttons, 
+            boardView, 
+            shop
+        );
+
         add(boardView);
 
         pack();
