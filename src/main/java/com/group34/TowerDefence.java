@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.swing.JFrame;
-import javax.swing.plaf.SliderUI;
-import javax.swing.plaf.basic.BasicOptionPaneUI;
 
 import com.group34.Controller.TowerPurchase;
 import com.group34.Model.Board.Board;
@@ -21,7 +19,6 @@ import com.group34.Model.Round.Round;
 import com.group34.Model.Shop.CashVault;
 import com.group34.Model.Shop.Shop;
 import com.group34.Model.Shop.ShopItem;
-import com.group34.Model.Tower.LightningSmurfFactory;
 import com.group34.View.BoardView;
 import com.group34.View.GameView;
 import com.group34.View.RightPanel;
@@ -121,6 +118,8 @@ public class TowerDefence extends JFrame implements Runnable {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                } else {
+                    break;
                 }
                 if (isPaused) { renderPausedScreen(); }
             }
