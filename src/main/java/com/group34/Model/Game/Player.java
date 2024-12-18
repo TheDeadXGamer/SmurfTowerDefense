@@ -1,12 +1,9 @@
 package com.group34.Model.Game;
 
-import com.group34.Model.IObservable;
-import com.group34.Model.IObserver;
-
 import java.util.ArrayList;
 
-public class Player implements IObservable {
-    private ArrayList<IObserver> observers;
+public class Player {
+    private ArrayList<PlayerSubscriber> observers;
     private int health;
 
     public Player(int startingHealth) {
@@ -20,26 +17,24 @@ public class Player implements IObservable {
 
     public void reduceHealth(int damage) {
         health -= damage;
+        notifyObservers();
     }
 
     public boolean isAlive() {
         return health > 0;
     }
 
-    @Override
-    public void addObserver(IObserver observer) {
+    public void subscribe(PlayerSubscriber observer) {
         observers.add(observer);
     }
 
-    @Override
-    public void removeObserver(IObserver observer) {
+    public void unsubscribe(PlayerSubscriber observer) {
         observers.remove(observer);
     }
 
-    @Override
     public void notifyObservers() {
-        for (IObserver observer : observers) {
-            observer.update();
+        for (PlayerSubscriber observer : observers) {
+            observer.updateHealth(health);
         }
     }
 }

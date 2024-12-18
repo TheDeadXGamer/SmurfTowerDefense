@@ -43,22 +43,7 @@ public class ViewConstants {
 
     public static final String COIN_ICON_PATH = "/assets/Other/Smurfcoins.png";
 
-    public static String getProjectileImage(String projectileType) {
-        try {
-            switch (projectileType) {
-                case "LightningBolt":
-                    return "/assets/Projectiles/LightningBolt.png";
-                // Add more Projectiles here if needed
-                default:
-                    throw new IllegalArgumentException("Invalid projectile type: " + projectileType);
-            }
-        } catch (IllegalArgumentException e) {
-            // Log the error or take appropriate action
-            System.err.println("Error: " + e.getMessage());
-            // Provide a default image or handle the case as necessary
-            return "/assets/Projectiles/Default.png";
-        }
-    }
+    public static final String LIGHTNINGBOLT_IMAGE = "/assets/Projectiles/LightningBolt.png";
 
     /**
      *  Creates a placeholder icon, a red square.

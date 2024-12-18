@@ -118,13 +118,27 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
             targets.remove(enemy);
         }
     }
-
+    @Override
     public void notifyOfDeath(enemies enemy) {
         if (targets.contains(enemy)) {
             targets.remove(enemy);
         }
     }
 
+    /**
+     * Determines if the specified enemy is within the range of the tower.
+     * <p>
+     * This method calculates the distance between the tower's position
+     * and the enemy's position and checks if the distance is less than
+     * or equal to the tower's range. If the enemy is within the range,
+     * it returns {@code true}; otherwise, it returns {@code false}.
+     * </p>
+     *
+     * @param enemy the enemy whose position is checked to determine if it is within the tower's range.
+     *              The enemy object must provide its position through the {@code getPosition()} method.
+     * @return {@code true} if the enemy is within the range of the tower;
+     *         {@code false} otherwise.
+     */
     private boolean checkIfInRange(enemies enemy) {
         return position.distance(enemy.getPosition()) <= this.range;
     }

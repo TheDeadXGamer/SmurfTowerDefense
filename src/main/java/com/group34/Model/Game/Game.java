@@ -10,7 +10,7 @@ import com.group34.Model.IObserver;
 
 public class Game implements IObservable {
 
-    private TowerNotifier notifier = new TowerNotifier();
+    private TowerNotifier notifier = new TowerNotifier().getInstance();
     private final List<Enemy> enemies = new ArrayList<>();
     private int roundNumber = -1;
     private ArrayList<IObserver> observers = new ArrayList<>();
@@ -32,26 +32,35 @@ public class Game implements IObservable {
         return enemies.iterator();
     }
 
+    public void removeEnemy(Enemy enemy) {
+        enemies.remove(enemy);
+    }
+
+    public TowerNotifier getNotifier() {
+        return notifier;
+    }
+
     public int enemiesLeft() {
         return enemies.size();
     }
 
-    public void update() {
+    public List<Enemy> update() {
 
         List<Enemy> killedEnemies = new ArrayList<>();
         for (Enemy enemy : enemies) {
             if (!enemy.isAlive()) {
                 killedEnemies.add(enemy);
-                continue;
             }
             enemy.move();
             notifier.getInstance().notifyThatEnemyMoved(enemy);
         }
+
         for (Enemy enemy: killedEnemies) {
             notifier.getInstance().notifyThatEnemyDied(enemy);
             enemies.remove(enemy);
-
         }
+
+        return killedEnemies;
     }
 
     @Override

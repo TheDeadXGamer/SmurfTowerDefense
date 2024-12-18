@@ -1,5 +1,5 @@
 
-package com.group34.Model.Cash;
+package com.group34.Model.Shop;
 
 
 public class OverDraftError extends Exception { 

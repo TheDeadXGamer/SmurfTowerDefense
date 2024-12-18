@@ -1,12 +1,9 @@
-package com.group34.Model.Cash;
-
-import com.group34.Model.IObservable;
-import com.group34.Model.IObserver;
+package com.group34.Model.Shop;
 
 import java.util.ArrayList;
 
-public class CashVault implements IObservable {
-    private ArrayList<IObserver> observers;
+public class CashVault{
+    private ArrayList<CashVaultObserver> observers;
     private int balance;
 
     public CashVault(int balance) {
@@ -38,7 +35,7 @@ public class CashVault implements IObservable {
      * @param amount the amount to reduce the balance by
      * @throws OverDraftError if the balance would go below 0
      */
-    public void reduce(int amount) throws OverDraftError {
+    public void withdraw(int amount) throws OverDraftError {
         if (balance < amount) {
             throw new OverDraftError("Not enough Money");
         }
@@ -46,20 +43,17 @@ public class CashVault implements IObservable {
         notifyObservers();
     }
 
-    @Override
-    public void addObserver(IObserver observer) {
+    public void subscribe(CashVaultObserver observer) {
         observers.add(observer);
     }
 
-    @Override
-    public void removeObserver(IObserver observer) {
+    public void unsubscribe(CashVaultObserver observer) {
         observers.remove(observer);
     }
 
-    @Override
-    public void notifyObservers() {
-        for (IObserver observer : observers) {
-            observer.update();
+    private void notifyObservers() {
+        for (CashVaultObserver observer : observers) {
+            observer.updateCash(balance);
         }
     }
 

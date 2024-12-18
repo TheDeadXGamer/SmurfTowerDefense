@@ -1,19 +1,14 @@
 package com.group34.View;
 
-import com.group34.View.Game.ShopPanel;
-import com.group34.View.Shop.ShopController;
-import com.group34.View.ViewConstants;
-import jdk.jshell.Snippet;
+import java.awt.BorderLayout;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-public class RightPanel extends JPanel {
-    private ButtonPanel buttonPanel;
-    private StatusPanel statusPanel;
-    private ShopPanel shopPanel;
 
-    public RightPanel(ShopController shopController) {
+public class RightPanel extends JLabel {
+
+    public RightPanel(ShopPanel shopPanel, StatusPanel statusPanel) {
         setLayout(new BorderLayout());
         setPreferredSize(ViewConstants.SHOP_PANEL_SIZE);
         setBackground(ViewConstants.RIGHT_PANEL_COLOR);
@@ -23,17 +18,15 @@ public class RightPanel extends JPanel {
         topPanel.setLayout(new BorderLayout());
 
         // Add ButtonPanel
-        buttonPanel = new ButtonPanel();
+        ButtonPanel buttonPanel = new ButtonPanel();
         topPanel.add(buttonPanel, BorderLayout.NORTH);
 
         // Add StatusPanel
-        statusPanel = new StatusPanel(shopController);
         topPanel.add(statusPanel, BorderLayout.SOUTH);
 
         add(topPanel, BorderLayout.NORTH);
 
         // Add ShopPanel
-        shopPanel = new ShopPanel(shopController);
         add(shopPanel, BorderLayout.CENTER);
     }
 }

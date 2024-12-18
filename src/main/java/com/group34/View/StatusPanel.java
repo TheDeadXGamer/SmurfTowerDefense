@@ -1,6 +1,7 @@
 package com.group34.View;
 
-import com.group34.Model.Game.StatusModel;
+import com.group34.Model.Cash.CashVault;
+import com.group34.Model.Game.Player;
 import com.group34.Model.IObserver;
 import com.group34.View.Shop.ShopController;
 
@@ -46,6 +47,8 @@ public class StatusPanel extends JPanel implements IObserver {
         setLayout(new GridLayout(3, 2));
         setBackground(ViewConstants.RIGHT_PANEL_COLOR);
 
+
+
         // images and text
         JLabel roundTitleLabel = new JLabel("Round: ");
         roundTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -75,12 +78,17 @@ public class StatusPanel extends JPanel implements IObserver {
 
     @Override
     public void update() {
-        int health = statusModel.getHealth();
-        int cashBalance = statusModel.getBalance();
-        int roundNumber = statusModel.getRoundNumber();
+        int health = player.getHealth();
+        int cashBalance = cashVault.getBalance();
 
         healthLabel.setText("" + health);
         cashLabel.setText("" + cashBalance);
-        roundLabel.setText("" + roundNumber);
     }
+
+
+    @Override
+    public void updateCash(int cash) {
+        cashLabel.setText("" + cash);
+    }
+
 }

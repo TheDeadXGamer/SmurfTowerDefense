@@ -1,6 +1,5 @@
 package com.group34.Model.Enemy;
 
-import com.group34.Model.Cash.CashVault;
 import com.group34.Model.Road.RoadToken;
 
 public class Gargamel extends BaseEnemy {
@@ -9,10 +8,9 @@ public class Gargamel extends BaseEnemy {
     static int health = 30;
     static int reward = 10;
 
-    public Gargamel(
-        CashVault cashVault, 
+    public Gargamel( 
         RoadToken point
     ) {
-        super(health, cashVault, speed, reward, point);
+        super(health, speed, reward, point);
     }
 }

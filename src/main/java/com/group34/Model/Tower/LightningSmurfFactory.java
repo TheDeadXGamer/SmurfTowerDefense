@@ -3,7 +3,7 @@ package com.group34.Model.Tower;
 
 import java.awt.geom.Point2D;
 
-public class LightningSmurfFactory extends TowerFactory{
+public class LightningSmurfFactory extends TowerFactory {
     public LightningSmurfFactory() {
 
     }
@@ -12,4 +12,5 @@ public class LightningSmurfFactory extends TowerFactory{
 
         return new LightningSmurf(position,2,5,200,50);
     }
+
 }
