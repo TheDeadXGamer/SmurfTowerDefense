@@ -57,7 +57,11 @@ public class TowerDefence extends JFrame implements Runnable {
         while (shopItems.hasNext()) {
             buttons.add(new ShopButton(shopItems.next()));
         }
-        UpgradePanel upgradeScreen = new UpgradePanel(new TowerUpgrade());
+
+        TowerUpgrade towerUpgrade = new TowerUpgrade();
+        towerUpgrade.setCashVault(cashVault);
+
+        UpgradePanel upgradeScreen = new UpgradePanel(towerUpgrade);
         ShopPanel shopPanel = new ShopPanel(buttons);
         StatusPanel statusPanel = new StatusPanel(cashVault, player);
         RightPanel rightPanel = new RightPanel(shopPanel, statusPanel,upgradeScreen);
@@ -67,7 +71,7 @@ public class TowerDefence extends JFrame implements Runnable {
             this.game,
             rightPanel
         );
-
+        towerUpgrade.setBoardView(boardView);
         TowerPurchase purchaseController = new TowerPurchase(
             buttons,
             boardView,

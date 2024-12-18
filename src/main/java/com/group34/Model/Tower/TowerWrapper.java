@@ -42,6 +42,11 @@ public class TowerWrapper implements Tower{
     }
 
     @Override
+    public int getCost() {
+        return tower.getCost();
+    }
+
+    @Override
     public void notifyTower(Positionable enemy) {
         tower.notifyTower(enemy);
     }
@@ -53,10 +58,12 @@ public class TowerWrapper implements Tower{
 
 
     @Override
-    public Tower upgrade() {
-        if(tower.upgrade() != null) {
+    public Tower upgrade(){
+
+        Tower upgradedTower = tower.upgrade();
+        if(upgradedTower != null) {
             tower = tower.upgrade();
         }
-        return tower;
+        return upgradedTower;
     }
 }

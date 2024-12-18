@@ -25,6 +25,7 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
 
 
 
+
     Targetings targeting;
 
     public ThunderSmurf(Point2D position) {
@@ -113,6 +114,11 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
     }
 
     @Override
+    public int getCost() {
+        return cost;
+    }
+
+    @Override
     public void notifyTower(enemies enemy) {
         if (checkIfInRange(enemy) && !targets.contains(enemy)) {
             targets.add(enemy);
@@ -148,6 +154,7 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
 
     @Override
     public Tower upgrade() {
+
         return null;
     }
 }

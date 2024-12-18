@@ -3,6 +3,7 @@ package com.group34.View;
 
 
 import com.group34.Controller.TowerUpgrade;
+import com.group34.Model.Tower.NoUpgradeError;
 import com.group34.Model.Tower.Tower;
 
 import javax.swing.*;
@@ -22,8 +23,11 @@ public class UpgradePanel extends JPanel {
         upgradeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 towerUpgrade.upgradeTower(currTower);
             }
+
+
         });
         // Add the button to the center with constraints
         GridBagConstraints gbc = new GridBagConstraints();
