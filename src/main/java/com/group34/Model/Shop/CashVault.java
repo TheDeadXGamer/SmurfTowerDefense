@@ -36,13 +36,17 @@ public class CashVault{
      * @throws OverDraftError if the balance would go below 0
      */
     public void withdraw(int amount) throws OverDraftError {
-        if (balance < amount) {
-            throw new OverDraftError("Not enough Money");
-        }
+        ableToBuy(amount);
         balance -= amount;
         notifyObservers();
     }
 
+    public boolean ableToBuy(int amount) throws OverDraftError {
+        if (balance < amount) {
+            throw new OverDraftError("Not enough Money");
+        }
+        return true;
+    }
     public void subscribe(CashVaultObserver observer) {
         observers.add(observer);
     }

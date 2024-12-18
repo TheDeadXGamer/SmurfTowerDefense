@@ -25,13 +25,18 @@ public class Shop {
         return this;
     }
 
-    public void purchaseItem(ShopItem item, Point2D position) 
-        throws OverDraftError, PlacementError 
-    {
-            cashVault.withdraw(item.getCost());
+    public void purchaseItem(String itemAsString, Point2D position) throws OverDraftError, PlacementError {
+
+            ShopItem item = stringToShopItem(itemAsString);
+
             Tower tower = item.factory.createTower(position);
-            board.addTower(tower);
+            if (cashVault.ableToBuy(item.getCost()) && board.addTower(tower)) {
+                cashVault.withdraw(item.getCost());
+            }
+
+
     }
+
 
     public void refundTower(Tower tower, ShopItem item) throws InvalidRemovalError {
         cashVault.deposit((int) (item.getCost() * REFUND_FACTOR));
@@ -42,4 +47,12 @@ public class Shop {
         return items.iterator();
     }
 
+    private ShopItem stringToShopItem(String item) {
+        for (ShopItem shopItem: items) {
+            if (item.equals(shopItem.getName())) {
+                return shopItem;
+            }
+        }
+        return null;
+    }
 }
