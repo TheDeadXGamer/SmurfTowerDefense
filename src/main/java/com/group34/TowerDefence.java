@@ -78,12 +78,8 @@ public class TowerDefence extends JFrame implements Runnable {
             shop
         );
 
-        //GameView gameView = new GameView();
-        //gameView.add(boardView);
-        //gameView.pack();
-        //gameView.setVisible(true);
-
-        add(boardView);
+        gameView.add(boardView);
+        add(gameView);
         pack();
         setVisible(true);
 
@@ -93,7 +89,6 @@ public class TowerDefence extends JFrame implements Runnable {
     @Override
     public void run() {
         renderWelcomeScreen();
-
         for (Round round : rounds) {
             while (!round.isRoundOver() || game.enemiesLeft() > 0) {
                 if (player.isAlive()) {
