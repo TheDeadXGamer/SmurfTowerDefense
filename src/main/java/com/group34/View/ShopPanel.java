@@ -23,7 +23,7 @@ public class ShopPanel extends JPanel {
 
     /**
      * Constructor for ShopPanel.
-     * @param shopController
+     * @param
      */
     public ShopPanel(List<ShopButton> buttons) {
         setLayout(new BorderLayout());

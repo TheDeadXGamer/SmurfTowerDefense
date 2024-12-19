@@ -12,7 +12,7 @@ import com.group34.Model.Tower.Targeting.ClosestAttack;
 import com.group34.Model.Tower.Targeting.Targetings;
 import com.group34.View.ViewConstants;
 
-public class LightningSmurf<enemies extends Positionable & Attackable> implements Upgrade, Attack<enemies> {
+public class LightningSmurf<enemies extends Positionable & Attackable> implements  Attack<enemies> {
 
     protected int attackSpeed;
     protected int damage;
@@ -23,16 +23,18 @@ public class LightningSmurf<enemies extends Positionable & Attackable> implement
     protected int range;
     List<enemies> targets = new ArrayList<>();
     Targetings targeting;
+    private int cost;
 
     private float towerWidth;
     
-    public LightningSmurf(Point2D position, int attackSpeed, int damage, int range,float towerWidth) {
+    public LightningSmurf(Point2D position, int attackSpeed, int damage, int range,float towerWidth,int cost) {
         this.attackSpeed = attackSpeed;
         this.damage = damage;
         this.range = range;
         this.position = position;
         this.targeting = new ClosestAttack(new LightningBoltFactory(this), position);
         this.towerWidth = towerWidth;
+        this.cost = cost;
     }
 
     /**
@@ -100,6 +102,11 @@ public class LightningSmurf<enemies extends Positionable & Attackable> implement
     @Override
     public float getTowerWidth() {
         return towerWidth;
+    }
+
+    @Override
+    public int getCost() {
+        return cost;
     }
 
 

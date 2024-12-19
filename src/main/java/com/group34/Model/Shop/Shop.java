@@ -38,8 +38,8 @@ public class Shop {
     }
 
 
-    public void refundTower(Tower tower, ShopItem item) throws InvalidRemovalError {
-        cashVault.deposit((int) (item.getCost() * REFUND_FACTOR));
+    public void refundTower(Tower tower) throws InvalidRemovalError {
+        cashVault.deposit((int) (tower.getCost() * REFUND_FACTOR));
         board.removeTower(tower);
     }
 

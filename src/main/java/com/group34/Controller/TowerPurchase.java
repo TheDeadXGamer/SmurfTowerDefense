@@ -58,7 +58,10 @@ public class TowerPurchase {
                      // Create and place the tower on the board
                      Point dropPoint = dtde.getLocation();
                      try {
-                     shop.purchaseItem(towerType, dropPoint);}
+                     shop.purchaseItem(towerType, dropPoint);
+                     boardView.addTowerButton(dropPoint);
+                     }
+
                      catch (PlacementError e) {
                         boardView.showTemporaryMessage(e.getMessage());
                      }
