@@ -53,7 +53,7 @@ public class RightPanel extends JLabel {
 
     public void displayUpgradePanel(Tower tower) {
         cardLayout.show(cardPanel,"UPGRADE_PANEL");
-        upgradePanel.setCurrentTower(tower);
+        upgradePanel.populateUpgradePanel(tower);
     }
     
     public ButtonPanel getButtonPanel() {
