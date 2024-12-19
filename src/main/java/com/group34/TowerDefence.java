@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.plaf.SliderUI;
 
 import com.group34.Model.Board.Board;
 import com.group34.Model.Enemy.Enemy;
@@ -18,9 +17,8 @@ import com.group34.Model.Road.RoadToken;
 import com.group34.Model.Round.Round;
 import com.group34.Model.Shop.CashVault;
 import com.group34.Model.Shop.Shop;
-import com.group34.Model.Shop.ShopItem;
-import com.group34.Model.Tower.LightningSmurfFactory;
 import com.group34.View.BoardView;
+import com.group34.View.ButtonPanel;
 import com.group34.View.RightPanel;
 import com.group34.View.ShopPanel;
 import com.group34.View.StatusPanel;
@@ -37,9 +35,7 @@ public class TowerDefence extends JFrame implements Runnable {
     private List<Round> rounds;
     private GameSpeed gameSpeed;
     private Shop shop;
-    private boolean isPaused = false;
     
-
     private GameState currentState;
     private CardLayout cardLayout;
     private JPanel cardPanel;
@@ -64,6 +60,7 @@ public class TowerDefence extends JFrame implements Runnable {
         ShopPanel shopPanel = new ShopPanel(shop);
         StatusPanel statusPanel = new StatusPanel(cashVault, player);
         RightPanel rightPanel = new RightPanel(shopPanel, statusPanel);
+        WelcomePanel welcomePanel = new WelcomePanel();
 
         BoardView boardView = new BoardView(
             this.board, 
@@ -73,7 +70,7 @@ public class TowerDefence extends JFrame implements Runnable {
 
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
-        cardPanel.add(new WelcomePanel(this), "Welcome");
+        cardPanel.add(welcomePanel, "Welcome");
         cardPanel.add(boardView, "Game");
 
         add(cardPanel);
@@ -82,6 +79,8 @@ public class TowerDefence extends JFrame implements Runnable {
 
         pack();
         setVisible(true);
+
+        addButtonListeners(welcomePanel, rightPanel);
     }
 
     @Override
@@ -157,6 +156,7 @@ public class TowerDefence extends JFrame implements Runnable {
                     break;
                 }
             }
+            currentState = GameState.BETWEEN_ROUND;
         }
     }
 
@@ -166,6 +166,19 @@ public class TowerDefence extends JFrame implements Runnable {
 
     public void setState(GameState state) {
         currentState = state;
+    }
+
+    private void addButtonListeners(WelcomePanel welcomePanel, RightPanel rightPanel) {
+        welcomePanel.getPlayButton().addActionListener(e -> {
+            setState(GameState.BETWEEN_ROUND);
+        });
+
+        ButtonPanel buttonPanel = rightPanel.getButtonPanel();
+        buttonPanel.getFastForwardButton().addActionListener(e -> {
+            if(currentState == GameState.BETWEEN_ROUND) {
+                setState(GameState.ACTIVE_ROUND);
+            }
+        });
     }
 
 }

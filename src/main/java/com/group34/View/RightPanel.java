@@ -8,6 +8,8 @@ import javax.swing.JPanel;
 
 public class RightPanel extends JLabel {
 
+    ButtonPanel buttonPanel;
+
     public RightPanel(ShopPanel shopPanel, StatusPanel statusPanel) {
         setLayout(new BorderLayout());
         setPreferredSize(ViewConstants.SHOP_PANEL_SIZE);
@@ -18,7 +20,7 @@ public class RightPanel extends JLabel {
         topPanel.setLayout(new BorderLayout());
 
         // Add ButtonPanel
-        ButtonPanel buttonPanel = new ButtonPanel();
+        buttonPanel = new ButtonPanel();
         topPanel.add(buttonPanel, BorderLayout.NORTH);
 
         // Add StatusPanel
@@ -28,5 +30,9 @@ public class RightPanel extends JLabel {
 
         // Add ShopPanel
         add(shopPanel, BorderLayout.CENTER);
+    }
+
+    public ButtonPanel getButtonPanel() {
+        return buttonPanel;
     }
 }

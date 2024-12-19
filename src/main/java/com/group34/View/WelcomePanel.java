@@ -12,17 +12,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import com.group34.GameState;
-import com.group34.TowerDefence;
-import com.group34.Model.Game.Game;
-import com.group34.Model.Tower.Tower;
-
 public class WelcomePanel extends JPanel {
 
-    private TowerDefence towerDefence;
+    private JButton playButton;
     
-    public WelcomePanel(TowerDefence towerDefence){
-        this.towerDefence = towerDefence;
+    public WelcomePanel(){
         renderScreen();
     }
 
@@ -42,18 +36,16 @@ public class WelcomePanel extends JPanel {
         centerPanel.add(Box.createVerticalStrut(ViewConstants.GAME_HEIGHT/3));
         
 
-        JButton playButton = new JButton("Play");
+        this.playButton = new JButton("Play");
 
         playButton.setAlignmentX(CENTER_ALIGNMENT);
         centerPanel.add(playButton);
 
         add(centerPanel, BorderLayout.CENTER);
-        playButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                towerDefence.setState(GameState.BETWEEN_ROUND); // Navigate to Game screen
-            }
-        });
+        
     }
 
+    public JButton getPlayButton() {
+        return playButton;
+    }
 }
