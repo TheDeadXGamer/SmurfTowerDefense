@@ -1,11 +1,9 @@
 package com.group34.View;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.awt.geom.Point2D;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -17,7 +15,7 @@ import com.group34.Model.Game.Game;
 import com.group34.Model.Projectile.Projectile;
 import com.group34.Model.Tower.Tower;
 
-public class BoardView extends JPanel {
+public class BoardView extends JPanel implements SellTowerListener  {
     private String temporaryMessage = null;
     private boolean showTemporaryMessage = false;
     private Timer errorTimer;
@@ -25,6 +23,7 @@ public class BoardView extends JPanel {
     public Game game;
     public RightPanel rightPanel;
     private JPanel overlayPanel;
+    private HashMap<Tower,JButton> buttons = new HashMap<>();
     private final Map<String, Image> enemyImages = Map.of(
         "Gargamel", new ImageIcon(
             getClass().getResource(ViewConstants.GARGAMEL_IMAGE))
@@ -79,34 +78,17 @@ public class BoardView extends JPanel {
         overlayPanel.setOpaque(false);
 
         // TODO: explain
-        addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                rightPanel.displayShopPanel();
-            }
+        addMouseListener(new MouseAdapter() {
+                             @Override
+                             public void mouseClicked(MouseEvent e) {
+                                 rightPanel.displayShopPanel();
+                             }
+                         });
 
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
 
         add(overlayPanel);
+
+
     }
 
 
@@ -238,11 +220,14 @@ public class BoardView extends JPanel {
         int topLeftX = x - (buttonWidth / 2);
         int topLeftY = y - (buttonHeight / 2);
 
+        Tower tower = findTower(point);
+        buttons.put(tower,towerButton);
         towerButton.setBounds(topLeftX,topLeftY,buttonWidth,buttonHeight);
+
         towerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                rightPanel.displayUpgradePanel(findTower(point));
+                rightPanel.displayUpgradePanel(tower);
             }
         });
 
@@ -267,5 +252,13 @@ public class BoardView extends JPanel {
             }
         }
         return null;
+    }
+
+    @Override
+    public void update(Tower tower) {
+        JButton button = buttons.get(tower);
+        overlayPanel.remove(button);
+        buttons.remove(tower,button);
+        rightPanel.displayShopPanel();
     }
 }
