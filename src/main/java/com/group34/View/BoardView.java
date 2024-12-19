@@ -3,6 +3,7 @@ package com.group34.View;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -136,7 +137,6 @@ public class BoardView extends JPanel implements SellTowerListener  {
 
         add(overlayPanel);
 
-
     }
 
 
@@ -244,7 +244,7 @@ public class BoardView extends JPanel implements SellTowerListener  {
     public void showTemporaryMessage(String message) {
         temporaryMessage = message;
         showTemporaryMessage = true;
-
+        repaint();
         if (errorTimer == null || !errorTimer.isRunning()) {
             // Hide the message after 2 seconds
             errorTimer = new Timer(2000, e -> {

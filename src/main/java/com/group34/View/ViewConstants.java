@@ -14,11 +14,12 @@ public class ViewConstants {
     public static final Color BORDER_COLOR = Color.BLACK; // black
     public static final Color HEALTH_BAR_COLOR = new Color(0, 255, 0); // green
 
+
     // size integers
     public static final int BUTTON_SIZE = 30;
     public static final int TOWER_SIZE = 80;
-    public static final int GAME_WIDTH = 800;
-    public static final int GAME_HEIGHT = 600;
+    public static final int GAME_WIDTH = 786;
+    public static final int GAME_HEIGHT = 635;
     public static final int RIGHT_PANEL_WIDTH = GAME_WIDTH - 600;
     public static final int STATUS_ICON_SIZE = 30;
 
