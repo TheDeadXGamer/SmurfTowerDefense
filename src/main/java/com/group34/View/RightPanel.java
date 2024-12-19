@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 
 
 public class RightPanel extends JLabel {
+
+    private ButtonPanel buttonPanel;
     private CardLayout cardLayout; // For switching between panels
     private JPanel cardPanel; // Container for ShopPanel and UpgradePanel
     private UpgradePanel upgradePanel;
@@ -24,7 +26,7 @@ public class RightPanel extends JLabel {
         topPanel.setLayout(new BorderLayout());
 
         // Add ButtonPanel
-        ButtonPanel buttonPanel = new ButtonPanel();
+        buttonPanel = new ButtonPanel();
         topPanel.add(buttonPanel, BorderLayout.NORTH);
 
         // Add StatusPanel
@@ -52,5 +54,9 @@ public class RightPanel extends JLabel {
     public void displayUpgradePanel(Tower tower) {
         cardLayout.show(cardPanel,"UPGRADE_PANEL");
         upgradePanel.setCurrentTower(tower);
+    }
+    
+    public ButtonPanel getButtonPanel() {
+        return buttonPanel;
     }
 }
