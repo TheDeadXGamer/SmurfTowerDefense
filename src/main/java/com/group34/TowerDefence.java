@@ -1,11 +1,13 @@
 package com.group34;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 import javax.swing.JFrame;
-import javax.swing.plaf.SliderUI;
 
+import com.group34.Controller.TowerPurchase;
 import com.group34.Model.Board.Board;
 import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Enemy.EnemyFactory;
@@ -17,9 +19,10 @@ import com.group34.Model.Round.Round;
 import com.group34.Model.Shop.CashVault;
 import com.group34.Model.Shop.Shop;
 import com.group34.Model.Shop.ShopItem;
-import com.group34.Model.Tower.LightningSmurfFactory;
 import com.group34.View.BoardView;
+import com.group34.View.GameView;
 import com.group34.View.RightPanel;
+import com.group34.View.ShopButton;
 import com.group34.View.ShopPanel;
 import com.group34.View.StatusPanel;
 
@@ -35,7 +38,7 @@ public class TowerDefence extends JFrame implements Runnable {
     private GameSpeed gameSpeed;
     private Shop shop;
     private boolean isPaused = false;
-
+    private GameView gameView = new GameView();
 
     public TowerDefence(TowerDefenceBuilder builder) {
 
@@ -47,13 +50,19 @@ public class TowerDefence extends JFrame implements Runnable {
         this.rounds = builder.rounds;
         this.gameSpeed = builder.gameSpeed;
         this.shop = builder.shop;
-        
+
         setTitle("Tower Defence");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
         setLocationRelativeTo(null);
 
-        ShopPanel shopPanel = new ShopPanel(shop);
+        List<ShopButton> buttons = new ArrayList<>();
+        Iterator<ShopItem> shopItems = shop.getItems();
+        while (shopItems.hasNext()) {
+            buttons.add(new ShopButton(shopItems.next()));
+        }
+
+        ShopPanel shopPanel = new ShopPanel(buttons);
         StatusPanel statusPanel = new StatusPanel(cashVault, player);
         RightPanel rightPanel = new RightPanel(shopPanel, statusPanel);
 
@@ -62,16 +71,24 @@ public class TowerDefence extends JFrame implements Runnable {
             this.game, 
             rightPanel
         );
-        add(boardView);
 
+        TowerPurchase purchaseController = new TowerPurchase(
+            buttons,
+            boardView,
+            shop
+        );
+
+        gameView.add(boardView);
+        add(gameView);
         pack();
         setVisible(true);
+
+
     }
 
     @Override
     public void run() {
         renderWelcomeScreen();
-
         for (Round round : rounds) {
             while (!round.isRoundOver() || game.enemiesLeft() > 0) {
                 if (player.isAlive()) {
@@ -88,6 +105,7 @@ public class TowerDefence extends JFrame implements Runnable {
                     }
                     
                     board.update();
+                    //gameView.repaint();
                     repaint();
 
                     try {
@@ -95,6 +113,8 @@ public class TowerDefence extends JFrame implements Runnable {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
+                } else {
+                    break;
                 }
                 if (isPaused) { renderPausedScreen(); }
             }

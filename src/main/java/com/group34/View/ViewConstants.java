@@ -23,7 +23,7 @@ public class ViewConstants {
 
     // dimension objects
     public static final Dimension BUTTON_PANEL_SIZE = new Dimension(RIGHT_PANEL_WIDTH, 50);
-    public static final Dimension STATUS_PANEL_SIZE = new Dimension(RIGHT_PANEL_WIDTH, 120);
+    public static final Dimension STATUS_PANEL_SIZE = new Dimension(RIGHT_PANEL_WIDTH, 100);
     public static final Dimension SHOP_PANEL_SIZE = new Dimension(RIGHT_PANEL_WIDTH, 400);
 
     // image paths

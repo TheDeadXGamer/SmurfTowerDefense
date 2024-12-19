@@ -74,53 +74,10 @@ public class BoardView extends JPanel {
         setLayout(new BorderLayout());
         add(rightPanel, BorderLayout.EAST);
 
-       // Enable drop target, TODO: show image of tower being dragged
-        // setDropTarget(new DropTarget() {
-        //     @Override
-        //     public synchronized void drop(DropTargetDropEvent dtde) {
-        //         try {
-        //             dtde.acceptDrop(dtde.getDropAction());
-        //             Transferable transferable = dtde.getTransferable();
-        //             String towerType = (String) transferable.getTransferData(DataFlavor.stringFlavor);
-
-        //             // Create and place the tower on the board
-        //             Point dropPoint = dtde.getLocation();
-        //             String checkPurchase = shopController.purchaseTower(towerType, dropPoint);
-
-        //             switch(checkPurchase) {
-
-        //                 case "PlacedOnAnotherTower":
-        //                     showTemporaryMessage("Cannot place on another tower!");
-        //                     break;
-        //                 case "NotEnoughMoney"  :
-        //                     showTemporaryMessage("Not enough money!");
-        //             }
-
-        //             repaint(); // Repaint to show the new tower
-        //         } catch (Exception e) {
-        //             e.printStackTrace();
-        //         }
-        //     }
-        // });
-    }
-
-    private void showTemporaryMessage(String message) {
-        temporaryMessage = message;
-        showTemporaryMessage = true;
-        repaint(); // Trigger repaint to show the message
-
-        if (errorTimer == null || !errorTimer.isRunning()) {
-            // Hide the message after 2 seconds
-            errorTimer = new Timer(2000, e -> {
-                showTemporaryMessage = false;
-                repaint(); // Trigger repaint to remove the message
-            });
-            errorTimer.setRepeats(false);
-            errorTimer.start();
-        }
-
 
     }
+
+
 
     @Override
     public void paintComponent(Graphics g) {
@@ -214,5 +171,19 @@ public class BoardView extends JPanel {
                 (int) board.getDimension().getHeight(),
                 this
         );
+    }
+    public void showTemporaryMessage(String message) {
+        temporaryMessage = message;
+        showTemporaryMessage = true;
+
+        if (errorTimer == null || !errorTimer.isRunning()) {
+            // Hide the message after 2 seconds
+            errorTimer = new Timer(2000, e -> {
+                showTemporaryMessage = false;
+                repaint(); // Trigger repaint to remove the message
+            });
+            errorTimer.setRepeats(false);
+            errorTimer.start();
+        }
     }
 }

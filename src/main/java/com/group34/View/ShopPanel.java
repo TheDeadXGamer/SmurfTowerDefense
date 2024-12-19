@@ -2,60 +2,64 @@ package com.group34.View;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Image;
 import java.awt.Insets;
-import java.awt.datatransfer.StringSelection;
-import java.awt.datatransfer.Transferable;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Map;
+import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
-import javax.swing.TransferHandler;
-
-import com.group34.Model.Shop.Shop;
-import com.group34.Model.Shop.ShopItem;
 
 
 public class ShopPanel extends JPanel {
 
-    private Map<String, Image> towerImages = Map.of(
-        "LightningSmurf", new ImageIcon(
-            getClass().getResource(ViewConstants.LIGHTNINGSMURF_IMAGE))
-            .getImage()
-            .getScaledInstance(
-                ViewConstants.TOWER_SIZE,
-                ViewConstants.TOWER_SIZE,
-                Image.SCALE_SMOOTH)
-    );
-    
+    List<ShopButton> shopButtons = new ArrayList<>();
 
     /**
      * Constructor for ShopPanel.
-     * @param shopController
      */
-    public ShopPanel(Shop shop) {
+    public ShopPanel(List<ShopButton> buttons) {
         setLayout(new BorderLayout());
         setPreferredSize(ViewConstants.SHOP_PANEL_SIZE);
         setBackground(ViewConstants.RIGHT_PANEL_COLOR);
+        add(createTitle(), BorderLayout.NORTH);
 
-        // A JPanel to hold shop items
+        JPanel itemsPanel = getItemsPanel();
+        populateItems(itemsPanel, buttons);
+        JScrollPane scrollPane = getScrollPane(itemsPanel);
+        add(scrollPane, BorderLayout.CENTER);
+        setBorder(BorderFactory.createLineBorder(ViewConstants.BORDER_COLOR));
+    }
+
+    public Iterator<ShopButton> getButtons() {
+        return shopButtons.iterator();
+    }
+
+    private JScrollPane getScrollPane(JPanel itemsPanel) {
+        JScrollPane scrollPane = new JScrollPane(itemsPanel);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        return scrollPane;
+    }
+
+    private JPanel getItemsPanel() {
         JPanel itemsPanel = new JPanel();
         itemsPanel.setLayout(new GridBagLayout());
         itemsPanel.setBackground(ViewConstants.RIGHT_PANEL_COLOR);
-        itemsPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0)); // Add 10px top padding
+        itemsPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
+        return itemsPanel;
+    }
 
+    private void populateItems(
+        JPanel itemsPanel,
+        List<ShopButton> buttons)
+    {
         // Grid stuff, not sure that it works
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 0, 10, 0); // Add vertical padding between items
@@ -64,80 +68,13 @@ public class ShopPanel extends JPanel {
         gbc.gridx = 0; // Single column
         gbc.anchor = GridBagConstraints.NORTH;
 
-        // Adds items to the itemsPanel from the shopModel
-        Iterator<ShopItem> items = shop.getItems();
-        int counter = 0;
-        while (items.hasNext()) {
-            ShopItem item = items.next();
-            ShopItemTooltip itemPanel = getTowerComponent(item);
+        for (int i = 0; i < buttons.size(); i++) {
+            ShopButton itemPanel = buttons.get(i);
             itemPanel.setBackground(ViewConstants.RIGHT_PANEL_COLOR);
-
-            gbc.gridy = counter;
-            counter ++; // New row for each item
-
+            gbc.gridy = i;// New row for each item
             itemsPanel.add(itemPanel, gbc);
         }
 
-        // Create a JScrollPane and add the itemsPanel to it
-        JScrollPane scrollPane = new JScrollPane(itemsPanel);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-
-        // Add the scrollPane to the shopPanel
-        add(createTitle(), BorderLayout.NORTH);
-        add(scrollPane, BorderLayout.CENTER);
-        setBorder(BorderFactory.createLineBorder(ViewConstants.BORDER_COLOR));
-    }
-
-     /**
-     * @param item The item to create a JComponent for.
-     * @return A ShopItemComponent, a specific JComponent, for the item.
-     **/
-    private ShopItemTooltip getTowerComponent(ShopItem item) {
-        ShopItemTooltip itemComponent = new ShopItemTooltip(item);
-        itemComponent.setLayout(new FlowLayout());
-
-        JLabel itemImageLabel = new JLabel();
-        Image towerImage = towerImages.get(item.getName()); 
-
-        if (towerImage != null) {
-            Image image = towerImage.getScaledInstance(ViewConstants.TOWER_SIZE, ViewConstants.TOWER_SIZE, Image.SCALE_SMOOTH);
-            itemImageLabel.setIcon(new ImageIcon(image));
-        } else {
-            itemImageLabel.setIcon(ViewConstants.createPlaceholderIcon());
-        }
-        itemImageLabel.setBorder(BorderFactory.createLineBorder(ViewConstants.BORDER_COLOR));
-        itemComponent.add(itemImageLabel);
-
-        // price tag
-        JLabel priceLabel = new JLabel("$" + item.getCost());
-        priceLabel.setFont(new Font("Arial", Font.PLAIN, 14));
-        priceLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        itemComponent.add(priceLabel, BorderLayout.SOUTH);
-
-        itemComponent.setTransferHandler(new TransferHandler("text") {
-            @Override
-            protected Transferable createTransferable(JComponent c) {
-                return new StringSelection(item.getName());
-            }
-
-            @Override
-            public int getSourceActions(JComponent c) {
-                return COPY;
-            }
-        });
-
-        itemComponent.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                JComponent comp = (JComponent) e.getSource();
-                TransferHandler handler = comp.getTransferHandler();
-                handler.exportAsDrag(comp, e, TransferHandler.COPY);
-            }
-        });
-        
-
-        return itemComponent;
     }
 
     private JLabel createTitle() {
