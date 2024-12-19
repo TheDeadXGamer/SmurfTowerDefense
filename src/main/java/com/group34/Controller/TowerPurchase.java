@@ -10,22 +10,22 @@ import java.awt.event.MouseAdapter;
 import java.util.List;
 
 import javax.swing.JComponent;
-import javax.swing.JPanel;
 import javax.swing.TransferHandler;
 
 import com.group34.Model.Board.PlacementError;
 import com.group34.Model.Shop.OverDraftError;
 import com.group34.Model.Shop.Shop;
 import com.group34.View.BoardView;
-import com.group34.View.ShopButton;
+import com.group34.View.ShopButtonComponent;
 
 public class TowerPurchase {
     public TowerPurchase(
-        List<ShopButton> buttons,        
+        List<ShopButtonComponent> buttons,
         BoardView boardView,
         Shop shop
     ) {
-        for (ShopButton button : buttons) {
+        // TODO: explain what this does
+        for (ShopButtonComponent button : buttons) {
             button.setTransferHandler(new TransferHandler("text") {
                 @Override
                 protected Transferable createTransferable(JComponent c) {
@@ -47,34 +47,29 @@ public class TowerPurchase {
                 }
             });
 
-         boardView.setDropTarget(new DropTarget() {
-             @Override
-             public synchronized void drop(DropTargetDropEvent dtde) {
-                 try {
-                     dtde.acceptDrop(dtde.getDropAction());
-                     Transferable transferable = dtde.getTransferable();
-                     String towerType = (String) transferable.getTransferData(DataFlavor.stringFlavor);
+            boardView.setDropTarget(new DropTarget() {
+            @Override
+            public synchronized void drop(DropTargetDropEvent dtde) {
+                try {
+                    dtde.acceptDrop(dtde.getDropAction());
+                    Transferable transferable = dtde.getTransferable();
+                    String towerType = (String) transferable.getTransferData(DataFlavor.stringFlavor);
 
-                     // Create and place the tower on the board
-                     Point dropPoint = dtde.getLocation();
-                     try {
-                     shop.purchaseItem(towerType, dropPoint);
-                     boardView.addTowerButton(dropPoint);
-                     }
-
-                     catch (PlacementError e) {
+                    // Create and place the tower on the board
+                    Point dropPoint = dtde.getLocation();
+                    try {
+                        shop.purchaseItem(towerType, dropPoint);
+                        boardView.addTowerButton(dropPoint);
+                    } catch (PlacementError e) {
                         boardView.showTemporaryMessage(e.getMessage());
-                     }
-                     catch (OverDraftError e) {
-                         boardView.showTemporaryMessage(e.getMessage());
-                     }
-                 } catch (Exception e) {
-                     e.printStackTrace();
-                 }
-             }});
+                    }
+                    catch (OverDraftError e) {
+                        boardView.showTemporaryMessage(e.getMessage());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }});
         }
     }
-
-
-    
 }

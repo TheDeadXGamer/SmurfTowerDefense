@@ -7,6 +7,5 @@ import com.group34.Model.Positionable;
 import java.util.List;
 
 public interface Targetings<enemies extends Positionable & Attackable> {
-
     void attack(List<enemies> enemy);
 }

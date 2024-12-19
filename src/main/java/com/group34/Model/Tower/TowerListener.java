@@ -9,7 +9,7 @@ public interface TowerListener<enemies extends Positionable & Attackable> {
      * Notifies a tower when a certain action happens and passes the enemy related to that action.
      * @param enemy the enemy related to the action.
      */
-    public void notifyTower(enemies enemy);
+    void notifyTower(enemies enemy);
 
     /**
      * Notifies a tower when an enemy dies.

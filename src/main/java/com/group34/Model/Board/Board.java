@@ -23,7 +23,7 @@ public class Board {
         this.dimension = dimension;
     }
 
-    public Dimension getDimension( ) {
+    public Dimension getDimension() {
         return dimension;
     }
 

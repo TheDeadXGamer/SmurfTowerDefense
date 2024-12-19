@@ -45,19 +45,16 @@ public class StatusPanel extends JPanel implements PlayerSubscriber, CashVaultOb
         CashVault cashVault,
         Player player
     ) {
-
         this.cashVault = cashVault;
         this.player = player;
+
         cashVault.subscribe(this);
         player.subscribe(this);
- 
 
         // size, layout, background
         setPreferredSize(ViewConstants.STATUS_PANEL_SIZE);
         setLayout(new GridLayout(2, 2));
         setBackground(ViewConstants.RIGHT_PANEL_COLOR);
-
-  
 
         // images and text
         JLabel healthImageLabel = new JLabel(new ImageIcon(healthImage));
@@ -65,7 +62,6 @@ public class StatusPanel extends JPanel implements PlayerSubscriber, CashVaultOb
 
         JLabel cashImageLabel = new JLabel(new ImageIcon(coinImage));
         cashLabel = new JLabel("" + cashVault.getBalance());
-        // update();
 
         // font
         Font labelFont = new Font("Arial", Font.PLAIN, 16);

@@ -18,14 +18,12 @@ import javax.swing.SwingConstants;
 
 
 public class ShopPanel extends JPanel {
-
-    List<ShopButton> shopButtons = new ArrayList<>();
+    List<ShopButtonComponent> shopButtonComponents = new ArrayList<>();
 
     /**
      * Constructor for ShopPanel.
-     * @param
      */
-    public ShopPanel(List<ShopButton> buttons) {
+    public ShopPanel(List<ShopButtonComponent> buttons) {
         setLayout(new BorderLayout());
         setPreferredSize(ViewConstants.SHOP_PANEL_SIZE);
         setBackground(ViewConstants.RIGHT_PANEL_COLOR);
@@ -38,8 +36,8 @@ public class ShopPanel extends JPanel {
         setBorder(BorderFactory.createLineBorder(ViewConstants.BORDER_COLOR));
     }
 
-    public Iterator<ShopButton> getButtons() {
-        return shopButtons.iterator();
+    public Iterator<ShopButtonComponent> getButtons() {
+        return shopButtonComponents.iterator();
     }
 
     private JScrollPane getScrollPane(JPanel itemsPanel) {
@@ -59,8 +57,7 @@ public class ShopPanel extends JPanel {
 
     private void populateItems(
         JPanel itemsPanel, 
-        List<ShopButton> buttons)
-    {
+        List<ShopButtonComponent> buttons) {
         // Grid stuff, not sure that it works
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 0, 10, 0); // Add vertical padding between items
@@ -70,12 +67,11 @@ public class ShopPanel extends JPanel {
         gbc.anchor = GridBagConstraints.NORTH;
 
         for (int i = 0; i < buttons.size(); i++) {
-            ShopButton itemPanel = buttons.get(i);
+            ShopButtonComponent itemPanel = buttons.get(i);
             itemPanel.setBackground(ViewConstants.RIGHT_PANEL_COLOR);
             gbc.gridy = i;// New row for each item
             itemsPanel.add(itemPanel, gbc);
         }
-      
     }
 
     private JLabel createTitle() {
@@ -85,6 +81,4 @@ public class ShopPanel extends JPanel {
         shopTitle.setFont(new Font("Arial", Font.BOLD, 20));
         return shopTitle;
     }
-
-
 }

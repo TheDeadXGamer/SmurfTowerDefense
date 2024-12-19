@@ -7,15 +7,11 @@ import com.group34.Model.Positionable;
 import java.awt.geom.Point2D;
 
 public class LightningBolt<Target extends Positionable & Attackable & Killable> implements Projectile {
-
     private double speed;
     private Target enemy;
     private Point2D currentPosition;
     private int damage;
     private String projectileType;
-
-
-
 
     public LightningBolt(double speed, Point2D startPosition, int damage, String projectileType, Target enemy) {
         this.speed = speed;
@@ -84,11 +80,8 @@ public class LightningBolt<Target extends Positionable & Attackable & Killable> 
     }
 
     @Override
-    public void update() {
-
-
-
-        //Calculate how far to move projectile in each axis
+    public void updatePosition() {
+        // Calculate how far to move projectile in each axis
         double deltaX = Math.cos(getAngle()) * speed;
         double deltaY = Math.sin(getAngle()) * speed;
 

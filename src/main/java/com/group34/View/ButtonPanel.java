@@ -5,7 +5,6 @@ import java.awt.*;
 import java.util.Objects;
 
 public class ButtonPanel extends JPanel {
-
     final Image settingsImage = new ImageIcon(
             getClass().getResource(ViewConstants.SETTINGS_ICON_PATH)
     )

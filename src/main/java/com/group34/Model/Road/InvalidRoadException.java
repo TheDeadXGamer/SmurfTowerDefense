@@ -4,5 +4,4 @@ public class InvalidRoadException extends Exception {
     public InvalidRoadException(String message) {
         super(message);
     }
-    
 }
