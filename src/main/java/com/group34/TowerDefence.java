@@ -8,6 +8,7 @@ import java.util.Optional;
 import javax.swing.JFrame;
 
 import com.group34.Controller.TowerPurchase;
+import com.group34.Controller.TowerSell;
 import com.group34.Controller.TowerUpgrade;
 import com.group34.Model.Board.Board;
 import com.group34.Model.Enemy.Enemy;
@@ -60,8 +61,9 @@ public class TowerDefence extends JFrame implements Runnable {
 
         TowerUpgrade towerUpgrade = new TowerUpgrade();
         towerUpgrade.setCashVault(cashVault);
+        TowerSell towerSell = new TowerSell(shop);
 
-        UpgradePanel upgradeScreen = new UpgradePanel(towerUpgrade);
+        UpgradePanel upgradeScreen = new UpgradePanel(towerUpgrade,towerSell);
         ShopPanel shopPanel = new ShopPanel(buttons);
         StatusPanel statusPanel = new StatusPanel(cashVault, player);
         RightPanel rightPanel = new RightPanel(shopPanel, statusPanel,upgradeScreen);
