@@ -108,8 +108,6 @@ public class TsunamiSmurf<enemies extends Positionable & Attackable> implements 
         return null;
     }
 
-    @Override
-    public String getName() {
-        return getClass().getSimpleName();
-    }
+
+
 }

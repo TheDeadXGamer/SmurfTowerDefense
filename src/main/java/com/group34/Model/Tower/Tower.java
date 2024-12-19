@@ -41,5 +41,5 @@ public interface Tower<enemies extends Positionable & Attackable> extends TowerL
 
     int getCost();
 
-    String getName();
+
 }

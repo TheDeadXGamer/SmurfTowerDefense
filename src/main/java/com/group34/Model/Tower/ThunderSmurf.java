@@ -114,10 +114,7 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
         return cost;
     }
 
-    @Override
-    public String getName() {
-        return getClass().getSimpleName();
-    }
+
 
     @Override
     public void notifyTower(enemies enemy) {

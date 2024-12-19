@@ -107,10 +107,7 @@ public class LightningSmurf<enemies extends Positionable & Attackable> implement
         return cost;
     }
 
-    @Override
-    public String getName() {
-        return getClass().getSimpleName();
-    }
+
 
 
     /**

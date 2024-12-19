@@ -108,8 +108,4 @@ public class BlazeSmurf<enemies extends Positionable & Attackable> implements At
         return null;
     }
 
-    @Override
-    public String getName() {
-        return getClass().getSimpleName();
-    }
 }
