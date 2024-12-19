@@ -21,7 +21,7 @@ import com.group34.View.ShopButton;
 
 public class TowerPurchase {
     public TowerPurchase(
-        List<ShopButton> buttons,
+        List<ShopButton> buttons,        
         BoardView boardView,
         Shop shop
     ) {
@@ -31,7 +31,7 @@ public class TowerPurchase {
                 protected Transferable createTransferable(JComponent c) {
                     return new StringSelection(button.getItem().getName());
                 }
-
+                
                 @Override
                 public int getSourceActions(JComponent c) {
                     return COPY;
@@ -58,7 +58,10 @@ public class TowerPurchase {
                      // Create and place the tower on the board
                      Point dropPoint = dtde.getLocation();
                      try {
-                     shop.purchaseItem(towerType, dropPoint);}
+                     shop.purchaseItem(towerType, dropPoint);
+                     boardView.addTowerButton(dropPoint);
+                     }
+
                      catch (PlacementError e) {
                         boardView.showTemporaryMessage(e.getMessage());
                      }
@@ -73,5 +76,5 @@ public class TowerPurchase {
     }
 
 
-
+    
 }

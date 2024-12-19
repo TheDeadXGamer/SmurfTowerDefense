@@ -23,6 +23,7 @@ public class ShopPanel extends JPanel {
 
     /**
      * Constructor for ShopPanel.
+     * @param
      */
     public ShopPanel(List<ShopButton> buttons) {
         setLayout(new BorderLayout());
@@ -32,7 +33,7 @@ public class ShopPanel extends JPanel {
 
         JPanel itemsPanel = getItemsPanel();
         populateItems(itemsPanel, buttons);
-        JScrollPane scrollPane = getScrollPane(itemsPanel);
+        JScrollPane scrollPane = getScrollPane(itemsPanel);    
         add(scrollPane, BorderLayout.CENTER);
         setBorder(BorderFactory.createLineBorder(ViewConstants.BORDER_COLOR));
     }
@@ -57,7 +58,7 @@ public class ShopPanel extends JPanel {
     }
 
     private void populateItems(
-        JPanel itemsPanel,
+        JPanel itemsPanel, 
         List<ShopButton> buttons)
     {
         // Grid stuff, not sure that it works
@@ -74,7 +75,7 @@ public class ShopPanel extends JPanel {
             gbc.gridy = i;// New row for each item
             itemsPanel.add(itemPanel, gbc);
         }
-
+      
     }
 
     private JLabel createTitle() {

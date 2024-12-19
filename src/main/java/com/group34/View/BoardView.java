@@ -1,18 +1,15 @@
 package com.group34.View;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.RenderingHints;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.geom.Point2D;
 import java.util.Iterator;
 import java.util.Map;
 
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-import javax.swing.Timer;
+import javax.swing.*;
 
 import com.group34.Model.Board.Board;
 import com.group34.Model.Enemy.Enemy;
@@ -26,7 +23,8 @@ public class BoardView extends JPanel {
     private Timer errorTimer;
     public Board board;
     public Game game;
-
+    public RightPanel rightPanel;
+    private JPanel overlayPanel;
     private Map<String, Image> enemyImages = Map.of(
         "Gargamel", new ImageIcon(
             getClass().getResource(ViewConstants.GARGAMEL_IMAGE))
@@ -44,7 +42,13 @@ public class BoardView extends JPanel {
             .getScaledInstance(
                 ViewConstants.TOWER_SIZE,
                 ViewConstants.TOWER_SIZE,
-                Image.SCALE_SMOOTH)
+                Image.SCALE_SMOOTH),"ThunderSmurf", new ImageIcon(
+                    getClass().getResource(ViewConstants.LIGHTNINGSMURF_IMAGE))
+                    .getImage()
+                    .getScaledInstance(
+                            ViewConstants.TOWER_SIZE,
+                            ViewConstants.TOWER_SIZE,
+                            Image.SCALE_SMOOTH)
     );
 
     private Map<String, Image> projectileImages = Map.of(
@@ -70,11 +74,42 @@ public class BoardView extends JPanel {
 
         this.board = board;
         this.game = game;
+        this.rightPanel = rightPanel;
         setPreferredSize(board.getDimension());
         setLayout(new BorderLayout());
         add(rightPanel, BorderLayout.EAST);
 
+        overlayPanel = new JPanel(null);
+        overlayPanel.setOpaque(false);
+        add(overlayPanel);
 
+
+        addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                rightPanel.displayShopPanel();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
     }
 
 
@@ -185,5 +220,48 @@ public class BoardView extends JPanel {
             errorTimer.setRepeats(false);
             errorTimer.start();
         }
+    }
+    public void addTowerButton( Point point) {
+        JButton towerButton = new JButton();
+
+        int buttonWidth = 50;  // Adjust this to your desired button width
+        int buttonHeight = 70; // Adjust this to your desired button height
+
+        // Calculate the position for the top-left corner so the button is centered
+        int x = (int) point.getX();
+        int y = (int) point.getY();
+        int topLeftX = x - (buttonWidth / 2);
+        int topLeftY = y - (buttonHeight / 2);
+
+        towerButton.setBounds(topLeftX,topLeftY,buttonWidth,buttonHeight);
+        towerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                rightPanel.displayUpgradePanel(findTower(point));
+            }
+        });
+
+        towerButton.setContentAreaFilled(false); // Removes the button's background
+        towerButton.setBorderPainted(false);    // Removes the border
+        towerButton.setFocusPainted(false);     // Removes focus painting
+        towerButton.setOpaque(false);           // Ensures the button is fully transparent
+
+
+        overlayPanel.add(towerButton);
+        overlayPanel.revalidate();
+        overlayPanel.repaint();
+
+    }
+    private Tower findTower(Point point) {
+        Point2D position = new Point2D.Double(point.getX(),point.getY());
+        Iterator<Tower> towers = board.getTowers();
+
+        while (towers.hasNext()) {
+            Tower tower = towers.next();
+            if (tower.getPosition().distance(position) <= 1) {
+                return tower;
+            }
+        }
+        return null;
     }
 }
