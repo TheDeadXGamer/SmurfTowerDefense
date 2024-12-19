@@ -112,8 +112,6 @@ public class FireSmurf<enemies extends Positionable & Attackable> implements Att
         targeting = targetingtype;
     }
 
-    @Override
-    public String getName() {
-        return getClass().getSimpleName();
+
     }
-}
+
