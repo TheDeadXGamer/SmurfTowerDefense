@@ -147,7 +147,9 @@ public class TowerDefence extends JFrame implements Runnable {
     }
 
     private void handleGameOver() {
-        System.out.println("Game Over");
+        while (true) {
+            break;
+        }
     }
 
     private void handleActive(){
@@ -186,6 +188,7 @@ public class TowerDefence extends JFrame implements Runnable {
                 if(roundIterator.hasNext()) {
                     currentState = GameState.BETWEEN_ROUND;
                     handleBetweenRound();
+                    continue;
                 }
                 currentState = GameState.GAME_OVER;
         }
@@ -213,10 +216,6 @@ public class TowerDefence extends JFrame implements Runnable {
 
         ButtonPanel buttonPanel = rightPanel.getButtonPanel();
         buttonPanel.getFastForwardButton().addActionListener(e -> {
-            if(currentState == GameState.BETWEEN_ROUND) {
-                setState(GameState.ACTIVE_ROUND);
-            }
-
             if(currentState == GameState.ACTIVE_ROUND) {
                 
                 if(gameSpeed == GameSpeed.FAST) {
@@ -225,6 +224,10 @@ public class TowerDefence extends JFrame implements Runnable {
                 else if(gameSpeed == GameSpeed.NORMAL) {
                     gameSpeed = GameSpeed.FAST;
                 }
+            }
+
+            if(currentState == GameState.BETWEEN_ROUND) {
+                setState(GameState.ACTIVE_ROUND);
             }
         });
     }
