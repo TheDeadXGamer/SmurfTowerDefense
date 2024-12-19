@@ -32,14 +32,23 @@ public class Game {
 
     public List<Enemy> update() {
         List<Enemy> killedEnemies = new ArrayList<>();
+        List<Enemy> finishedEnemies = new ArrayList<>();
         for (Enemy enemy : enemies) {
             if (!enemy.isAlive()) {
                 killedEnemies.add(enemy);
+            }
+            if (enemy.isFinished()) {
+                finishedEnemies.add(enemy);
             }
             enemy.move();
             notifier.getInstance().notifyThatEnemyMoved(enemy);
         }
         for (Enemy enemy: killedEnemies) {
+            notifier.getInstance().notifyThatEnemyDied(enemy);
+            enemies.remove(enemy);
+        }
+
+        for (Enemy enemy: finishedEnemies) {
             notifier.getInstance().notifyThatEnemyDied(enemy);
             enemies.remove(enemy);
         }

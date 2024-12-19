@@ -9,7 +9,6 @@ import java.util.Optional;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-
 import com.group34.Controller.TowerPurchase;
 import com.group34.Controller.TowerSell;
 import com.group34.Controller.TowerUpgrade;
@@ -24,7 +23,15 @@ import com.group34.Model.Round.Round;
 import com.group34.Model.Shop.CashVault;
 import com.group34.Model.Shop.Shop;
 import com.group34.Model.Shop.ShopItem;
-import com.group34.View.*;
+import com.group34.View.BoardView;
+import com.group34.View.ButtonPanel;
+import com.group34.View.GameView;
+import com.group34.View.RightPanel;
+import com.group34.View.ShopButtonComponent;
+import com.group34.View.ShopPanel;
+import com.group34.View.StatusPanel;
+import com.group34.View.UpgradePanel;
+import com.group34.View.WelcomePanel;
 
 
 public class TowerDefence extends JFrame implements Runnable {

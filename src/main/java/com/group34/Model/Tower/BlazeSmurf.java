@@ -1,14 +1,14 @@
 package com.group34.Model.Tower;
 
-import com.group34.Model.Enemy.Attackable;
-import com.group34.Model.Positionable;
-import com.group34.Model.Projectile.FireballFactory;
-import com.group34.Model.Tower.Targeting.ClosestAttack;
-import com.group34.Model.Tower.Targeting.Targetings;
-
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.group34.Model.Enemy.Attackable;
+import com.group34.Model.Positionable;
+import com.group34.Model.Projectile.FireballFactory;
+import com.group34.Model.Tower.Targeting.AreaAttack;
+import com.group34.Model.Tower.Targeting.Targetings;
 
 public class BlazeSmurf<enemies extends Positionable & Attackable> implements Attack<enemies> {
     private int attackSpeed;
@@ -30,7 +30,7 @@ public class BlazeSmurf<enemies extends Positionable & Attackable> implements At
         this.position = position;
         this.cost = 70;
         this.towerWidth = 50;
-        this.targeting = new ClosestAttack(new FireballFactory(this), position);
+        this.targeting = new AreaAttack(new FireballFactory(this), position, range);
     }
 
     @Override

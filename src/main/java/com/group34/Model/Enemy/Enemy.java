@@ -10,5 +10,7 @@ public interface Enemy extends Positionable,Attackable,Killable {
 
     int getReward();
 
+    boolean isFinished();
+
     void move();
 }
