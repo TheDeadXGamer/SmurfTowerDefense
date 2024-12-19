@@ -81,6 +81,9 @@ public class TowerDefence extends JFrame implements Runnable {
             rightPanel
         );
 
+        towerSell.subscribe(boardView);
+
+
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
         cardPanel.add(welcomePanel, "Welcome");
