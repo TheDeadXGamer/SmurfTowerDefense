@@ -115,6 +115,11 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
     }
 
     @Override
+    public String getName() {
+        return getClass().getSimpleName();
+    }
+
+    @Override
     public void notifyTower(enemies enemy) {
         if (checkIfInRange(enemy) && !targets.contains(enemy)) {
             targets.add(enemy);

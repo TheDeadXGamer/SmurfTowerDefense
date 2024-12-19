@@ -107,6 +107,11 @@ public class LightningSmurf<enemies extends Positionable & Attackable> implement
         return cost;
     }
 
+    @Override
+    public String getName() {
+        return getClass().getSimpleName();
+    }
+
 
     /**
      * Returns the attack speed of the tower
