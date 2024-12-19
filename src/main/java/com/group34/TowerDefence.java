@@ -1,6 +1,7 @@
 package com.group34;
 
 import java.awt.CardLayout;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -121,14 +122,14 @@ public class TowerDefence extends JFrame implements Runnable {
     }
 
     private void handleGameOver() {
-        while (true) {
-            break;
-        }
+        System.out.println("Game Over");
     }
 
     private void handleActive(){
         cardLayout.show(cardPanel, "Game");
-        for (Round round : rounds) {
+        Iterator<Round> roundIterator = rounds.iterator();
+        while(roundIterator.hasNext()) {
+            Round round = roundIterator.next();
             while (!round.isRoundOver() || game.enemiesLeft() > 0) {
                 if (player.isAlive()) {
                     Optional<EnemyFactory> spawn = round.spawn();
@@ -156,12 +157,23 @@ public class TowerDefence extends JFrame implements Runnable {
                     break;
                 }
             }
-            currentState = GameState.BETWEEN_ROUND;
+                if(roundIterator.hasNext()) {
+                    currentState = GameState.BETWEEN_ROUND;
+                    handleBetweenRound();
+                }
+                currentState = GameState.GAME_OVER;
         }
     }
 
     private void handleBetweenRound() {
         cardLayout.show(cardPanel, "Game");
+        while(currentState == GameState.BETWEEN_ROUND) {
+            try {
+                Thread.sleep(1000 / gameSpeed.getSpeed());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void setState(GameState state) {
@@ -177,6 +189,16 @@ public class TowerDefence extends JFrame implements Runnable {
         buttonPanel.getFastForwardButton().addActionListener(e -> {
             if(currentState == GameState.BETWEEN_ROUND) {
                 setState(GameState.ACTIVE_ROUND);
+            }
+
+            if(currentState == GameState.ACTIVE_ROUND) {
+                
+                if(gameSpeed == GameSpeed.FAST) {
+                    gameSpeed = GameSpeed.NORMAL;
+                }
+                else if(gameSpeed == GameSpeed.NORMAL) {
+                    gameSpeed = GameSpeed.FAST;
+                }
             }
         });
     }
