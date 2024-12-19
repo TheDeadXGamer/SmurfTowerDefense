@@ -37,6 +37,7 @@ public abstract class BaseEnemy implements Enemy {
         return health > 0;
     }
 
+
     @Override
     public int getHealth() {
         return health;
@@ -55,6 +56,11 @@ public abstract class BaseEnemy implements Enemy {
     @Override
     public Point2D getPosition() {
         return point.getPosition();
+    }
+
+    @Override
+    public boolean isFinished() {
+        return point.isFinished();
     }
 
 }

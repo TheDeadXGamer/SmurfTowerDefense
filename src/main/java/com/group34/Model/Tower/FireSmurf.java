@@ -7,7 +7,7 @@ import java.util.List;
 import com.group34.Model.Enemy.Attackable;
 import com.group34.Model.Positionable;
 import com.group34.Model.Projectile.FireballFactory;
-import com.group34.Model.Tower.Targeting.ClosestAttack;
+import com.group34.Model.Tower.Targeting.AreaAttack;
 import com.group34.Model.Tower.Targeting.Targetings;
 
 public class FireSmurf<enemies extends Positionable & Attackable> implements Attack<enemies> {
@@ -27,7 +27,7 @@ public class FireSmurf<enemies extends Positionable & Attackable> implements Att
         this.damage = damage;
         this.range = range;
         this.position = position;
-        this.targeting = new ClosestAttack(new FireballFactory(this), position);
+        this.targeting = new AreaAttack(new FireballFactory(this), position, range);
         this.towerWidth = towerWidth;
         this.cost = cost;
     }
