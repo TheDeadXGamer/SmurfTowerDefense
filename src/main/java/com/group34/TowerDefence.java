@@ -1,5 +1,6 @@
 package com.group34;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -19,6 +20,7 @@ import com.group34.Model.Round.Round;
 import com.group34.Model.Shop.CashVault;
 import com.group34.Model.Shop.Shop;
 import com.group34.Model.Shop.ShopItem;
+import com.group34.Model.Transform.ViewportManager;
 import com.group34.View.BoardView;
 import com.group34.View.GameView;
 import com.group34.View.RightPanel;
@@ -39,6 +41,7 @@ public class TowerDefence extends JFrame implements Runnable {
     private Shop shop;
     private boolean isPaused = false;
     private GameView gameView = new GameView();
+    private ViewportManager viewportManager = new ViewportManager(new Dimension(815, 635));
 
     public TowerDefence(TowerDefenceBuilder builder) {
 

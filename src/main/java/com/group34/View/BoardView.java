@@ -1,12 +1,8 @@
 package com.group34.View;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.RenderingHints;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.geom.Point2D;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -19,6 +15,7 @@ import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Game.Game;
 import com.group34.Model.Projectile.Projectile;
 import com.group34.Model.Tower.Tower;
+import com.group34.Model.Transform.ViewportManager;
 
 public class BoardView extends JPanel {
     private String temporaryMessage = null;
@@ -26,6 +23,7 @@ public class BoardView extends JPanel {
     private Timer errorTimer;
     public Board board;
     public Game game;
+    private final ViewportManager viewportManager;
 
     private Map<String, Image> enemyImages = Map.of(
         "Gargamel", new ImageIcon(
@@ -62,22 +60,47 @@ public class BoardView extends JPanel {
     ).getImage();
 
 
-    public BoardView(
-        Board board, 
-        Game game,
-        RightPanel rightPanel
-    ) {
-
+    public BoardView(Board board, Game game, RightPanel rightPanel) {
         this.board = board;
         this.game = game;
+        this.viewportManager = new ViewportManager(board.getDimension());
         setPreferredSize(board.getDimension());
         setLayout(new BorderLayout());
         add(rightPanel, BorderLayout.EAST);
 
+        // Add a listener to handle resizing of the window
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                Dimension newSize = getSize();
+                viewportManager.handleResize(newSize);
+                repaint();
+            }
+        });
 
+        // Add a listener to handle mouse clicks
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Convert screen coordinates to game coordinates
+                Point2D screenPoint = new Point2D.Double(e.getX(), e.getY());
+                Point2D gamePoint = viewportManager.getTransformer().toGame(screenPoint);
+
+            }
+        });
+
+        addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                // Could use this for showing tower placement preview
+                Point2D gamePoint = viewportManager.getTransformer().toGame(
+                        new Point2D.Double(e.getX(), e.getY())
+                );
+                // Update preview position
+                repaint();
+            }
+        });
     }
-
-
 
     @Override
     public void paintComponent(Graphics g) {
@@ -112,13 +135,17 @@ public class BoardView extends JPanel {
         Iterator<Projectile> iterProjectile = board.getProjectileManager().getProjectiles().iterator();
         while (iterProjectile.hasNext()) {
             Projectile p = iterProjectile.next();
+            Point2D gamePos = p.getCurrentPosition();
+            // Convert game position to screen position
+            Point2D screenPos = viewportManager.getTransformer().toScreen(gamePos);
+            int scaledSize = (int)viewportManager.getTransformer().scaleValue(ViewConstants.TOWER_SIZE);
 
             g.drawImage(
                     projectileImages.get(p.getClass().getSimpleName()),
-                    (int) p.getCurrentPosition().getX() - ViewConstants.TOWER_SIZE / 2,
-                    (int) p.getCurrentPosition().getY() - ViewConstants.TOWER_SIZE / 2,
-                    ViewConstants.TOWER_SIZE,
-                    ViewConstants.TOWER_SIZE,
+                    (int) screenPos.getX() - scaledSize / 2,
+                    (int) screenPos.getY() - scaledSize / 2,
+                    scaledSize,
+                    scaledSize,
                     this
             );
         }
@@ -128,12 +155,16 @@ public class BoardView extends JPanel {
         Iterator<Enemy> iterEnemy = game.getEnemies();
         while (iterEnemy.hasNext()) {
             Enemy e = iterEnemy.next();
+            Point2D gamePos = e.getPosition();
+            // Convert game position to screen position
+            Point2D screenPos = viewportManager.getTransformer().toScreen(gamePos);
+            int scaledSize = (int)viewportManager.getTransformer().scaleValue(ViewConstants.TOWER_SIZE);
             g.drawImage(
                     enemyImages.get(e.getClass().getSimpleName()),
-                    (int) e.getPosition().getX() - ViewConstants.TOWER_SIZE / 2,
-                    (int) e.getPosition().getY() - ViewConstants.TOWER_SIZE / 2,
-                    ViewConstants.TOWER_SIZE,
-                    ViewConstants.TOWER_SIZE,
+                    (int) screenPos.getX() - scaledSize / 2,
+                    (int) screenPos.getY() - scaledSize / 2,
+                    scaledSize,
+                    scaledSize,
                     this
             );
 
@@ -151,27 +182,34 @@ public class BoardView extends JPanel {
         Iterator<Tower> iter = board.getTowers();
         while (iter.hasNext()) {
             Tower t = iter.next();
+            Point2D gamePos = t.getPosition();
+            // Convert game position to screen position
+            Point2D screenPos = viewportManager.getTransformer().toScreen(gamePos);
+            int scaledSize = (int)viewportManager.getTransformer().scaleValue(ViewConstants.TOWER_SIZE);
+
             g.drawImage(
                     towerImages.get(t.getTowerType()),
-                    (int) t.getPosition().getX() - ViewConstants.TOWER_SIZE / 2,
-                    (int) t.getPosition().getY() - ViewConstants.TOWER_SIZE / 2,
-                    ViewConstants.TOWER_SIZE,
-                    ViewConstants.TOWER_SIZE,
+                    (int) screenPos.getX() - scaledSize / 2,
+                    (int) screenPos.getY() - scaledSize / 2,
+                    scaledSize,
+                    scaledSize,
                     this
             );
         }
     }
 
     private void renderBackground(Graphics g) {
+        Dimension currentSize = viewportManager.getTransformer().getCurrentResolution();
         g.drawImage(
                 backgroundImage,
                 0,
                 0,
-                (int) board.getDimension().getWidth(),
-                (int) board.getDimension().getHeight(),
+                (int) currentSize.getWidth(),
+                (int) currentSize.getHeight(),
                 this
         );
     }
+
     public void showTemporaryMessage(String message) {
         temporaryMessage = message;
         showTemporaryMessage = true;
