@@ -10,8 +10,7 @@ import javax.swing.JPanel;
 
 public class RightPanel extends JLabel {
 
-    ButtonPanel buttonPanel;
-
+    private ButtonPanel buttonPanel;
     private CardLayout cardLayout; // For switching between panels
     private JPanel cardPanel;      // Container for ShopPanel and UpgradePanel
     private UpgradePanel upgradePanel;

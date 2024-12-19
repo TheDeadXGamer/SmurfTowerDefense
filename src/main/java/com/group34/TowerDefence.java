@@ -9,6 +9,7 @@ import java.util.Optional;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+
 import com.group34.Controller.TowerPurchase;
 import com.group34.Controller.TowerSell;
 import com.group34.Controller.TowerUpgrade;
@@ -22,12 +23,6 @@ import com.group34.Model.Road.RoadToken;
 import com.group34.Model.Round.Round;
 import com.group34.Model.Shop.CashVault;
 import com.group34.Model.Shop.Shop;
-import com.group34.View.BoardView;
-import com.group34.View.ButtonPanel;
-import com.group34.View.RightPanel;
-import com.group34.View.ShopPanel;
-import com.group34.View.StatusPanel;
-import com.group34.View.WelcomePanel;
 import com.group34.Model.Shop.ShopItem;
 import com.group34.View.*;
 
@@ -42,7 +37,6 @@ public class TowerDefence extends JFrame implements Runnable {
     private List<Round> rounds;
     private GameSpeed gameSpeed;
     private Shop shop;
-    
     private GameState currentState;
     private CardLayout cardLayout;
     private JPanel cardPanel;
