@@ -74,7 +74,7 @@ public class TowerDefence extends JFrame implements Runnable {
             this.game,
             rightPanel
         );
-
+        towerSell.subscribe(boardView);
         towerUpgrade.setBoardView(boardView);
 
         TowerPurchase purchaseController = new TowerPurchase(
