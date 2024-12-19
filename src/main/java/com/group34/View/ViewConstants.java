@@ -12,6 +12,7 @@ public class ViewConstants {
     // colors
     public static final Color RIGHT_PANEL_COLOR = new Color(255, 201, 54); // orange
     public static final Color BORDER_COLOR = Color.BLACK; // black
+    public static final Color HEALTH_BAR_COLOR = new Color(0, 255, 0); // green
 
     // size integers
     public static final int BUTTON_SIZE = 30;
@@ -28,21 +29,12 @@ public class ViewConstants {
 
     // image paths
     public static final String BASE_MAP_IMAGE_PATH = "/assets/Maps/BaseMap.png";
-
-    public static final String BASE_MAP_COLOR_IMAGE_PATH = "/assets/Maps/BaseMapColor.png";
-
     public static final String LIGHTNINGSMURF_IMAGE = "/assets/Towers/LightningSmurf.png";
-
     public static final String GARGAMEL_IMAGE = "/assets/Enemies/BaseEnemy.png";
-
     public static final String SETTINGS_ICON_PATH = "/assets/Miscellaneous/settings-icon.png";
-
     public static final String FASTFORWARD_ICON_PATH = "/assets/Miscellaneous/fastforward-icon.png";
-
     public static final String HEALTH_ICON_PATH = "/assets/Other/Smurfhealth.png";
-
     public static final String COIN_ICON_PATH = "/assets/Other/Smurfcoins.png";
-
     public static final String LIGHTNINGBOLT_IMAGE = "/assets/Projectiles/LightningBolt.png";
 
     /**
@@ -59,8 +51,4 @@ public class ViewConstants {
         g2.dispose();
         return new ImageIcon(image);
     }
-
-
-    public static final Color HEALTH_BAR_COLOR = new Color(0, 255, 0); 
-
 }

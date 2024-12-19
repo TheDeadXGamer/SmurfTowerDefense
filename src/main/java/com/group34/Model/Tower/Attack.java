@@ -13,7 +13,7 @@ public interface Attack<enemies extends Positionable & Attackable> extends Tower
     *
     * @return the attack speed of the tower as an integer.
     */
-   public int getAttackSpeed();
+   int getAttackSpeed();
 
    /**
     * Retrieves the damage dealt by the tower's attacks.
@@ -24,5 +24,5 @@ public interface Attack<enemies extends Positionable & Attackable> extends Tower
     *
     * @return the damage dealt by the tower as an integer.
     */
-   public int getDamage();
+   int getDamage();
 }

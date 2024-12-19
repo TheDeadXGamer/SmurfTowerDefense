@@ -8,8 +8,7 @@ import com.group34.Model.Tower.Attack;
 import java.awt.*;
 
 public class LightningBoltFactory extends  ProjectileFactory{
-
-    Attack tower;
+    private Attack tower;
 
     String projectileType = "LightningBolt";
     public LightningBoltFactory(Attack tower) {

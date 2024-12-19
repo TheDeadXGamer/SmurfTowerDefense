@@ -7,7 +7,6 @@ import java.util.List;
 import com.group34.Model.Enemy.Enemy;
 
 public class Game {
-
     private TowerNotifier notifier = new TowerNotifier().getInstance();
     private final List<Enemy> enemies = new ArrayList<>();
 
@@ -32,7 +31,6 @@ public class Game {
     }
 
     public List<Enemy> update() {
-
         List<Enemy> killedEnemies = new ArrayList<>();
         for (Enemy enemy : enemies) {
             if (!enemy.isAlive()) {
@@ -41,7 +39,6 @@ public class Game {
             enemy.move();
             notifier.getInstance().notifyThatEnemyMoved(enemy);
         }
-
         for (Enemy enemy: killedEnemies) {
             notifier.getInstance().notifyThatEnemyDied(enemy);
             enemies.remove(enemy);

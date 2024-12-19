@@ -9,7 +9,6 @@ public class RoadSection implements Road {
     private final float angle;
     private final int length;
 
-
     public RoadSection(Point2D point, Road child) {
         this.start = point;
         
@@ -62,6 +61,4 @@ public class RoadSection implements Road {
 
         return new Point2D.Double(newX, newY);
     }
-
-
 }

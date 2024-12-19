@@ -25,7 +25,7 @@ public class BoardView extends JPanel {
     public Game game;
     public RightPanel rightPanel;
     private JPanel overlayPanel;
-    private Map<String, Image> enemyImages = Map.of(
+    private final Map<String, Image> enemyImages = Map.of(
         "Gargamel", new ImageIcon(
             getClass().getResource(ViewConstants.GARGAMEL_IMAGE))
             .getImage()
@@ -34,8 +34,7 @@ public class BoardView extends JPanel {
                 ViewConstants.TOWER_SIZE,
                 Image.SCALE_SMOOTH)
     );
-
-    private Map<String, Image> towerImages = Map.of(
+    private final Map<String, Image> towerImages = Map.of(
         "LightningSmurf", new ImageIcon(
             getClass().getResource(ViewConstants.LIGHTNINGSMURF_IMAGE))
             .getImage()
@@ -50,8 +49,7 @@ public class BoardView extends JPanel {
                             ViewConstants.TOWER_SIZE,
                             Image.SCALE_SMOOTH)
     );
-
-    private Map<String, Image> projectileImages = Map.of(
+    private final Map<String, Image> projectileImages = Map.of(
         "LightningBolt", new ImageIcon(
             getClass().getResource(ViewConstants.LIGHTNINGBOLT_IMAGE))
             .getImage()
@@ -60,30 +58,27 @@ public class BoardView extends JPanel {
                 ViewConstants.TOWER_SIZE,
                 Image.SCALE_SMOOTH)
     );
-
-    final Image backgroundImage = new ImageIcon(
+    private final Image backgroundImage = new ImageIcon(
         getClass().getResource(ViewConstants.BASE_MAP_IMAGE_PATH)
     ).getImage();
-
 
     public BoardView(
         Board board, 
         Game game,
         RightPanel rightPanel
     ) {
-
         this.board = board;
         this.game = game;
         this.rightPanel = rightPanel;
+
         setPreferredSize(board.getDimension());
         setLayout(new BorderLayout());
         add(rightPanel, BorderLayout.EAST);
 
         overlayPanel = new JPanel(null);
         overlayPanel.setOpaque(false);
-        add(overlayPanel);
 
-
+        // TODO: explain
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -110,6 +105,8 @@ public class BoardView extends JPanel {
 
             }
         });
+
+        add(overlayPanel);
     }
 
 
@@ -117,9 +114,11 @@ public class BoardView extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+
         Graphics2D g2d = (Graphics2D) g;
         
-        // Enable anti-aliasing for smoother graphics
+        // Enable antialiasing for smoother graphics
+        // TODO: if (true)?
         if (true) {
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
@@ -134,7 +133,7 @@ public class BoardView extends JPanel {
         if (showTemporaryMessage) {
             g.setColor(Color.RED);
             g.setFont(new Font("Arial", Font.BOLD, 25));
-            int messageWidth = g.getFontMetrics().stringWidth(temporaryMessage);
+            int messageWidth = g.getFontMetrics().stringWidth(temporaryMessage); // TODO: is this going to be used? if not, remove
             g.drawString(
                     temporaryMessage,
                     ViewConstants.GAME_WIDTH/4 + 35,
@@ -144,7 +143,9 @@ public class BoardView extends JPanel {
     }
 
     private void renderProjectiles(Graphics g) {
+        // q: why use while loop instead of for loop?
         Iterator<Projectile> iterProjectile = board.getProjectileManager().getProjectiles().iterator();
+
         while (iterProjectile.hasNext()) {
             Projectile p = iterProjectile.next();
 
@@ -161,8 +162,10 @@ public class BoardView extends JPanel {
 
     private void renderEnemies(Graphics g) {
         Iterator<Enemy> iterEnemy = game.getEnemies();
+
         while (iterEnemy.hasNext()) {
             Enemy e = iterEnemy.next();
+
             g.drawImage(
                     enemyImages.get(e.getClass().getSimpleName()),
                     (int) e.getPosition().getX() - ViewConstants.TOWER_SIZE / 2,
@@ -171,7 +174,6 @@ public class BoardView extends JPanel {
                     ViewConstants.TOWER_SIZE,
                     this
             );
-
             g.setColor(ViewConstants.HEALTH_BAR_COLOR);
             g.setFont(g.getFont().deriveFont(20f));
             g.drawString(
@@ -184,6 +186,7 @@ public class BoardView extends JPanel {
 
     private void renderTowers(Graphics g) {
         Iterator<Tower> iter = board.getTowers();
+
         while (iter.hasNext()) {
             Tower t = iter.next();
             g.drawImage(
@@ -207,6 +210,7 @@ public class BoardView extends JPanel {
                 this
         );
     }
+
     public void showTemporaryMessage(String message) {
         temporaryMessage = message;
         showTemporaryMessage = true;
@@ -221,6 +225,7 @@ public class BoardView extends JPanel {
             errorTimer.start();
         }
     }
+
     public void addTowerButton( Point point) {
         JButton towerButton = new JButton();
 
@@ -245,7 +250,6 @@ public class BoardView extends JPanel {
         towerButton.setBorderPainted(false);    // Removes the border
         towerButton.setFocusPainted(false);     // Removes focus painting
         towerButton.setOpaque(false);           // Ensures the button is fully transparent
-
 
         overlayPanel.add(towerButton);
         overlayPanel.revalidate();

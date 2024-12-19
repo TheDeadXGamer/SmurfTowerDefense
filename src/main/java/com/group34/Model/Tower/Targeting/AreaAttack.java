@@ -11,8 +11,7 @@ import com.group34.Model.Tower.Attack;
 public interface AreaAttack<enemies extends Positionable & Attackable> extends Targetings<enemies>  {
     @Override
     default void attack(List<enemies> enemy) {
-
-        //TODO some towers might want to have their attack do aoe
+        // TODO: some towers might want to have their attack do aoe
     }
     
 }

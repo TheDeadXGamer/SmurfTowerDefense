@@ -54,7 +54,7 @@ public class ProjectileManager {
         List<Projectile> removeProjectiles = new ArrayList<>();
 
         for (Projectile projectile : projectiles) {
-            projectile.update();
+            projectile.updatePosition();
             if (checkIfProjectileReached(projectile)) {
                 projectile.damage();
                 removeProjectiles.add(projectile);

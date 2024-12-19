@@ -10,12 +10,12 @@ import javax.swing.JLabel;
 import com.group34.Model.Shop.ShopItem;
 
 
-public class ShopButton extends JComponent {
+public class ShopButtonComponent extends JComponent {
     private ShopItem item;
 
     private static final Map<String, Image> towerImages = Map.of(
         "LightningSmurf", new ImageIcon(
-            ShopButton.class.getResource(ViewConstants.LIGHTNINGSMURF_IMAGE))
+            ShopButtonComponent.class.getResource(ViewConstants.LIGHTNINGSMURF_IMAGE))
             .getImage()
             .getScaledInstance(
                 ViewConstants.TOWER_SIZE,
@@ -23,7 +23,7 @@ public class ShopButton extends JComponent {
                 Image.SCALE_SMOOTH)
     );
 
-    public ShopButton(ShopItem item) {
+    public ShopButtonComponent(ShopItem item) {
         this.item = item;
         setToolTipText(item.getName());
 
@@ -41,6 +41,5 @@ public class ShopButton extends JComponent {
 
     public ShopItem getItem() {
         return item;
-    }   
-  
+    }
 }

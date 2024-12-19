@@ -13,10 +13,8 @@ import com.group34.Model.Tower.Targeting.Targetings;
 import com.group34.View.ViewConstants;
 
 public class LightningSmurf<enemies extends Positionable & Attackable> implements  Attack<enemies> {
-
     protected int attackSpeed;
     protected int damage;
-
     private boolean canAttack = true;
     private float lastAttack = System.nanoTime();
     protected Point2D position;
@@ -24,7 +22,6 @@ public class LightningSmurf<enemies extends Positionable & Attackable> implement
     List<enemies> targets = new ArrayList<>();
     Targetings targeting;
     private int cost;
-
     private float towerWidth;
     
     public LightningSmurf(Point2D position, int attackSpeed, int damage, int range,float towerWidth,int cost) {

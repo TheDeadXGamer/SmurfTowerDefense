@@ -19,5 +19,4 @@ public class ShopItem {
     public String getName() {
         return factory.getClass().getSimpleName().replace("Factory", "");
     }
-
 }

@@ -38,7 +38,6 @@ public class TowerDefence extends JFrame implements Runnable {
     private GameView gameView = new GameView();
 
     public TowerDefence(TowerDefenceBuilder builder) {
-
         this.cashVault = builder.cashVault;
         this.game = builder.game;
         this.board = builder.board;
@@ -53,10 +52,12 @@ public class TowerDefence extends JFrame implements Runnable {
         setResizable(true);
         setLocationRelativeTo(null);
 
-        List<ShopButton> buttons = new ArrayList<>();
+        // TODO: explain
+
+        List<ShopButtonComponent> buttons = new ArrayList<>();
         Iterator<ShopItem> shopItems = shop.getItems();
         while (shopItems.hasNext()) {
-            buttons.add(new ShopButton(shopItems.next()));
+            buttons.add(new ShopButtonComponent(shopItems.next()));
         }
 
         TowerUpgrade towerUpgrade = new TowerUpgrade();
@@ -73,7 +74,9 @@ public class TowerDefence extends JFrame implements Runnable {
             this.game,
             rightPanel
         );
+
         towerUpgrade.setBoardView(boardView);
+
         TowerPurchase purchaseController = new TowerPurchase(
             buttons,
             boardView,

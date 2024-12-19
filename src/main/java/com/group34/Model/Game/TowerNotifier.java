@@ -7,7 +7,6 @@ import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Tower.TowerListener;
 
 public class TowerNotifier {
-
     private static TowerNotifier instance = null;
 
     private List<TowerListener> listeners = new ArrayList<>();
@@ -24,6 +23,7 @@ public class TowerNotifier {
         listeners.add(tower);
 
     }
+
     public void unsubscribe(TowerListener tower) {
         listeners.remove(tower);
     }
@@ -34,6 +34,7 @@ public class TowerNotifier {
             tower.notifyTower(enemy);
         }
     }
+
     public void notifyThatEnemyDied(Enemy enemy) {
         for (TowerListener tower: listeners) {
             tower.notifyOfDeath(enemy);

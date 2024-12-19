@@ -9,27 +9,27 @@ import com.group34.View.BoardView;
 import com.group34.View.UpgradePanel;
 
 public class TowerUpgrade {
-
     private CashVault cashVault;
     private BoardView boardView;
 
-
-
     public void upgradeTower(Tower tower)  {
-
-        try{
+        try {
             Tower upgradedTower = tower.upgrade();
-
-            if(upgradedTower != null) {
+            if (upgradedTower != null) {
                 cashVault.withdraw(upgradedTower.getCost());
+            } else {
+                boardView.showTemporaryMessage("Cant upgrade this tower further!");
             }
-            else {boardView.showTemporaryMessage("Cant upgrade this tower further!");}
         } catch (OverDraftError e) {
             boardView.showTemporaryMessage(e.getMessage());
         }
     }
+
     public void setCashVault(CashVault cashVault) {
         this.cashVault = cashVault;
     }
-    public void setBoardView(BoardView boardView) {this.boardView = boardView;}
+
+    public void setBoardView(BoardView boardView) {
+        this.boardView = boardView;
+    }
 }
