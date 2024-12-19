@@ -56,9 +56,6 @@ public class ProjectileManager {
         for (Projectile projectile : projectiles) {
             projectile.update();
             if (checkIfProjectileReached(projectile)) {
-                System.out.println("Projectile position: " + projectile.getCurrentPosition() +
-                        " | Target position " + projectile.getTargetPosition() +
-                        " | Distance: " + projectile.getCurrentPosition().distance(projectile.getTargetPosition()));
                 projectile.damage();
                 removeProjectiles.add(projectile);
             }

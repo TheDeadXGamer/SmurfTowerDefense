@@ -1,6 +1,7 @@
 package com.group34;
 
 import java.awt.CardLayout;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +9,9 @@ import java.util.Optional;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.group34.Controller.TowerPurchase;
+import com.group34.Controller.TowerSell;
+import com.group34.Controller.TowerUpgrade;
 import com.group34.Model.Board.Board;
 import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Enemy.EnemyFactory;
@@ -24,6 +28,8 @@ import com.group34.View.RightPanel;
 import com.group34.View.ShopPanel;
 import com.group34.View.StatusPanel;
 import com.group34.View.WelcomePanel;
+import com.group34.Model.Shop.ShopItem;
+import com.group34.View.*;
 
 
 public class TowerDefence extends JFrame implements Runnable {
@@ -40,7 +46,7 @@ public class TowerDefence extends JFrame implements Runnable {
     private GameState currentState;
     private CardLayout cardLayout;
     private JPanel cardPanel;
-
+    private GameView gameView = new GameView();
 
     public TowerDefence(TowerDefenceBuilder builder) {
 
@@ -58,14 +64,25 @@ public class TowerDefence extends JFrame implements Runnable {
         setResizable(true);
         setLocationRelativeTo(null);
 
-        ShopPanel shopPanel = new ShopPanel(shop);
+        List<ShopButton> buttons = new ArrayList<>();
+        Iterator<ShopItem> shopItems = shop.getItems();
+        while (shopItems.hasNext()) {
+            buttons.add(new ShopButton(shopItems.next()));
+        }
+
+        TowerUpgrade towerUpgrade = new TowerUpgrade();
+        towerUpgrade.setCashVault(cashVault);
+        TowerSell towerSell = new TowerSell(shop);
+
+        UpgradePanel upgradeScreen = new UpgradePanel(towerUpgrade,towerSell);
+        ShopPanel shopPanel = new ShopPanel(buttons);
         StatusPanel statusPanel = new StatusPanel(cashVault, player);
-        RightPanel rightPanel = new RightPanel(shopPanel, statusPanel);
         WelcomePanel welcomePanel = new WelcomePanel();
+        RightPanel rightPanel = new RightPanel(shopPanel, statusPanel,upgradeScreen);
 
         BoardView boardView = new BoardView(
-            this.board, 
-            this.game, 
+            this.board,
+            this.game,
             rightPanel
         );
 
@@ -77,6 +94,17 @@ public class TowerDefence extends JFrame implements Runnable {
         add(cardPanel);
 
         currentState = GameState.WELCOME;
+        towerUpgrade.setBoardView(boardView);
+        TowerPurchase purchaseController = new TowerPurchase(
+            buttons,
+            boardView,
+            shop
+        );
+
+        //GameView gameView = new GameView();
+        //gameView.add(boardView);
+        //gameView.pack();
+        //gameView.setVisible(true);
 
         pack();
         setVisible(true);
@@ -145,6 +173,7 @@ public class TowerDefence extends JFrame implements Runnable {
                     }
                     
                     board.update();
+                    //gameView.repaint();
                     repaint();
 
                     try {
