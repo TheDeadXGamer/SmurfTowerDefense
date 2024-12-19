@@ -12,7 +12,7 @@ public class RightPanel extends JLabel {
 
     private ButtonPanel buttonPanel;
     private CardLayout cardLayout; // For switching between panels
-    private JPanel cardPanel;      // Container for ShopPanel and UpgradePanel
+    private JPanel cardPanel; // Container for ShopPanel and UpgradePanel
     private UpgradePanel upgradePanel;
 
     public RightPanel(ShopPanel shopPanel, StatusPanel statusPanel, UpgradePanel upgradeScreen) {
@@ -39,24 +39,21 @@ public class RightPanel extends JLabel {
 
         // Add ShopPanel
         cardPanel.add(shopPanel,"SHOP_PANEL");
-        //Add UpgradePanel
-        cardPanel.add(upgradeScreen,"UPGRADE_PANEL");
 
+        // Add UpgradePanel
+        cardPanel.add(upgradeScreen,"UPGRADE_PANEL");
 
         add(cardPanel);
         cardLayout.show(cardPanel,"SHOP_PANEL");
-
-
-
-
     }
+
     public void displayShopPanel() {
         cardLayout.show(cardPanel,"SHOP_PANEL");
     }
+
     public void displayUpgradePanel(Tower tower) {
         cardLayout.show(cardPanel,"UPGRADE_PANEL");
-        upgradePanel.setCurrTower(tower);
-
+        upgradePanel.setCurrentTower(tower);
     }
     
     public ButtonPanel getButtonPanel() {

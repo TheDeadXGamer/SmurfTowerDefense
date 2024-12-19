@@ -15,6 +15,4 @@ public class RoundEvent implements Comparable<RoundEvent> {
     public int compareTo(RoundEvent o) {
         return Integer.compare(counter, o.counter);
     }
-
-
 }

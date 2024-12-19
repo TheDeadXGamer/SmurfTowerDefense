@@ -11,10 +11,10 @@ public class TowerSell {
     }
 
     public void sellTower(Tower tower) {
-        try {shop.refundTower(tower);}
-        catch (InvalidRemovalError e) {
-            System.out.println("asdsad");
+        try {
+            shop.refundTower(tower);
+        } catch (InvalidRemovalError e) {
+            System.out.println("asdsad"); // TODO: handle exception
         }
-
     }
 }

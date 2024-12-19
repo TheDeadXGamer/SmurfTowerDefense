@@ -57,5 +57,4 @@ public abstract class BaseEnemy implements Enemy {
         return point.getPosition();
     }
 
-
 }

@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.group34.Model.Road.RoadValidator;
+import com.group34.View.ViewConstants;
 
 public class MapRoadCreatorTool extends JFrame {
     private BufferedImage mapImage;
@@ -21,10 +22,12 @@ public class MapRoadCreatorTool extends JFrame {
     private Map<Double, Double> scalablePoints = new LinkedHashMap<>();
     private JButton finishButton;
 
+    // TODO: needs more comments
+
     public MapRoadCreatorTool() {
         super("Map Road Creator Tool");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
+        setSize(ViewConstants.GAME_WIDTH, ViewConstants.GAME_HEIGHT);
 
         mapPanel = new MapPanel();
         add(mapPanel);

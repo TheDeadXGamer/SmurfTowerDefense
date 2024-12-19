@@ -4,7 +4,6 @@ package com.group34.View;
 
 import com.group34.Controller.TowerSell;
 import com.group34.Controller.TowerUpgrade;
-import com.group34.Model.Tower.NoUpgradeError;
 import com.group34.Model.Tower.Tower;
 
 import javax.swing.*;
@@ -13,8 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class UpgradePanel extends JPanel {
+    Tower currentTower;
 
-    Tower currTower;
     public UpgradePanel(TowerUpgrade towerUpgrade, TowerSell sellTower) {
         // Set the layout manager
         setLayout(new GridBagLayout());
@@ -25,17 +24,16 @@ public class UpgradePanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                towerUpgrade.upgradeTower(currTower);
+                towerUpgrade.upgradeTower(currentTower);
             }
         });
-
 
         // Create the "Sell Tower" button
         JButton sellButton = new JButton("Sell Tower");
         sellButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                sellTower.sellTower(currTower);
+                sellTower.sellTower(currentTower);
             }
         });
 
@@ -46,12 +44,14 @@ public class UpgradePanel extends JPanel {
         gbc.insets = new Insets(10, 10, 10, 10); // Add padding around the button
 
         add(upgradeButton, gbc);
+
         // Add the "Sell Tower" button at the bottom
         gbc.gridy = 1; // Position below the "Upgrade Tower" button
         gbc.insets = new Insets(20, 10, 10, 10); // Add more padding above the button
+
         add(sellButton, gbc);
     }
-    public void setCurrTower(Tower tower) {
-        this.currTower = tower;
+    public void setCurrentTower(Tower tower) {
+        this.currentTower = tower;
     }
 }

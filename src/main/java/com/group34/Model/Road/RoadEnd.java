@@ -23,6 +23,4 @@ public class RoadEnd implements Road {
         return position;
     }
 
-
-
 }

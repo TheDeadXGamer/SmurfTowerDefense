@@ -8,10 +8,8 @@ import com.group34.Model.Enemy.EnemyFactory;
 
 
 public class Round {
-    
     PriorityQueue<RoundEvent> events;
     int counter = 0;
-
 
     public Round(RoundBuilder builder) {
         this.events = builder.events;
@@ -28,7 +26,6 @@ public class Round {
     public boolean isRoundOver() {
         return events.isEmpty();
     }
-
 }
 
 

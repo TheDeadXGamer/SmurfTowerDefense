@@ -10,9 +10,9 @@ public class AudioPlayer {
     private boolean isMuted = false;
     private float previousVolume = 0.0f;
 
-    public AudioPlayer() {
+    public AudioPlayer(String filePath) {
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File("target/classes/assets/Audio/smurf_theme.wav"));
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(filePath));
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             volumeControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);

@@ -5,12 +5,12 @@ import com.group34.Model.Positionable;
 import java.awt.geom.Point2D;
 
 public class TowerWrapper implements Tower{
-
     Tower tower;
 
     public TowerWrapper(Tower tower) {
         this.tower = tower;
     }
+
     @Override
     public Point2D getPosition() {
         return tower.getPosition();
@@ -55,7 +55,6 @@ public class TowerWrapper implements Tower{
     public void notifyOfDeath(Positionable enemy) {
         tower.notifyOfDeath(enemy);
     }
-
 
     @Override
     public Tower upgrade(){

@@ -13,7 +13,6 @@ public interface Tower<enemies extends Positionable & Attackable> extends TowerL
      * @return the position is needed to calculate in range targets. Also required for UI placement.
      **/
 
-
     /**
      * @return Sets the position of the tower.
      **/

@@ -23,9 +23,6 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
     private float lastAttack = System.nanoTime();
     private float towerWidth;
 
-
-
-
     Targetings targeting;
 
     public ThunderSmurf(Point2D position) {
@@ -90,13 +87,11 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
         if (System.nanoTime() - lastAttack >= (Math.pow(10,9) / attackSpeed )) {
             canAttack = true;
         }
-
         if (canAttack) {
             targeting.attack(targets);
             canAttack = false;
             lastAttack = System.nanoTime();
         }
-
     }
 
     /**
@@ -122,8 +117,7 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
     public void notifyTower(enemies enemy) {
         if (checkIfInRange(enemy) && !targets.contains(enemy)) {
             targets.add(enemy);
-        }
-        else if (!checkIfInRange(enemy) && targets.contains(enemy)) {
+        } else if (!checkIfInRange(enemy) && targets.contains(enemy)) {
             targets.remove(enemy);
         }
     }
@@ -154,7 +148,6 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
 
     @Override
     public Tower upgrade() {
-
         return null;
     }
 }
