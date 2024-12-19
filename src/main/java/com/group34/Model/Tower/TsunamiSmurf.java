@@ -107,4 +107,9 @@ public class TsunamiSmurf<enemies extends Positionable & Attackable> implements 
     public Tower upgrade() {
         return null;
     }
+
+    @Override
+    public String getName() {
+        return getClass().getSimpleName();
+    }
 }

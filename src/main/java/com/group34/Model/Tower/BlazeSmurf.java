@@ -107,4 +107,9 @@ public class BlazeSmurf<enemies extends Positionable & Attackable> implements At
     public Tower upgrade() {
         return null;
     }
+
+    @Override
+    public String getName() {
+        return getClass().getSimpleName();
+    }
 }

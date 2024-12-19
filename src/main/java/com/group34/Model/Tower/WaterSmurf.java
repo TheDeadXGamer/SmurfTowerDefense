@@ -111,4 +111,9 @@ public class WaterSmurf<enemies extends Positionable & Attackable> implements At
     public void changeTargeting(Targetings targetingtype) {
         targeting = targetingtype;
     }
+
+    @Override
+    public String getName() {
+        return getClass().getSimpleName();
+    }
 }
