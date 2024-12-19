@@ -24,42 +24,90 @@ public class BoardView extends JPanel implements SellTowerListener  {
     public RightPanel rightPanel;
     private JPanel overlayPanel;
     private HashMap<Tower,JButton> buttons = new HashMap<>();
+
+
     private final Map<String, Image> enemyImages = Map.of(
         "Gargamel", new ImageIcon(
             getClass().getResource(ViewConstants.GARGAMEL_IMAGE))
             .getImage()
             .getScaledInstance(
-                ViewConstants.TOWER_SIZE,
-                ViewConstants.TOWER_SIZE,
-                Image.SCALE_SMOOTH)
+                ViewConstants.TOWER_SIZE, ViewConstants.TOWER_SIZE, Image.SCALE_SMOOTH),
+        "Azrael", new ImageIcon(
+            getClass().getResource(ViewConstants.AZRAEL_IMAGE))
+            .getImage()
+            .getScaledInstance(
+                ViewConstants.TOWER_SIZE, ViewConstants.TOWER_SIZE, Image.SCALE_SMOOTH),
+        "Hogatha", new ImageIcon(
+            getClass().getResource(ViewConstants.HOGATHA_IMAGE))
+            .getImage()
+            .getScaledInstance(
+                ViewConstants.TOWER_SIZE, ViewConstants.TOWER_SIZE, Image.SCALE_SMOOTH),
+        "Balthazar", new ImageIcon(
+            getClass().getResource(ViewConstants.BALTHAZAR_IMAGE))
+            .getImage()
+            .getScaledInstance(
+                ViewConstants.TOWER_SIZE, ViewConstants.TOWER_SIZE, Image.SCALE_SMOOTH)
     );
+
+
     private final Map<String, Image> towerImages = Map.of(
         "LightningSmurf", new ImageIcon(
             getClass().getResource(ViewConstants.LIGHTNINGSMURF_IMAGE))
             .getImage()
             .getScaledInstance(
-                ViewConstants.TOWER_SIZE,
-                ViewConstants.TOWER_SIZE,
-                Image.SCALE_SMOOTH),"ThunderSmurf", new ImageIcon(
-                    getClass().getResource(ViewConstants.LIGHTNINGSMURF_IMAGE))
-                    .getImage()
-                    .getScaledInstance(
-                            ViewConstants.TOWER_SIZE,
-                            ViewConstants.TOWER_SIZE,
-                            Image.SCALE_SMOOTH)
+                ViewConstants.TOWER_SIZE, ViewConstants.TOWER_SIZE, Image.SCALE_SMOOTH),
+        "FireSmurf", new ImageIcon(
+            getClass().getResource(ViewConstants.FIRESMURF_IMAGE))
+            .getImage()
+            .getScaledInstance(
+                ViewConstants.TOWER_SIZE, ViewConstants.TOWER_SIZE, Image.SCALE_SMOOTH),
+        "WaterSmurf", new ImageIcon(
+            getClass().getResource(ViewConstants.WATERSMURF_IMAGE))
+            .getImage()
+            .getScaledInstance(
+                ViewConstants.TOWER_SIZE, ViewConstants.TOWER_SIZE, Image.SCALE_SMOOTH),
+        "ThunderSmurf", new ImageIcon(
+            getClass().getResource(ViewConstants.LIGHTNINGSMURF_IMAGE))
+            .getImage()
+            .getScaledInstance(
+                ViewConstants.TOWER_SIZE, ViewConstants.TOWER_SIZE, Image.SCALE_SMOOTH),
+        "BlazeSmurf", new ImageIcon(
+            getClass().getResource(ViewConstants.FIRESMURF_IMAGE))
+            .getImage()
+            .getScaledInstance(
+                ViewConstants.TOWER_SIZE, ViewConstants.TOWER_SIZE, Image.SCALE_SMOOTH),
+        "TsunamiSmurf", new ImageIcon(
+            getClass().getResource(ViewConstants.WATERSMURF_IMAGE))
+            .getImage()
+            .getScaledInstance(
+                ViewConstants.TOWER_SIZE, ViewConstants.TOWER_SIZE, Image.SCALE_SMOOTH)
+        
     );
+
+
     private final Map<String, Image> projectileImages = Map.of(
         "LightningBolt", new ImageIcon(
             getClass().getResource(ViewConstants.LIGHTNINGBOLT_IMAGE))
             .getImage()
             .getScaledInstance(
-                ViewConstants.TOWER_SIZE,
-                ViewConstants.TOWER_SIZE,
-                Image.SCALE_SMOOTH)
+                ViewConstants.TOWER_SIZE, ViewConstants.TOWER_SIZE, Image.SCALE_SMOOTH),
+        "Fireball", new ImageIcon(
+            getClass().getResource(ViewConstants.FIREBALL_IMAGE))
+            .getImage()
+            .getScaledInstance(
+                ViewConstants.TOWER_SIZE, ViewConstants.TOWER_SIZE, Image.SCALE_SMOOTH),
+        "Waterdrop", new ImageIcon(
+            getClass().getResource(ViewConstants.WATERDROP_IMAGE))
+            .getImage()
+            .getScaledInstance(
+                ViewConstants.TOWER_SIZE, ViewConstants.TOWER_SIZE, Image.SCALE_SMOOTH)
     );
+
+
     private final Image backgroundImage = new ImageIcon(
-        getClass().getResource(ViewConstants.BASE_MAP_IMAGE_PATH)
-    ).getImage();
+        getClass().getResource(ViewConstants.BASE_MAP_IMAGE_PATH))
+        .getImage();
+
 
     public BoardView(
         Board board, 

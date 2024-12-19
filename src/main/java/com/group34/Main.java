@@ -14,9 +14,11 @@ import com.group34.Model.Round.RoundConfig;
 import com.group34.Model.Shop.CashVault;
 import com.group34.Model.Shop.Shop;
 import com.group34.Model.Shop.ShopItem;
+import com.group34.Model.Tower.FireSmurfFactory;
 import com.group34.Model.Tower.LightningSmurfFactory;
 import com.group34.Model.Tower.Tower;
 import com.group34.Model.Tower.TowerWrapper;
+import com.group34.Model.Tower.WaterSmurfFactory;
 
 
 public class Main {
@@ -32,8 +34,15 @@ public class Main {
         Board board = new Board(new Dimension(815, 635));
         Game game = new Game();
         
-        ShopItem item = new ShopItem(new LightningSmurfFactory(), 50);
-        Shop shop = new Shop(cashVault, board).addItem(item);
+        ShopItem lightningItem = new ShopItem(new LightningSmurfFactory(), 50);
+        ShopItem fireItem = new ShopItem(new FireSmurfFactory(), 100);
+        ShopItem waterItem = new ShopItem(new WaterSmurfFactory(), 75);
+        
+        Shop shop = new Shop(cashVault, board)
+            .addItem(lightningItem)
+            .addItem(fireItem)
+            .addItem(waterItem);
+        
 
         List<Round> rounds = RoundConfig.createRounds(cashVault);
 

@@ -29,13 +29,26 @@ public class ViewConstants {
 
     // image paths
     public static final String BASE_MAP_IMAGE_PATH = "/assets/Maps/BaseMap.png";
-    public static final String LIGHTNINGSMURF_IMAGE = "/assets/Towers/LightningSmurf.png";
-    public static final String GARGAMEL_IMAGE = "/assets/Enemies/BaseEnemy.png";
+    
     public static final String SETTINGS_ICON_PATH = "/assets/Miscellaneous/settings-icon.png";
     public static final String FASTFORWARD_ICON_PATH = "/assets/Miscellaneous/fastforward-icon.png";
     public static final String HEALTH_ICON_PATH = "/assets/Other/Smurfhealth.png";
     public static final String COIN_ICON_PATH = "/assets/Other/Smurfcoins.png";
+
     public static final String LIGHTNINGBOLT_IMAGE = "/assets/Projectiles/LightningBolt.png";
+    public static final String LIGHTNINGSMURF_IMAGE = "/assets/Towers/LightningSmurf.png";
+
+    public static final String FIREBALL_IMAGE = "/assets/Projectiles/Fireball.png";
+    public static final String FIRESMURF_IMAGE = "/assets/Towers/FireSmurf.png";
+
+    public static final String WATERDROP_IMAGE = "/assets/Projectiles/Waterdrop.png";
+    public static final String WATERSMURF_IMAGE = "/assets/Towers/WaterSmurf.png";
+
+    public static final String GARGAMEL_IMAGE = "/assets/Enemies/BaseEnemy.png";
+    public static final String AZRAEL_IMAGE = "/assets/Enemies/Azrael.png";
+    public static final String BALTHAZAR_IMAGE = "/assets/Enemies/Balthazar.png";
+    public static final String HOGATHA_IMAGE = "/assets/Enemies/Hogatha.png";
+
 
     /**
      *  Creates a placeholder icon, a red square.
