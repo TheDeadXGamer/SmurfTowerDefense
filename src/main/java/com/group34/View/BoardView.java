@@ -260,5 +260,6 @@ public class BoardView extends JPanel implements SellTowerListener  {
         overlayPanel.remove(button);
         buttons.remove(tower,button);
         rightPanel.displayShopPanel();
+        repaint();
     }
 }

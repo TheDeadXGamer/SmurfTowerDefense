@@ -4,6 +4,7 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.group34.GameSpeed;
 import com.group34.Model.Enemy.Attackable;
 import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Positionable;
@@ -75,7 +76,7 @@ public class LightningSmurf<enemies extends Positionable & Attackable> implement
      */
     @Override
     public void action() {
-        if (System.nanoTime() - lastAttack >= (Math.pow(10,9) / attackSpeed )) {
+        if (System.nanoTime() - lastAttack >= (Math.pow(10,9) / ((double) (attackSpeed * GameSpeed.getCurrentSpeed()) /60 ) )) {
             canAttack = true;
         }
 
