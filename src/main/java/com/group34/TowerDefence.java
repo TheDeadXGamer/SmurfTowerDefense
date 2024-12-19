@@ -41,7 +41,6 @@ public class TowerDefence extends JFrame implements Runnable {
     private Shop shop;
     private boolean isPaused = false;
     private GameView gameView = new GameView();
-    private ViewportManager viewportManager = new ViewportManager(new Dimension(815, 635));
 
     public TowerDefence(TowerDefenceBuilder builder) {
 
