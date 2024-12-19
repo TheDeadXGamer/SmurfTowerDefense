@@ -201,6 +201,7 @@ public class TowerDefence extends JFrame implements Runnable {
         cardLayout.show(cardPanel, "Game");
         while(currentState == GameState.BETWEEN_ROUND) {
             try {
+                board.update();
                 Thread.sleep(1000 / gameSpeed.getSpeed());
             } catch (InterruptedException e) {
                 e.printStackTrace();

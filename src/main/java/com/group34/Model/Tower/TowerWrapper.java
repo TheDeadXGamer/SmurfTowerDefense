@@ -65,4 +65,8 @@ public class TowerWrapper implements Tower{
         }
         return upgradedTower;
     }
+    @Override
+    public String getName() {
+        return tower.getName();
+    }
 }
