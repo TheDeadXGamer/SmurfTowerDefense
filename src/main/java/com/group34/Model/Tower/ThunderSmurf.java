@@ -1,9 +1,7 @@
 package com.group34.Model.Tower;
 
-
 import com.group34.GameSpeed;
 import com.group34.Model.Enemy.Attackable;
-import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Positionable;
 import com.group34.Model.Projectile.LightningBoltFactory;
 import com.group34.Model.Tower.Targeting.ClosestAttack;

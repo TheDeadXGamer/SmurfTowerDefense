@@ -6,12 +6,10 @@ import java.util.List;
 
 import com.group34.GameSpeed;
 import com.group34.Model.Enemy.Attackable;
-import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Positionable;
 import com.group34.Model.Projectile.LightningBoltFactory;
 import com.group34.Model.Tower.Targeting.ClosestAttack;
 import com.group34.Model.Tower.Targeting.Targetings;
-import com.group34.View.ViewConstants;
 
 public class LightningSmurf<enemies extends Positionable & Attackable> implements  Attack<enemies> {
     protected int attackSpeed;

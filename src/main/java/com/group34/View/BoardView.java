@@ -82,10 +82,7 @@ public class BoardView extends JPanel implements SellTowerListener  {
             .getImage()
             .getScaledInstance(
                 ViewConstants.TOWER_SIZE, ViewConstants.TOWER_SIZE, Image.SCALE_SMOOTH)
-        
     );
-
-
     private final Map<String, Image> projectileImages = Map.of(
         "LightningBolt", new ImageIcon(
             getClass().getResource(ViewConstants.LIGHTNINGBOLT_IMAGE))
@@ -126,7 +123,6 @@ public class BoardView extends JPanel implements SellTowerListener  {
         overlayPanel = new JPanel(null);
         overlayPanel.setOpaque(false);
 
-        // TODO: explain
         addMouseListener(new MouseAdapter() {
                              @Override
                              public void mouseClicked(MouseEvent e) {
@@ -148,7 +144,6 @@ public class BoardView extends JPanel implements SellTowerListener  {
         Graphics2D g2d = (Graphics2D) g;
         
         // Enable antialiasing for smoother graphics
-        // TODO: if (true)?
         if (true) {
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);

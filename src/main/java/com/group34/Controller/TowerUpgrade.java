@@ -9,7 +9,7 @@ public class TowerUpgrade {
     private CashVault cashVault;
     private BoardView boardView;
 
-    public void upgradeTower(Tower tower)  {
+    public void upgradeTower(Tower tower) {
         try {
                 cashVault.withdraw(tower.getUpgradeCost());
 

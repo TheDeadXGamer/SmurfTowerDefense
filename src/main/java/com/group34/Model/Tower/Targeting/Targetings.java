@@ -1,7 +1,6 @@
 package com.group34.Model.Tower.Targeting;
 
 import com.group34.Model.Enemy.Attackable;
-import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Positionable;
 
 import java.util.List;

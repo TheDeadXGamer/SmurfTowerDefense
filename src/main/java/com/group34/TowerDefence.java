@@ -34,9 +34,7 @@ import com.group34.View.StatusPanel;
 import com.group34.View.UpgradePanel;
 import com.group34.View.WelcomePanel;
 
-
 public class TowerDefence extends JFrame implements Runnable {
-    static final int FPS = 60;
     private CashVault cashVault;
     private Game game;
     private Board board;
@@ -63,8 +61,6 @@ public class TowerDefence extends JFrame implements Runnable {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
         setLocationRelativeTo(null);
-
-        // TODO: explain
 
         List<ShopButtonComponent> buttons = new ArrayList<>();
         Iterator<ShopItem> shopItems = shop.getItems();
@@ -111,11 +107,6 @@ public class TowerDefence extends JFrame implements Runnable {
             boardView,
             shop
         );
-
-        //GameView gameView = new GameView();
-        //gameView.add(boardView);
-        //gameView.pack();
-        //gameView.setVisible(true);
 
         pack();
         setVisible(true);
@@ -168,10 +159,7 @@ public class TowerDefence extends JFrame implements Runnable {
 
     private void handleActive(){
         cardLayout.show(cardPanel, "Game");
-
-
             Round round = RoundConfig.createRound();
-
             while (!round.isRoundOver() || game.enemiesLeft() > 0) {
                 if (player.isAlive()) {
                     Optional<EnemyFactory> spawn = round.spawn();

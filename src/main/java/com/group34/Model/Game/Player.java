@@ -1,8 +1,10 @@
 package com.group34.Model.Game;
 
+import com.group34.Model.Enemy.Killable;
+
 import java.util.ArrayList;
 
-public class Player {
+public class Player implements Killable {
     private ArrayList<PlayerSubscriber> observers;
     private int health;
 
@@ -20,6 +22,7 @@ public class Player {
         notifyObservers();
     }
 
+    @Override
     public boolean isAlive() {
         return health > 0;
     }

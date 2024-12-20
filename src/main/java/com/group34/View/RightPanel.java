@@ -15,8 +15,8 @@ public class RightPanel extends JLabel {
     private JPanel cardPanel; // Container for ShopPanel and UpgradePanel
     private UpgradePanel upgradePanel;
 
-    public RightPanel(ShopPanel shopPanel, StatusPanel statusPanel, UpgradePanel upgradeScreen) {
-        this.upgradePanel = upgradeScreen;
+    public RightPanel(ShopPanel shopPanel, StatusPanel statusPanel, UpgradePanel upgradePanel) {
+        this.upgradePanel = upgradePanel;
         setLayout(new BorderLayout());
         setPreferredSize(ViewConstants.SHOP_PANEL_SIZE);
         setBackground(ViewConstants.RIGHT_PANEL_COLOR);
@@ -41,7 +41,7 @@ public class RightPanel extends JLabel {
         cardPanel.add(shopPanel,"SHOP_PANEL");
 
         // Add UpgradePanel
-        cardPanel.add(upgradeScreen,"UPGRADE_PANEL");
+        cardPanel.add(upgradePanel,"UPGRADE_PANEL");
 
         add(cardPanel);
         cardLayout.show(cardPanel,"SHOP_PANEL");
