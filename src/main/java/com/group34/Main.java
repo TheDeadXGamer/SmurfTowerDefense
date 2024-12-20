@@ -33,7 +33,6 @@ public class Main {
         CashVault cashVault = new CashVault(100);
         Board board = new Board(ViewConstants.BOARD_SIZE);
 
-        Board board = new Board(new Dimension(786, 635));
         Game game = new Game();
         
         ShopItem lightningItem = new ShopItem(new LightningSmurfFactory(), 50);
