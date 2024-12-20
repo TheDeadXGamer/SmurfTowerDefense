@@ -25,10 +25,6 @@ public class Main {
     public static void main (String[] args) throws Exception {
         Point2D position = new Point2D.Double(100, 100);
 
-        // should these exist in the final game?
-        Tower tower = new TowerWrapper(new LightningSmurfFactory().createTower(position)) ;
-        Tower tower2 = new TowerWrapper(new LightningSmurfFactory().createTower(new Point2D.Double(100,400))).upgrade();
-
         Player player = new Player(30);
         CashVault cashVault = new CashVault(100);
         Board board = new Board(ViewConstants.BOARD_SIZE);
@@ -118,9 +114,6 @@ public class Main {
                 .add(new Point2D.Double(729.9123904881102, 311.0738255033557))
                 .add(new Point2D.Double(786, 308.05369127516775))
                 .build();
-
-        board.addTower(tower);
-        board.addTower(tower2);
 
         TowerDefence towerDefence = new TowerDefenceBuilder()
             .setCashVault(cashVault)
