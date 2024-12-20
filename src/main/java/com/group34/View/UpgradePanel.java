@@ -63,7 +63,7 @@ public class UpgradePanel extends JPanel {
     }
     public void createTowerTitle() {
         towerTitleLabel.removeAll();
-        String towerName = currentTower.getName();
+        String towerName = currentTower.getTowerType();
         // Create the JLabel to display text at the top
         towerTitleLabel.setText("<html><div style='text-align: center;'>" + towerName + "<br>Upgrade options</div></html>");
         towerTitleLabel.setFont(new Font("Arial", Font.BOLD, 16)); // Set font size and style if needed

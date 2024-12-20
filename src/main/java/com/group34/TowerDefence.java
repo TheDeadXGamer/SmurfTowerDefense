@@ -47,7 +47,7 @@ public class TowerDefence extends JFrame implements Runnable {
     private GameState currentState;
     private CardLayout cardLayout;
     private JPanel cardPanel;
-    private GameView gameView = new GameView();
+    private GameView gameView;
 
     public TowerDefence(TowerDefenceBuilder builder) {
         this.cashVault = builder.cashVault;
@@ -72,6 +72,8 @@ public class TowerDefence extends JFrame implements Runnable {
             buttons.add(new ShopButtonComponent(shopItems.next()));
         }
 
+
+
         TowerUpgrade towerUpgrade = new TowerUpgrade();
         towerUpgrade.setCashVault(cashVault);
         TowerSell towerSell = new TowerSell(shop);
@@ -80,6 +82,7 @@ public class TowerDefence extends JFrame implements Runnable {
         ShopPanel shopPanel = new ShopPanel(buttons);
         StatusPanel statusPanel = new StatusPanel(cashVault, player);
         WelcomePanel welcomePanel = new WelcomePanel();
+
         RightPanel rightPanel = new RightPanel(shopPanel, statusPanel,upgradeScreen);
 
         BoardView boardView = new BoardView(
@@ -88,13 +91,14 @@ public class TowerDefence extends JFrame implements Runnable {
             rightPanel
         );
 
+
         towerSell.subscribe(boardView);
 
-
+        gameView = new GameView(boardView,rightPanel);
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
         cardPanel.add(welcomePanel, "Welcome");
-        cardPanel.add(boardView, "Game");
+        cardPanel.add(gameView, "Game");
 
         add(cardPanel);
 
@@ -209,6 +213,7 @@ public class TowerDefence extends JFrame implements Runnable {
         while(currentState == GameState.BETWEEN_ROUND) {
             try {
                 board.update();
+
                 Thread.sleep(1000 / gameSpeed.getSpeed());
             } catch (InterruptedException e) {
                 e.printStackTrace();

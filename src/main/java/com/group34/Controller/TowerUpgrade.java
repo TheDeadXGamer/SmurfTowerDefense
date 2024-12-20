@@ -15,8 +15,11 @@ public class TowerUpgrade {
             if (upgradedTower != null) {
                 cashVault.withdraw(upgradedTower.getCost());
             } else {
+                System.out.println("asdasd");
                 boardView.showTemporaryMessage("Cant upgrade this tower further!");
             }
+            boardView.rightPanel.displayUpgradePanel(tower);
+
         } catch (OverDraftError e) {
             boardView.showTemporaryMessage(e.getMessage());
         }
@@ -30,3 +33,4 @@ public class TowerUpgrade {
         this.boardView = boardView;
     }
 }
+
