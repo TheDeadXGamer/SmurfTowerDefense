@@ -1,5 +1,4 @@
 package com.group34.Model.Tower.Targeting;
-
 import java.awt.geom.Point2D;
 import java.util.List;
 
@@ -33,6 +32,4 @@ public class AreaAttack<enemies extends Positionable & Attackable> implements Ta
     private boolean checkIfInRange(enemies enemy) {
         return towerPosition.distance(enemy.getPosition()) <= this.range;
     }
-
-
 }

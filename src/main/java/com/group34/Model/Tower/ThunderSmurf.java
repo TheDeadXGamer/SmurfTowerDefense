@@ -112,6 +112,8 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
         return cost;
     }
 
+
+
     @Override
     public void notifyTower(enemies enemy) {
         if (checkIfInRange(enemy) && !targets.contains(enemy)) {

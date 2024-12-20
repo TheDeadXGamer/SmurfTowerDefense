@@ -3,6 +3,7 @@ package com.group34.View;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -81,7 +82,7 @@ public class BoardView extends JPanel implements SellTowerListener  {
             .getImage()
             .getScaledInstance(
                 ViewConstants.TOWER_SIZE, ViewConstants.TOWER_SIZE, Image.SCALE_SMOOTH)
-
+        
     );
 
     private final Map<String, Image> projectileImages = Map.of(
@@ -101,6 +102,8 @@ public class BoardView extends JPanel implements SellTowerListener  {
             .getScaledInstance(
                 ViewConstants.TOWER_SIZE, ViewConstants.TOWER_SIZE, Image.SCALE_SMOOTH)
     );
+
+
     private final Image backgroundImage = new ImageIcon(
         getClass().getResource(ViewConstants.BASE_MAP_IMAGE_PATH))
         .getImage();
@@ -157,7 +160,7 @@ public class BoardView extends JPanel implements SellTowerListener  {
         if (showTemporaryMessage) {
             g.setColor(Color.RED);
             g.setFont(new Font("Arial", Font.BOLD, 25));
-            int messageWidth = g.getFontMetrics().stringWidth(temporaryMessage); // TODO: is this going to be used? if not, remove
+            int messageWidth = g.getFontMetrics().stringWidth(temporaryMessage); 
             g.drawString(
                     temporaryMessage,
                     ViewConstants.GAME_WIDTH/4 + 35,
@@ -167,7 +170,6 @@ public class BoardView extends JPanel implements SellTowerListener  {
     }
 
     private void renderProjectiles(Graphics g) {
-        // q: why use while loop instead of for loop?
         Iterator<Projectile> iterProjectile = board.getProjectileManager().getProjectiles().iterator();
 
         while (iterProjectile.hasNext()) {

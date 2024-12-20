@@ -111,6 +111,8 @@ public class LightningSmurf<enemies extends Positionable & Attackable> implement
     }
 
 
+
+
     /**
      * Returns the attack speed of the tower
      * @return the attack speed of the tower

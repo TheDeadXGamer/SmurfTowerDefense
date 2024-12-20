@@ -15,6 +15,11 @@ import com.group34.Model.Shop.Shop;
 import com.group34.Model.Shop.ShopItem;
 import com.group34.Model.Tower.*;
 import com.group34.View.ViewConstants;
+import com.group34.Model.Tower.FireSmurfFactory;
+import com.group34.Model.Tower.LightningSmurfFactory;
+import com.group34.Model.Tower.Tower;
+import com.group34.Model.Tower.TowerWrapper;
+import com.group34.Model.Tower.WaterSmurfFactory;
 
 public class Main {
     public static void main (String[] args) throws Exception {
@@ -32,15 +37,11 @@ public class Main {
         ShopItem lightningItem = new ShopItem(new LightningSmurfFactory(), 50);
         ShopItem fireItem = new ShopItem(new FireSmurfFactory(), 100);
         ShopItem waterItem = new ShopItem(new WaterSmurfFactory(), 75);
-
         Shop shop = new Shop(cashVault, board)
             .addItem(lightningItem)
             .addItem(fireItem)
             .addItem(waterItem);
-
-
-
-
+            
         RoadSpawn spawn = new RoadBuilder(board, player)
                 .add(new Point2D.Double(671., 0))
                 .add(new Point2D.Double(666., 32.))
