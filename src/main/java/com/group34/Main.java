@@ -38,7 +38,7 @@ public class Main {
         ShopItem lightningItem = new ShopItem(new LightningSmurfFactory(), 50);
         ShopItem fireItem = new ShopItem(new FireSmurfFactory(), 100);
         ShopItem waterItem = new ShopItem(new WaterSmurfFactory(), 75);
-      
+
         Shop shop = new Shop(cashVault, board)
             .addItem(lightningItem)
             .addItem(fireItem)

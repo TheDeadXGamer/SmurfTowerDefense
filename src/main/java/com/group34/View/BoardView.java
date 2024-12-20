@@ -83,6 +83,7 @@ public class BoardView extends JPanel implements SellTowerListener  {
             .getScaledInstance(
                 ViewConstants.TOWER_SIZE, ViewConstants.TOWER_SIZE, Image.SCALE_SMOOTH)
     );
+
     private final Map<String, Image> projectileImages = Map.of(
         "LightningBolt", new ImageIcon(
             getClass().getResource(ViewConstants.LIGHTNINGBOLT_IMAGE))
@@ -158,7 +159,7 @@ public class BoardView extends JPanel implements SellTowerListener  {
         if (showTemporaryMessage) {
             g.setColor(Color.RED);
             g.setFont(new Font("Arial", Font.BOLD, 25));
-            int messageWidth = g.getFontMetrics().stringWidth(temporaryMessage); // TODO: is this going to be used? if not, remove
+            int messageWidth = g.getFontMetrics().stringWidth(temporaryMessage); 
             g.drawString(
                     temporaryMessage,
                     ViewConstants.GAME_WIDTH/4 + 35,
@@ -168,7 +169,6 @@ public class BoardView extends JPanel implements SellTowerListener  {
     }
 
     private void renderProjectiles(Graphics g) {
-        // q: why use while loop instead of for loop?
         Iterator<Projectile> iterProjectile = board.getProjectileManager().getProjectiles().iterator();
 
         while (iterProjectile.hasNext()) {
