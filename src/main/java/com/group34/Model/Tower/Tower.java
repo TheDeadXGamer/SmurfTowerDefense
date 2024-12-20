@@ -40,4 +40,6 @@ public interface Tower<enemies extends Positionable & Attackable> extends TowerL
     float getTowerWidth();
 
     int getCost();
+
+
 }

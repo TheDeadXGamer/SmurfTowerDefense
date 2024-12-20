@@ -3,6 +3,7 @@ package com.group34.View;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -81,9 +82,7 @@ public class BoardView extends JPanel implements SellTowerListener  {
             .getImage()
             .getScaledInstance(
                 ViewConstants.TOWER_SIZE, ViewConstants.TOWER_SIZE, Image.SCALE_SMOOTH)
-
     );
-
     private final Map<String, Image> projectileImages = Map.of(
         "LightningBolt", new ImageIcon(
             getClass().getResource(ViewConstants.LIGHTNINGBOLT_IMAGE))
@@ -101,6 +100,8 @@ public class BoardView extends JPanel implements SellTowerListener  {
             .getScaledInstance(
                 ViewConstants.TOWER_SIZE, ViewConstants.TOWER_SIZE, Image.SCALE_SMOOTH)
     );
+
+
     private final Image backgroundImage = new ImageIcon(
         getClass().getResource(ViewConstants.BASE_MAP_IMAGE_PATH))
         .getImage();

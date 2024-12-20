@@ -24,7 +24,15 @@ import com.group34.Model.Round.RoundConfig;
 import com.group34.Model.Shop.CashVault;
 import com.group34.Model.Shop.Shop;
 import com.group34.Model.Shop.ShopItem;
-import com.group34.View.*;
+import com.group34.View.BoardView;
+import com.group34.View.ButtonPanel;
+import com.group34.View.GameView;
+import com.group34.View.RightPanel;
+import com.group34.View.ShopButtonComponent;
+import com.group34.View.ShopPanel;
+import com.group34.View.StatusPanel;
+import com.group34.View.UpgradePanel;
+import com.group34.View.WelcomePanel;
 
 public class TowerDefence extends JFrame implements Runnable {
     private CashVault cashVault;
@@ -60,6 +68,8 @@ public class TowerDefence extends JFrame implements Runnable {
             buttons.add(new ShopButtonComponent(shopItems.next()));
         }
 
+
+
         TowerUpgrade towerUpgrade = new TowerUpgrade();
         towerUpgrade.setCashVault(cashVault);
         TowerSell towerSell = new TowerSell(shop);
@@ -68,6 +78,7 @@ public class TowerDefence extends JFrame implements Runnable {
         ShopPanel shopPanel = new ShopPanel(buttons);
         StatusPanel statusPanel = new StatusPanel(cashVault, player);
         WelcomePanel welcomePanel = new WelcomePanel();
+
         RightPanel rightPanel = new RightPanel(shopPanel, statusPanel,upgradeScreen);
 
         BoardView boardView = new BoardView(

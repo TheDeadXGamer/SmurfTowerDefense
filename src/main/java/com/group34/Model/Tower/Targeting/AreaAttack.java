@@ -33,6 +33,4 @@ public class AreaAttack<enemies extends Positionable & Attackable> implements Ta
     private boolean checkIfInRange(enemies enemy) {
         return towerPosition.distance(enemy.getPosition()) <= this.range;
     }
-
-
 }

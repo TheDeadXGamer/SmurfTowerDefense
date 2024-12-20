@@ -37,6 +37,7 @@ public abstract class BaseEnemy implements Enemy {
         return health > 0;
     }
 
+
     @Override
     public int getHealth() {
         return health;

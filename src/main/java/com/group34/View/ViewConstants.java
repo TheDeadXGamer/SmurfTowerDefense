@@ -14,6 +14,7 @@ public class ViewConstants {
     public static final Color BORDER_COLOR = Color.BLACK; // black
     public static final Color HEALTH_BAR_COLOR = new Color(0, 255, 0); // green
 
+
     // size integers
     public static final int BUTTON_SIZE = 30;
     public static final int TOWER_SIZE = 80;
