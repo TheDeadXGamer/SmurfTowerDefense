@@ -1,6 +1,5 @@
 package com.group34.Model.Road;
 
-
 import java.awt.geom.Point2D;
 
 public class RoadSection implements Road {

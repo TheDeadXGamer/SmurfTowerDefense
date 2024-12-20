@@ -2,7 +2,6 @@ package com.group34.Model.Round;
 
 import java.util.PriorityQueue;
 
-
 public class RoundBuilder {
     final PriorityQueue<RoundEvent> events;
 

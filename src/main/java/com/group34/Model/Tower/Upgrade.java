@@ -7,4 +7,5 @@ public interface Upgrade {
      * @return the upgraded tower.
      */
     Tower upgrade();
+    int getUpgradeCost();
 }

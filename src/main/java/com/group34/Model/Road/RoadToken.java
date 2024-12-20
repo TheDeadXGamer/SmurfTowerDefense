@@ -5,6 +5,7 @@ import java.awt.geom.Point2D;
 public class RoadToken {
     Road section;
     int distance;
+    boolean isFinished = false;
 
     public RoadToken(Road section) {
         this.section = section;
@@ -18,6 +19,10 @@ public class RoadToken {
 
     void setRoadSection(Road section) {
         this.section = section;
+    }
+
+    public boolean isFinished() {
+        return isFinished;
     }
 
     public void advance(int amount) {

@@ -20,12 +20,11 @@ import com.group34.View.ShopButtonComponent;
 
 public class TowerPurchase {
     public TowerPurchase(
-        List<ShopButtonComponent> buttons,
+        List<ShopButtonComponent> shopButtons,
         BoardView boardView,
         Shop shop
     ) {
-        // TODO: explain what this does
-        for (ShopButtonComponent button : buttons) {
+        for (ShopButtonComponent button : shopButtons) {
             button.setTransferHandler(new TransferHandler("text") {
                 @Override
                 protected Transferable createTransferable(JComponent c) {

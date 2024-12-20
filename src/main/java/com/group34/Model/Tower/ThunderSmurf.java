@@ -1,8 +1,7 @@
 package com.group34.Model.Tower;
 
-
+import com.group34.GameSpeed;
 import com.group34.Model.Enemy.Attackable;
-import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Positionable;
 import com.group34.Model.Projectile.LightningBoltFactory;
 import com.group34.Model.Tower.Targeting.ClosestAttack;
@@ -84,7 +83,7 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
      */
     @Override
     public void action() {
-        if (System.nanoTime() - lastAttack >= (Math.pow(10,9) / attackSpeed )) {
+        if (System.nanoTime() - lastAttack >= (Math.pow(10,9) / ((double) (attackSpeed * GameSpeed.getCurrentSpeed()) /60 ) )) {
             canAttack = true;
         }
         if (canAttack) {
@@ -149,5 +148,10 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
     @Override
     public Tower upgrade() {
         return null;
+    }
+
+    @Override
+    public int getUpgradeCost() {
+        return 0;
     }
 }

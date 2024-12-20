@@ -9,7 +9,6 @@ import java.util.Optional;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-
 import com.group34.Controller.TowerPurchase;
 import com.group34.Controller.TowerSell;
 import com.group34.Controller.TowerUpgrade;
@@ -21,14 +20,13 @@ import com.group34.Model.Game.Player;
 import com.group34.Model.Road.RoadSpawn;
 import com.group34.Model.Road.RoadToken;
 import com.group34.Model.Round.Round;
+import com.group34.Model.Round.RoundConfig;
 import com.group34.Model.Shop.CashVault;
 import com.group34.Model.Shop.Shop;
 import com.group34.Model.Shop.ShopItem;
 import com.group34.View.*;
 
-
 public class TowerDefence extends JFrame implements Runnable {
-    static final int FPS = 60;
     private CashVault cashVault;
     private Game game;
     private Board board;
@@ -40,7 +38,7 @@ public class TowerDefence extends JFrame implements Runnable {
     private GameState currentState;
     private CardLayout cardLayout;
     private JPanel cardPanel;
-    private GameView gameView = new GameView();
+    private GameView gameView;
 
     public TowerDefence(TowerDefenceBuilder builder) {
         this.cashVault = builder.cashVault;
@@ -48,7 +46,6 @@ public class TowerDefence extends JFrame implements Runnable {
         this.board = builder.board;
         this.player = builder.player;
         this.roadSpawn = builder.roadSpawn;
-        this.rounds = builder.rounds;
         this.gameSpeed = builder.gameSpeed;
         this.shop = builder.shop;
         
@@ -56,8 +53,6 @@ public class TowerDefence extends JFrame implements Runnable {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
         setLocationRelativeTo(null);
-
-        // TODO: explain
 
         List<ShopButtonComponent> buttons = new ArrayList<>();
         Iterator<ShopItem> shopItems = shop.getItems();
@@ -81,10 +76,14 @@ public class TowerDefence extends JFrame implements Runnable {
             rightPanel
         );
 
+
+        towerSell.subscribe(boardView);
+
+        gameView = new GameView(boardView,rightPanel);
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
         cardPanel.add(welcomePanel, "Welcome");
-        cardPanel.add(boardView, "Game");
+        cardPanel.add(gameView, "Game");
 
         add(cardPanel);
 
@@ -97,11 +96,6 @@ public class TowerDefence extends JFrame implements Runnable {
             boardView,
             shop
         );
-
-        //GameView gameView = new GameView();
-        //gameView.add(boardView);
-        //gameView.pack();
-        //gameView.setVisible(true);
 
         pack();
         setVisible(true);
@@ -154,9 +148,7 @@ public class TowerDefence extends JFrame implements Runnable {
 
     private void handleActive(){
         cardLayout.show(cardPanel, "Game");
-        Iterator<Round> roundIterator = rounds.iterator();
-        while(roundIterator.hasNext()) {
-            Round round = roundIterator.next();
+            Round round = RoundConfig.createRound();
             while (!round.isRoundOver() || game.enemiesLeft() > 0) {
                 if (player.isAlive()) {
                     Optional<EnemyFactory> spawn = round.spawn();
@@ -185,19 +177,17 @@ public class TowerDefence extends JFrame implements Runnable {
                     break;
                 }
             }
-                if(roundIterator.hasNext()) {
-                    currentState = GameState.BETWEEN_ROUND;
-                    handleBetweenRound();
-                    continue;
-                }
-                currentState = GameState.GAME_OVER;
-        }
+
+            currentState = GameState.BETWEEN_ROUND;
+            handleBetweenRound();
     }
 
     private void handleBetweenRound() {
         cardLayout.show(cardPanel, "Game");
         while(currentState == GameState.BETWEEN_ROUND) {
             try {
+                board.update();
+
                 Thread.sleep(1000 / gameSpeed.getSpeed());
             } catch (InterruptedException e) {
                 e.printStackTrace();

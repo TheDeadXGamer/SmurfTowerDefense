@@ -15,6 +15,8 @@ public class RoadEnd implements Road {
 
     @Override
     public void advance(RoadToken token, int distance) {
+        assert distance > 0;
+        token.isFinished = true;
         player.reduceHealth(1);
     }
 

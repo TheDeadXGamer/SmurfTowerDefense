@@ -47,6 +47,7 @@ public class CashVault{
         }
         return true;
     }
+
     public void subscribe(CashVaultObserver observer) {
         observers.add(observer);
     }

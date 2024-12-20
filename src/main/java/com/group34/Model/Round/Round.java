@@ -5,8 +5,6 @@ import java.util.PriorityQueue;
 
 import com.group34.Model.Enemy.EnemyFactory;
 
-
-
 public class Round {
     PriorityQueue<RoundEvent> events;
     int counter = 0;

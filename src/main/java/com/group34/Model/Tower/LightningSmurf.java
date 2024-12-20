@@ -4,13 +4,12 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.group34.GameSpeed;
 import com.group34.Model.Enemy.Attackable;
-import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Positionable;
 import com.group34.Model.Projectile.LightningBoltFactory;
 import com.group34.Model.Tower.Targeting.ClosestAttack;
 import com.group34.Model.Tower.Targeting.Targetings;
-import com.group34.View.ViewConstants;
 
 public class LightningSmurf<enemies extends Positionable & Attackable> implements  Attack<enemies> {
     protected int attackSpeed;
@@ -41,6 +40,11 @@ public class LightningSmurf<enemies extends Positionable & Attackable> implement
     @Override
     public Attack upgrade() {
         return new ThunderSmurf(this.position);
+    }
+
+    @Override
+    public int getUpgradeCost() {
+        return 50;
     }
 
     /**
@@ -75,7 +79,7 @@ public class LightningSmurf<enemies extends Positionable & Attackable> implement
      */
     @Override
     public void action() {
-        if (System.nanoTime() - lastAttack >= (Math.pow(10,9) / attackSpeed )) {
+        if (System.nanoTime() - lastAttack >= (Math.pow(10,9) / ((double) (attackSpeed * GameSpeed.getCurrentSpeed()) /60 ) )) {
             canAttack = true;
         }
 

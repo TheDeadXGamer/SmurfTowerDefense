@@ -20,6 +20,20 @@ public class ShopButtonComponent extends JComponent {
             .getScaledInstance(
                 ViewConstants.TOWER_SIZE,
                 ViewConstants.TOWER_SIZE,
+                Image.SCALE_SMOOTH),
+        "FireSmurf", new ImageIcon(
+            ShopButtonComponent.class.getResource(ViewConstants.FIRESMURF_IMAGE))
+            .getImage()
+            .getScaledInstance(
+                ViewConstants.TOWER_SIZE,
+                ViewConstants.TOWER_SIZE,
+                Image.SCALE_SMOOTH),
+        "WaterSmurf", new ImageIcon(
+            ShopButtonComponent.class.getResource(ViewConstants.WATERSMURF_IMAGE))
+            .getImage()
+            .getScaledInstance(
+                ViewConstants.TOWER_SIZE,
+                ViewConstants.TOWER_SIZE,
                 Image.SCALE_SMOOTH)
     );
 
@@ -34,8 +48,7 @@ public class ShopButtonComponent extends JComponent {
         setBackground(ViewConstants.RIGHT_PANEL_COLOR);
 
         itemImageLabel.setIcon(new ImageIcon(image));
-        itemImageLabel.setBorder(
-            BorderFactory.createLineBorder(ViewConstants.BORDER_COLOR));
+        itemImageLabel.setBorder(BorderFactory.createLineBorder(ViewConstants.BORDER_COLOR));
         add(itemImageLabel);
     }
 

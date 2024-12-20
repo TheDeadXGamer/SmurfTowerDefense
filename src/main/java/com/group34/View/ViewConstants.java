@@ -17,25 +17,39 @@ public class ViewConstants {
     // size integers
     public static final int BUTTON_SIZE = 30;
     public static final int TOWER_SIZE = 80;
-    public static final int GAME_WIDTH = 800;
-    public static final int GAME_HEIGHT = 600;
+    public static final int GAME_WIDTH = 786;
+    public static final int GAME_HEIGHT = 635;
     public static final int RIGHT_PANEL_WIDTH = GAME_WIDTH - 600;
     public static final int STATUS_ICON_SIZE = 30;
 
     // dimension objects
+    public static final Dimension BOARD_SIZE = new Dimension(GAME_WIDTH, GAME_HEIGHT);
     public static final Dimension BUTTON_PANEL_SIZE = new Dimension(RIGHT_PANEL_WIDTH, 50);
     public static final Dimension STATUS_PANEL_SIZE = new Dimension(RIGHT_PANEL_WIDTH, 100);
     public static final Dimension SHOP_PANEL_SIZE = new Dimension(RIGHT_PANEL_WIDTH, 400);
 
     // image paths
     public static final String BASE_MAP_IMAGE_PATH = "/assets/Maps/BaseMap.png";
-    public static final String LIGHTNINGSMURF_IMAGE = "/assets/Towers/LightningSmurf.png";
-    public static final String GARGAMEL_IMAGE = "/assets/Enemies/BaseEnemy.png";
+
     public static final String SETTINGS_ICON_PATH = "/assets/Miscellaneous/settings-icon.png";
     public static final String FASTFORWARD_ICON_PATH = "/assets/Miscellaneous/fastforward-icon.png";
     public static final String HEALTH_ICON_PATH = "/assets/Other/Smurfhealth.png";
     public static final String COIN_ICON_PATH = "/assets/Other/Smurfcoins.png";
+
     public static final String LIGHTNINGBOLT_IMAGE = "/assets/Projectiles/LightningBolt.png";
+    public static final String LIGHTNINGSMURF_IMAGE = "/assets/Towers/LightningSmurf.png";
+
+    public static final String FIREBALL_IMAGE = "/assets/Projectiles/Fireball.png";
+    public static final String FIRESMURF_IMAGE = "/assets/Towers/FireSmurf.png";
+
+    public static final String WATERDROP_IMAGE = "/assets/Projectiles/Waterdrop.png";
+    public static final String WATERSMURF_IMAGE = "/assets/Towers/WaterSmurf.png";
+
+    public static final String GARGAMEL_IMAGE = "/assets/Enemies/BaseEnemy.png";
+    public static final String AZRAEL_IMAGE = "/assets/Enemies/Azrael.png";
+    public static final String BALTHAZAR_IMAGE = "/assets/Enemies/Balthazar.png";
+    public static final String HOGATHA_IMAGE = "/assets/Enemies/Hogatha.png";
+
 
     /**
      *  Creates a placeholder icon, a red square.

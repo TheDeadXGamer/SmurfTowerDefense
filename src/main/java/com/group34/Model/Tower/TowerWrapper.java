@@ -4,7 +4,7 @@ import com.group34.Model.Positionable;
 
 import java.awt.geom.Point2D;
 
-public class TowerWrapper implements Tower{
+public class TowerWrapper implements Tower {
     Tower tower;
 
     public TowerWrapper(Tower tower) {
@@ -65,4 +65,10 @@ public class TowerWrapper implements Tower{
         }
         return upgradedTower;
     }
+
+    @Override
+    public int getUpgradeCost() {
+        return tower.getUpgradeCost();
+    }
+
 }
