@@ -55,10 +55,7 @@ public class ShopPanel extends JPanel {
         return itemsPanel;
     }
 
-    private void populateItems(
-        JPanel itemsPanel, 
-        List<ShopButtonComponent> buttons) {
-        // Grid stuff, not sure that it works
+    private void populateItems(JPanel itemsPanel, List<ShopButtonComponent> buttons) {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 0, 10, 0); // Add vertical padding between items
         gbc.fill = GridBagConstraints.HORIZONTAL; // Make items fill the cell horizontally
@@ -69,8 +66,22 @@ public class ShopPanel extends JPanel {
         for (int i = 0; i < buttons.size(); i++) {
             ShopButtonComponent itemPanel = buttons.get(i);
             itemPanel.setBackground(ViewConstants.RIGHT_PANEL_COLOR);
-            gbc.gridy = i;// New row for each item
-            itemsPanel.add(itemPanel, gbc);
+            gbc.gridy = i;
+
+            // Create a panel to hold the item and its price
+            JPanel itemWithPricePanel = new JPanel(new BorderLayout(5, 0)); // Add horizontal gap between image and price
+            itemWithPricePanel.setBackground(ViewConstants.RIGHT_PANEL_COLOR);
+
+            // Add the item panel
+            itemWithPricePanel.add(itemPanel, BorderLayout.WEST);
+
+            // Create and add the price label
+            JLabel priceLabel = new JLabel("$" + itemPanel.getCost());
+            priceLabel.setFont(new Font("Arial", Font.BOLD, 14));
+            priceLabel.setHorizontalAlignment(SwingConstants.LEFT);
+            itemWithPricePanel.add(priceLabel, BorderLayout.CENTER);
+
+            itemsPanel.add(itemWithPricePanel, gbc);
         }
     }
 

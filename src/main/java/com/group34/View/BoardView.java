@@ -82,7 +82,6 @@ public class BoardView extends JPanel implements SellTowerListener  {
             .getImage()
             .getScaledInstance(
                 ViewConstants.TOWER_SIZE, ViewConstants.TOWER_SIZE, Image.SCALE_SMOOTH)
-        
     );
 
     private final Map<String, Image> projectileImages = Map.of(
