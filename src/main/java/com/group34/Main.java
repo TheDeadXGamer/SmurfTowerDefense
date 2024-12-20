@@ -1,15 +1,12 @@
 package com.group34;
 
 import java.awt.geom.Point2D;
-import java.util.List;
 
 import com.group34.Model.Board.Board;
 import com.group34.Model.Game.Game;
 import com.group34.Model.Game.Player;
 import com.group34.Model.Road.RoadBuilder;
 import com.group34.Model.Road.RoadSpawn;
-import com.group34.Model.Round.Round;
-import com.group34.Model.Round.RoundConfig;
 import com.group34.Model.Shop.CashVault;
 import com.group34.Model.Shop.Shop;
 import com.group34.Model.Shop.ShopItem;

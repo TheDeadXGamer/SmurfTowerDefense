@@ -4,10 +4,20 @@ import java.awt.geom.Point2D;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * RoadValidator is a utility class that provides methods to validate road points.
+ */
 public class RoadValidator {
     public static final double BORDER_TOLERANCE = 0.10; // 10% tolerance for percentages
     public static final double COORDINATE_TOLERANCE = 50.0; // pixel tolerance for actual coordinates
 
+    /**
+     * Checks if the road is valid. A road is valid if it has at least 2 points and both the start and end points are on the border.
+     * @param points List of points that make up the road
+     * @param width Width of the map
+     * @param height Height of the map
+     * @return True if the road is valid, false otherwise
+     */
     public static boolean isValidRoad(List<Point2D> points, double width, double height) {
         if (points.size() < 2) {
             return false;
@@ -30,6 +40,15 @@ public class RoadValidator {
         return startOnBorder && endOnBorder;
     }
 
+
+    /**
+     * Checks if the road percentage points are valid.
+     * @param points Map of points that make up the road
+     * @param width Width of the map
+     * @param height Height of the map
+     * @param isLastPoint True if this is the last point, false otherwise
+     * @return True if the road is valid, false otherwise
+     */
     public static boolean isValidPercentageRoad(Map<Double, Double> points, boolean isLastPoint) {
         if (points.size() < 2) {
             return false;
@@ -63,7 +82,12 @@ public class RoadValidator {
         return startOnBorder;
     }
 
-    // For percentage-based validation (used by MapRoadCreatorTool)
+    /**
+     * Checks if a point is on the border of the map.
+     * @param x X coordinate
+     * @param y Y coordinate
+     * @return True if the point is on the border, false otherwise
+     */
     public static boolean isValidBorderPoint(double x, double y) {
         boolean xNearZero = x <= BORDER_TOLERANCE;
         boolean xNearMax = x >= (1 - BORDER_TOLERANCE);
@@ -73,12 +97,23 @@ public class RoadValidator {
         return xNearZero || xNearMax || yNearZero || yNearMax;
     }
 
-    // For coordinate-based validation (used by RoadBuilder)
+    /**
+     * Checks if a point is on the border of the map.
+     * @param coordinate X coordinate
+     * @param maxValue Maximum value for the coordinate
+     * @return True if the point is on the border, false otherwise
+     */
     private static boolean isOnBorderX(double coordinate, double maxValue) {
         return coordinate <= COORDINATE_TOLERANCE ||
                 coordinate >= (maxValue - COORDINATE_TOLERANCE);
     }
 
+    /**
+     * Checks if a point is on the border of the map.
+     * @param coordinate Y coordinate
+     * @param maxValue Maximum value for the coordinate
+     * @return True if the point is on the border, false otherwise
+     */
     private static boolean isOnBorderY(double coordinate, double maxValue) {
         return coordinate <= COORDINATE_TOLERANCE ||
                 coordinate >= (maxValue - COORDINATE_TOLERANCE);

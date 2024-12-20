@@ -9,6 +9,15 @@ import com.group34.Model.Projectile.ProjectileFactory;
 import com.group34.Model.Projectile.Projectile;
 import com.group34.Model.Projectile.ProjectileManager;
 
+/**
+ * A class that represents a targeting strategy for attacking the closest enemy.
+ * <p>
+ * This class is responsible for attacking the closest enemy to the tower from a list of enemies.
+ * The closest enemy is determined by calculating the distance between the tower's position and
+ * each enemy's position. The enemy with the smallest distance is considered the closest.
+ * </p>
+ * @param <enemies> the type of enemy that can be targeted by the tower.
+ */
 public class ClosestAttack<enemies extends Positionable & Attackable> implements Targetings<enemies> {
 
     private ProjectileManager projectileManager = new ProjectileManager();

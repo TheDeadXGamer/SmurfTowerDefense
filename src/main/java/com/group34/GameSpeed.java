@@ -1,5 +1,8 @@
 package com.group34;
 
+/**
+ * Enum class to represent the game speed.
+ */
 public enum GameSpeed {
     SLOW(30), NORMAL(60), FAST(120);
 

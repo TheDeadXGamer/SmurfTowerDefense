@@ -15,14 +15,15 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import com.group34.Model.Road.RoadValidator;
 import com.group34.View.ViewConstants;
 
+/**
+ * This class is a tool to create paths for the game. It allows the user to load an image of a map and then click on the map to create a path.
+ */
 public class MapRoadCreatorTool extends JFrame {
     private BufferedImage mapImage;
     private MapPanel mapPanel;
     private List<Point2D> points = new ArrayList<Point2D>();
     private Map<Double, Double> scalablePoints = new LinkedHashMap<>();
     private JButton finishButton;
-
-    // TODO: needs more comments
 
     public MapRoadCreatorTool() {
         super("Map Road Creator Tool");
@@ -45,6 +46,11 @@ public class MapRoadCreatorTool extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Validates the path and finishes the path creation.
+     * If the path is invalid, an error message is shown.
+     * @return void
+     */
     private void validateAndFinishPath() {
         if (points.size() < 2) {
             JOptionPane.showMessageDialog(this,
@@ -66,6 +72,9 @@ public class MapRoadCreatorTool extends JFrame {
         }
     }
 
+    /**
+     * Panel to display the map image and the path being created.
+     */
     private class MapPanel extends JPanel {
         private MapPanel() {
             addMouseListener(new MouseAdapter() {
@@ -102,6 +111,10 @@ public class MapRoadCreatorTool extends JFrame {
         }
     }
 
+    /**
+     * Loads an image from the file system.
+     * @return void
+     */
     private void loadImage() {
         try {
             JFileChooser fileChooser = new JFileChooser();
@@ -115,6 +128,11 @@ public class MapRoadCreatorTool extends JFrame {
         }
     }
 
+    /**
+     * Handles mouse clicks on the map panel.
+     * @param e MouseEvent
+     * @return void
+     */
     void mouseClicker(MouseEvent e) {
         double xPercentage = (e.getX() / (double)mapPanel.getWidth());
         double yPercentage = (e.getY() / (double)mapPanel.getHeight());
@@ -152,11 +170,23 @@ public class MapRoadCreatorTool extends JFrame {
         }
     }
 
+    /**
+     * Adds a point to the path.
+     * @param x double
+     * @param y double
+     * @return void
+     */
     private void addPoint(double x, double y){
         Point2D point = new Point2D.Double(x, y); // Raw coordinates
         points.add(point);
     }
 
+    /**
+     * Adds a point to the path with scalable coordinates.
+     * @param x double
+     * @param y double
+     * @return void
+     */
     private void addScalablePoint(double x, double y){
         double xPercentage = x / mapPanel.getWidth();
         double yPercentage = y / mapPanel.getHeight();

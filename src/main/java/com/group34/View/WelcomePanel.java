@@ -2,8 +2,6 @@ package com.group34.View;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -20,6 +18,10 @@ public class WelcomePanel extends JPanel {
         renderScreen();
     }
 
+    /**
+     * Renders the welcome screen
+     * @return void
+     */
     public void renderScreen() {
         setLayout(new BorderLayout());
 
@@ -45,6 +47,10 @@ public class WelcomePanel extends JPanel {
         
     }
 
+    /**
+     * Returns the play button
+     * @return JButton
+     */
     public JButton getPlayButton() {
         return playButton;
     }

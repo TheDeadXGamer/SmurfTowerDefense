@@ -16,7 +16,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
-
+/**
+ * ShopPanel class is a JPanel that contains the shop buttons.
+ */
 public class ShopPanel extends JPanel {
     List<ShopButtonComponent> shopButtonComponents = new ArrayList<>();
 
@@ -36,10 +38,19 @@ public class ShopPanel extends JPanel {
         setBorder(BorderFactory.createLineBorder(ViewConstants.BORDER_COLOR));
     }
 
+    /**
+     * Get the buttons in the shop.
+     * @return Iterator of ShopButtonComponent.
+     */
     public Iterator<ShopButtonComponent> getButtons() {
         return shopButtonComponents.iterator();
     }
 
+    /**
+     * Get the scroll pane for the shop.
+     * @param itemsPanel JPanel containing the shop buttons.
+     * @return JScrollPane.
+     */
     private JScrollPane getScrollPane(JPanel itemsPanel) {
         JScrollPane scrollPane = new JScrollPane(itemsPanel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -47,6 +58,10 @@ public class ShopPanel extends JPanel {
         return scrollPane;
     }
 
+    /**
+     * Get the panel containing the shop buttons.
+     * @return JPanel.
+     */
     private JPanel getItemsPanel() {
         JPanel itemsPanel = new JPanel();
         itemsPanel.setLayout(new GridBagLayout());
@@ -55,7 +70,14 @@ public class ShopPanel extends JPanel {
         return itemsPanel;
     }
 
-    private void populateItems(JPanel itemsPanel, List<ShopButtonComponent> buttons) {
+    /**
+     * Populate the shop panel with shop buttons.
+     * @param itemsPanel JPanel containing the shop buttons.
+     * @param buttons List of ShopButtonComponent.
+     */
+    private void populateItems(
+        JPanel itemsPanel, 
+        List<ShopButtonComponent> buttons) {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 0, 10, 0); // Add vertical padding between items
         gbc.fill = GridBagConstraints.HORIZONTAL; // Make items fill the cell horizontally
@@ -85,6 +107,10 @@ public class ShopPanel extends JPanel {
         }
     }
 
+    /**
+     * Create the title for the shop panel.
+     * @return JLabel.
+     */
     private JLabel createTitle() {
         JLabel shopTitle = new JLabel("<html><u>Towers</u></html>", SwingConstants.CENTER);
         shopTitle.setBackground(ViewConstants.RIGHT_PANEL_COLOR);

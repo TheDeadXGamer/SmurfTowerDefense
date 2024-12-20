@@ -13,28 +13,55 @@ public class Player implements Killable {
         observers = new ArrayList<>();
     }
 
+    /**
+     * Returns the player's health
+     * @return int
+     */
     public int getHealth() {
         return health;
     }
 
+    /**
+     * Reduces the player's health by the given amount
+     * @param damage Amount to reduce health by
+     * @return void
+     */
     public void reduceHealth(int damage) {
         health -= damage;
         notifyObservers();
     }
 
+    /**
+     * Returns whether the player is alive
+     * @return boolean
+     */
     @Override
     public boolean isAlive() {
         return health > 0;
     }
 
+    /**
+     * Adds an observer to the player
+     * @param observer Observer to add
+     * @return void
+     */
     public void subscribe(PlayerSubscriber observer) {
         observers.add(observer);
     }
 
+    /**
+     * Removes an observer from the player
+     * @param observer Observer to remove
+     * @return void
+     */
     public void unsubscribe(PlayerSubscriber observer) {
         observers.remove(observer);
     }
 
+    /**
+     * Notifies all observers of the player's health
+     * @return void
+     */
     public void notifyObservers() {
         for (PlayerSubscriber observer : observers) {
             observer.updateHealth(health);

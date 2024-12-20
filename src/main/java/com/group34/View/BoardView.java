@@ -3,7 +3,6 @@ package com.group34.View;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Point2D;
-import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -16,17 +15,20 @@ import com.group34.Model.Game.Game;
 import com.group34.Model.Projectile.Projectile;
 import com.group34.Model.Tower.Tower;
 
+/**
+ * The BoardView class is responsible for rendering the game board, including the background, towers, enemies, and projectiles.
+ */
 public class BoardView extends JPanel implements SellTowerListener  {
     private String temporaryMessage = null;
     private boolean showTemporaryMessage = false;
     private Timer errorTimer;
-    public Board board;
-    public Game game;
+    private Board board;
+    private Game game;
     public RightPanel rightPanel;
     private JPanel overlayPanel;
     private HashMap<Tower,JButton> buttons = new HashMap<>();
 
-
+    // Images for enemies, towers, and projectiles
     private final Map<String, Image> enemyImages = Map.of(
         "Gargamel", new ImageIcon(
             getClass().getResource(ViewConstants.GARGAMEL_IMAGE))
@@ -50,7 +52,7 @@ public class BoardView extends JPanel implements SellTowerListener  {
                 ViewConstants.TOWER_SIZE, ViewConstants.TOWER_SIZE, Image.SCALE_SMOOTH)
     );
 
-
+    // Images for towers
     private final Map<String, Image> towerImages = Map.of(
         "LightningSmurf", new ImageIcon(
             getClass().getResource(ViewConstants.LIGHTNINGSMURF_IMAGE))
@@ -84,6 +86,7 @@ public class BoardView extends JPanel implements SellTowerListener  {
                 ViewConstants.TOWER_SIZE, ViewConstants.TOWER_SIZE, Image.SCALE_SMOOTH)
     );
 
+    // Images for projectiles
     private final Map<String, Image> projectileImages = Map.of(
         "LightningBolt", new ImageIcon(
             getClass().getResource(ViewConstants.LIGHTNINGBOLT_IMAGE))
@@ -102,7 +105,7 @@ public class BoardView extends JPanel implements SellTowerListener  {
                 ViewConstants.TOWER_SIZE, ViewConstants.TOWER_SIZE, Image.SCALE_SMOOTH)
     );
 
-
+    // Background image
     private final Image backgroundImage = new ImageIcon(
         getClass().getResource(ViewConstants.BASE_MAP_IMAGE_PATH))
         .getImage();
@@ -124,6 +127,7 @@ public class BoardView extends JPanel implements SellTowerListener  {
         overlayPanel = new JPanel(null);
         overlayPanel.setOpaque(false);
 
+        // Add a listener to the overlay panel to display the shop panel when clicked
         addMouseListener(new MouseAdapter() {
                              @Override
                              public void mouseClicked(MouseEvent e) {
@@ -137,7 +141,12 @@ public class BoardView extends JPanel implements SellTowerListener  {
     }
 
 
-
+    /**
+     * Paints the game board, including the background, towers, enemies, and projectiles.
+     * @param g The graphics object to paint with
+     * @see javax.swing.JComponent#paintComponent(Graphics)
+     * @return void
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -145,10 +154,8 @@ public class BoardView extends JPanel implements SellTowerListener  {
         Graphics2D g2d = (Graphics2D) g;
         
         // Enable antialiasing for smoother graphics
-        if (true) {
-            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        }
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
         renderBackground(g);
         renderTowers(g);
@@ -159,7 +166,6 @@ public class BoardView extends JPanel implements SellTowerListener  {
         if (showTemporaryMessage) {
             g.setColor(Color.RED);
             g.setFont(new Font("Arial", Font.BOLD, 25));
-            int messageWidth = g.getFontMetrics().stringWidth(temporaryMessage); 
             g.drawString(
                     temporaryMessage,
                     ViewConstants.GAME_WIDTH/4 + 35,
@@ -168,6 +174,11 @@ public class BoardView extends JPanel implements SellTowerListener  {
         }
     }
 
+    /**
+     * Renders the projectiles on the game board.
+     * @param g The graphics object to paint with
+     * @return void
+     */
     private void renderProjectiles(Graphics g) {
         Iterator<Projectile> iterProjectile = board.getProjectileManager().getProjectiles().iterator();
 
@@ -185,6 +196,11 @@ public class BoardView extends JPanel implements SellTowerListener  {
         }
     }
 
+    /**
+     * Renders the enemies on the game board.
+     * @param g The graphics object to paint with
+     * @return void
+     */
     private void renderEnemies(Graphics g) {
         Iterator<Enemy> iterEnemy = game.getEnemies();
 
@@ -209,6 +225,11 @@ public class BoardView extends JPanel implements SellTowerListener  {
         }
     }
 
+    /**
+     * Renders the towers on the game board.
+     * @param g The graphics object to paint with
+     * @return void
+     */
     private void renderTowers(Graphics g) {
         Iterator<Tower> iter = board.getTowers();
 
@@ -225,6 +246,11 @@ public class BoardView extends JPanel implements SellTowerListener  {
         }
     }
 
+    /**
+     * Renders the background image on the game board.
+     * @param g The graphics object to paint with
+     * @return void
+     */
     private void renderBackground(Graphics g) {
         g.drawImage(
                 backgroundImage,
@@ -236,6 +262,11 @@ public class BoardView extends JPanel implements SellTowerListener  {
         );
     }
 
+    /**
+     * Displays a temporary message on the game board.
+     * @param message The message to display
+     * @return void
+     */
     public void showTemporaryMessage(String message) {
         temporaryMessage = message;
         showTemporaryMessage = true;
@@ -251,6 +282,11 @@ public class BoardView extends JPanel implements SellTowerListener  {
         }
     }
 
+    /**
+     * Adds a tower button to the game board.
+     * @param point The point to add the tower button at
+     * @return void
+     */
     public void addTowerButton( Point point) {
         JButton towerButton = new JButton();
 
@@ -284,6 +320,12 @@ public class BoardView extends JPanel implements SellTowerListener  {
         overlayPanel.repaint();
 
     }
+
+    /**
+     * Finds a tower at a given point.
+     * @param point 
+     * @return void
+     */
     private Tower findTower(Point point) {
         Point2D position = new Point2D.Double(point.getX(),point.getY());
         Iterator<Tower> towers = board.getTowers();
@@ -297,6 +339,11 @@ public class BoardView extends JPanel implements SellTowerListener  {
         return null;
     }
 
+    /**
+     * Updates the game board when a tower is sold.
+     * @param tower The tower to sell
+     * @return void
+     */
     @Override
     public void update(Tower tower) {
         JButton button = buttons.get(tower);

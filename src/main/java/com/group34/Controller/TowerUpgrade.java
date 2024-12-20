@@ -9,7 +9,15 @@ public class TowerUpgrade {
     private CashVault cashVault;
     private BoardView boardView;
 
-    public void upgradeTower(Tower tower) {
+
+    /**
+     * Upgrades the tower
+     * @param tower the tower to be upgraded
+     * @throws OverDraftError if the player does not have enough money to upgrade the tower
+     * @return void
+     */
+    public void upgradeTower(Tower tower)  {
+
         try {
                 cashVault.withdraw(tower.getUpgradeCost());
 
@@ -23,10 +31,20 @@ public class TowerUpgrade {
         }
     }
 
+    /**
+     * Sets the cashVault
+     * @param cashVault the cashVault to be set
+     * @return void
+     */
     public void setCashVault(CashVault cashVault) {
         this.cashVault = cashVault;
     }
 
+    /**
+     * Sets the boardView
+     * @param boardView the boardView to be set
+     * @return void
+     */
     public void setBoardView(BoardView boardView) {
         this.boardView = boardView;
     }

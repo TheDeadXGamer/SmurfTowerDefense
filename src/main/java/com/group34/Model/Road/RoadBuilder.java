@@ -7,6 +7,9 @@ import java.util.List;
 import com.group34.Model.Board.Board;
 import com.group34.Model.Game.Player;
 
+/**
+ * This class is used to build a road by adding points to the road.
+ */
 public class RoadBuilder {
     private final Board board;
     private final Player player;
@@ -17,11 +20,21 @@ public class RoadBuilder {
         this.player = player;
     }
 
+    /**
+     * Adds a point to the road.
+     * @param point The point to add.
+     * @return The road builder.
+     */
     public RoadBuilder add(Point2D point) {
         points.add(point);
         return this;
     }
 
+    /**
+     * Builds the road.
+     * @return The road.
+     * @throws InvalidRoadException If the road is invalid.
+     */
     public RoadSpawn build() throws InvalidRoadException {
         if (!RoadValidator.isValidRoad(points, board.getDimension().getWidth(),
                 board.getDimension().getHeight())) {

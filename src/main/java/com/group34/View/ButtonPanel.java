@@ -4,11 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
 
+/**
+ * ButtonPanel class is a JPanel that contains the settings and fast-forward buttons.
+ */
 public class ButtonPanel extends JPanel {
 
         private JButton settingsButton;
         private JButton fastForwardButton;
 
+        // settings button image
         final Image settingsImage = new ImageIcon(
                 getClass().getResource(ViewConstants.SETTINGS_ICON_PATH)
         )
@@ -40,10 +44,18 @@ public class ButtonPanel extends JPanel {
         setBorder(BorderFactory.createLineBorder(ViewConstants.BORDER_COLOR));
         }
 
+        /**
+         * Getter for settings button
+         * @return settingsButton
+         */
         public JButton getSettingsButton() {
             return settingsButton;
         }
 
+        /**
+         * Getter for fast-forward button
+         * @return fastForwardButton
+         */
         public JButton getFastForwardButton() {
             return fastForwardButton;
         }
