@@ -171,6 +171,7 @@ public class TowerDefence extends JFrame implements Runnable {
 
 
             Round round = RoundConfig.createRound();
+
             while (!round.isRoundOver() || game.enemiesLeft() > 0) {
                 if (player.isAlive()) {
                     Optional<EnemyFactory> spawn = round.spawn();
