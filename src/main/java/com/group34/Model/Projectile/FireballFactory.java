@@ -11,6 +11,11 @@ public class FireballFactory extends ProjectileFactory {
         this.tower = tower;
     }
 
+    /**
+     * Creates a Fireball projectile
+     * @param enemy the enemy to target
+     * @return the Fireball projectile
+     */
     @Override
     public Projectile createProjectile(Positionable enemy) {
         return new Fireball(10, tower.getPosition(), tower.getDamage(), projectileType, enemy);

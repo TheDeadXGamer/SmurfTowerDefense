@@ -10,6 +10,9 @@ import com.group34.Model.Round.Round;
 import com.group34.Model.Shop.CashVault;
 import com.group34.Model.Shop.Shop;
 
+/**
+ * Builder class for TowerDefence
+ */
 class TowerDefenceBuilder {
     Board board;
     CashVault cashVault;

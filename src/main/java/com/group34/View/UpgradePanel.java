@@ -11,6 +11,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * UpgradePanel class is a JPanel that contains the upgrade and sell buttons for the tower.
+ */
 public class UpgradePanel extends JPanel {
     Tower currentTower;
     GridBagConstraints gbc = new GridBagConstraints();
@@ -61,6 +64,11 @@ public class UpgradePanel extends JPanel {
 
         add(sellButton, gbc);
     }
+
+    /**
+     * Create the title for the tower that is selected.
+     * @return void
+     */
     public void createTowerTitle() {
         towerTitleLabel.removeAll();
         String towerName = currentTower.getTowerType();
@@ -78,6 +86,12 @@ public class UpgradePanel extends JPanel {
 
 
     }
+
+    /**
+     * Populate the upgrade panel with the tower that is selected.
+     * @param tower The tower that is selected.
+     * @return void
+     */
     public void populateUpgradePanel(Tower tower) {
         this.currentTower = tower;
         createTowerTitle();

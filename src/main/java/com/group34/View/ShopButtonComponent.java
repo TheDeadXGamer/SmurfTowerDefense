@@ -9,10 +9,13 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import com.group34.Model.Shop.ShopItem;
 
-
+/**
+ * ShopButtonComponent is a JComponent that represents a shop item in the shop panel.
+ */
 public class ShopButtonComponent extends JComponent {
     private ShopItem item;
 
+    // Map of tower images
     private static final Map<String, Image> towerImages = Map.of(
         "LightningSmurf", new ImageIcon(
             ShopButtonComponent.class.getResource(ViewConstants.LIGHTNINGSMURF_IMAGE))
@@ -53,6 +56,10 @@ public class ShopButtonComponent extends JComponent {
         add(itemImageLabel);
     }
 
+    /**
+     * Get the shop item.
+     * @return ShopItem
+     */
     public ShopItem getItem() {
         return item;
     }

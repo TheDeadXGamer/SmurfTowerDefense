@@ -4,6 +4,9 @@ import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * AudioPlayer class to play audio files
+ */
 public class AudioPlayer {
     private Clip clip;
     private FloatControl volumeControl;
@@ -21,6 +24,10 @@ public class AudioPlayer {
         }
     }
 
+    /**
+     * Play the audio file continuously
+     * @return void
+     */
     public void playLoop() {
         if (clip != null) {
             clip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -28,6 +35,10 @@ public class AudioPlayer {
         }
     }
 
+    /**
+     * Mute the audio
+     * @return void
+     */
     public void mute() {
         if (volumeControl != null) {
             if (isMuted) {
@@ -41,6 +52,11 @@ public class AudioPlayer {
         }
     }
 
+    /**
+     * Sets the volume of the audio
+     * @param volume the volume to set
+     * @return void
+     */
     public void setVolume(float volume) {
         if (volumeControl != null) {
             volumeControl.setValue(volume);

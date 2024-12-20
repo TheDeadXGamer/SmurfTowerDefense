@@ -8,6 +8,9 @@ import java.awt.image.BufferedImage;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
+/**
+ * ViewConstants class contains constants used in the view package.
+ */
 public class ViewConstants {
     // colors
     public static final Color RIGHT_PANEL_COLOR = new Color(255, 201, 54); // orange

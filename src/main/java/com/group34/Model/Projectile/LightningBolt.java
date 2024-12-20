@@ -59,12 +59,20 @@ public class LightningBolt<Target extends Positionable & Attackable & Killable> 
         return this.projectileType;
     }
 
+    /**
+     * Damages the enemy
+     * @return void
+     */
     @Override
     public void damage() {
         enemy.damage(damage);
         System.out.println("did " + damage + " damage!");
     }
 
+    /**
+     * Returns the angle of the projectile
+     * @return the angle of the projectile
+     */
     @Override
     public double getAngle() {
         // Calculate the differences in x and y
@@ -79,6 +87,10 @@ public class LightningBolt<Target extends Positionable & Attackable & Killable> 
         return angle;
     }
 
+    /**
+     * Updates the position of the projectile
+     * @return void
+     */
     @Override
     public void updatePosition() {
         // Calculate how far to move projectile in each axis
@@ -88,11 +100,19 @@ public class LightningBolt<Target extends Positionable & Attackable & Killable> 
         currentPosition = new Point2D.Double(currentPosition.getX() + deltaX,currentPosition.getY() + deltaY);
     }
 
+    /**
+     * Returns the position of the target
+     * @return the position of the target
+     */
     @Override
     public Point2D getTargetPosition() {
         return enemy.getPosition();
     }
 
+    /**
+     * Returns if the target is dead
+     * @return if the target is dead
+     */
     @Override
     public boolean IfTargetDead() {
         return !enemy.isAlive();

@@ -3,7 +3,6 @@ package com.group34.Model.Tower;
 
 import com.group34.GameSpeed;
 import com.group34.Model.Enemy.Attackable;
-import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Positionable;
 import com.group34.Model.Projectile.LightningBoltFactory;
 import com.group34.Model.Tower.Targeting.ClosestAttack;
@@ -13,6 +12,9 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class representing the upgraded version of the LightningTower.
+ */
 public class ThunderSmurf<enemies extends Positionable & Attackable> implements Attack<enemies> {
     private int attackSpeed;
     private int damage;
@@ -23,7 +25,6 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
     private boolean canAttack = true;
     private float lastAttack = System.nanoTime();
     private float towerWidth;
-
     Targetings targeting;
 
     public ThunderSmurf(Point2D position) {
@@ -82,6 +83,7 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
 
     /**
      * Attacks the enemies in range
+     * @return void
      */
     @Override
     public void action() {
@@ -104,18 +106,28 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
         return this.getClass().getSimpleName();
     }
 
+    /**
+     * Returns the width of the tower
+     * @return the width of the tower
+     */
     @Override
     public float getTowerWidth() {
         return towerWidth;
     }
 
+    /**
+     * Returns the cost of the tower
+     * @return the cost of the tower
+     */
     @Override
     public int getCost() {
         return cost;
     }
-
-
-
+    
+    /**
+     * Notifies the tower that an enemy is in range.
+     * @return void
+     */
     @Override
     public void notifyTower(enemies enemy) {
         if (checkIfInRange(enemy) && !targets.contains(enemy)) {
@@ -124,6 +136,12 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
             targets.remove(enemy);
         }
     }
+
+    /**
+     * Notifies the tower that an enemy is dead.
+     * @param enemy the enemy that is dead
+     * @return void
+     */
     @Override
     public void notifyOfDeath(enemies enemy) {
         if (targets.contains(enemy)) {
@@ -149,11 +167,19 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
         return position.distance(enemy.getPosition()) <= this.range;
     }
 
+    /**
+     * Upgrades the tower and returns the new tower
+     * @return the new tower
+     */
     @Override
     public Tower upgrade() {
         return null;
     }
 
+    /**
+     * Returns the cost of the upgrade
+     * @return the cost of the upgrade
+     */
     @Override
     public int getUpgradeCost() {
         return 0;

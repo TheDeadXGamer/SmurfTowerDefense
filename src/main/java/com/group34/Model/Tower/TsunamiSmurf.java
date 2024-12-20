@@ -4,13 +4,15 @@ import com.group34.Model.Enemy.Attackable;
 import com.group34.Model.Positionable;
 import com.group34.Model.Projectile.WaterdropFactory;
 import com.group34.Model.Tower.Targeting.AreaAttack;
-import com.group34.Model.Tower.Targeting.ClosestAttack;
 import com.group34.Model.Tower.Targeting.Targetings;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for the TsunamiSmurf tower. This tower has a high attack speed and a medium range.
+ */
 public class TsunamiSmurf<enemies extends Positionable & Attackable> implements Attack<enemies> {
     private int attackSpeed;
     private int damage;
@@ -21,8 +23,7 @@ public class TsunamiSmurf<enemies extends Positionable & Attackable> implements 
     private boolean canAttack = true;
     private float lastAttack = System.nanoTime();
     private float towerWidth;
-
-    Targetings targeting;
+    private Targetings targeting;
 
     public TsunamiSmurf(Point2D position) {
         this.attackSpeed = 4;

@@ -42,7 +42,6 @@ public class TowerDefence extends JFrame implements Runnable {
     private Board board;
     private Player player;
     private RoadSpawn roadSpawn;
-    private List<Round> rounds;
     private GameSpeed gameSpeed;
     private Shop shop;
     private GameState currentState;
@@ -64,15 +63,12 @@ public class TowerDefence extends JFrame implements Runnable {
         setResizable(true);
         setLocationRelativeTo(null);
 
-        // TODO: explain
-
+        // Create buttons for each shop item
         List<ShopButtonComponent> buttons = new ArrayList<>();
         Iterator<ShopItem> shopItems = shop.getItems();
         while (shopItems.hasNext()) {
             buttons.add(new ShopButtonComponent(shopItems.next()));
         }
-
-
 
         TowerUpgrade towerUpgrade = new TowerUpgrade();
         towerUpgrade.setCashVault(cashVault);
@@ -112,11 +108,6 @@ public class TowerDefence extends JFrame implements Runnable {
             shop
         );
 
-        //GameView gameView = new GameView();
-        //gameView.add(boardView);
-        //gameView.pack();
-        //gameView.setVisible(true);
-
         pack();
         setVisible(true);
 
@@ -150,6 +141,10 @@ public class TowerDefence extends JFrame implements Runnable {
         }
     }
 
+    /**
+     * Show the welcome screen
+     * @return void
+     */
     private void handleWelcome() {
         cardLayout.show(cardPanel, "Welcome");
     }
@@ -166,6 +161,10 @@ public class TowerDefence extends JFrame implements Runnable {
         }
     }
 
+    /**
+     * Handle the active round
+     * @return void
+     */
     private void handleActive(){
         cardLayout.show(cardPanel, "Game");
 
@@ -205,6 +204,10 @@ public class TowerDefence extends JFrame implements Runnable {
             handleBetweenRound();
     }
 
+    /**
+     * Handle the between round
+     * @return void
+     */
     private void handleBetweenRound() {
         cardLayout.show(cardPanel, "Game");
         while(currentState == GameState.BETWEEN_ROUND) {
@@ -218,10 +221,20 @@ public class TowerDefence extends JFrame implements Runnable {
         }
     }
 
+    /**
+     * Set the current state of the game
+     * @param state
+     * @return void
+     */
     public void setState(GameState state) {
         currentState = state;
     }
 
+    /**
+     * Add button listeners to the welcome panel
+     * @param welcomePanel
+     * @param rightPanel
+     */
     private void addButtonListeners(WelcomePanel welcomePanel, RightPanel rightPanel) {
         welcomePanel.getPlayButton().addActionListener(e -> {
             setState(GameState.BETWEEN_ROUND);

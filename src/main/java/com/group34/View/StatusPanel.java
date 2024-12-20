@@ -15,76 +15,89 @@ import com.group34.Model.Game.PlayerSubscriber;
 import com.group34.Model.Shop.CashVault;
 import com.group34.Model.Shop.CashVaultObserver;
 
+/**
+ * StatusPanel class is a JPanel that contains the player's health and cash.
+ */
 public class StatusPanel extends JPanel implements PlayerSubscriber, CashVaultObserver {
-    private final Image healthImage = new ImageIcon(
-            Objects.requireNonNull(getClass().getResource(ViewConstants.HEALTH_ICON_PATH))
-    )
-            .getImage()
-            .getScaledInstance(
-                    ViewConstants.STATUS_ICON_SIZE,
-                    ViewConstants.STATUS_ICON_SIZE,
-                    Image.SCALE_SMOOTH
-            );
 
-    private final Image coinImage = new ImageIcon(
-            getClass().getResource(ViewConstants.COIN_ICON_PATH)
-    )
-            .getImage()
-            .getScaledInstance(
-                    ViewConstants.STATUS_ICON_SIZE,
-                    ViewConstants.STATUS_ICON_SIZE,
-                    Image.SCALE_SMOOTH
-            );
+        
+        private final Image healthImage = new ImageIcon(
+                Objects.requireNonNull(getClass().getResource(ViewConstants.HEALTH_ICON_PATH))
+        )
+                .getImage()
+                .getScaledInstance(
+                        ViewConstants.STATUS_ICON_SIZE,
+                        ViewConstants.STATUS_ICON_SIZE,
+                        Image.SCALE_SMOOTH
+                );
 
-    private JLabel healthLabel;
-    private JLabel cashLabel;
-    private CashVault cashVault;
-    private Player player;
+        private final Image coinImage = new ImageIcon(
+                getClass().getResource(ViewConstants.COIN_ICON_PATH)
+        )
+                .getImage()
+                .getScaledInstance(
+                        ViewConstants.STATUS_ICON_SIZE,
+                        ViewConstants.STATUS_ICON_SIZE,
+                        Image.SCALE_SMOOTH
+                );
 
-    public StatusPanel(
-        CashVault cashVault,
-        Player player
-    ) {
-        this.cashVault = cashVault;
-        this.player = player;
+        private JLabel healthLabel;
+        private JLabel cashLabel;
+        private CashVault cashVault;
+        private Player player;
 
-        cashVault.subscribe(this);
-        player.subscribe(this);
+        public StatusPanel(
+                CashVault cashVault,
+                Player player
+        ) {
+                this.cashVault = cashVault;
+                this.player = player;
 
-        // size, layout, background
-        setPreferredSize(ViewConstants.STATUS_PANEL_SIZE);
-        setLayout(new GridLayout(2, 2));
-        setBackground(ViewConstants.RIGHT_PANEL_COLOR);
+                cashVault.subscribe(this);
+                player.subscribe(this);
 
-        // images and text
-        JLabel healthImageLabel = new JLabel(new ImageIcon(healthImage));
-        healthLabel = new JLabel("" + player.getHealth());
+                // size, layout, background
+                setPreferredSize(ViewConstants.STATUS_PANEL_SIZE);
+                setLayout(new GridLayout(2, 2));
+                setBackground(ViewConstants.RIGHT_PANEL_COLOR);
 
-        JLabel cashImageLabel = new JLabel(new ImageIcon(coinImage));
-        cashLabel = new JLabel("" + cashVault.getBalance());
+                // images and text
+                JLabel healthImageLabel = new JLabel(new ImageIcon(healthImage));
+                healthLabel = new JLabel("" + player.getHealth());
 
-        // font
-        Font labelFont = new Font("Arial", Font.PLAIN, 16);
-        healthLabel.setFont(labelFont);
-        cashLabel.setFont(labelFont);
+                JLabel cashImageLabel = new JLabel(new ImageIcon(coinImage));
+                cashLabel = new JLabel("" + cashVault.getBalance());
 
-        // finalizing
-        add(cashImageLabel);
-        add(cashLabel);
-        add(healthImageLabel);
-        add(healthLabel);
-        setBorder(BorderFactory.createLineBorder(ViewConstants.BORDER_COLOR));
-    }
+                // font
+                Font labelFont = new Font("Arial", Font.PLAIN, 16);
+                healthLabel.setFont(labelFont);
+                cashLabel.setFont(labelFont);
 
-    @Override
-    public void updateHealth(int health) {
-        healthLabel.setText("" + health);
-    }
+                // finalizing
+                add(cashImageLabel);
+                add(cashLabel);
+                add(healthImageLabel);
+                add(healthLabel);
+                setBorder(BorderFactory.createLineBorder(ViewConstants.BORDER_COLOR));
+        }
 
+        /**
+         * Update the health label of the player.
+         * @param health The new health of the player.
+         * @return void
+         */
+        @Override
+        public void updateHealth(int health) {
+                healthLabel.setText("" + health);
+        }
 
-    @Override
-    public void updateCash(int cash) {
-        cashLabel.setText("" + cash);
-    }
-
+        /**
+         * Update the cash label of the player.
+         * @param cash The new cash of the player.
+         * @return void
+         */
+        @Override
+        public void updateCash(int cash) {
+                cashLabel.setText("" + cash);
+        }
 }

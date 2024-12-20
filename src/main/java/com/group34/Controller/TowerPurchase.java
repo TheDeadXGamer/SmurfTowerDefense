@@ -19,12 +19,20 @@ import com.group34.View.BoardView;
 import com.group34.View.ShopButtonComponent;
 
 public class TowerPurchase {
+
+    /**
+     * Constructor for TowerPurchase
+     * @param buttons List of ShopButtonComponent
+     * @param boardView BoardView
+     * @param shop Shop
+     */
     public TowerPurchase(
         List<ShopButtonComponent> buttons,
         BoardView boardView,
         Shop shop
     ) {
-        // TODO: explain what this does
+        
+        // Add drag and drop functionality to the shop buttons
         for (ShopButtonComponent button : buttons) {
             button.setTransferHandler(new TransferHandler("text") {
                 @Override
@@ -38,6 +46,7 @@ public class TowerPurchase {
                 }
             });
 
+            // Add mouse listener to the shop buttons
             button.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mousePressed(java.awt.event.MouseEvent e) {
@@ -47,6 +56,7 @@ public class TowerPurchase {
                 }
             });
 
+            // Add drop target to the board
             boardView.setDropTarget(new DropTarget() {
             @Override
             public synchronized void drop(DropTargetDropEvent dtde) {

@@ -6,22 +6,23 @@ import java.util.List;
 
 import com.group34.GameSpeed;
 import com.group34.Model.Enemy.Attackable;
-import com.group34.Model.Enemy.Enemy;
 import com.group34.Model.Positionable;
 import com.group34.Model.Projectile.LightningBoltFactory;
 import com.group34.Model.Tower.Targeting.ClosestAttack;
 import com.group34.Model.Tower.Targeting.Targetings;
-import com.group34.View.ViewConstants;
 
+/**
+ * A class representing the LightningSmurf tower
+ */
 public class LightningSmurf<enemies extends Positionable & Attackable> implements  Attack<enemies> {
-    protected int attackSpeed;
-    protected int damage;
+    private int attackSpeed;
+    private int damage;
     private boolean canAttack = true;
     private float lastAttack = System.nanoTime();
-    protected Point2D position;
-    protected int range;
-    List<enemies> targets = new ArrayList<>();
-    Targetings targeting;
+    private Point2D position;
+    private int range;
+    private List<enemies> targets = new ArrayList<>();
+    private Targetings targeting;
     private int cost;
     private float towerWidth;
     
@@ -44,6 +45,10 @@ public class LightningSmurf<enemies extends Positionable & Attackable> implement
         return new ThunderSmurf(this.position);
     }
 
+    /**
+     * Returns the cost of the upgrade
+     * @return the cost of the upgrade
+     */
     @Override
     public int getUpgradeCost() {
         return 50;
@@ -78,6 +83,8 @@ public class LightningSmurf<enemies extends Positionable & Attackable> implement
 
     /**
      * Attacks the enemies in range
+     * @param enemies the enemies in range
+     * @return void
      */
     @Override
     public void action() {
@@ -102,18 +109,23 @@ public class LightningSmurf<enemies extends Positionable & Attackable> implement
         return this.getClass().getSimpleName();
     }
 
+    /**
+     * Returns the width of the tower
+     * @return the width of the tower
+     */
     @Override
     public float getTowerWidth() {
         return towerWidth;
     }
 
+    /**
+     * Returns the cost of the tower
+     * @return the cost of the tower
+     */
     @Override
     public int getCost() {
         return cost;
     }
-
-
-
 
     /**
      * Returns the attack speed of the tower
@@ -133,7 +145,11 @@ public class LightningSmurf<enemies extends Positionable & Attackable> implement
         return damage;
     }
 
-
+    /**
+     * Notifies the tower of the enemies in range
+     * @param enemy the enemy in range
+     * @return void
+     */
     @Override
     public void notifyTower(enemies enemy) {
         if (checkIfInRange(enemy) && !targets.contains(enemy)) {
@@ -144,6 +160,11 @@ public class LightningSmurf<enemies extends Positionable & Attackable> implement
         }
     }
 
+    /**
+     * Notifies the tower of the death of the enemies
+     * @param enemy the enemy that died
+     * @return void
+     */
     @Override
     public void notifyOfDeath(enemies enemy) {
         if (targets.contains(enemy)) {
@@ -151,10 +172,20 @@ public class LightningSmurf<enemies extends Positionable & Attackable> implement
         }
     }
 
+    /**
+     * Checks if the enemy is in range
+     * @param enemy the enemy to check
+     * @return true if the enemy is in range, false otherwise
+     */
     private boolean checkIfInRange(enemies enemy) {
         return position.distance(enemy.getPosition()) <= this.range;
     }
 
+    /**
+     * Changes the targeting type of the tower
+     * @param targetingtype the new targeting type
+     * @return void
+     */
     public void changeTargeting(Targetings targetingtype) {
         targeting = targetingtype;
     }
