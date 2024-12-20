@@ -33,7 +33,7 @@ public class TowerPurchase {
     ) {
       
         // Add drag and drop functionality to the shop buttons
-        for (ShopButtonComponent button : buttons) {
+        for (ShopButtonComponent button : shopButtons) {
             button.setTransferHandler(new TransferHandler("text") {
                 @Override
                 protected Transferable createTransferable(JComponent c) {
