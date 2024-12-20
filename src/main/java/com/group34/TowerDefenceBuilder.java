@@ -56,10 +56,6 @@ class TowerDefenceBuilder {
         return this;
     }
 
-    public TowerDefenceBuilder setRounds (List<Round> rounds) {
-        this.rounds = rounds;
-        return this;
-    }
 
     public TowerDefence build() {
         return new TowerDefence(this);

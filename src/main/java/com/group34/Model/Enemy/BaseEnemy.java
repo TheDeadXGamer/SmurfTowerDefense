@@ -7,7 +7,7 @@ import com.group34.Model.Road.RoadToken;
 public abstract class BaseEnemy implements Enemy {
     private int health;
     private static int reward;
-    private static int speed;
+    private int speed;
     private final RoadToken point;
 
     public BaseEnemy(

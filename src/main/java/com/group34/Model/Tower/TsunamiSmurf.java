@@ -3,6 +3,7 @@ package com.group34.Model.Tower;
 import com.group34.Model.Enemy.Attackable;
 import com.group34.Model.Positionable;
 import com.group34.Model.Projectile.WaterdropFactory;
+import com.group34.Model.Tower.Targeting.AreaAttack;
 import com.group34.Model.Tower.Targeting.ClosestAttack;
 import com.group34.Model.Tower.Targeting.Targetings;
 
@@ -30,7 +31,7 @@ public class TsunamiSmurf<enemies extends Positionable & Attackable> implements 
         this.position = position;
         this.cost = 75;
         this.towerWidth = 50;
-        this.targeting = new ClosestAttack(new WaterdropFactory(this), position);
+        this.targeting = new AreaAttack(new WaterdropFactory(this), position,this.range);
     }
 
     @Override
@@ -108,6 +109,10 @@ public class TsunamiSmurf<enemies extends Positionable & Attackable> implements 
         return null;
     }
 
+    @Override
+    public int getUpgradeCost() {
+        return 0;
+    }
 
 
 }

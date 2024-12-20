@@ -20,6 +20,7 @@ import com.group34.Model.Game.Player;
 import com.group34.Model.Road.RoadSpawn;
 import com.group34.Model.Road.RoadToken;
 import com.group34.Model.Round.Round;
+import com.group34.Model.Round.RoundConfig;
 import com.group34.Model.Shop.CashVault;
 import com.group34.Model.Shop.Shop;
 import com.group34.Model.Shop.ShopItem;
@@ -55,7 +56,6 @@ public class TowerDefence extends JFrame implements Runnable {
         this.board = builder.board;
         this.player = builder.player;
         this.roadSpawn = builder.roadSpawn;
-        this.rounds = builder.rounds;
         this.gameSpeed = builder.gameSpeed;
         this.shop = builder.shop;
         
@@ -168,9 +168,10 @@ public class TowerDefence extends JFrame implements Runnable {
 
     private void handleActive(){
         cardLayout.show(cardPanel, "Game");
-        Iterator<Round> roundIterator = rounds.iterator();
-        while(roundIterator.hasNext()) {
-            Round round = roundIterator.next();
+
+
+            Round round = RoundConfig.createRound();
+
             while (!round.isRoundOver() || game.enemiesLeft() > 0) {
                 if (player.isAlive()) {
                     Optional<EnemyFactory> spawn = round.spawn();
@@ -199,13 +200,9 @@ public class TowerDefence extends JFrame implements Runnable {
                     break;
                 }
             }
-                if(roundIterator.hasNext()) {
-                    currentState = GameState.BETWEEN_ROUND;
-                    handleBetweenRound();
-                    continue;
-                }
-                currentState = GameState.GAME_OVER;
-        }
+
+            currentState = GameState.BETWEEN_ROUND;
+            handleBetweenRound();
     }
 
     private void handleBetweenRound() {

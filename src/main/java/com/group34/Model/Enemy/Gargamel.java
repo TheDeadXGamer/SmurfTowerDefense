@@ -10,6 +10,7 @@ public class Gargamel extends BaseEnemy {
     public Gargamel( 
         RoadToken point
     ) {
+
         super(health, speed, reward, point);
     }
 }

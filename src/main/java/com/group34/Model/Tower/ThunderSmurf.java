@@ -153,4 +153,9 @@ public class ThunderSmurf<enemies extends Positionable & Attackable> implements 
     public Tower upgrade() {
         return null;
     }
+
+    @Override
+    public int getUpgradeCost() {
+        return 0;
+    }
 }

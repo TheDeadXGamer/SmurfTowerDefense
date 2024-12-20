@@ -44,7 +44,7 @@ public class Main {
             .addItem(waterItem);
         
 
-        List<Round> rounds = RoundConfig.createRounds(cashVault);
+
 
         RoadSpawn spawn = new RoadBuilder(board, player)
                 .add(new Point2D.Double(671., 0))
@@ -138,7 +138,7 @@ public class Main {
             .setBoard(board)
             .setPlayer(player)
             .setRoadSpawn(spawn)
-            .setRounds(rounds)
+
             .setShop(shop)
             .setGameSpeed(GameSpeed.NORMAL)
             .build();
