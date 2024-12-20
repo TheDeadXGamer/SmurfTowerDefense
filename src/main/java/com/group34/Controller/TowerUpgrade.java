@@ -19,6 +19,7 @@ public class TowerUpgrade {
                 boardView.showTemporaryMessage("Cant upgrade this tower further!");
             }
             boardView.rightPanel.displayUpgradePanel(tower);
+
         } catch (OverDraftError e) {
             boardView.showTemporaryMessage(e.getMessage());
         }
