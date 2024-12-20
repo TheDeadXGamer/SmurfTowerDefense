@@ -27,13 +27,14 @@ public class ViewConstants {
     public static final int STATUS_ICON_SIZE = 30;
 
     // dimension objects
+    public static final Dimension BOARD_SIZE = new Dimension(GAME_WIDTH, GAME_HEIGHT);
     public static final Dimension BUTTON_PANEL_SIZE = new Dimension(RIGHT_PANEL_WIDTH, 50);
     public static final Dimension STATUS_PANEL_SIZE = new Dimension(RIGHT_PANEL_WIDTH, 100);
     public static final Dimension SHOP_PANEL_SIZE = new Dimension(RIGHT_PANEL_WIDTH, 400);
 
     // image paths
     public static final String BASE_MAP_IMAGE_PATH = "/assets/Maps/BaseMap.png";
-    
+
     public static final String SETTINGS_ICON_PATH = "/assets/Miscellaneous/settings-icon.png";
     public static final String FASTFORWARD_ICON_PATH = "/assets/Miscellaneous/fastforward-icon.png";
     public static final String HEALTH_ICON_PATH = "/assets/Other/Smurfhealth.png";

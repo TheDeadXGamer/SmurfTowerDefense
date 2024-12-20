@@ -27,11 +27,11 @@ public class TowerPurchase {
      * @param shop Shop
      */
     public TowerPurchase(
-        List<ShopButtonComponent> buttons,
+        List<ShopButtonComponent> shopButtons,
         BoardView boardView,
         Shop shop
     ) {
-        
+      
         // Add drag and drop functionality to the shop buttons
         for (ShopButtonComponent button : buttons) {
             button.setTransferHandler(new TransferHandler("text") {

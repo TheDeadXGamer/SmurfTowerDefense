@@ -16,5 +16,4 @@ public class LightningSmurfFactory extends TowerFactory {
     public Tower createTower(Point2D position) {
        return new TowerWrapper(new LightningSmurf(position,2,5,200,50,50));
     }
-
 }

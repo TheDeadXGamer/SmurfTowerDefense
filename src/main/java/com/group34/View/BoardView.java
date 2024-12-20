@@ -84,7 +84,6 @@ public class BoardView extends JPanel implements SellTowerListener  {
             .getImage()
             .getScaledInstance(
                 ViewConstants.TOWER_SIZE, ViewConstants.TOWER_SIZE, Image.SCALE_SMOOTH)
-        
     );
 
     // Images for projectiles
@@ -157,7 +156,6 @@ public class BoardView extends JPanel implements SellTowerListener  {
         // Enable antialiasing for smoother graphics
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        
 
         renderBackground(g);
         renderTowers(g);

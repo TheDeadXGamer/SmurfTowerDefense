@@ -51,8 +51,7 @@ public class ShopButtonComponent extends JComponent {
         setBackground(ViewConstants.RIGHT_PANEL_COLOR);
 
         itemImageLabel.setIcon(new ImageIcon(image));
-        itemImageLabel.setBorder(
-            BorderFactory.createLineBorder(ViewConstants.BORDER_COLOR));
+        itemImageLabel.setBorder(BorderFactory.createLineBorder(ViewConstants.BORDER_COLOR));
         add(itemImageLabel);
     }
 
@@ -62,5 +61,9 @@ public class ShopButtonComponent extends JComponent {
      */
     public ShopItem getItem() {
         return item;
+    }
+
+    public int getCost() {
+        return item.getCost();
     }
 }

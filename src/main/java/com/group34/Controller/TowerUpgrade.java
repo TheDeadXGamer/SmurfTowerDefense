@@ -9,6 +9,7 @@ public class TowerUpgrade {
     private CashVault cashVault;
     private BoardView boardView;
 
+
     /**
      * Upgrades the tower
      * @param tower the tower to be upgraded
@@ -16,6 +17,7 @@ public class TowerUpgrade {
      * @return void
      */
     public void upgradeTower(Tower tower)  {
+
         try {
                 cashVault.withdraw(tower.getUpgradeCost());
 

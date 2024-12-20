@@ -3,7 +3,8 @@ package com.group34.Model.Projectile;
 import com.group34.Model.Positionable;
 import com.group34.Model.Tower.Attack;
 
-public class LightningBoltFactory extends  ProjectileFactory{
+
+public class LightningBoltFactory extends ProjectileFactory {
     private Attack tower;
 
     String projectileType = "LightningBolt";

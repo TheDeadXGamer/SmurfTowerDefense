@@ -34,9 +34,7 @@ import com.group34.View.StatusPanel;
 import com.group34.View.UpgradePanel;
 import com.group34.View.WelcomePanel;
 
-
 public class TowerDefence extends JFrame implements Runnable {
-    static final int FPS = 60;
     private CashVault cashVault;
     private Game game;
     private Board board;
@@ -167,10 +165,7 @@ public class TowerDefence extends JFrame implements Runnable {
      */
     private void handleActive(){
         cardLayout.show(cardPanel, "Game");
-
-
             Round round = RoundConfig.createRound();
-
             while (!round.isRoundOver() || game.enemiesLeft() > 0) {
                 if (player.isAlive()) {
                     Optional<EnemyFactory> spawn = round.spawn();
