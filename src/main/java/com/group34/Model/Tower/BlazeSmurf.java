@@ -108,4 +108,9 @@ public class BlazeSmurf<enemies extends Positionable & Attackable> implements At
         return null;
     }
 
+    @Override
+    public int getUpgradeCost() {
+        return 0;
+    }
+
 }

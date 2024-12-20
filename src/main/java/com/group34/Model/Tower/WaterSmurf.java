@@ -38,6 +38,11 @@ public class WaterSmurf<enemies extends Positionable & Attackable> implements At
     }
 
     @Override
+    public int getUpgradeCost() {
+        return 75;
+    }
+
+    @Override
     public Point2D getPosition() {
         return (Point2D) position.clone();
     }

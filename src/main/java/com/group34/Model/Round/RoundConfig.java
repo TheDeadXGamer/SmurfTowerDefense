@@ -1,49 +1,54 @@
 package com.group34.Model.Round;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
-import com.group34.Model.Enemy.AzraelFactory;
-import com.group34.Model.Enemy.BalthazarFactory;
-import com.group34.Model.Enemy.GargamelFactory;
-import com.group34.Model.Enemy.HogathaFactory;
+import com.group34.Model.Enemy.*;
 import com.group34.Model.Shop.CashVault;
 
 public class RoundConfig {
-    public static List<Round> createRounds(CashVault cashVault) {
-        List<Round> rounds = new ArrayList<>();
 
-        // Round 1
-        rounds.add(new RoundBuilder()
-            .addEvent(new RoundEvent(new GargamelFactory(), 0))
-            .addEvent(new RoundEvent(new BalthazarFactory(), 40))
-            .addEvent(new RoundEvent(new AzraelFactory(), 80))
-            .addEvent(new RoundEvent(new HogathaFactory(), 80))
-            .build());
-        
-        // Round 2 etc
-        rounds.add(new RoundBuilder()
-            .addEvent(new RoundEvent(new GargamelFactory(), 0))
-            .addEvent(new RoundEvent(new BalthazarFactory(), 80))
-            .addEvent(new RoundEvent(new AzraelFactory(), 160))
-            .addEvent(new RoundEvent(new HogathaFactory(), 240))
-            .addEvent(new RoundEvent(new GargamelFactory(), 250))
-            .addEvent(new RoundEvent(new GargamelFactory(), 260))
-            .addEvent(new RoundEvent(new BalthazarFactory(), 270))
-            .addEvent(new RoundEvent(new AzraelFactory(), 280))
-            .addEvent(new RoundEvent(new HogathaFactory(), 290))
-            .addEvent(new RoundEvent(new GargamelFactory(), 300))
-            .addEvent(new RoundEvent(new HogathaFactory(), 310))
-            .addEvent(new RoundEvent(new GargamelFactory(), 320))
-            .addEvent(new RoundEvent(new GargamelFactory(), 330))
-            .addEvent(new RoundEvent(new BalthazarFactory(), 340))
-            .addEvent(new RoundEvent(new AzraelFactory(), 350))
-            .addEvent(new RoundEvent(new HogathaFactory(), 360))
-            .addEvent(new RoundEvent(new GargamelFactory(), 370))
-            
-            .build());
+    private static int totalRoundValue = 3;
+    private static ArrayList<EnemyFactory> factories = new ArrayList<>();
 
-        return rounds;
+
+    static {
+        factories.add(new GargamelFactory());
+        factories.add(new BalthazarFactory());
+        factories.add(new AzraelFactory());
+        factories.add(new HogathaFactory());
+    }
+    public static Round createRound() {
+        return createRandomizedRound();
+    }
+    private static Round createRandomizedRound() {
+        Random random = new Random();
+        int waitForSpawn = 0;
+        int thisRoundValue = totalRoundValue;
+
+        RoundBuilder builder = new RoundBuilder();
+
+        ArrayList<EnemyFactory> copyOfFactories = (ArrayList<EnemyFactory>) factories.clone();
+
+
+        int bound = factories.size()-1;
+        while (thisRoundValue > 0) {
+            int randomNum = random.nextInt(bound);
+            if (thisRoundValue < copyOfFactories.get(randomNum).getSpawnValue()) {
+                copyOfFactories.remove(randomNum);
+                bound -= 1;
+            }
+
+            builder.addEvent(new RoundEvent(copyOfFactories.get(randomNum),waitForSpawn));
+            thisRoundValue -= copyOfFactories.get(randomNum).getSpawnValue();
+            waitForSpawn += random.nextInt(15,100);
+        }
+        totalRoundValue += 3;
+        return builder.build();
+
+
     }
 }
 

@@ -108,6 +108,10 @@ public class TsunamiSmurf<enemies extends Positionable & Attackable> implements 
         return null;
     }
 
+    @Override
+    public int getUpgradeCost() {
+        return 0;
+    }
 
 
 }

@@ -11,13 +11,11 @@ public class TowerUpgrade {
 
     public void upgradeTower(Tower tower)  {
         try {
-            Tower upgradedTower = tower.upgrade();
-            if (upgradedTower != null) {
-                cashVault.withdraw(upgradedTower.getCost());
-            } else {
-                System.out.println("asdasd");
-                boardView.showTemporaryMessage("Cant upgrade this tower further!");
-            }
+                cashVault.withdraw(tower.getUpgradeCost());
+
+                if (tower.getUpgradeCost() == 0) {
+                    boardView.showTemporaryMessage("Cant upgrade this tower further!");}
+            tower.upgrade();
             boardView.rightPanel.displayUpgradePanel(tower);
 
         } catch (OverDraftError e) {

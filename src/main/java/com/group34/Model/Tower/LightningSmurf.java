@@ -44,6 +44,11 @@ public class LightningSmurf<enemies extends Positionable & Attackable> implement
         return new ThunderSmurf(this.position);
     }
 
+    @Override
+    public int getUpgradeCost() {
+        return 50;
+    }
+
     /**
      * Returns the position of the tower
      * @return the position of the tower

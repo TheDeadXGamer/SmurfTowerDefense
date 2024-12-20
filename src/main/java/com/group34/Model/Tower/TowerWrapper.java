@@ -66,4 +66,9 @@ public class TowerWrapper implements Tower{
         return upgradedTower;
     }
 
+    @Override
+    public int getUpgradeCost() {
+        return tower.getUpgradeCost();
+    }
+
 }

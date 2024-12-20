@@ -38,6 +38,11 @@ public class FireSmurf<enemies extends Positionable & Attackable> implements Att
     }
 
     @Override
+    public int getUpgradeCost() {
+        return 70;
+    }
+
+    @Override
     public Point2D getPosition() {
         return (Point2D) position.clone();
     }
