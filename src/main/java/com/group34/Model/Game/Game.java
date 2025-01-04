@@ -9,6 +9,8 @@ import com.group34.Model.Enemy.Enemy;
 public class Game {
     private TowerNotifier notifier = new TowerNotifier().getInstance();
     private final List<Enemy> enemies = new ArrayList<>();
+    private ArrayList<GameObserver> observers = new ArrayList<>();
+    private int roundNumber = 0;
 
     /**
      * Adds an enemy to the game
@@ -82,4 +84,44 @@ public class Game {
         return killedEnemies;
     }
 
+    /**
+    * @return the current round number as an int.
+    * */
+    public int getRoundNumber() {
+        return roundNumber;
+    }
+
+    /**
+    * Increments the round number by 1.
+    * */
+    public void incrementRoundNumber() {
+        roundNumber++;
+        notifyObservers();
+    }
+
+    /**
+     * Notifies all observers of the player's health
+     * @return void
+     */
+    public void notifyObservers() {
+        for (GameObserver observer : observers) {
+            observer.updateRoundNumber(roundNumber);
+        }
+    }
+
+    /**
+     * Adds an observer to the game.
+     * @param observer Observer to add.
+     */
+    public void subscribe(GameObserver observer) {
+        observers.add(observer);
+    }
+
+    /**
+     * Removes an observer from the player.
+     * @param observer Observer to game.
+     */
+    public void unsubscribe(GameObserver observer) {
+        observers.remove(observer);
+    }
 }

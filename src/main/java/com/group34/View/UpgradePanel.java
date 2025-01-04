@@ -11,6 +11,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static com.group34.Model.Shop.Shop.REFUND_FACTOR;
+
 /**
  * UpgradePanel class is a JPanel that contains the upgrade and sell buttons for the tower.
  */
@@ -18,20 +20,24 @@ public class UpgradePanel extends JPanel {
     Tower currentTower;
     GridBagConstraints gbc = new GridBagConstraints();
     JLabel towerTitleLabel = new JLabel();
+    JLabel upgradePriceLabel = new JLabel();
+    JLabel sellPriceLabel = new JLabel();
+
     public UpgradePanel(TowerUpgrade towerUpgrade, TowerSell sellTower) {
         // Set the layout manager
         setLayout(new GridBagLayout());
 
         setBackground(ViewConstants.RIGHT_PANEL_COLOR);
         setBorder(BorderFactory.createLineBorder(ViewConstants.BORDER_COLOR));
+
         // Create the button
         JButton upgradeButton = new JButton("Upgrade Tower");
 
         upgradeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 towerUpgrade.upgradeTower(currentTower);
+                updatePrices();
             }
         });
 
@@ -52,17 +58,25 @@ public class UpgradePanel extends JPanel {
         add(towerTitleLabel, gbc);
 
         gbc.anchor = GridBagConstraints.NORTH; // Align the label to the top of the panel
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.insets = new Insets(10, 10, 10, 10); // Add padding around the button
 
+        gbc.gridy = 1;
+        gbc.insets = new Insets(10, 10, 10, 10);
         add(upgradeButton, gbc);
 
-        // Add the "Sell Tower" button at the bottom
-        gbc.gridy = 1; // Position below the "Upgrade Tower" button
-        gbc.insets = new Insets(100, 10, 10, 10); // Add more padding above the button
+        gbc.gridy = 2;
+        gbc.insets = new Insets(0, 10, 0, 10);
+        upgradePriceLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        add(upgradePriceLabel, gbc);
 
+        // Add the "Sell Tower" button at the bottom
+        gbc.gridy = 3; // Position below the "Upgrade Tower" button
+        gbc.insets = new Insets(100, 10, 10, 10); // Add more padding above the button
         add(sellButton, gbc);
+
+        gbc.gridy = 4;
+        gbc.insets = new Insets(0, 10, 0, 10);
+        sellPriceLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        add(sellPriceLabel, gbc);
     }
 
     /**
@@ -81,10 +95,6 @@ public class UpgradePanel extends JPanel {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.insets = new Insets(10, 10, 10, 10); // Add padding around the label
-
-
-
-
     }
 
     /**
@@ -95,5 +105,20 @@ public class UpgradePanel extends JPanel {
     public void populateUpgradePanel(Tower tower) {
         this.currentTower = tower;
         createTowerTitle();
+        updatePrices();
+    }
+
+    /**
+     * Update the upgrade and sell price of the tower.
+     * @return void
+     */
+    public void updatePrices() {
+        int upgradeCost = currentTower.getUpgradeCost();
+        if (upgradeCost == 0) {
+            upgradePriceLabel.setText("Not available");
+        } else {
+            upgradePriceLabel.setText("Cost: $" + upgradeCost);
+        }
+        sellPriceLabel.setText("Refund: $" + (int) (currentTower.getCost() * REFUND_FACTOR));
     }
 }
