@@ -74,7 +74,7 @@ public class TowerDefence extends JFrame implements Runnable {
 
         UpgradePanel upgradeScreen = new UpgradePanel(towerUpgrade,towerSell);
         ShopPanel shopPanel = new ShopPanel(buttons);
-        StatusPanel statusPanel = new StatusPanel(cashVault, player);
+        StatusPanel statusPanel = new StatusPanel(game, cashVault, player);
         WelcomePanel welcomePanel = new WelcomePanel();
 
         RightPanel rightPanel = new RightPanel(shopPanel, statusPanel,upgradeScreen);
@@ -166,6 +166,7 @@ public class TowerDefence extends JFrame implements Runnable {
     private void handleActive(){
         cardLayout.show(cardPanel, "Game");
             Round round = RoundConfig.createRound();
+            game.incrementRoundNumber();
             while (!round.isRoundOver() || game.enemiesLeft() > 0) {
                 if (player.isAlive()) {
                     Optional<EnemyFactory> spawn = round.spawn();

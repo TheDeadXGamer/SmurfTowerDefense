@@ -18,7 +18,7 @@ public class Shop {
     private ArrayList<ShopItem> items = new ArrayList<>();
     private CashVault cashVault;
     private Board board;
-    private static final double REFUND_FACTOR = 0.7;
+    public static final double REFUND_FACTOR = 0.7;
 
     public Shop(CashVault cashVault, Board board) {
         this.cashVault = cashVault;
@@ -37,8 +37,8 @@ public class Shop {
 
     /**
      * Purchase an item from the shop
-     * @param name The name of the item
-     * @param cost The cost of the item
+     * @param itemAsString The name of the item
+     * @param position The position to place the tower
      * @return void
      */
     public void purchaseItem(String itemAsString, Point2D position) throws OverDraftError, PlacementError {

@@ -39,7 +39,7 @@ public class TowerUpgradeTest {
         ShopPanel shopPanel = new ShopPanel(buttons);
         Player player = new Player(50);
 
-        StatusPanel statusPanel = new StatusPanel(cashVault, player);
+        StatusPanel statusPanel = new StatusPanel(game, cashVault, player);
         UpgradePanel upgradePanel = new UpgradePanel(towerUpgrade, towerSell);
         RightPanel rightPanel = new RightPanel(shopPanel, statusPanel, upgradePanel);
 
